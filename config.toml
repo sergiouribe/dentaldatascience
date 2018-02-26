@@ -1,4 +1,4 @@
-baseurl = "http://dentaldatascience.org/"
+baseurl = "https://dentaldatascience.org/"
 DefaultContentLanguage = "en"
 #DefaultContentLanguage = "ja"
 title = "Dental Data Science"
