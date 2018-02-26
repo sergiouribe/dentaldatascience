@@ -69,17 +69,17 @@ disqusShortname = "dental-data-science"
 [[menu.main]]
     name = "About"
     url = "page/about/"
-    weight = 3
+    weight = 1
     
 [[menu.main]]
     name = "Links"
     url = "page/links/"
-    weight = 3
+    weight = 4
 
 [[menu.main]]
     name = "Categ"
     url = "categories"
-    weight = 3
+    weight = 2
 
 [[menu.main]]
     name = "Tags"
