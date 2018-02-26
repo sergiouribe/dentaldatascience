@@ -11,7 +11,7 @@ pygmentsCodefencesGuessSyntax = true
 #pygmentsUseClassic = true
 #pygmentOptions = "linenos=inline"
 disqusShortname = "dental-data-science"
-#googleAnalytics = "XXX"
+googleAnalytics = "UA-113383529-1"
 
 [Params]
   subtitle = "Tools and tips to manipulate dental research data, create visualizations, and to communicate information with R"
