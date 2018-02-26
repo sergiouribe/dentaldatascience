@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on Dental Data Science</title>
-    <link>/tags/</link>
-    <description>Recent content in Tags on Dental Data Science</description>
+    <title>Data Wrangling on Dental Data Science</title>
+    <link>/tags/data-wrangling/</link>
+    <description>Recent content in Data Wrangling on Dental Data Science</description>
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>sergio.uribe@gmail.com (Sergio Uribe)</managingEditor>
     <webMaster>sergio.uribe@gmail.com (Sergio Uribe)</webMaster>
     <lastBuildDate>Mon, 26 Feb 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/data-wrangling/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Data Wrangling</title>
-      <link>/tags/data-wrangling/</link>
+      <title>How to deal with multiple measures per patient</title>
+      <link>/post/how-to-deal-with-multiple-measures-per-patient/</link>
       <pubDate>Mon, 26 Feb 2018 00:00:00 +0000</pubDate>
       <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
-      <guid>/tags/data-wrangling/</guid>
+      <guid>/post/how-to-deal-with-multiple-measures-per-patient/</guid>
       <description></description>
     </item>
     

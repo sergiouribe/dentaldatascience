@@ -7,9 +7,28 @@
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>sergio.uribe@gmail.com (Sergio Uribe)</managingEditor>
     <webMaster>sergio.uribe@gmail.com (Sergio Uribe)</webMaster>
+    <lastBuildDate>Mon, 26 Feb 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>How to </title>
+      <link>/post/how-to/</link>
+      <pubDate>Mon, 26 Feb 2018 00:00:00 +0000</pubDate>
+      <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
+      <guid>/post/how-to/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>How to deal with multiple measures per patient</title>
+      <link>/post/how-to-deal-with-multiple-measures-per-patient/</link>
+      <pubDate>Mon, 26 Feb 2018 00:00:00 +0000</pubDate>
+      <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
+      <guid>/post/how-to-deal-with-multiple-measures-per-patient/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>About DDS</title>
