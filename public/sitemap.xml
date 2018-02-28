@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>/post/dentists-in-ocde-countries/</loc>
+    <lastmod>2018-02-26T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/how-to/</loc>
     <lastmod>2018-02-26T00:00:00+00:00</lastmod>
   </url>
@@ -23,6 +28,12 @@
   
   <url>
     <loc>/categories/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/tags/countries/</loc>
+    <lastmod>2018-02-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
