@@ -13,49 +13,12 @@
     
     
     <item>
-      <title>New post in markdown</title>
-      <link>/post/new-post-in-markdown/</link>
-      <pubDate>Thu, 01 Mar 2018 00:00:00 +0000</pubDate>
-      <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
-      <guid>/post/new-post-in-markdown/</guid>
-      <description>Packages install.packages(&amp;ldquo;pubh&amp;rdquo;) install.packages(&amp;ldquo;tidyverse&amp;rdquo;) install.packages(&amp;ldquo;pubh&amp;rdquo;)
-Exploratory data analysis of medical data library(pubh) library(tidyverse) Dataset data(Hodgkin) Exploring the raw dataset head(Hodgkin) Summary tables Hodgkin %&amp;gt;% gather(key = &amp;#34;Cell&amp;#34;, value = value, CD4:CD8) %&amp;gt;% group_by(Group, Cell) %&amp;gt;% summarise(Mean = mean(value)) %&amp;gt;% spread(Cell, Mean) Visualizations Histogram Hodgkin %&amp;gt;% mutate(&amp;#34;CD4/CD8 ratio&amp;#34; = CD4 / CD8) %&amp;gt;% ggplot(aes(x = `CD4/CD8 ratio`, fill = Group)) + geom_histogram(bins = 9, alpha = 0.5) + theme_minimal() + scale_fill_grey()  Boxplot with summary table Hodgkin %&amp;gt;% mutate(&amp;#34;CD4/CD8 ratio&amp;#34; = CD4 / CD8) %&amp;gt;% group_by(Group) %&amp;gt;% summarise(N = n(), &amp;#34;Min.</description>
-    </item>
-    
-    <item>
-      <title>Post in rmarkdown</title>
-      <link>/post/post-in-rmarkdown/</link>
-      <pubDate>Thu, 01 Mar 2018 00:00:00 +0000</pubDate>
-      <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
-      <guid>/post/post-in-rmarkdown/</guid>
-      <description>Exploratory data analysis of medical data library(pubh)## Loading required package: lattice## Loading required package: latticeExtra## Loading required package: RColorBrewerlibrary(tidyverse)## ── Attaching packages ──────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──## ✔ ggplot2 2.2.1 ✔ purrr 0.2.4 ## ✔ tibble 1.4.2 ✔ dplyr 0.7.4 ## ✔ tidyr 0.7.2 ✔ stringr 1.2.0 ## ✔ readr 1.1.1 ✔ forcats 0.2.0## ── Conflicts ─────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ── ## ✖ dplyr::filter() masks stats::filter() ## ✖ dplyr::lag() masks stats::lag() ## ✖ ggplot2::layer() masks latticeExtra::layer() Dataset data(Hodgkin) Exploring the raw dataset head(Hodgkin)## CD4 CD8 Group ## 1 396 836 Hodgkin ## 2 568 978 Hodgkin ## 3 1212 1678 Hodgkin ## 4 171 212 Hodgkin ## 5 554 670 Hodgkin ## 6 1104 1335 Hodgkin Summary tables Hodgkin %&amp;gt;% gather(key = &amp;#34;Cell&amp;#34;, value = value, CD4:CD8) %&amp;gt;% group_by(Group, Cell) %&amp;gt;% summarise(Mean = mean(value)) %&amp;gt;% spread(Cell, Mean)## # A tibble: 2 x 3 ## # Groups: Group [2] ## Group CD4 CD8 ## * &amp;lt;fct&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; ## 1 Non-Hodgkin 522 260 ## 2 Hodgkin 823 614 Visualizations Histogram Hodgkin %&amp;gt;% mutate(&amp;#34;CD4/CD8 ratio&amp;#34; = CD4 / CD8) %&amp;gt;% ggplot(aes(x = `CD4/CD8 ratio`, fill = Group)) + geom_histogram(bins = 9, alpha = 0.</description>
-    </item>
-    
-    <item>
-      <title>Post in rmarkdown</title>
-      <link>/post/post-in-rmarkdown/</link>
-      <pubDate>Thu, 01 Mar 2018 00:00:00 +0000</pubDate>
-      <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
-      <guid>/post/post-in-rmarkdown/</guid>
-      <description>Exploratory data analysis of medical data library(pubh)## Loading required package: lattice## Loading required package: latticeExtra## Loading required package: RColorBrewerlibrary(tidyverse)## ── Attaching packages ──────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──## ✔ ggplot2 2.2.1 ✔ purrr 0.2.4 ## ✔ tibble 1.4.2 ✔ dplyr 0.7.4 ## ✔ tidyr 0.7.2 ✔ stringr 1.2.0 ## ✔ readr 1.1.1 ✔ forcats 0.2.0## ── Conflicts ─────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ── ## ✖ dplyr::filter() masks stats::filter() ## ✖ dplyr::lag() masks stats::lag() ## ✖ ggplot2::layer() masks latticeExtra::layer() Dataset data(Hodgkin) Exploring the raw dataset head(Hodgkin)## CD4 CD8 Group ## 1 396 836 Hodgkin ## 2 568 978 Hodgkin ## 3 1212 1678 Hodgkin ## 4 171 212 Hodgkin ## 5 554 670 Hodgkin ## 6 1104 1335 Hodgkin Summary tables Hodgkin %&amp;gt;% gather(key = &amp;#34;Cell&amp;#34;, value = value, CD4:CD8) %&amp;gt;% group_by(Group, Cell) %&amp;gt;% summarise(Mean = mean(value)) %&amp;gt;% spread(Cell, Mean)## # A tibble: 2 x 3 ## # Groups: Group [2] ## Group CD4 CD8 ## * &amp;lt;fct&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; ## 1 Non-Hodgkin 522 260 ## 2 Hodgkin 823 614 Visualizations Histogram Hodgkin %&amp;gt;% mutate(&amp;#34;CD4/CD8 ratio&amp;#34; = CD4 / CD8) %&amp;gt;% ggplot(aes(x = `CD4/CD8 ratio`, fill = Group)) + geom_histogram(bins = 9, alpha = 0.</description>
-    </item>
-    
-    <item>
       <title>Post in rmd</title>
       <link>/post/post-in-rmd/</link>
       <pubDate>Thu, 01 Mar 2018 00:00:00 +0000</pubDate>
       <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
       <guid>/post/post-in-rmd/</guid>
       <description>Exploratory data analysis of medical data library(pubh) ## Loading required package: lattice ## Loading required package: latticeExtra ## Loading required package: RColorBrewer library(tidyverse) ## ── Attaching packages ──────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ── ## ✔ ggplot2 2.2.1 ✔ purrr 0.2.4 ## ✔ tibble 1.4.2 ✔ dplyr 0.7.4 ## ✔ tidyr 0.7.2 ✔ stringr 1.2.0 ## ✔ readr 1.1.1 ✔ forcats 0.2.0 ## ── Conflicts ─────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ── ## ✖ dplyr::filter() masks stats::filter() ## ✖ dplyr::lag() masks stats::lag() ## ✖ ggplot2::layer() masks latticeExtra::layer() Dataset data(Hodgkin)  Exploring the raw dataset head(Hodgkin) ## CD4 CD8 Group ## 1 396 836 Hodgkin ## 2 568 978 Hodgkin ## 3 1212 1678 Hodgkin ## 4 171 212 Hodgkin ## 5 554 670 Hodgkin ## 6 1104 1335 Hodgkin  Summary tables Hodgkin %&amp;gt;% gather(key = &amp;quot;Cell&amp;quot;, value = value, CD4:CD8) %&amp;gt;% group_by(Group, Cell) %&amp;gt;% summarise(Mean = mean(value)) %&amp;gt;% spread(Cell, Mean) ## # A tibble: 2 x 3 ## # Groups: Group [2] ## Group CD4 CD8 ## * &amp;lt;fct&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt; ## 1 Non-Hodgkin 522 260 ## 2 Hodgkin 823 614  Visualizations Histogram Hodgkin %&amp;gt;% mutate(&amp;quot;CD4/CD8 ratio&amp;quot; = CD4 / CD8) %&amp;gt;% ggplot(aes(x = `CD4/CD8 ratio`, fill = Group)) + geom_histogram(bins = 9, alpha = 0.</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>/post/2018-03-01-new-post-in-markdown/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
-      <guid>/post/2018-03-01-new-post-in-markdown/</guid>
-      <description>New post in markdown       code{white-space: pre;} pre:not([class]) { background-color: white; }  if (window.hljs) { hljs.configure({languages: []}); hljs.initHighlightingOnLoad(); if (document.readyState &amp;&amp; document.readyState === &#34;complete&#34;) { window.setTimeout(function() { hljs.initHighlighting(); }, 0); } }  h1 { font-size: 34px; } h1.title { font-size: 38px; } h2 { font-size: 30px; } h3 { font-size: 24px; } h4 { font-size: 18px; } h5 { font-size: 16px; } h6 { font-size: 12px; } .</description>
     </item>
     
     <item>
