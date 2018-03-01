@@ -10,6 +10,11 @@ tags:
 ---
 
 # Exploratory data analysis of medical data
+
+Here are some code to create boxplots with significance bars
+
+<!--more-->
+
 ```{r}
 library(pubh)
 library(tidyverse)
