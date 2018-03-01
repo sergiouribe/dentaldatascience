@@ -7,28 +7,9 @@
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>sergio.uribe@gmail.com (Sergio Uribe)</managingEditor>
     <webMaster>sergio.uribe@gmail.com (Sergio Uribe)</webMaster>
-    <lastBuildDate>Mon, 26 Feb 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
-    
-    <item>
-      <title>Countries</title>
-      <link>/tags/countries/</link>
-      <pubDate>Mon, 26 Feb 2018 00:00:00 +0000</pubDate>
-      <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
-      <guid>/tags/countries/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Data Wrangling</title>
-      <link>/tags/data-wrangling/</link>
-      <pubDate>Mon, 26 Feb 2018 00:00:00 +0000</pubDate>
-      <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
-      <guid>/tags/data-wrangling/</guid>
-      <description></description>
-    </item>
     
   </channel>
 </rss>

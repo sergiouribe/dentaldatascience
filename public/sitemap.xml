@@ -3,31 +3,6 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/post/caries-at-age-12-in-oecd-countries/</loc>
-    <lastmod>2018-03-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/dentists-in-ocde-countries/</loc>
-    <lastmod>2018-02-26T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/how-to/</loc>
-    <lastmod>2018-02-26T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/post/how-to-deal-with-multiple-measures-per-patient/</loc>
-    <lastmod>2018-02-26T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/</loc>
-    <lastmod>2018-03-01T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
     <loc>/page/about/</loc>
   </url>
   
@@ -37,20 +12,7 @@
   </url>
   
   <url>
-    <loc>/tags/countries/</loc>
-    <lastmod>2018-02-26T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/tags/data-wrangling/</loc>
-    <lastmod>2018-02-26T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
-    <loc>/categories/how-to/</loc>
-    <lastmod>2018-02-26T00:00:00+00:00</lastmod>
+    <loc>/</loc>
     <priority>0</priority>
   </url>
   
@@ -64,14 +26,7 @@
   </url>
   
   <url>
-    <loc>/post/</loc>
-    <lastmod>2018-03-01T00:00:00+00:00</lastmod>
-    <priority>0</priority>
-  </url>
-  
-  <url>
     <loc>/tags/</loc>
-    <lastmod>2018-02-26T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
