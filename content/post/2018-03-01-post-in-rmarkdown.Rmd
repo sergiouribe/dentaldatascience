@@ -11,13 +11,12 @@ tags:
 
 
 # Exploratory data analysis of medical data
-```{r, eval=FALSE}
-install.packages("pubh")
+```{r}
 library(pubh)
 library(tidyverse)
 ```
 ## Dataset
-```{r, eval=FALSE}
+```{r}
 data(Hodgkin)
 ```
 
