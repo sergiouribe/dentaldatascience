@@ -5,12 +5,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>About DDS</title>
-  <meta property="og:title" content="About DDS" />
-  <meta name="twitter:title" content="About DDS" />
-  <meta name="description" content="Dental Data Science in action">
-  <meta property="og:description" content="Dental Data Science in action">
-  <meta name="twitter:description" content="Dental Data Science in action">
+  <title>Post in rmd</title>
+  <meta property="og:title" content="Post in rmd" />
+  <meta name="twitter:title" content="Post in rmd" />
+  <meta name="description" content="Exploratory data analysis of medical data library(pubh) ## Loading required package: lattice ## Loading required package: latticeExtra ## Loading required package: RColorBrewer library(tidyverse) ## ── Attaching packages ──────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ── ## ✔ ggplot2 2.2.1 ✔ purrr 0.2.4 ## ✔ tibble 1.4.2 ✔ dplyr 0.7.4 ## ✔ tidyr 0.7.2 ✔ stringr 1.2.0 ## ✔ readr 1.1.1 ✔ forcats 0.2.0 ## ── Conflicts ─────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ── ## ✖ dplyr::filter() masks stats::filter() ## ✖ dplyr::lag() masks stats::lag() ## ✖ ggplot2::layer() masks latticeExtra::layer() Dataset data(Hodgkin)  Exploring the raw dataset head(Hodgkin) ## CD4 CD8 Group ## 1 396 836 Hodgkin ## 2 568 978 Hodgkin ## 3 1212 1678 Hodgkin ## 4 171 212 Hodgkin ## 5 554 670 Hodgkin ## 6 1104 1335 Hodgkin  Summary tables Hodgkin %&gt;% gather(key = &quot;Cell&quot;, value = value, CD4:CD8) %&gt;% group_by(Group, Cell) %&gt;% summarise(Mean = mean(value)) %&gt;% spread(Cell, Mean) ## # A tibble: 2 x 3 ## # Groups: Group [2] ## Group CD4 CD8 ## * &lt;fct&gt; &lt;dbl&gt; &lt;dbl&gt; ## 1 Non-Hodgkin 522 260 ## 2 Hodgkin 823 614  Visualizations Histogram Hodgkin %&gt;% mutate(&quot;CD4/CD8 ratio&quot; = CD4 / CD8) %&gt;% ggplot(aes(x = `CD4/CD8 ratio`, fill = Group)) &#43; geom_histogram(bins = 9, alpha = 0.">
+  <meta property="og:description" content="Exploratory data analysis of medical data library(pubh) ## Loading required package: lattice ## Loading required package: latticeExtra ## Loading required package: RColorBrewer library(tidyverse) ## ── Attaching packages ──────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ── ## ✔ ggplot2 2.2.1 ✔ purrr 0.2.4 ## ✔ tibble 1.4.2 ✔ dplyr 0.7.4 ## ✔ tidyr 0.7.2 ✔ stringr 1.2.0 ## ✔ readr 1.1.1 ✔ forcats 0.2.0 ## ── Conflicts ─────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ── ## ✖ dplyr::filter() masks stats::filter() ## ✖ dplyr::lag() masks stats::lag() ## ✖ ggplot2::layer() masks latticeExtra::layer() Dataset data(Hodgkin)  Exploring the raw dataset head(Hodgkin) ## CD4 CD8 Group ## 1 396 836 Hodgkin ## 2 568 978 Hodgkin ## 3 1212 1678 Hodgkin ## 4 171 212 Hodgkin ## 5 554 670 Hodgkin ## 6 1104 1335 Hodgkin  Summary tables Hodgkin %&gt;% gather(key = &quot;Cell&quot;, value = value, CD4:CD8) %&gt;% group_by(Group, Cell) %&gt;% summarise(Mean = mean(value)) %&gt;% spread(Cell, Mean) ## # A tibble: 2 x 3 ## # Groups: Group [2] ## Group CD4 CD8 ## * &lt;fct&gt; &lt;dbl&gt; &lt;dbl&gt; ## 1 Non-Hodgkin 522 260 ## 2 Hodgkin 823 614  Visualizations Histogram Hodgkin %&gt;% mutate(&quot;CD4/CD8 ratio&quot; = CD4 / CD8) %&gt;% ggplot(aes(x = `CD4/CD8 ratio`, fill = Group)) &#43; geom_histogram(bins = 9, alpha = 0.">
+  <meta name="twitter:description" content="Exploratory data analysis of medical data library(pubh) ## Loading required package: lattice ## Loading required package: latticeExtra ## Loading required package: RColorBrewer library(tidyverse) ## …">
   <meta name="author" content="Sergio Uribe"/>
   <link href='/img/favicon.png' rel='icon' type='image/x-icon'/>
   <meta property="og:image" content="/img/icon.png" />
@@ -18,12 +18,12 @@
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:site" content="@dentaldatasci" />
   <meta name="twitter:creator" content="@dentaldatasci" />
-  <meta property="og:url" content="/page/about/" />
+  <meta property="og:url" content="/post/post-in-rmd/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Dental Data Science" />
 
   <meta name="generator" content="Hugo 0.37" />
-  <link rel="canonical" href="/page/about/" />
+  <link rel="canonical" href="/post/post-in-rmd/" />
   <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Dental Data Science">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
@@ -202,14 +202,23 @@ ga('send', 'pageview');
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <div class="page-heading">
-              <h1>About DDS</h1>
+            <div class="post-heading">
+              <h1>Post in rmd</h1>
                 
-                  
-                    <hr class="small">
-                    <span class="page-subheading">Dental Data Science in action</span>
-                  
                 
+                  <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on March 1, 2018
+  
+  
+  &nbsp;|&nbsp;
+  <i class="fa fa-clock-o"></i> 2 minutes (392 words)
+  
+  
+</span>
+
+
                 
             </div>
           </div>
@@ -224,55 +233,165 @@ ga('send', 'pageview');
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        
-
-<blockquote>
-<p>Statistical thinking will one day be as necessary a qualification for efficient citizenship as the ability to read and write. HG Wells</p>
-</blockquote>
-
-<p><img src="/img/oecd.jpg" alt="OECD caries status" /></p>
-
-<h1 id="purpose-of-this-site">Purpose of this site</h1>
-
-<p>This site is dedicated to discuss issues about data generated by dental research, and tools to explore those data, extract information and generate knowledge in a valid and reproducible way.</p>
-
-<p>Main topics are</p>
-
-<ul>
-<li>exploratory data analysis: data cleaning, wrangling, summarize and visualizations,</li>
-<li>examples of analyses of datasets with data from dental research or oral public health, and</li>
-<li>Comments on dental papers with innovative or creative exploratory data analysis.</li>
-</ul>
-
-<p>Unless a good reason, every post will have at least one reproducible example.</p>
-
-<blockquote>
-<p>Perhaps the biggest barrier to reproducible research is the lack of a deeply ingrained culture that simply requires reproducibility for all scientific
-claims. Not unlike the culture of replication that persists across all scientific disciplines, the scientific community needs to develop a &ldquo;culture of reproducibility&rdquo; for computational science and require it of published claims. <a href="http://science.sciencemag.org/content/334/6060/1226.full">R Peng, 2011</a></p>
-</blockquote>
-
-<h2 id="tools-used-in-this-site">Tools used in this site</h2>
-
-<p>This site discuss exploratory data analysis with <a href="https://www.r-project.org/">R</a>, <a href="https://www.rstudio.com/products/rstudio/download/">Rstudio</a> and the <a href="https://www.tidyverse.org/">tidyverse</a> package. This site was created using <a href="https://bookdown.org/yihui/blogdown/">blogdown</a> + <a href="https://gohugo.io/">Hugo</a>.</p>
-
-<h1 id="about-the-author">About the author</h1>
-
-<p><a href="http://www.sergiouri.be/">Sergio Uribe</a>. I am Associate Professor at the <a href="http://www.medicina.uach.cl/escuelas/odontologia/index.php">School of Dentistry, Universidad Austral de Chile</a>. In the 90s I use Epi Info (6.04 of course), SPSS during 2000-2008 (which I regret) and in 2008 I discovered R. But the real incentive to use R was recently since</p>
-
-<ul>
-<li>the development of the tidyverse, a set of tools that allow a human readable workflow for data analysis, and</li>
-<li>the development of rmarkdown, to create dinamic documents that allow the easy deployment of reproducible code integrated to documents.</li>
-</ul>
-
-<p>On this site I will share my learning journey.I took this decision after listening to <a href="https://www.datacamp.com/community/podcast/citizen-data-science">David Robinson podcast</a>.</p>
-
-<p>Please, feel free to contact me at any time.</p>
+        <div id="exploratory-data-analysis-of-medical-data" class="section level1">
+<h1>Exploratory data analysis of medical data</h1>
+<pre class="r"><code>library(pubh)</code></pre>
+<pre><code>## Loading required package: lattice</code></pre>
+<pre><code>## Loading required package: latticeExtra</code></pre>
+<pre><code>## Loading required package: RColorBrewer</code></pre>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>## ── Attaching packages ──────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>## ✔ ggplot2 2.2.1     ✔ purrr   0.2.4
+## ✔ tibble  1.4.2     ✔ dplyr   0.7.4
+## ✔ tidyr   0.7.2     ✔ stringr 1.2.0
+## ✔ readr   1.1.1     ✔ forcats 0.2.0</code></pre>
+<pre><code>## ── Conflicts ─────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter()  masks stats::filter()
+## ✖ dplyr::lag()     masks stats::lag()
+## ✖ ggplot2::layer() masks latticeExtra::layer()</code></pre>
+<div id="dataset" class="section level2">
+<h2>Dataset</h2>
+<pre class="r"><code>data(Hodgkin)</code></pre>
+</div>
+<div id="exploring-the-raw-dataset" class="section level2">
+<h2>Exploring the raw dataset</h2>
+<pre class="r"><code>head(Hodgkin)</code></pre>
+<pre><code>##    CD4  CD8   Group
+## 1  396  836 Hodgkin
+## 2  568  978 Hodgkin
+## 3 1212 1678 Hodgkin
+## 4  171  212 Hodgkin
+## 5  554  670 Hodgkin
+## 6 1104 1335 Hodgkin</code></pre>
+</div>
+<div id="summary-tables" class="section level2">
+<h2>Summary tables</h2>
+<pre class="r"><code>Hodgkin %&gt;% 
+  gather(key = &quot;Cell&quot;, value = value, CD4:CD8) %&gt;% 
+  group_by(Group, Cell) %&gt;% 
+  summarise(Mean = mean(value)) %&gt;% 
+  spread(Cell, Mean)</code></pre>
+<pre><code>## # A tibble: 2 x 3
+## # Groups:   Group [2]
+##   Group         CD4   CD8
+## * &lt;fct&gt;       &lt;dbl&gt; &lt;dbl&gt;
+## 1 Non-Hodgkin   522   260
+## 2 Hodgkin       823   614</code></pre>
+</div>
+<div id="visualizations" class="section level2">
+<h2>Visualizations</h2>
+<div id="histogram" class="section level3">
+<h3>Histogram</h3>
+<pre class="r"><code>Hodgkin %&gt;% 
+  mutate(&quot;CD4/CD8 ratio&quot; = CD4 / CD8) %&gt;% 
+  ggplot(aes(x = `CD4/CD8 ratio`, fill = Group)) +
+  geom_histogram(bins = 9, alpha = 0.5) + 
+  theme_minimal() +
+  scale_fill_grey() </code></pre>
+<p><img src="/post/2018-03-01-post-in-rmd_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</div>
+<div id="boxplot-with-summary-table" class="section level3">
+<h3>Boxplot with summary table</h3>
+<pre class="r"><code>Hodgkin %&gt;% 
+  mutate(&quot;CD4/CD8 ratio&quot; = CD4 / CD8) %&gt;% 
+  group_by(Group) %&gt;% 
+  summarise(N = n(), 
+            &quot;Min.&quot; = min(`CD4/CD8 ratio`), 
+            &quot;Max.&quot; = max(`CD4/CD8 ratio`), 
+            Mean = mean(`CD4/CD8 ratio`), 
+            Median = median(`CD4/CD8 ratio`), 
+            SD = sd(`CD4/CD8 ratio`)) %&gt;% 
+  mutate_if(is.numeric, funs(round(., 2)))</code></pre>
+<pre><code>## # A tibble: 2 x 7
+##   Group           N  Min.  Max.  Mean Median    SD
+##   &lt;fct&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+## 1 Non-Hodgkin  20.0 1.10   3.49  2.12   2.15 0.730
+## 2 Hodgkin      20.0 0.470  3.82  1.50   1.19 0.910</code></pre>
+<pre class="r"><code>Hodgkin %&gt;% 
+  mutate(&quot;CD4/CD8 ratio&quot; = CD4 / CD8) %&gt;% 
+  ggplot(aes(x = Group, y = `CD4/CD8 ratio`)) + 
+  geom_boxplot() +
+  theme_minimal()</code></pre>
+<p><img src="/post/2018-03-01-post-in-rmd_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+</div>
+<div id="boxplot-with-jitter" class="section level3">
+<h3>Boxplot with jitter</h3>
+<pre class="r"><code>Hodgkin %&gt;% 
+  mutate(&quot;CD4/CD8 ratio&quot; = CD4 / CD8) %&gt;% 
+  ggplot(aes(x = Group, y = `CD4/CD8 ratio`)) + 
+  geom_boxplot() +
+  geom_dotplot(binaxis = &quot;y&quot;,
+               stackdir = &quot;center&quot;, 
+               alpha = 0.3) +
+  theme_minimal() </code></pre>
+<p><img src="/post/2018-03-01-post-in-rmd_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+</div>
+<div id="most-complete" class="section level3">
+<h3>Most complete</h3>
+<p>require library(ggsignif)</p>
+<pre class="r"><code>library(ggsignif)</code></pre>
+<pre class="r"><code>Hodgkin %&gt;% 
+  mutate(&quot;CD4/CD8 ratio&quot; = CD4 / CD8) %&gt;% 
+  ggplot(aes(x = Group, y = `CD4/CD8 ratio`)) + 
+  geom_boxplot() +
+  geom_dotplot(binaxis = &quot;y&quot;,
+               stackdir = &quot;center&quot;, 
+               alpha = 0.3) +
+  geom_signif(comparisons = list(c(&quot;Non-Hodgkin&quot;, &quot;Hodgkin&quot;)), 
+              map_signif_level=TRUE) +
+  theme_minimal() +
+  labs(
+    caption = &quot;\n * p&gt;0.05; ** p&lt;0.01; *** p&lt;0.001 &quot;
+  )</code></pre>
+<p><img src="/post/2018-03-01-post-in-rmd_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+</div>
+</div>
+</div>
 
       </article>
 
       
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="/post/2018-03-01-new-post-in-markdown/" data-toggle="tooltip" data-placement="top" title="">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="/post/post-in-rmarkdown/" data-toggle="tooltip" data-placement="top" title="Post in rmarkdown">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      
 
 
+      
+        
+          <div class="disqus-comments">
+            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "dental-data-science" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        
+        
       
 
     </div>

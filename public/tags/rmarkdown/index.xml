@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Rmarkdown on Dental Data Science</title>
+    <link>/tags/rmarkdown/</link>
+    <description>Recent content in Rmarkdown on Dental Data Science</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <managingEditor>sergio.uribe@gmail.com (Sergio Uribe)</managingEditor>
+    <webMaster>sergio.uribe@gmail.com (Sergio Uribe)</webMaster>
+    <lastBuildDate>Thu, 01 Mar 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/rmarkdown/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Post in rmarkdown</title>
+      <link>/post/post-in-rmarkdown/</link>
+      <pubDate>Thu, 01 Mar 2018 00:00:00 +0000</pubDate>
+      <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
+      <guid>/post/post-in-rmarkdown/</guid>
+      <description> Exploratory data analysis of medical data install.packages(&amp;#34;pubh&amp;#34;) library(pubh) library(tidyverse) Dataset data(Hodgkin) Exploring the raw dataset </description>
+    </item>
+    
+    <item>
+      <title>Post in rmarkdown</title>
+      <link>/post/post-in-rmarkdown/</link>
+      <pubDate>Thu, 01 Mar 2018 00:00:00 +0000</pubDate>
+      <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
+      <guid>/post/post-in-rmarkdown/</guid>
+      <description>Exploratory data analysis of medical data install.packages(&amp;#34;pubh&amp;#34;) library(pubh) library(tidyverse) Dataset data(Hodgkin) Exploring the raw dataset head(Hodgkin)## Error in head(Hodgkin): objeto &amp;#39;Hodgkin&amp;#39; no encontrado Summary tables Hodgkin %&amp;gt;% gather(key = &amp;#34;Cell&amp;#34;, value = value, CD4:CD8) %&amp;gt;% group_by(Group, Cell) %&amp;gt;% summarise(Mean = mean(value)) %&amp;gt;% spread(Cell, Mean)## Error in Hodgkin %&amp;gt;% gather(key = &amp;#34;Cell&amp;#34;, value = value, CD4:CD8) %&amp;gt;% : no se pudo encontrar la función &amp;#34;%&amp;gt;%&amp;#34; Visualizations Histogram Hodgkin %&amp;gt;% mutate(&amp;#34;CD4/CD8 ratio&amp;#34; = CD4 / CD8) %&amp;gt;% ggplot(aes(x = `CD4/CD8 ratio`, fill = Group)) + geom_histogram(bins = 9, alpha = 0.</description>
+    </item>
+    
+  </channel>
+</rss>

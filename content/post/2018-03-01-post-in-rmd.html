@@ -1,0 +1,127 @@
+---
+title: Post in rmd
+author: Sergio Uribe
+date: '2018-03-01'
+slug: post-in-rmd
+categories:
+  - rmd
+tags:
+  - rmd
+---
+
+
+
+<div id="exploratory-data-analysis-of-medical-data" class="section level1">
+<h1>Exploratory data analysis of medical data</h1>
+<pre class="r"><code>library(pubh)</code></pre>
+<pre><code>## Loading required package: lattice</code></pre>
+<pre><code>## Loading required package: latticeExtra</code></pre>
+<pre><code>## Loading required package: RColorBrewer</code></pre>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>## ── Attaching packages ──────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ──</code></pre>
+<pre><code>## ✔ ggplot2 2.2.1     ✔ purrr   0.2.4
+## ✔ tibble  1.4.2     ✔ dplyr   0.7.4
+## ✔ tidyr   0.7.2     ✔ stringr 1.2.0
+## ✔ readr   1.1.1     ✔ forcats 0.2.0</code></pre>
+<pre><code>## ── Conflicts ─────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ──
+## ✖ dplyr::filter()  masks stats::filter()
+## ✖ dplyr::lag()     masks stats::lag()
+## ✖ ggplot2::layer() masks latticeExtra::layer()</code></pre>
+<div id="dataset" class="section level2">
+<h2>Dataset</h2>
+<pre class="r"><code>data(Hodgkin)</code></pre>
+</div>
+<div id="exploring-the-raw-dataset" class="section level2">
+<h2>Exploring the raw dataset</h2>
+<pre class="r"><code>head(Hodgkin)</code></pre>
+<pre><code>##    CD4  CD8   Group
+## 1  396  836 Hodgkin
+## 2  568  978 Hodgkin
+## 3 1212 1678 Hodgkin
+## 4  171  212 Hodgkin
+## 5  554  670 Hodgkin
+## 6 1104 1335 Hodgkin</code></pre>
+</div>
+<div id="summary-tables" class="section level2">
+<h2>Summary tables</h2>
+<pre class="r"><code>Hodgkin %&gt;% 
+  gather(key = &quot;Cell&quot;, value = value, CD4:CD8) %&gt;% 
+  group_by(Group, Cell) %&gt;% 
+  summarise(Mean = mean(value)) %&gt;% 
+  spread(Cell, Mean)</code></pre>
+<pre><code>## # A tibble: 2 x 3
+## # Groups:   Group [2]
+##   Group         CD4   CD8
+## * &lt;fct&gt;       &lt;dbl&gt; &lt;dbl&gt;
+## 1 Non-Hodgkin   522   260
+## 2 Hodgkin       823   614</code></pre>
+</div>
+<div id="visualizations" class="section level2">
+<h2>Visualizations</h2>
+<div id="histogram" class="section level3">
+<h3>Histogram</h3>
+<pre class="r"><code>Hodgkin %&gt;% 
+  mutate(&quot;CD4/CD8 ratio&quot; = CD4 / CD8) %&gt;% 
+  ggplot(aes(x = `CD4/CD8 ratio`, fill = Group)) +
+  geom_histogram(bins = 9, alpha = 0.5) + 
+  theme_minimal() +
+  scale_fill_grey() </code></pre>
+<p><img src="/post/2018-03-01-post-in-rmd_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
+</div>
+<div id="boxplot-with-summary-table" class="section level3">
+<h3>Boxplot with summary table</h3>
+<pre class="r"><code>Hodgkin %&gt;% 
+  mutate(&quot;CD4/CD8 ratio&quot; = CD4 / CD8) %&gt;% 
+  group_by(Group) %&gt;% 
+  summarise(N = n(), 
+            &quot;Min.&quot; = min(`CD4/CD8 ratio`), 
+            &quot;Max.&quot; = max(`CD4/CD8 ratio`), 
+            Mean = mean(`CD4/CD8 ratio`), 
+            Median = median(`CD4/CD8 ratio`), 
+            SD = sd(`CD4/CD8 ratio`)) %&gt;% 
+  mutate_if(is.numeric, funs(round(., 2)))</code></pre>
+<pre><code>## # A tibble: 2 x 7
+##   Group           N  Min.  Max.  Mean Median    SD
+##   &lt;fct&gt;       &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;
+## 1 Non-Hodgkin  20.0 1.10   3.49  2.12   2.15 0.730
+## 2 Hodgkin      20.0 0.470  3.82  1.50   1.19 0.910</code></pre>
+<pre class="r"><code>Hodgkin %&gt;% 
+  mutate(&quot;CD4/CD8 ratio&quot; = CD4 / CD8) %&gt;% 
+  ggplot(aes(x = Group, y = `CD4/CD8 ratio`)) + 
+  geom_boxplot() +
+  theme_minimal()</code></pre>
+<p><img src="/post/2018-03-01-post-in-rmd_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+</div>
+<div id="boxplot-with-jitter" class="section level3">
+<h3>Boxplot with jitter</h3>
+<pre class="r"><code>Hodgkin %&gt;% 
+  mutate(&quot;CD4/CD8 ratio&quot; = CD4 / CD8) %&gt;% 
+  ggplot(aes(x = Group, y = `CD4/CD8 ratio`)) + 
+  geom_boxplot() +
+  geom_dotplot(binaxis = &quot;y&quot;,
+               stackdir = &quot;center&quot;, 
+               alpha = 0.3) +
+  theme_minimal() </code></pre>
+<p><img src="/post/2018-03-01-post-in-rmd_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
+</div>
+<div id="most-complete" class="section level3">
+<h3>Most complete</h3>
+<p>require library(ggsignif)</p>
+<pre class="r"><code>library(ggsignif)</code></pre>
+<pre class="r"><code>Hodgkin %&gt;% 
+  mutate(&quot;CD4/CD8 ratio&quot; = CD4 / CD8) %&gt;% 
+  ggplot(aes(x = Group, y = `CD4/CD8 ratio`)) + 
+  geom_boxplot() +
+  geom_dotplot(binaxis = &quot;y&quot;,
+               stackdir = &quot;center&quot;, 
+               alpha = 0.3) +
+  geom_signif(comparisons = list(c(&quot;Non-Hodgkin&quot;, &quot;Hodgkin&quot;)), 
+              map_signif_level=TRUE) +
+  theme_minimal() +
+  labs(
+    caption = &quot;\n * p&gt;0.05; ** p&lt;0.01; *** p&lt;0.001 &quot;
+  )</code></pre>
+<p><img src="/post/2018-03-01-post-in-rmd_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+</div>
+</div>
+</div>
