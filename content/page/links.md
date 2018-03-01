@@ -45,3 +45,4 @@ Data Carpentry contributors](http://www.datacarpentry.org/R-ecology-lesson/01-in
   - [Elementary Statistics with R](http://www.r-tutor.com/elementary-statistics)
   - [#rstats on Twitter](https://twitter.com/search?q=%23rstats&src=typd)
   - [Practical Data Science for Stats - a PeerJ Collection](https://peerj.com/collections/50-practicaldatascistats/)
+  - [Recommended Resources for Beginners](http://www.datasciguide.com/recommended-resources-for-beginners/)
