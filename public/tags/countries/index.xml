@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Countries on Dental Data Science</title>
+    <link>/tags/countries/</link>
+    <description>Recent content in Countries on Dental Data Science</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <managingEditor>sergio.uribe@gmail.com (Sergio Uribe)</managingEditor>
+    <webMaster>sergio.uribe@gmail.com (Sergio Uribe)</webMaster>
+    <lastBuildDate>Mon, 26 Feb 2018 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/countries/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Dentists in OCDE countries</title>
+      <link>/post/dentists-in-ocde-countries/</link>
+      <pubDate>Mon, 26 Feb 2018 00:00:00 +0000</pubDate>
+      <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
+      <guid>/post/dentists-in-ocde-countries/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
