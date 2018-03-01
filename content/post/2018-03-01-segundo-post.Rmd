@@ -1,0 +1,17 @@
+---
+title: segundo post
+author: Sergio Uribe
+date: '2018-03-01'
+slug: segundo-post
+categories: []
+tags: []
+---
+
+```{r}
+2+2
+```
+
+```{r}
+plot(cars)
+```
+
