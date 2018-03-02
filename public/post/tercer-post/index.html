@@ -1,0 +1,3572 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Wrangling and visualization of case-control studies</title>
+  <meta property="og:title" content="Wrangling and visualization of case-control studies" />
+  <meta name="twitter:title" content="Wrangling and visualization of case-control studies" />
+  <meta name="description" content="A Case-control study compares patients who have a disease or outcome of interest (cases) with patients who do not have the disease or outcome (controls), and looks back retrospectively to compare how frequently the exposure to a risk factor is present in each group to determine the relationship between the risk factor and the disease.
+Case control studies are observational because no intervention is attempted and no attempt is made to alter the course of the disease.">
+  <meta property="og:description" content="A Case-control study compares patients who have a disease or outcome of interest (cases) with patients who do not have the disease or outcome (controls), and looks back retrospectively to compare how frequently the exposure to a risk factor is present in each group to determine the relationship between the risk factor and the disease.
+Case control studies are observational because no intervention is attempted and no attempt is made to alter the course of the disease.">
+  <meta name="twitter:description" content="A Case-control study compares patients who have a disease or outcome of interest (cases) with patients who do not have the disease or outcome (controls), and looks back retrospectively to compare how …">
+  <meta name="author" content="Sergio Uribe"/>
+  <link href='/img/favicon.png' rel='icon' type='image/x-icon'/>
+  <meta property="og:image" content="/img/icon.png" />
+  <meta name="twitter:image" content="/img/icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@dentaldatasci" />
+  <meta name="twitter:creator" content="@dentaldatasci" />
+  <meta property="og:url" content="/post/tercer-post/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Dental Data Science" />
+
+  <meta name="generator" content="Hugo 0.37" />
+  <link rel="canonical" href="/post/tercer-post/" />
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Dental Data Science">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="/css/highlight.min.css" /><link rel="stylesheet" href="/css/codeblock.css" />
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+<script>
+window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+ga('create', 'UA-113383529-1', 'auto');
+ga('send', 'pageview');
+</script>
+<script async src='//www.google-analytics.com/analytics.js'></script>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="/">Dental Data Science</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Categ" href="/categories">Categ</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Links" href="/page/links/">Links</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/page/about/">About</a>
+            </li>
+          
+        
+
+        
+
+        
+          <li>
+            <a href="#modalSearch" data-toggle="modal" data-target="#modalSearch" style="outline: none;">
+              <span class="hidden-sm hidden-md hidden-lg">Search</span> <span id="searchGlyph" class="glyphicon glyphicon-search"></span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+          <a title="Dental Data Science" href="/">
+            <img class="avatar-img" src="/img/icon.png" alt="Dental Data Science" />
+          </a>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+  <div id="modalSearch" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Search Dental Data Science</h4>
+        </div>
+        <div class="modal-body">
+          <gcse:search></gcse:search>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="post-heading">
+              <h1>Wrangling and visualization of case-control studies</h1>
+                
+                
+                  <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on March 2, 2018
+  
+  
+  &nbsp;|&nbsp;
+  <i class="fa fa-clock-o"></i> 94 minutes (19987 words)
+  
+  
+</span>
+
+
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <p>A Case-control study compares patients who have a disease or outcome of interest (cases) with patients who do not have the disease or outcome (controls), and looks back retrospectively to compare how frequently the exposure to a risk factor is present in each group to determine the relationship between the risk factor and the disease.</p>
+<p>Case control studies are observational because no intervention is attempted and no attempt is made to alter the course of the disease. The goal is to retrospectively determine the exposure to the risk factor of interest from each of the two groups of individuals: cases and controls. These studies are designed to estimate odds.</p>
+<p>Case control studies are also known as “retrospective studies” and “case-referent studies.”</p>
+<p>In the classic textbook of Breslow and Day about <a href="http://www.iarc.fr/en/publications/pdfs-online/stat/sp32/index.php">data analysis of cancer research</a>,this is the table of the study about risk factors for oesophageal cancer:</p>
+<div class="figure">
+<img src="/img/grouped-data-case-control.png" alt="From Breslow and N. E. Day, ch 4." />
+<p class="caption">From Breslow and N. E. Day, ch 4.</p>
+</div>
+<p>We will use dplyr and ggplot2 to graph this data.</p>
+<p>First, we load the meta-package <strong>tidyverse</strong> thant contains packages as <strong>dplyr</strong> for data wrangling and <strong>ggplot2</strong> for data visualization among others.</p>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre class="r"><code>df &lt;- read.delim(&quot;http://faculty.washington.edu/heagerty/Courses/b513/WEB2002/datasets/esoph.raw&quot;, sep = &quot;&quot;, header = FALSE)</code></pre>
+<pre class="r"><code>head(df)</code></pre>
+<pre><code>##   V1 V2 V3 V4
+## 1  1  2  1  0
+## 2  1  1  1  0
+## 3  1  2  4  0
+## 4  1  2  2  0
+## 5  1  2  1  0
+## 6  1  2  1  0</code></pre>
+<p>Data is without column names. The variables are:</p>
+<table>
+<thead>
+<tr class="header">
+<th>COL</th>
+<th>VAR</th>
+<th>RANGE/VALUES</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Age group</td>
+<td>1 = 25-34</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>(years)</td>
+<td>2 = 35-44</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>3 = 45-54</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>4 = 55-64</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>5 = 65-74</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>6 = 75+</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>Alcohol</td>
+<td>1 = 0-39</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>(gms/day)</td>
+<td>2 = 40-79</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>3 = 80-119</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>4 = 120+</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Tobacco</td>
+<td>1 = 0- 9</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>(gms/day)</td>
+<td>2 = 10-19</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td></td>
+<td>3 = 20-29</td>
+</tr>
+<tr class="even">
+<td></td>
+<td></td>
+<td>4 = 30+</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>Case or</td>
+<td>1 = case</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>Control</td>
+<td>0 = control</td>
+</tr>
+</tbody>
+</table>
+<p>Add the column names:</p>
+<pre class="r"><code>colnames(df) &lt;- (c(&quot;age&quot;, &quot;alc&quot;, &quot;tob&quot;, &quot;cc&quot;))</code></pre>
+<pre class="r"><code>head(df)</code></pre>
+<pre><code>##   age alc tob cc
+## 1   1   2   1  0
+## 2   1   1   1  0
+## 3   1   2   4  0
+## 4   1   2   2  0
+## 5   1   2   1  0
+## 6   1   2   1  0</code></pre>
+<p>Let’s recode all the dataset using the funtion <code>mutate</code> and <code>case_when</code> of <code>dplyr</code></p>
+<p>Age groups 1 = 25-34 2 = 35-44 3 = 45-54 4 = 55-64 5 = 65-74 6 = 75+</p>
+<pre class="r"><code>df &lt;- df %&gt;% 
+  mutate(
+    age_grp = 
+      case_when(
+        age == 1 ~ &quot;25-34&quot;, 
+        age == 2 ~ &quot;35-44&quot;, 
+        age == 3 ~ &quot;45-54&quot;, 
+        age == 4 ~ &quot;55-64&quot;, 
+        age == 5 ~ &quot;65-74&quot;, 
+        TRUE ~ &quot;75+&quot;, 
+      )
+  )</code></pre>
+<pre class="r"><code>head(df)</code></pre>
+<pre><code>##   age alc tob cc age_grp
+## 1   1   2   1  0   25-34
+## 2   1   1   1  0   25-34
+## 3   1   2   4  0   25-34
+## 4   1   2   2  0   25-34
+## 5   1   2   1  0   25-34
+## 6   1   2   1  0   25-34</code></pre>
+<p>OK!</p>
+<p>The same for the rest of the variables</p>
+<pre class="r"><code>df &lt;- df %&gt;% 
+  mutate(
+    alc_grp = 
+      case_when(
+        alc == 1 ~  &quot;0-39&quot;, 
+        alc == 2 ~ &quot;40-79&quot;,  
+        alc == 3 ~ &quot;80-119&quot;,  
+        TRUE ~ &quot;120+&quot; 
+      )
+  )</code></pre>
+<pre class="r"><code>df &lt;- df %&gt;% 
+  mutate(
+    tob_grp = 
+      case_when(
+        tob == 1 ~  &quot;0- 9&quot;, 
+        tob == 2 ~ &quot;10-19&quot;, 
+        tob == 3 ~ &quot;20-29&quot;, 
+        TRUE ~ &quot;30+&quot; 
+      )
+  )</code></pre>
+<pre class="r"><code>df &lt;- df %&gt;% 
+  mutate(
+    cc_grp = 
+      case_when(
+        cc == 0 ~ &quot;control&quot;, 
+        TRUE ~ &quot;case&quot;
+      )
+  )</code></pre>
+<p>Now, omit the former columns</p>
+<pre class="r"><code>df &lt;- df %&gt;% 
+  select(age_grp:cc_grp)</code></pre>
+<p>and now, we have to give the order of the factors for the ordinal variables age, alcohol and tobbaco</p>
+<pre class="r"><code>df %&gt;% 
+  mutate(age_grp = factor(age_grp, levels = c(&quot;25-34&quot;,
+                                              &quot;35-44&quot;   ,
+                                              &quot;45-54&quot;   ,
+                                              &quot;55-64&quot;   ,
+                                              &quot;65-74&quot;   ,
+                                              &quot;75&quot;
+)))</code></pre>
+<pre><code>##     age_grp alc_grp tob_grp  cc_grp
+## 1     25-34   40-79    0- 9 control
+## 2     25-34    0-39    0- 9 control
+## 3     25-34   40-79     30+ control
+## 4     25-34   40-79   10-19 control
+## 5     25-34   40-79    0- 9 control
+## 6     25-34   40-79    0- 9 control
+## 7     25-34    0-39   10-19 control
+## 8     25-34   40-79   10-19 control
+## 9     25-34   40-79   10-19 control
+## 10    25-34   40-79    0- 9 control
+## 11    25-34   40-79    0- 9 control
+## 12    25-34   40-79   20-29 control
+## 13    25-34   40-79    0- 9 control
+## 14    25-34   40-79    0- 9 control
+## 15    25-34   40-79    0- 9 control
+## 16    25-34    0-39    0- 9 control
+## 17    25-34    0-39    0- 9 control
+## 18    25-34   40-79   20-29 control
+## 19    25-34    0-39    0- 9 control
+## 20    25-34   40-79    0- 9 control
+## 21    25-34    0-39    0- 9 control
+## 22    25-34    0-39    0- 9 control
+## 23    25-34    0-39    0- 9 control
+## 24    25-34    0-39    0- 9 control
+## 25    25-34   40-79     30+ control
+## 26    25-34    0-39   20-29 control
+## 27    25-34    0-39     30+ control
+## 28    25-34    0-39     30+ control
+## 29    25-34    0-39    0- 9 control
+## 30    25-34    0-39    0- 9 control
+## 31    25-34   40-79    0- 9 control
+## 32    25-34   40-79     30+ control
+## 33    25-34    0-39    0- 9 control
+## 34    25-34  80-119   10-19 control
+## 35    25-34    0-39   10-19 control
+## 36    25-34    0-39   10-19 control
+## 37    25-34   40-79    0- 9 control
+## 38    25-34    0-39    0- 9 control
+## 39    25-34    0-39    0- 9 control
+## 40    25-34    0-39   20-29 control
+## 41    25-34    0-39    0- 9 control
+## 42    25-34    0-39    0- 9 control
+## 43    25-34  80-119     30+ control
+## 44    25-34    0-39   10-19 control
+## 45    25-34   40-79     30+ control
+## 46    25-34    0-39    0- 9 control
+## 47    25-34   40-79    0- 9 control
+## 48    25-34   40-79     30+ control
+## 49    25-34    0-39   20-29 control
+## 50    25-34    0-39     30+ control
+## 51    25-34   40-79    0- 9 control
+## 52    25-34   40-79   10-19 control
+## 53    25-34    0-39    0- 9 control
+## 54    25-34    0-39   20-29 control
+## 55    25-34   40-79     30+ control
+## 56    25-34   40-79   20-29 control
+## 57    25-34    0-39   10-19 control
+## 58    25-34  80-119     30+ control
+## 59    25-34   40-79    0- 9 control
+## 60    25-34  80-119    0- 9 control
+## 61    25-34    0-39    0- 9 control
+## 62    25-34    0-39   20-29 control
+## 63    25-34    0-39    0- 9 control
+## 64    25-34    0-39    0- 9 control
+## 65    25-34    0-39    0- 9 control
+## 66    25-34   40-79    0- 9 control
+## 67    25-34   40-79    0- 9 control
+## 68    25-34   40-79   10-19 control
+## 69    25-34    0-39    0- 9 control
+## 70    25-34    0-39    0- 9 control
+## 71    25-34   40-79    0- 9 control
+## 72    25-34    0-39    0- 9 control
+## 73    25-34    0-39    0- 9 control
+## 74    25-34    0-39    0- 9 control
+## 75    25-34    0-39    0- 9 control
+## 76    25-34    0-39    0- 9 control
+## 77    25-34    0-39   20-29 control
+## 78    25-34    0-39    0- 9 control
+## 79    25-34    120+   10-19    case
+## 80    25-34   40-79    0- 9 control
+## 81    25-34    0-39    0- 9 control
+## 82    25-34    0-39    0- 9 control
+## 83    25-34    0-39    0- 9 control
+## 84    25-34   40-79   10-19 control
+## 85    25-34    0-39    0- 9 control
+## 86    25-34    0-39    0- 9 control
+## 87    25-34   40-79    0- 9 control
+## 88    25-34    0-39    0- 9 control
+## 89    25-34    120+     30+ control
+## 90    25-34   40-79    0- 9 control
+## 91    25-34   40-79    0- 9 control
+## 92    25-34    0-39   10-19 control
+## 93    25-34   40-79    0- 9 control
+## 94    25-34    0-39   10-19 control
+## 95    25-34  80-119    0- 9 control
+## 96    25-34    0-39    0- 9 control
+## 97    25-34    0-39     30+ control
+## 98    25-34   40-79    0- 9 control
+## 99    25-34   40-79    0- 9 control
+## 100   25-34    0-39    0- 9 control
+## 101   25-34    0-39    0- 9 control
+## 102   25-34   40-79     30+ control
+## 103   25-34   40-79   10-19 control
+## 104   25-34    120+     30+ control
+## 105   25-34    0-39    0- 9 control
+## 106   25-34   40-79    0- 9 control
+## 107   25-34    120+   20-29 control
+## 108   25-34    0-39    0- 9 control
+## 109   25-34    0-39     30+ control
+## 110   25-34    120+    0- 9 control
+## 111   25-34    0-39   10-19 control
+## 112   25-34   40-79    0- 9 control
+## 113   25-34    0-39   10-19 control
+## 114   25-34   40-79    0- 9 control
+## 115   25-34   40-79   20-29 control
+## 116   25-34    0-39   10-19 control
+## 117   35-44  80-119    0- 9 control
+## 118   35-44    0-39    0- 9 control
+## 119   35-44   40-79    0- 9 control
+## 120   35-44   40-79    0- 9 control
+## 121   35-44   40-79     30+ control
+## 122   35-44   40-79   20-29 control
+## 123   35-44  80-119   10-19 control
+## 124   35-44  80-119   10-19 control
+## 125   35-44    0-39    0- 9 control
+## 126   35-44    0-39    0- 9 control
+## 127   35-44  80-119     30+ control
+## 128   35-44  80-119   20-29 control
+## 129   35-44   40-79    0- 9 control
+## 130   35-44   40-79   20-29 control
+## 131   35-44    0-39    0- 9 control
+## 132   35-44   40-79   20-29 control
+## 133   35-44    0-39    0- 9 control
+## 134   35-44    120+   20-29    case
+## 135   35-44   40-79    0- 9 control
+## 136   35-44    0-39    0- 9 control
+## 137   35-44    0-39    0- 9 control
+## 138   35-44   40-79    0- 9 control
+## 139   35-44    0-39    0- 9 control
+## 140   35-44    0-39   10-19 control
+## 141   35-44    0-39   10-19 control
+## 142   35-44    0-39   20-29 control
+## 143   35-44    0-39    0- 9 control
+## 144   35-44   40-79   10-19 control
+## 145   35-44    120+   10-19 control
+## 146   35-44   40-79    0- 9 control
+## 147   35-44  80-119   20-29 control
+## 148   35-44    0-39    0- 9 control
+## 149   35-44   40-79    0- 9 control
+## 150   35-44   40-79    0- 9 control
+## 151   35-44   40-79    0- 9 control
+## 152   35-44   40-79    0- 9 control
+## 153   35-44    0-39    0- 9 control
+## 154   35-44   40-79   10-19 control
+## 155   35-44   40-79     30+ control
+## 156   35-44    0-39   10-19 control
+## 157   35-44    0-39     30+ control
+## 158   35-44   40-79    0- 9 control
+## 159   35-44  80-119    0- 9 control
+## 160   35-44   40-79   10-19 control
+## 161   35-44   40-79    0- 9 control
+## 162   35-44    0-39     30+ control
+## 163   35-44    0-39     30+ control
+## 164   35-44    0-39    0- 9 control
+## 165   35-44   40-79   10-19 control
+## 166   35-44  80-119    0- 9 control
+## 167   35-44    0-39   20-29 control
+## 168   35-44    0-39    0- 9 control
+## 169   35-44    0-39    0- 9 control
+## 170   35-44    0-39   10-19 control
+## 171   35-44   40-79   10-19    case
+## 172   35-44  80-119    0- 9 control
+## 173   35-44   40-79    0- 9 control
+## 174   35-44    0-39    0- 9 control
+## 175   35-44    120+    0- 9 control
+## 176   35-44    0-39    0- 9 control
+## 177   35-44   40-79   10-19 control
+## 178   35-44   40-79   10-19 control
+## 179   35-44  80-119    0- 9 control
+## 180   35-44   40-79    0- 9 control
+## 181   35-44  80-119    0- 9 control
+## 182   35-44   40-79     30+ control
+## 183   35-44  80-119   10-19 control
+## 184   35-44    120+   20-29 control
+## 185   35-44   40-79   10-19 control
+## 186   35-44    0-39    0- 9 control
+## 187   35-44    0-39    0- 9 control
+## 188   35-44   40-79    0- 9 control
+## 189   35-44    0-39    0- 9 control
+## 190   35-44    0-39    0- 9 control
+## 191   35-44    120+   20-29 control
+## 192   35-44    0-39    0- 9 control
+## 193   35-44   40-79   10-19 control
+## 194   35-44  80-119    0- 9 control
+## 195   35-44    0-39    0- 9 control
+## 196   35-44    0-39    0- 9 control
+## 197   35-44    0-39     30+ control
+## 198   35-44    0-39    0- 9 control
+## 199   35-44   40-79   20-29 control
+## 200   35-44    0-39    0- 9 control
+## 201   35-44   40-79   10-19 control
+## 202   35-44   40-79   20-29 control
+## 203   35-44    0-39   20-29 control
+## 204   35-44    0-39    0- 9 control
+## 205   35-44    0-39   10-19 control
+## 206   35-44    0-39    0- 9 control
+## 207   35-44    0-39    0- 9 control
+## 208   35-44    120+    0- 9    case
+## 209   35-44    0-39   20-29 control
+## 210   35-44   40-79   10-19 control
+## 211   35-44   40-79   10-19    case
+## 212   35-44   40-79    0- 9 control
+## 213   35-44    0-39    0- 9 control
+## 214   35-44    0-39    0- 9 control
+## 215   35-44    0-39    0- 9 control
+## 216   35-44    0-39   10-19 control
+## 217   35-44   40-79   20-29 control
+## 218   35-44    0-39    0- 9 control
+## 219   35-44   40-79    0- 9 control
+## 220   35-44    0-39    0- 9 control
+## 221   35-44    0-39    0- 9 control
+## 222   35-44   40-79     30+ control
+## 223   35-44    0-39    0- 9 control
+## 224   35-44   40-79    0- 9 control
+## 225   35-44    0-39   10-19 control
+## 226   35-44   40-79   10-19 control
+## 227   35-44    0-39    0- 9 control
+## 228   35-44    0-39    0- 9 control
+## 229   35-44    0-39    0- 9 control
+## 230   35-44    0-39    0- 9 control
+## 231   35-44    0-39     30+ control
+## 232   35-44   40-79   20-29 control
+## 233   35-44   40-79   20-29 control
+## 234   35-44   40-79   20-29    case
+## 235   35-44    0-39     30+ control
+## 236   35-44    0-39     30+ control
+## 237   35-44   40-79   10-19    case
+## 238   35-44    0-39   10-19 control
+## 239   35-44    0-39    0- 9 control
+## 240   35-44   40-79    0- 9 control
+## 241   35-44   40-79     30+ control
+## 242   35-44   40-79    0- 9 control
+## 243   35-44  80-119   10-19 control
+## 244   35-44   40-79   20-29 control
+## 245   35-44   40-79   10-19 control
+## 246   35-44    0-39    0- 9 control
+## 247   35-44   40-79     30+ control
+## 248   35-44  80-119    0- 9 control
+## 249   35-44   40-79     30+ control
+## 250   35-44   40-79   20-29 control
+## 251   35-44   40-79    0- 9 control
+## 252   35-44   40-79    0- 9 control
+## 253   35-44   40-79   10-19 control
+## 254   35-44    0-39    0- 9 control
+## 255   35-44  80-119    0- 9 control
+## 256   35-44    0-39   20-29 control
+## 257   35-44   40-79    0- 9 control
+## 258   35-44    0-39    0- 9 control
+## 259   35-44    0-39   10-19 control
+## 260   35-44    0-39    0- 9 control
+## 261   35-44   40-79   20-29 control
+## 262   35-44   40-79   10-19 control
+## 263   35-44    0-39    0- 9 control
+## 264   35-44   40-79   20-29 control
+## 265   35-44    0-39    0- 9 control
+## 266   35-44    0-39   20-29 control
+## 267   35-44    0-39    0- 9 control
+## 268   35-44    0-39   10-19 control
+## 269   35-44    0-39    0- 9 control
+## 270   35-44    0-39   10-19 control
+## 271   35-44    120+   10-19 control
+## 272   35-44    0-39    0- 9 control
+## 273   35-44   40-79    0- 9 control
+## 274   35-44    0-39    0- 9 control
+## 275   35-44   40-79   10-19 control
+## 276   35-44    0-39    0- 9 control
+## 277   35-44  80-119    0- 9 control
+## 278   35-44   40-79    0- 9 control
+## 279   35-44   40-79     30+ control
+## 280   35-44    0-39    0- 9 control
+## 281   35-44  80-119    0- 9 control
+## 282   35-44   40-79   10-19 control
+## 283   35-44  80-119   10-19 control
+## 284   35-44    0-39    0- 9 control
+## 285   35-44    0-39   10-19 control
+## 286   35-44    0-39    0- 9 control
+## 287   35-44   40-79    0- 9 control
+## 288   35-44   40-79    0- 9 control
+## 289   35-44   40-79   10-19 control
+## 290   35-44    0-39    0- 9 control
+## 291   35-44    120+   10-19 control
+## 292   35-44    0-39    0- 9 control
+## 293   35-44   40-79    0- 9 control
+## 294   35-44    0-39    0- 9 control
+## 295   35-44   40-79   10-19 control
+## 296   35-44    0-39    0- 9 control
+## 297   35-44   40-79   10-19 control
+## 298   35-44    0-39    0- 9 control
+## 299   35-44   40-79    0- 9 control
+## 300   35-44   40-79    0- 9 control
+## 301   35-44    120+   20-29    case
+## 302   35-44    120+    0- 9    case
+## 303   35-44   40-79    0- 9 control
+## 304   35-44    0-39   10-19 control
+## 305   35-44    0-39     30+ control
+## 306   35-44   40-79   20-29 control
+## 307   35-44   40-79    0- 9 control
+## 308   35-44   40-79    0- 9 control
+## 309   35-44   40-79   10-19 control
+## 310   35-44   40-79    0- 9 control
+## 311   35-44   40-79    0- 9 control
+## 312   35-44    0-39   20-29 control
+## 313   35-44    0-39    0- 9 control
+## 314   35-44  80-119   10-19 control
+## 315   35-44    0-39   10-19    case
+## 316   45-54  80-119     30+ control
+## 317   45-54    0-39    0- 9 control
+## 318   45-54    120+     30+    case
+## 319   45-54  80-119    0- 9 control
+## 320   45-54   40-79    0- 9 control
+## 321   45-54    0-39    0- 9 control
+## 322   45-54   40-79    0- 9 control
+## 323   45-54    0-39    0- 9 control
+## 324   45-54    0-39    0- 9 control
+## 325   45-54  80-119    0- 9    case
+## 326   45-54   40-79   10-19 control
+## 327   45-54    0-39    0- 9 control
+## 328   45-54  80-119   20-29 control
+## 329   45-54    0-39    0- 9 control
+## 330   45-54    120+   20-29    case
+## 331   45-54   40-79    0- 9 control
+## 332   45-54    0-39    0- 9 control
+## 333   45-54   40-79    0- 9 control
+## 334   45-54   40-79    0- 9 control
+## 335   45-54   40-79    0- 9 control
+## 336   45-54  80-119   10-19    case
+## 337   45-54   40-79   10-19    case
+## 338   45-54  80-119    0- 9 control
+## 339   45-54   40-79   10-19    case
+## 340   45-54    0-39    0- 9 control
+## 341   45-54   40-79    0- 9 control
+## 342   45-54  80-119   20-29 control
+## 343   45-54   40-79    0- 9 control
+## 344   45-54   40-79   20-29    case
+## 345   45-54   40-79   20-29 control
+## 346   45-54    120+    0- 9    case
+## 347   45-54   40-79   10-19 control
+## 348   45-54    0-39   20-29 control
+## 349   45-54    0-39   20-29 control
+## 350   45-54   40-79     30+    case
+## 351   45-54  80-119   10-19    case
+## 352   45-54   40-79   10-19 control
+## 353   45-54    0-39    0- 9 control
+## 354   45-54   40-79     30+    case
+## 355   45-54   40-79    0- 9 control
+## 356   45-54    0-39    0- 9 control
+## 357   45-54    0-39    0- 9 control
+## 358   45-54    120+   10-19    case
+## 359   45-54  80-119   10-19 control
+## 360   45-54   40-79   10-19 control
+## 361   45-54   40-79    0- 9 control
+## 362   45-54   40-79   20-29 control
+## 363   45-54   40-79    0- 9 control
+## 364   45-54   40-79   10-19 control
+## 365   45-54   40-79   20-29    case
+## 366   45-54    0-39   10-19 control
+## 367   45-54   40-79   20-29 control
+## 368   45-54  80-119   10-19 control
+## 369   45-54    0-39   10-19 control
+## 370   45-54   40-79   20-29    case
+## 371   45-54    0-39   10-19 control
+## 372   45-54  80-119     30+    case
+## 373   45-54    120+   20-29 control
+## 374   45-54    0-39   10-19 control
+## 375   45-54    0-39    0- 9 control
+## 376   45-54   40-79    0- 9    case
+## 377   45-54   40-79   20-29 control
+## 378   45-54   40-79   10-19 control
+## 379   45-54   40-79   10-19 control
+## 380   45-54   40-79   10-19    case
+## 381   45-54    0-39     30+ control
+## 382   45-54    0-39    0- 9 control
+## 383   45-54  80-119    0- 9 control
+## 384   45-54    120+   20-29    case
+## 385   45-54  80-119   20-29    case
+## 386   45-54   40-79   20-29 control
+## 387   45-54  80-119    0- 9 control
+## 388   45-54   40-79    0- 9 control
+## 389   45-54    0-39   10-19 control
+## 390   45-54    0-39    0- 9 control
+## 391   45-54    0-39   10-19 control
+## 392   45-54    0-39    0- 9 control
+## 393   45-54    120+     30+    case
+## 394   45-54  80-119   10-19 control
+## 395   45-54  80-119    0- 9 control
+## 396   45-54   40-79    0- 9 control
+## 397   45-54    0-39    0- 9 control
+## 398   45-54   40-79    0- 9    case
+## 399   45-54    120+     30+    case
+## 400   45-54  80-119    0- 9    case
+## 401   45-54    0-39   10-19 control
+## 402   45-54    0-39   10-19 control
+## 403   45-54    0-39    0- 9 control
+## 404   45-54    120+   10-19 control
+## 405   45-54    0-39   10-19 control
+## 406   45-54   40-79     30+    case
+## 407   45-54   40-79   10-19 control
+## 408   45-54   40-79    0- 9 control
+## 409   45-54   40-79    0- 9 control
+## 410   45-54  80-119    0- 9 control
+## 411   45-54   40-79   20-29 control
+## 412   45-54   40-79   10-19 control
+## 413   45-54  80-119   10-19    case
+## 414   45-54    0-39    0- 9 control
+## 415   45-54  80-119    0- 9 control
+## 416   45-54    0-39    0- 9 control
+## 417   45-54    0-39    0- 9 control
+## 418   45-54  80-119   10-19 control
+## 419   45-54  80-119   10-19    case
+## 420   45-54   40-79     30+    case
+## 421   45-54   40-79   20-29    case
+## 422   45-54    120+     30+    case
+## 423   45-54  80-119   10-19 control
+## 424   45-54   40-79    0- 9 control
+## 425   45-54    0-39   10-19 control
+## 426   45-54    0-39   20-29 control
+## 427   45-54    0-39    0- 9 control
+## 428   45-54   40-79   20-29 control
+## 429   45-54    0-39   20-29 control
+## 430   45-54  80-119    0- 9 control
+## 431   45-54  80-119    0- 9    case
+## 432   45-54  80-119   10-19 control
+## 433   45-54   40-79    0- 9 control
+## 434   45-54    0-39    0- 9 control
+## 435   45-54   40-79   10-19 control
+## 436   45-54   40-79    0- 9 control
+## 437   45-54   40-79    0- 9 control
+## 438   45-54   40-79     30+    case
+## 439   45-54    0-39   10-19 control
+## 440   45-54   40-79   10-19    case
+## 441   45-54   40-79   10-19 control
+## 442   45-54  80-119     30+    case
+## 443   45-54   40-79    0- 9    case
+## 444   45-54    0-39     30+ control
+## 445   45-54    0-39   20-29 control
+## 446   45-54    0-39   10-19 control
+## 447   45-54   40-79    0- 9 control
+## 448   45-54   40-79    0- 9 control
+## 449   45-54   40-79    0- 9    case
+## 450   45-54   40-79    0- 9    case
+## 451   45-54   40-79    0- 9 control
+## 452   45-54   40-79    0- 9 control
+## 453   45-54   40-79   20-29 control
+## 454   45-54    0-39   10-19 control
+## 455   45-54    0-39    0- 9 control
+## 456   45-54    0-39   20-29 control
+## 457   45-54    0-39    0- 9 control
+## 458   45-54  80-119   10-19 control
+## 459   45-54  80-119     30+ control
+## 460   45-54    0-39    0- 9 control
+## 461   45-54    0-39   20-29 control
+## 462   45-54    0-39    0- 9 control
+## 463   45-54    0-39   10-19 control
+## 464   45-54    0-39    0- 9 control
+## 465   45-54   40-79   10-19 control
+## 466   45-54    120+    0- 9    case
+## 467   45-54    0-39    0- 9 control
+## 468   45-54   40-79    0- 9 control
+## 469   45-54  80-119    0- 9 control
+## 470   45-54    0-39   20-29 control
+## 471   45-54    0-39    0- 9 control
+## 472   45-54    0-39     30+ control
+## 473   45-54    0-39    0- 9 control
+## 474   45-54    0-39    0- 9 control
+## 475   45-54   40-79   20-29 control
+## 476   45-54  80-119    0- 9 control
+## 477   45-54  80-119   10-19    case
+## 478   45-54   40-79    0- 9 control
+## 479   45-54    0-39   10-19 control
+## 480   45-54  80-119    0- 9 control
+## 481   45-54   40-79   20-29    case
+## 482   45-54   40-79     30+ control
+## 483   45-54    0-39     30+ control
+## 484   45-54   40-79   10-19 control
+## 485   45-54   40-79   10-19 control
+## 486   45-54    120+    0- 9    case
+## 487   45-54   40-79    0- 9 control
+## 488   45-54    0-39    0- 9 control
+## 489   45-54    0-39    0- 9 control
+## 490   45-54    0-39    0- 9 control
+## 491   45-54    120+   10-19    case
+## 492   45-54    0-39    0- 9 control
+## 493   45-54   40-79   20-29 control
+## 494   45-54  80-119    0- 9 control
+## 495   45-54   40-79    0- 9    case
+## 496   45-54    120+    0- 9    case
+## 497   45-54  80-119    0- 9 control
+## 498   45-54  80-119   10-19    case
+## 499   45-54   40-79     30+ control
+## 500   45-54    0-39    0- 9 control
+## 501   45-54    0-39   10-19 control
+## 502   45-54   40-79    0- 9 control
+## 503   45-54   40-79    0- 9 control
+## 504   45-54   40-79   10-19 control
+## 505   45-54    0-39   10-19 control
+## 506   45-54    0-39    0- 9 control
+## 507   45-54  80-119   20-29 control
+## 508   45-54    0-39    0- 9 control
+## 509   45-54    0-39    0- 9 control
+## 510   45-54    0-39    0- 9 control
+## 511   45-54    0-39    0- 9    case
+## 512   45-54   40-79   10-19 control
+## 513   45-54    0-39   20-29 control
+## 514   45-54   40-79    0- 9 control
+## 515   45-54    0-39   10-19 control
+## 516   45-54  80-119   10-19 control
+## 517   45-54    0-39    0- 9 control
+## 518   45-54    0-39    0- 9 control
+## 519   45-54   40-79    0- 9 control
+## 520   45-54    0-39    0- 9 control
+## 521   45-54  80-119   20-29 control
+## 522   45-54    0-39    0- 9 control
+## 523   45-54    120+   10-19    case
+## 524   45-54   40-79   10-19 control
+## 525   45-54    0-39    0- 9 control
+## 526   45-54   40-79    0- 9 control
+## 527   45-54    0-39   20-29 control
+## 528   45-54   40-79    0- 9 control
+## 529   55-64    0-39   10-19 control
+## 530   55-64    0-39    0- 9 control
+## 531   55-64    0-39    0- 9 control
+## 532   55-64    120+   10-19    case
+## 533   55-64   40-79    0- 9 control
+## 534   55-64    0-39   10-19 control
+## 535   55-64  80-119   20-29 control
+## 536   55-64    120+   10-19    case
+## 537   55-64    120+     30+    case
+## 538   55-64  80-119   10-19 control
+## 539   55-64    120+    0- 9    case
+## 540   55-64   40-79   20-29 control
+## 541   55-64    0-39   10-19 control
+## 542   55-64    0-39     30+    case
+## 543   55-64  80-119    0- 9 control
+## 544   55-64   40-79   10-19    case
+## 545   55-64    0-39     30+    case
+## 546   55-64    0-39   10-19    case
+## 547   55-64    0-39    0- 9 control
+## 548   55-64   40-79   10-19 control
+## 549   55-64   40-79    0- 9    case
+## 550   55-64   40-79    0- 9 control
+## 551   55-64    0-39    0- 9 control
+## 552   55-64  80-119    0- 9    case
+## 553   55-64   40-79    0- 9    case
+## 554   55-64    0-39   20-29 control
+## 555   55-64   40-79   10-19 control
+## 556   55-64   40-79    0- 9    case
+## 557   55-64   40-79    0- 9 control
+## 558   55-64  80-119   20-29 control
+## 559   55-64   40-79   10-19    case
+## 560   55-64    0-39    0- 9 control
+## 561   55-64    0-39    0- 9 control
+## 562   55-64    0-39    0- 9 control
+## 563   55-64    0-39    0- 9 control
+## 564   55-64   40-79    0- 9 control
+## 565   55-64  80-119   20-29    case
+## 566   55-64   40-79    0- 9 control
+## 567   55-64    0-39   10-19 control
+## 568   55-64    0-39   20-29 control
+## 569   55-64   40-79   20-29    case
+## 570   55-64   40-79    0- 9 control
+## 571   55-64    0-39   20-29 control
+## 572   55-64    120+   10-19 control
+## 573   55-64   40-79    0- 9 control
+## 574   55-64   40-79    0- 9 control
+## 575   55-64  80-119    0- 9 control
+## 576   55-64  80-119    0- 9 control
+## 577   55-64    120+     30+    case
+## 578   55-64    0-39    0- 9 control
+## 579   55-64   40-79   20-29 control
+## 580   55-64   40-79   20-29 control
+## 581   55-64   40-79     30+    case
+## 582   55-64   40-79   10-19 control
+## 583   55-64   40-79    0- 9 control
+## 584   55-64    0-39   10-19 control
+## 585   55-64  80-119    0- 9 control
+## 586   55-64    120+   10-19    case
+## 587   55-64   40-79   10-19    case
+## 588   55-64    120+   20-29    case
+## 589   55-64   40-79    0- 9 control
+## 590   55-64    0-39    0- 9 control
+## 591   55-64   40-79    0- 9 control
+## 592   55-64  80-119    0- 9 control
+## 593   55-64   40-79   20-29 control
+## 594   55-64    0-39   10-19 control
+## 595   55-64    0-39    0- 9    case
+## 596   55-64   40-79   10-19 control
+## 597   55-64   40-79    0- 9 control
+## 598   55-64    0-39   10-19 control
+## 599   55-64   40-79    0- 9 control
+## 600   55-64   40-79   10-19    case
+## 601   55-64    0-39   20-29 control
+## 602   55-64   40-79   20-29    case
+## 603   55-64   40-79   10-19 control
+## 604   55-64    0-39   20-29    case
+## 605   55-64    0-39   20-29 control
+## 606   55-64  80-119   10-19    case
+## 607   55-64    0-39    0- 9 control
+## 608   55-64    0-39    0- 9 control
+## 609   55-64   40-79    0- 9 control
+## 610   55-64    120+    0- 9 control
+## 611   55-64   40-79    0- 9 control
+## 612   55-64    0-39    0- 9 control
+## 613   55-64   40-79    0- 9 control
+## 614   55-64   40-79    0- 9 control
+## 615   55-64   40-79   10-19 control
+## 616   55-64   40-79    0- 9 control
+## 617   55-64   40-79    0- 9 control
+## 618   55-64    0-39    0- 9    case
+## 619   55-64    0-39    0- 9 control
+## 620   55-64    0-39   20-29 control
+## 621   55-64  80-119   20-29    case
+## 622   55-64    120+    0- 9 control
+## 623   55-64    0-39   10-19 control
+## 624   55-64  80-119   10-19    case
+## 625   55-64    0-39   10-19 control
+## 626   55-64  80-119   10-19 control
+## 627   55-64   40-79    0- 9    case
+## 628   55-64    0-39    0- 9 control
+## 629   55-64   40-79   20-29 control
+## 630   55-64  80-119   10-19    case
+## 631   55-64    0-39   20-29    case
+## 632   55-64  80-119    0- 9 control
+## 633   55-64    0-39    0- 9 control
+## 634   55-64    120+     30+    case
+## 635   55-64    0-39    0- 9 control
+## 636   55-64   40-79    0- 9 control
+## 637   55-64   40-79    0- 9 control
+## 638   55-64   40-79   10-19 control
+## 639   55-64  80-119   10-19 control
+## 640   55-64   40-79   20-29 control
+## 641   55-64  80-119    0- 9    case
+## 642   55-64   40-79   10-19 control
+## 643   55-64   40-79     30+ control
+## 644   55-64    120+     30+    case
+## 645   55-64    0-39   10-19    case
+## 646   55-64    0-39   20-29 control
+## 647   55-64    0-39    0- 9 control
+## 648   55-64    120+    0- 9    case
+## 649   55-64    0-39    0- 9 control
+## 650   55-64    0-39   10-19 control
+## 651   55-64  80-119   20-29 control
+## 652   55-64    0-39   10-19    case
+## 653   55-64  80-119    0- 9    case
+## 654   55-64  80-119     30+    case
+## 655   55-64    120+     30+    case
+## 656   55-64   40-79   20-29 control
+## 657   55-64    0-39    0- 9 control
+## 658   55-64   40-79   20-29 control
+## 659   55-64    0-39    0- 9 control
+## 660   55-64  80-119     30+    case
+## 661   55-64    0-39     30+ control
+## 662   55-64  80-119    0- 9 control
+## 663   55-64    120+    0- 9 control
+## 664   55-64  80-119    0- 9    case
+## 665   55-64   40-79    0- 9 control
+## 666   55-64    120+    0- 9    case
+## 667   55-64    0-39   10-19 control
+## 668   55-64   40-79    0- 9 control
+## 669   55-64   40-79    0- 9    case
+## 670   55-64  80-119   10-19 control
+## 671   55-64    120+    0- 9    case
+## 672   55-64    0-39    0- 9 control
+## 673   55-64    120+    0- 9 control
+## 674   55-64    0-39   10-19 control
+## 675   55-64  80-119   10-19 control
+## 676   55-64    0-39    0- 9 control
+## 677   55-64   40-79    0- 9 control
+## 678   55-64    120+   20-29 control
+## 679   55-64   40-79   20-29 control
+## 680   55-64    0-39     30+    case
+## 681   55-64    120+   10-19    case
+## 682   55-64    0-39    0- 9 control
+## 683   55-64   40-79   10-19 control
+## 684   55-64    0-39    0- 9 control
+## 685   55-64   40-79   10-19 control
+## 686   55-64    0-39    0- 9 control
+## 687   55-64    120+    0- 9 control
+## 688   55-64   40-79    0- 9 control
+## 689   55-64    0-39   10-19 control
+## 690   55-64    0-39    0- 9 control
+## 691   55-64    0-39    0- 9 control
+## 692   55-64   40-79    0- 9    case
+## 693   55-64    0-39    0- 9 control
+## 694   55-64    0-39    0- 9 control
+## 695   55-64    120+   10-19    case
+## 696   55-64  80-119    0- 9 control
+## 697   55-64    0-39    0- 9 control
+## 698   55-64   40-79     30+ control
+## 699   55-64   40-79     30+    case
+## 700   55-64   40-79    0- 9    case
+## 701   55-64  80-119   10-19 control
+## 702   55-64    0-39    0- 9 control
+## 703   55-64  80-119   10-19    case
+## 704   55-64   40-79   10-19    case
+## 705   55-64   40-79    0- 9 control
+## 706   55-64   40-79   20-29 control
+## 707   55-64  80-119    0- 9    case
+## 708   55-64    0-39     30+ control
+## 709   55-64   40-79   10-19 control
+## 710   55-64    0-39   10-19 control
+## 711   55-64   40-79    0- 9 control
+## 712   55-64    0-39    0- 9 control
+## 713   55-64    0-39   20-29 control
+## 714   55-64   40-79   10-19    case
+## 715   55-64  80-119     30+    case
+## 716   55-64  80-119    0- 9    case
+## 717   55-64  80-119     30+    case
+## 718   55-64   40-79    0- 9 control
+## 719   55-64  80-119   10-19    case
+## 720   55-64  80-119   20-29    case
+## 721   55-64    0-39     30+    case
+## 722   55-64  80-119    0- 9    case
+## 723   55-64    0-39    0- 9 control
+## 724   55-64    0-39    0- 9 control
+## 725   55-64    0-39   20-29 control
+## 726   55-64  80-119    0- 9 control
+## 727   55-64    0-39    0- 9 control
+## 728   55-64   40-79    0- 9    case
+## 729   55-64    0-39    0- 9 control
+## 730   55-64   40-79   20-29    case
+## 731   55-64   40-79     30+    case
+## 732   55-64    0-39   20-29    case
+## 733   55-64   40-79   20-29    case
+## 734   55-64    0-39    0- 9 control
+## 735   55-64   40-79   10-19 control
+## 736   55-64    0-39    0- 9 control
+## 737   55-64    120+   10-19    case
+## 738   55-64    120+     30+ control
+## 739   55-64   40-79    0- 9 control
+## 740   55-64    120+    0- 9    case
+## 741   55-64  80-119   10-19    case
+## 742   55-64   40-79    0- 9 control
+## 743   55-64   40-79    0- 9 control
+## 744   55-64    0-39    0- 9 control
+## 745   55-64    0-39    0- 9 control
+## 746   55-64  80-119   10-19 control
+## 747   55-64    0-39   10-19 control
+## 748   55-64    0-39   10-19 control
+## 749   55-64  80-119    0- 9    case
+## 750   55-64    0-39   10-19 control
+## 751   55-64  80-119   10-19    case
+## 752   55-64   40-79   20-29 control
+## 753   55-64    120+   20-29    case
+## 754   55-64    0-39   10-19 control
+## 755   55-64   40-79     30+ control
+## 756   55-64    0-39   10-19 control
+## 757   55-64   40-79   10-19 control
+## 758   55-64    0-39    0- 9 control
+## 759   55-64    0-39    0- 9 control
+## 760   55-64    0-39    0- 9 control
+## 761   55-64   40-79   10-19 control
+## 762   55-64   40-79   20-29 control
+## 763   55-64    0-39    0- 9 control
+## 764   55-64  80-119    0- 9    case
+## 765   55-64   40-79   10-19 control
+## 766   55-64    0-39    0- 9 control
+## 767   55-64  80-119   10-19    case
+## 768   55-64    0-39    0- 9 control
+## 769   55-64   40-79    0- 9    case
+## 770   55-64   40-79   20-29 control
+## 771   65-74   40-79    0- 9    case
+## 772   65-74    0-39    0- 9 control
+## 773   65-74    0-39    0- 9 control
+## 774   65-74  80-119    0- 9    case
+## 775   65-74    0-39   10-19 control
+## 776   65-74    0-39    0- 9 control
+## 777   65-74  80-119   10-19 control
+## 778   65-74    0-39   10-19 control
+## 779   65-74    120+   10-19 control
+## 780   65-74  80-119   10-19 control
+## 781   65-74    0-39    0- 9 control
+## 782   65-74    120+    0- 9    case
+## 783   65-74  80-119    0- 9    case
+## 784   65-74  80-119    0- 9    case
+## 785   65-74    0-39    0- 9 control
+## 786   65-74    0-39     30+ control
+## 787   65-74  80-119    0- 9 control
+## 788   65-74    0-39    0- 9 control
+## 789   65-74   40-79   20-29 control
+## 790   65-74   40-79    0- 9 control
+## 791   65-74  80-119   10-19    case
+## 792   65-74   40-79    0- 9 control
+## 793   65-74  80-119   10-19 control
+## 794   65-74   40-79    0- 9 control
+## 795   65-74    120+   10-19    case
+## 796   65-74    0-39    0- 9 control
+## 797   65-74   40-79   20-29 control
+## 798   65-74    0-39    0- 9 control
+## 799   65-74    120+     30+    case
+## 800   65-74   40-79    0- 9    case
+## 801   65-74   40-79    0- 9 control
+## 802   65-74   40-79    0- 9    case
+## 803   65-74   40-79   20-29    case
+## 804   65-74    0-39   20-29    case
+## 805   65-74   40-79    0- 9    case
+## 806   65-74   40-79    0- 9    case
+## 807   65-74    0-39    0- 9 control
+## 808   65-74    0-39   20-29 control
+## 809   65-74   40-79   20-29 control
+## 810   65-74  80-119   10-19    case
+## 811   65-74  80-119    0- 9 control
+## 812   65-74   40-79    0- 9    case
+## 813   65-74   40-79    0- 9 control
+## 814   65-74  80-119    0- 9 control
+## 815   65-74   40-79   10-19 control
+## 816   65-74   40-79   10-19    case
+## 817   65-74    0-39    0- 9 control
+## 818   65-74   40-79   20-29    case
+## 819   65-74    0-39    0- 9 control
+## 820   65-74    0-39    0- 9 control
+## 821   65-74    0-39    0- 9 control
+## 822   65-74    0-39    0- 9 control
+## 823   65-74    0-39    0- 9 control
+## 824   65-74    0-39    0- 9 control
+## 825   65-74    0-39    0- 9 control
+## 826   65-74   40-79    0- 9 control
+## 827   65-74    0-39    0- 9    case
+## 828   65-74    0-39    0- 9 control
+## 829   65-74  80-119    0- 9    case
+## 830   65-74    0-39    0- 9 control
+## 831   65-74   40-79    0- 9 control
+## 832   65-74    120+    0- 9    case
+## 833   65-74   40-79    0- 9 control
+## 834   65-74    0-39    0- 9 control
+## 835   65-74   40-79   10-19 control
+## 836   65-74  80-119     30+    case
+## 837   65-74   40-79    0- 9 control
+## 838   65-74   40-79    0- 9 control
+## 839   65-74   40-79    0- 9    case
+## 840   65-74   40-79   10-19 control
+## 841   65-74    120+    0- 9    case
+## 842   65-74    0-39   20-29 control
+## 843   65-74   40-79    0- 9    case
+## 844   65-74    0-39   20-29 control
+## 845   65-74   40-79    0- 9    case
+## 846   65-74    0-39    0- 9 control
+## 847   65-74    0-39   10-19    case
+## 848   65-74   40-79    0- 9    case
+## 849   65-74    0-39   20-29 control
+## 850   65-74  80-119   10-19 control
+## 851   65-74    0-39    0- 9    case
+## 852   65-74   40-79    0- 9    case
+## 853   65-74   40-79    0- 9 control
+## 854   65-74   40-79    0- 9 control
+## 855   65-74   40-79   20-29    case
+## 856   65-74    0-39   10-19    case
+## 857   65-74    0-39    0- 9    case
+## 858   65-74    0-39    0- 9 control
+## 859   65-74   40-79   10-19 control
+## 860   65-74   40-79    0- 9    case
+## 861   65-74   40-79    0- 9    case
+## 862   65-74    0-39   10-19 control
+## 863   65-74    0-39    0- 9 control
+## 864   65-74    0-39    0- 9 control
+## 865   65-74    0-39     30+ control
+## 866   65-74   40-79    0- 9    case
+## 867   65-74    0-39    0- 9 control
+## 868   65-74   40-79    0- 9    case
+## 869   65-74    0-39    0- 9 control
+## 870   65-74    0-39   20-29 control
+## 871   65-74    0-39    0- 9 control
+## 872   65-74    0-39    0- 9 control
+## 873   65-74  80-119   20-29    case
+## 874   65-74    0-39   10-19    case
+## 875   65-74  80-119   10-19 control
+## 876   65-74  80-119    0- 9    case
+## 877   65-74   40-79   10-19    case
+## 878   65-74    0-39    0- 9 control
+## 879   65-74    0-39    0- 9 control
+## 880   65-74   40-79    0- 9 control
+## 881   65-74    0-39   10-19 control
+## 882   65-74    0-39    0- 9 control
+## 883   65-74  80-119   10-19 control
+## 884   65-74    0-39    0- 9 control
+## 885   65-74    0-39   10-19 control
+## 886   65-74  80-119   20-29 control
+## 887   65-74    0-39    0- 9 control
+## 888   65-74    0-39   10-19 control
+## 889   65-74   40-79    0- 9    case
+## 890   65-74  80-119   10-19    case
+## 891   65-74    0-39   10-19 control
+## 892   65-74   40-79   10-19 control
+## 893   65-74  80-119    0- 9 control
+## 894   65-74   40-79    0- 9    case
+## 895   65-74    0-39    0- 9 control
+## 896   65-74    0-39   20-29    case
+## 897   65-74    120+    0- 9 control
+## 898   65-74    120+   20-29    case
+## 899   65-74    0-39    0- 9    case
+## 900   65-74  80-119    0- 9 control
+## 901   65-74    0-39   10-19 control
+## 902   65-74    0-39   10-19 control
+## 903   65-74    0-39    0- 9 control
+## 904   65-74  80-119    0- 9    case
+## 905   65-74    0-39    0- 9 control
+## 906   65-74    0-39    0- 9 control
+## 907   65-74  80-119    0- 9 control
+## 908   65-74   40-79   10-19    case
+## 909   65-74   40-79    0- 9 control
+## 910   65-74    0-39    0- 9 control
+## 911   65-74  80-119   10-19    case
+## 912   65-74   40-79   10-19 control
+## 913   65-74    0-39    0- 9 control
+## 914   65-74    0-39    0- 9 control
+## 915   65-74    0-39    0- 9 control
+## 916   65-74  80-119   20-29    case
+## 917   65-74   40-79   20-29    case
+## 918   65-74   40-79    0- 9 control
+## 919   65-74    0-39    0- 9    case
+## 920   65-74    0-39    0- 9 control
+## 921   65-74  80-119   10-19 control
+## 922   65-74  80-119    0- 9 control
+## 923   65-74   40-79    0- 9 control
+## 924   65-74   40-79   10-19 control
+## 925   65-74   40-79    0- 9 control
+## 926   65-74  80-119   10-19 control
+## 927   65-74    0-39   10-19    case
+## 928   65-74    0-39   10-19 control
+## 929   65-74   40-79   20-29    case
+## 930   65-74   40-79   20-29 control
+## 931   65-74    0-39    0- 9 control
+## 932    &lt;NA&gt;    0-39   10-19    case
+## 933    &lt;NA&gt;    120+   10-19    case
+## 934    &lt;NA&gt;    0-39    0- 9 control
+## 935    &lt;NA&gt;    0-39     30+    case
+## 936    &lt;NA&gt;   40-79    0- 9 control
+## 937    &lt;NA&gt;   40-79   20-29 control
+## 938    &lt;NA&gt;    0-39    0- 9 control
+## 939    &lt;NA&gt;   40-79     30+    case
+## 940    &lt;NA&gt;    0-39     30+ control
+## 941    &lt;NA&gt;    0-39    0- 9 control
+## 942    &lt;NA&gt;    0-39    0- 9 control
+## 943    &lt;NA&gt;    120+    0- 9    case
+## 944    &lt;NA&gt;    0-39    0- 9 control
+## 945    &lt;NA&gt;    0-39    0- 9 control
+## 946    &lt;NA&gt;    0-39    0- 9 control
+## 947    &lt;NA&gt;   40-79    0- 9    case
+## 948    &lt;NA&gt;    0-39    0- 9 control
+## 949    &lt;NA&gt;    0-39   10-19    case
+## 950    &lt;NA&gt;    0-39    0- 9 control
+## 951    &lt;NA&gt;   40-79   20-29 control
+## 952    &lt;NA&gt;    0-39    0- 9 control
+## 953    &lt;NA&gt;    0-39    0- 9 control
+## 954    &lt;NA&gt;    0-39    0- 9 control
+## 955    &lt;NA&gt;   40-79   20-29 control
+## 956    &lt;NA&gt;    0-39   10-19 control
+## 957    &lt;NA&gt;    0-39     30+ control
+## 958    &lt;NA&gt;    0-39    0- 9 control
+## 959    &lt;NA&gt;    0-39    0- 9 control
+## 960    &lt;NA&gt;    0-39    0- 9 control
+## 961    &lt;NA&gt;    0-39   10-19 control
+## 962    &lt;NA&gt;    0-39    0- 9    case
+## 963    &lt;NA&gt;    120+    0- 9    case
+## 964    &lt;NA&gt;   40-79   10-19 control
+## 965    &lt;NA&gt;    0-39   10-19 control
+## 966    &lt;NA&gt;   40-79    0- 9 control
+## 967    &lt;NA&gt;    0-39    0- 9 control
+## 968    &lt;NA&gt;  80-119   10-19    case
+## 969    &lt;NA&gt;    0-39   10-19 control
+## 970    &lt;NA&gt;   40-79   10-19    case
+## 971    &lt;NA&gt;  80-119    0- 9    case
+## 972    &lt;NA&gt;   40-79    0- 9    case
+## 973    &lt;NA&gt;   40-79    0- 9 control
+## 974    &lt;NA&gt;   40-79   10-19 control
+## 975    &lt;NA&gt;    0-39    0- 9 control</code></pre>
+<pre class="r"><code>df %&gt;% 
+  mutate(alc_grp = factor(alc_grp, levels = c(&quot;0-39&quot;,
+                                              &quot;40-79&quot;,
+                                              &quot;80-119&quot;,
+                                              &quot;120&quot;
+)))</code></pre>
+<pre><code>##     age_grp alc_grp tob_grp  cc_grp
+## 1     25-34   40-79    0- 9 control
+## 2     25-34    0-39    0- 9 control
+## 3     25-34   40-79     30+ control
+## 4     25-34   40-79   10-19 control
+## 5     25-34   40-79    0- 9 control
+## 6     25-34   40-79    0- 9 control
+## 7     25-34    0-39   10-19 control
+## 8     25-34   40-79   10-19 control
+## 9     25-34   40-79   10-19 control
+## 10    25-34   40-79    0- 9 control
+## 11    25-34   40-79    0- 9 control
+## 12    25-34   40-79   20-29 control
+## 13    25-34   40-79    0- 9 control
+## 14    25-34   40-79    0- 9 control
+## 15    25-34   40-79    0- 9 control
+## 16    25-34    0-39    0- 9 control
+## 17    25-34    0-39    0- 9 control
+## 18    25-34   40-79   20-29 control
+## 19    25-34    0-39    0- 9 control
+## 20    25-34   40-79    0- 9 control
+## 21    25-34    0-39    0- 9 control
+## 22    25-34    0-39    0- 9 control
+## 23    25-34    0-39    0- 9 control
+## 24    25-34    0-39    0- 9 control
+## 25    25-34   40-79     30+ control
+## 26    25-34    0-39   20-29 control
+## 27    25-34    0-39     30+ control
+## 28    25-34    0-39     30+ control
+## 29    25-34    0-39    0- 9 control
+## 30    25-34    0-39    0- 9 control
+## 31    25-34   40-79    0- 9 control
+## 32    25-34   40-79     30+ control
+## 33    25-34    0-39    0- 9 control
+## 34    25-34  80-119   10-19 control
+## 35    25-34    0-39   10-19 control
+## 36    25-34    0-39   10-19 control
+## 37    25-34   40-79    0- 9 control
+## 38    25-34    0-39    0- 9 control
+## 39    25-34    0-39    0- 9 control
+## 40    25-34    0-39   20-29 control
+## 41    25-34    0-39    0- 9 control
+## 42    25-34    0-39    0- 9 control
+## 43    25-34  80-119     30+ control
+## 44    25-34    0-39   10-19 control
+## 45    25-34   40-79     30+ control
+## 46    25-34    0-39    0- 9 control
+## 47    25-34   40-79    0- 9 control
+## 48    25-34   40-79     30+ control
+## 49    25-34    0-39   20-29 control
+## 50    25-34    0-39     30+ control
+## 51    25-34   40-79    0- 9 control
+## 52    25-34   40-79   10-19 control
+## 53    25-34    0-39    0- 9 control
+## 54    25-34    0-39   20-29 control
+## 55    25-34   40-79     30+ control
+## 56    25-34   40-79   20-29 control
+## 57    25-34    0-39   10-19 control
+## 58    25-34  80-119     30+ control
+## 59    25-34   40-79    0- 9 control
+## 60    25-34  80-119    0- 9 control
+## 61    25-34    0-39    0- 9 control
+## 62    25-34    0-39   20-29 control
+## 63    25-34    0-39    0- 9 control
+## 64    25-34    0-39    0- 9 control
+## 65    25-34    0-39    0- 9 control
+## 66    25-34   40-79    0- 9 control
+## 67    25-34   40-79    0- 9 control
+## 68    25-34   40-79   10-19 control
+## 69    25-34    0-39    0- 9 control
+## 70    25-34    0-39    0- 9 control
+## 71    25-34   40-79    0- 9 control
+## 72    25-34    0-39    0- 9 control
+## 73    25-34    0-39    0- 9 control
+## 74    25-34    0-39    0- 9 control
+## 75    25-34    0-39    0- 9 control
+## 76    25-34    0-39    0- 9 control
+## 77    25-34    0-39   20-29 control
+## 78    25-34    0-39    0- 9 control
+## 79    25-34    &lt;NA&gt;   10-19    case
+## 80    25-34   40-79    0- 9 control
+## 81    25-34    0-39    0- 9 control
+## 82    25-34    0-39    0- 9 control
+## 83    25-34    0-39    0- 9 control
+## 84    25-34   40-79   10-19 control
+## 85    25-34    0-39    0- 9 control
+## 86    25-34    0-39    0- 9 control
+## 87    25-34   40-79    0- 9 control
+## 88    25-34    0-39    0- 9 control
+## 89    25-34    &lt;NA&gt;     30+ control
+## 90    25-34   40-79    0- 9 control
+## 91    25-34   40-79    0- 9 control
+## 92    25-34    0-39   10-19 control
+## 93    25-34   40-79    0- 9 control
+## 94    25-34    0-39   10-19 control
+## 95    25-34  80-119    0- 9 control
+## 96    25-34    0-39    0- 9 control
+## 97    25-34    0-39     30+ control
+## 98    25-34   40-79    0- 9 control
+## 99    25-34   40-79    0- 9 control
+## 100   25-34    0-39    0- 9 control
+## 101   25-34    0-39    0- 9 control
+## 102   25-34   40-79     30+ control
+## 103   25-34   40-79   10-19 control
+## 104   25-34    &lt;NA&gt;     30+ control
+## 105   25-34    0-39    0- 9 control
+## 106   25-34   40-79    0- 9 control
+## 107   25-34    &lt;NA&gt;   20-29 control
+## 108   25-34    0-39    0- 9 control
+## 109   25-34    0-39     30+ control
+## 110   25-34    &lt;NA&gt;    0- 9 control
+## 111   25-34    0-39   10-19 control
+## 112   25-34   40-79    0- 9 control
+## 113   25-34    0-39   10-19 control
+## 114   25-34   40-79    0- 9 control
+## 115   25-34   40-79   20-29 control
+## 116   25-34    0-39   10-19 control
+## 117   35-44  80-119    0- 9 control
+## 118   35-44    0-39    0- 9 control
+## 119   35-44   40-79    0- 9 control
+## 120   35-44   40-79    0- 9 control
+## 121   35-44   40-79     30+ control
+## 122   35-44   40-79   20-29 control
+## 123   35-44  80-119   10-19 control
+## 124   35-44  80-119   10-19 control
+## 125   35-44    0-39    0- 9 control
+## 126   35-44    0-39    0- 9 control
+## 127   35-44  80-119     30+ control
+## 128   35-44  80-119   20-29 control
+## 129   35-44   40-79    0- 9 control
+## 130   35-44   40-79   20-29 control
+## 131   35-44    0-39    0- 9 control
+## 132   35-44   40-79   20-29 control
+## 133   35-44    0-39    0- 9 control
+## 134   35-44    &lt;NA&gt;   20-29    case
+## 135   35-44   40-79    0- 9 control
+## 136   35-44    0-39    0- 9 control
+## 137   35-44    0-39    0- 9 control
+## 138   35-44   40-79    0- 9 control
+## 139   35-44    0-39    0- 9 control
+## 140   35-44    0-39   10-19 control
+## 141   35-44    0-39   10-19 control
+## 142   35-44    0-39   20-29 control
+## 143   35-44    0-39    0- 9 control
+## 144   35-44   40-79   10-19 control
+## 145   35-44    &lt;NA&gt;   10-19 control
+## 146   35-44   40-79    0- 9 control
+## 147   35-44  80-119   20-29 control
+## 148   35-44    0-39    0- 9 control
+## 149   35-44   40-79    0- 9 control
+## 150   35-44   40-79    0- 9 control
+## 151   35-44   40-79    0- 9 control
+## 152   35-44   40-79    0- 9 control
+## 153   35-44    0-39    0- 9 control
+## 154   35-44   40-79   10-19 control
+## 155   35-44   40-79     30+ control
+## 156   35-44    0-39   10-19 control
+## 157   35-44    0-39     30+ control
+## 158   35-44   40-79    0- 9 control
+## 159   35-44  80-119    0- 9 control
+## 160   35-44   40-79   10-19 control
+## 161   35-44   40-79    0- 9 control
+## 162   35-44    0-39     30+ control
+## 163   35-44    0-39     30+ control
+## 164   35-44    0-39    0- 9 control
+## 165   35-44   40-79   10-19 control
+## 166   35-44  80-119    0- 9 control
+## 167   35-44    0-39   20-29 control
+## 168   35-44    0-39    0- 9 control
+## 169   35-44    0-39    0- 9 control
+## 170   35-44    0-39   10-19 control
+## 171   35-44   40-79   10-19    case
+## 172   35-44  80-119    0- 9 control
+## 173   35-44   40-79    0- 9 control
+## 174   35-44    0-39    0- 9 control
+## 175   35-44    &lt;NA&gt;    0- 9 control
+## 176   35-44    0-39    0- 9 control
+## 177   35-44   40-79   10-19 control
+## 178   35-44   40-79   10-19 control
+## 179   35-44  80-119    0- 9 control
+## 180   35-44   40-79    0- 9 control
+## 181   35-44  80-119    0- 9 control
+## 182   35-44   40-79     30+ control
+## 183   35-44  80-119   10-19 control
+## 184   35-44    &lt;NA&gt;   20-29 control
+## 185   35-44   40-79   10-19 control
+## 186   35-44    0-39    0- 9 control
+## 187   35-44    0-39    0- 9 control
+## 188   35-44   40-79    0- 9 control
+## 189   35-44    0-39    0- 9 control
+## 190   35-44    0-39    0- 9 control
+## 191   35-44    &lt;NA&gt;   20-29 control
+## 192   35-44    0-39    0- 9 control
+## 193   35-44   40-79   10-19 control
+## 194   35-44  80-119    0- 9 control
+## 195   35-44    0-39    0- 9 control
+## 196   35-44    0-39    0- 9 control
+## 197   35-44    0-39     30+ control
+## 198   35-44    0-39    0- 9 control
+## 199   35-44   40-79   20-29 control
+## 200   35-44    0-39    0- 9 control
+## 201   35-44   40-79   10-19 control
+## 202   35-44   40-79   20-29 control
+## 203   35-44    0-39   20-29 control
+## 204   35-44    0-39    0- 9 control
+## 205   35-44    0-39   10-19 control
+## 206   35-44    0-39    0- 9 control
+## 207   35-44    0-39    0- 9 control
+## 208   35-44    &lt;NA&gt;    0- 9    case
+## 209   35-44    0-39   20-29 control
+## 210   35-44   40-79   10-19 control
+## 211   35-44   40-79   10-19    case
+## 212   35-44   40-79    0- 9 control
+## 213   35-44    0-39    0- 9 control
+## 214   35-44    0-39    0- 9 control
+## 215   35-44    0-39    0- 9 control
+## 216   35-44    0-39   10-19 control
+## 217   35-44   40-79   20-29 control
+## 218   35-44    0-39    0- 9 control
+## 219   35-44   40-79    0- 9 control
+## 220   35-44    0-39    0- 9 control
+## 221   35-44    0-39    0- 9 control
+## 222   35-44   40-79     30+ control
+## 223   35-44    0-39    0- 9 control
+## 224   35-44   40-79    0- 9 control
+## 225   35-44    0-39   10-19 control
+## 226   35-44   40-79   10-19 control
+## 227   35-44    0-39    0- 9 control
+## 228   35-44    0-39    0- 9 control
+## 229   35-44    0-39    0- 9 control
+## 230   35-44    0-39    0- 9 control
+## 231   35-44    0-39     30+ control
+## 232   35-44   40-79   20-29 control
+## 233   35-44   40-79   20-29 control
+## 234   35-44   40-79   20-29    case
+## 235   35-44    0-39     30+ control
+## 236   35-44    0-39     30+ control
+## 237   35-44   40-79   10-19    case
+## 238   35-44    0-39   10-19 control
+## 239   35-44    0-39    0- 9 control
+## 240   35-44   40-79    0- 9 control
+## 241   35-44   40-79     30+ control
+## 242   35-44   40-79    0- 9 control
+## 243   35-44  80-119   10-19 control
+## 244   35-44   40-79   20-29 control
+## 245   35-44   40-79   10-19 control
+## 246   35-44    0-39    0- 9 control
+## 247   35-44   40-79     30+ control
+## 248   35-44  80-119    0- 9 control
+## 249   35-44   40-79     30+ control
+## 250   35-44   40-79   20-29 control
+## 251   35-44   40-79    0- 9 control
+## 252   35-44   40-79    0- 9 control
+## 253   35-44   40-79   10-19 control
+## 254   35-44    0-39    0- 9 control
+## 255   35-44  80-119    0- 9 control
+## 256   35-44    0-39   20-29 control
+## 257   35-44   40-79    0- 9 control
+## 258   35-44    0-39    0- 9 control
+## 259   35-44    0-39   10-19 control
+## 260   35-44    0-39    0- 9 control
+## 261   35-44   40-79   20-29 control
+## 262   35-44   40-79   10-19 control
+## 263   35-44    0-39    0- 9 control
+## 264   35-44   40-79   20-29 control
+## 265   35-44    0-39    0- 9 control
+## 266   35-44    0-39   20-29 control
+## 267   35-44    0-39    0- 9 control
+## 268   35-44    0-39   10-19 control
+## 269   35-44    0-39    0- 9 control
+## 270   35-44    0-39   10-19 control
+## 271   35-44    &lt;NA&gt;   10-19 control
+## 272   35-44    0-39    0- 9 control
+## 273   35-44   40-79    0- 9 control
+## 274   35-44    0-39    0- 9 control
+## 275   35-44   40-79   10-19 control
+## 276   35-44    0-39    0- 9 control
+## 277   35-44  80-119    0- 9 control
+## 278   35-44   40-79    0- 9 control
+## 279   35-44   40-79     30+ control
+## 280   35-44    0-39    0- 9 control
+## 281   35-44  80-119    0- 9 control
+## 282   35-44   40-79   10-19 control
+## 283   35-44  80-119   10-19 control
+## 284   35-44    0-39    0- 9 control
+## 285   35-44    0-39   10-19 control
+## 286   35-44    0-39    0- 9 control
+## 287   35-44   40-79    0- 9 control
+## 288   35-44   40-79    0- 9 control
+## 289   35-44   40-79   10-19 control
+## 290   35-44    0-39    0- 9 control
+## 291   35-44    &lt;NA&gt;   10-19 control
+## 292   35-44    0-39    0- 9 control
+## 293   35-44   40-79    0- 9 control
+## 294   35-44    0-39    0- 9 control
+## 295   35-44   40-79   10-19 control
+## 296   35-44    0-39    0- 9 control
+## 297   35-44   40-79   10-19 control
+## 298   35-44    0-39    0- 9 control
+## 299   35-44   40-79    0- 9 control
+## 300   35-44   40-79    0- 9 control
+## 301   35-44    &lt;NA&gt;   20-29    case
+## 302   35-44    &lt;NA&gt;    0- 9    case
+## 303   35-44   40-79    0- 9 control
+## 304   35-44    0-39   10-19 control
+## 305   35-44    0-39     30+ control
+## 306   35-44   40-79   20-29 control
+## 307   35-44   40-79    0- 9 control
+## 308   35-44   40-79    0- 9 control
+## 309   35-44   40-79   10-19 control
+## 310   35-44   40-79    0- 9 control
+## 311   35-44   40-79    0- 9 control
+## 312   35-44    0-39   20-29 control
+## 313   35-44    0-39    0- 9 control
+## 314   35-44  80-119   10-19 control
+## 315   35-44    0-39   10-19    case
+## 316   45-54  80-119     30+ control
+## 317   45-54    0-39    0- 9 control
+## 318   45-54    &lt;NA&gt;     30+    case
+## 319   45-54  80-119    0- 9 control
+## 320   45-54   40-79    0- 9 control
+## 321   45-54    0-39    0- 9 control
+## 322   45-54   40-79    0- 9 control
+## 323   45-54    0-39    0- 9 control
+## 324   45-54    0-39    0- 9 control
+## 325   45-54  80-119    0- 9    case
+## 326   45-54   40-79   10-19 control
+## 327   45-54    0-39    0- 9 control
+## 328   45-54  80-119   20-29 control
+## 329   45-54    0-39    0- 9 control
+## 330   45-54    &lt;NA&gt;   20-29    case
+## 331   45-54   40-79    0- 9 control
+## 332   45-54    0-39    0- 9 control
+## 333   45-54   40-79    0- 9 control
+## 334   45-54   40-79    0- 9 control
+## 335   45-54   40-79    0- 9 control
+## 336   45-54  80-119   10-19    case
+## 337   45-54   40-79   10-19    case
+## 338   45-54  80-119    0- 9 control
+## 339   45-54   40-79   10-19    case
+## 340   45-54    0-39    0- 9 control
+## 341   45-54   40-79    0- 9 control
+## 342   45-54  80-119   20-29 control
+## 343   45-54   40-79    0- 9 control
+## 344   45-54   40-79   20-29    case
+## 345   45-54   40-79   20-29 control
+## 346   45-54    &lt;NA&gt;    0- 9    case
+## 347   45-54   40-79   10-19 control
+## 348   45-54    0-39   20-29 control
+## 349   45-54    0-39   20-29 control
+## 350   45-54   40-79     30+    case
+## 351   45-54  80-119   10-19    case
+## 352   45-54   40-79   10-19 control
+## 353   45-54    0-39    0- 9 control
+## 354   45-54   40-79     30+    case
+## 355   45-54   40-79    0- 9 control
+## 356   45-54    0-39    0- 9 control
+## 357   45-54    0-39    0- 9 control
+## 358   45-54    &lt;NA&gt;   10-19    case
+## 359   45-54  80-119   10-19 control
+## 360   45-54   40-79   10-19 control
+## 361   45-54   40-79    0- 9 control
+## 362   45-54   40-79   20-29 control
+## 363   45-54   40-79    0- 9 control
+## 364   45-54   40-79   10-19 control
+## 365   45-54   40-79   20-29    case
+## 366   45-54    0-39   10-19 control
+## 367   45-54   40-79   20-29 control
+## 368   45-54  80-119   10-19 control
+## 369   45-54    0-39   10-19 control
+## 370   45-54   40-79   20-29    case
+## 371   45-54    0-39   10-19 control
+## 372   45-54  80-119     30+    case
+## 373   45-54    &lt;NA&gt;   20-29 control
+## 374   45-54    0-39   10-19 control
+## 375   45-54    0-39    0- 9 control
+## 376   45-54   40-79    0- 9    case
+## 377   45-54   40-79   20-29 control
+## 378   45-54   40-79   10-19 control
+## 379   45-54   40-79   10-19 control
+## 380   45-54   40-79   10-19    case
+## 381   45-54    0-39     30+ control
+## 382   45-54    0-39    0- 9 control
+## 383   45-54  80-119    0- 9 control
+## 384   45-54    &lt;NA&gt;   20-29    case
+## 385   45-54  80-119   20-29    case
+## 386   45-54   40-79   20-29 control
+## 387   45-54  80-119    0- 9 control
+## 388   45-54   40-79    0- 9 control
+## 389   45-54    0-39   10-19 control
+## 390   45-54    0-39    0- 9 control
+## 391   45-54    0-39   10-19 control
+## 392   45-54    0-39    0- 9 control
+## 393   45-54    &lt;NA&gt;     30+    case
+## 394   45-54  80-119   10-19 control
+## 395   45-54  80-119    0- 9 control
+## 396   45-54   40-79    0- 9 control
+## 397   45-54    0-39    0- 9 control
+## 398   45-54   40-79    0- 9    case
+## 399   45-54    &lt;NA&gt;     30+    case
+## 400   45-54  80-119    0- 9    case
+## 401   45-54    0-39   10-19 control
+## 402   45-54    0-39   10-19 control
+## 403   45-54    0-39    0- 9 control
+## 404   45-54    &lt;NA&gt;   10-19 control
+## 405   45-54    0-39   10-19 control
+## 406   45-54   40-79     30+    case
+## 407   45-54   40-79   10-19 control
+## 408   45-54   40-79    0- 9 control
+## 409   45-54   40-79    0- 9 control
+## 410   45-54  80-119    0- 9 control
+## 411   45-54   40-79   20-29 control
+## 412   45-54   40-79   10-19 control
+## 413   45-54  80-119   10-19    case
+## 414   45-54    0-39    0- 9 control
+## 415   45-54  80-119    0- 9 control
+## 416   45-54    0-39    0- 9 control
+## 417   45-54    0-39    0- 9 control
+## 418   45-54  80-119   10-19 control
+## 419   45-54  80-119   10-19    case
+## 420   45-54   40-79     30+    case
+## 421   45-54   40-79   20-29    case
+## 422   45-54    &lt;NA&gt;     30+    case
+## 423   45-54  80-119   10-19 control
+## 424   45-54   40-79    0- 9 control
+## 425   45-54    0-39   10-19 control
+## 426   45-54    0-39   20-29 control
+## 427   45-54    0-39    0- 9 control
+## 428   45-54   40-79   20-29 control
+## 429   45-54    0-39   20-29 control
+## 430   45-54  80-119    0- 9 control
+## 431   45-54  80-119    0- 9    case
+## 432   45-54  80-119   10-19 control
+## 433   45-54   40-79    0- 9 control
+## 434   45-54    0-39    0- 9 control
+## 435   45-54   40-79   10-19 control
+## 436   45-54   40-79    0- 9 control
+## 437   45-54   40-79    0- 9 control
+## 438   45-54   40-79     30+    case
+## 439   45-54    0-39   10-19 control
+## 440   45-54   40-79   10-19    case
+## 441   45-54   40-79   10-19 control
+## 442   45-54  80-119     30+    case
+## 443   45-54   40-79    0- 9    case
+## 444   45-54    0-39     30+ control
+## 445   45-54    0-39   20-29 control
+## 446   45-54    0-39   10-19 control
+## 447   45-54   40-79    0- 9 control
+## 448   45-54   40-79    0- 9 control
+## 449   45-54   40-79    0- 9    case
+## 450   45-54   40-79    0- 9    case
+## 451   45-54   40-79    0- 9 control
+## 452   45-54   40-79    0- 9 control
+## 453   45-54   40-79   20-29 control
+## 454   45-54    0-39   10-19 control
+## 455   45-54    0-39    0- 9 control
+## 456   45-54    0-39   20-29 control
+## 457   45-54    0-39    0- 9 control
+## 458   45-54  80-119   10-19 control
+## 459   45-54  80-119     30+ control
+## 460   45-54    0-39    0- 9 control
+## 461   45-54    0-39   20-29 control
+## 462   45-54    0-39    0- 9 control
+## 463   45-54    0-39   10-19 control
+## 464   45-54    0-39    0- 9 control
+## 465   45-54   40-79   10-19 control
+## 466   45-54    &lt;NA&gt;    0- 9    case
+## 467   45-54    0-39    0- 9 control
+## 468   45-54   40-79    0- 9 control
+## 469   45-54  80-119    0- 9 control
+## 470   45-54    0-39   20-29 control
+## 471   45-54    0-39    0- 9 control
+## 472   45-54    0-39     30+ control
+## 473   45-54    0-39    0- 9 control
+## 474   45-54    0-39    0- 9 control
+## 475   45-54   40-79   20-29 control
+## 476   45-54  80-119    0- 9 control
+## 477   45-54  80-119   10-19    case
+## 478   45-54   40-79    0- 9 control
+## 479   45-54    0-39   10-19 control
+## 480   45-54  80-119    0- 9 control
+## 481   45-54   40-79   20-29    case
+## 482   45-54   40-79     30+ control
+## 483   45-54    0-39     30+ control
+## 484   45-54   40-79   10-19 control
+## 485   45-54   40-79   10-19 control
+## 486   45-54    &lt;NA&gt;    0- 9    case
+## 487   45-54   40-79    0- 9 control
+## 488   45-54    0-39    0- 9 control
+## 489   45-54    0-39    0- 9 control
+## 490   45-54    0-39    0- 9 control
+## 491   45-54    &lt;NA&gt;   10-19    case
+## 492   45-54    0-39    0- 9 control
+## 493   45-54   40-79   20-29 control
+## 494   45-54  80-119    0- 9 control
+## 495   45-54   40-79    0- 9    case
+## 496   45-54    &lt;NA&gt;    0- 9    case
+## 497   45-54  80-119    0- 9 control
+## 498   45-54  80-119   10-19    case
+## 499   45-54   40-79     30+ control
+## 500   45-54    0-39    0- 9 control
+## 501   45-54    0-39   10-19 control
+## 502   45-54   40-79    0- 9 control
+## 503   45-54   40-79    0- 9 control
+## 504   45-54   40-79   10-19 control
+## 505   45-54    0-39   10-19 control
+## 506   45-54    0-39    0- 9 control
+## 507   45-54  80-119   20-29 control
+## 508   45-54    0-39    0- 9 control
+## 509   45-54    0-39    0- 9 control
+## 510   45-54    0-39    0- 9 control
+## 511   45-54    0-39    0- 9    case
+## 512   45-54   40-79   10-19 control
+## 513   45-54    0-39   20-29 control
+## 514   45-54   40-79    0- 9 control
+## 515   45-54    0-39   10-19 control
+## 516   45-54  80-119   10-19 control
+## 517   45-54    0-39    0- 9 control
+## 518   45-54    0-39    0- 9 control
+## 519   45-54   40-79    0- 9 control
+## 520   45-54    0-39    0- 9 control
+## 521   45-54  80-119   20-29 control
+## 522   45-54    0-39    0- 9 control
+## 523   45-54    &lt;NA&gt;   10-19    case
+## 524   45-54   40-79   10-19 control
+## 525   45-54    0-39    0- 9 control
+## 526   45-54   40-79    0- 9 control
+## 527   45-54    0-39   20-29 control
+## 528   45-54   40-79    0- 9 control
+## 529   55-64    0-39   10-19 control
+## 530   55-64    0-39    0- 9 control
+## 531   55-64    0-39    0- 9 control
+## 532   55-64    &lt;NA&gt;   10-19    case
+## 533   55-64   40-79    0- 9 control
+## 534   55-64    0-39   10-19 control
+## 535   55-64  80-119   20-29 control
+## 536   55-64    &lt;NA&gt;   10-19    case
+## 537   55-64    &lt;NA&gt;     30+    case
+## 538   55-64  80-119   10-19 control
+## 539   55-64    &lt;NA&gt;    0- 9    case
+## 540   55-64   40-79   20-29 control
+## 541   55-64    0-39   10-19 control
+## 542   55-64    0-39     30+    case
+## 543   55-64  80-119    0- 9 control
+## 544   55-64   40-79   10-19    case
+## 545   55-64    0-39     30+    case
+## 546   55-64    0-39   10-19    case
+## 547   55-64    0-39    0- 9 control
+## 548   55-64   40-79   10-19 control
+## 549   55-64   40-79    0- 9    case
+## 550   55-64   40-79    0- 9 control
+## 551   55-64    0-39    0- 9 control
+## 552   55-64  80-119    0- 9    case
+## 553   55-64   40-79    0- 9    case
+## 554   55-64    0-39   20-29 control
+## 555   55-64   40-79   10-19 control
+## 556   55-64   40-79    0- 9    case
+## 557   55-64   40-79    0- 9 control
+## 558   55-64  80-119   20-29 control
+## 559   55-64   40-79   10-19    case
+## 560   55-64    0-39    0- 9 control
+## 561   55-64    0-39    0- 9 control
+## 562   55-64    0-39    0- 9 control
+## 563   55-64    0-39    0- 9 control
+## 564   55-64   40-79    0- 9 control
+## 565   55-64  80-119   20-29    case
+## 566   55-64   40-79    0- 9 control
+## 567   55-64    0-39   10-19 control
+## 568   55-64    0-39   20-29 control
+## 569   55-64   40-79   20-29    case
+## 570   55-64   40-79    0- 9 control
+## 571   55-64    0-39   20-29 control
+## 572   55-64    &lt;NA&gt;   10-19 control
+## 573   55-64   40-79    0- 9 control
+## 574   55-64   40-79    0- 9 control
+## 575   55-64  80-119    0- 9 control
+## 576   55-64  80-119    0- 9 control
+## 577   55-64    &lt;NA&gt;     30+    case
+## 578   55-64    0-39    0- 9 control
+## 579   55-64   40-79   20-29 control
+## 580   55-64   40-79   20-29 control
+## 581   55-64   40-79     30+    case
+## 582   55-64   40-79   10-19 control
+## 583   55-64   40-79    0- 9 control
+## 584   55-64    0-39   10-19 control
+## 585   55-64  80-119    0- 9 control
+## 586   55-64    &lt;NA&gt;   10-19    case
+## 587   55-64   40-79   10-19    case
+## 588   55-64    &lt;NA&gt;   20-29    case
+## 589   55-64   40-79    0- 9 control
+## 590   55-64    0-39    0- 9 control
+## 591   55-64   40-79    0- 9 control
+## 592   55-64  80-119    0- 9 control
+## 593   55-64   40-79   20-29 control
+## 594   55-64    0-39   10-19 control
+## 595   55-64    0-39    0- 9    case
+## 596   55-64   40-79   10-19 control
+## 597   55-64   40-79    0- 9 control
+## 598   55-64    0-39   10-19 control
+## 599   55-64   40-79    0- 9 control
+## 600   55-64   40-79   10-19    case
+## 601   55-64    0-39   20-29 control
+## 602   55-64   40-79   20-29    case
+## 603   55-64   40-79   10-19 control
+## 604   55-64    0-39   20-29    case
+## 605   55-64    0-39   20-29 control
+## 606   55-64  80-119   10-19    case
+## 607   55-64    0-39    0- 9 control
+## 608   55-64    0-39    0- 9 control
+## 609   55-64   40-79    0- 9 control
+## 610   55-64    &lt;NA&gt;    0- 9 control
+## 611   55-64   40-79    0- 9 control
+## 612   55-64    0-39    0- 9 control
+## 613   55-64   40-79    0- 9 control
+## 614   55-64   40-79    0- 9 control
+## 615   55-64   40-79   10-19 control
+## 616   55-64   40-79    0- 9 control
+## 617   55-64   40-79    0- 9 control
+## 618   55-64    0-39    0- 9    case
+## 619   55-64    0-39    0- 9 control
+## 620   55-64    0-39   20-29 control
+## 621   55-64  80-119   20-29    case
+## 622   55-64    &lt;NA&gt;    0- 9 control
+## 623   55-64    0-39   10-19 control
+## 624   55-64  80-119   10-19    case
+## 625   55-64    0-39   10-19 control
+## 626   55-64  80-119   10-19 control
+## 627   55-64   40-79    0- 9    case
+## 628   55-64    0-39    0- 9 control
+## 629   55-64   40-79   20-29 control
+## 630   55-64  80-119   10-19    case
+## 631   55-64    0-39   20-29    case
+## 632   55-64  80-119    0- 9 control
+## 633   55-64    0-39    0- 9 control
+## 634   55-64    &lt;NA&gt;     30+    case
+## 635   55-64    0-39    0- 9 control
+## 636   55-64   40-79    0- 9 control
+## 637   55-64   40-79    0- 9 control
+## 638   55-64   40-79   10-19 control
+## 639   55-64  80-119   10-19 control
+## 640   55-64   40-79   20-29 control
+## 641   55-64  80-119    0- 9    case
+## 642   55-64   40-79   10-19 control
+## 643   55-64   40-79     30+ control
+## 644   55-64    &lt;NA&gt;     30+    case
+## 645   55-64    0-39   10-19    case
+## 646   55-64    0-39   20-29 control
+## 647   55-64    0-39    0- 9 control
+## 648   55-64    &lt;NA&gt;    0- 9    case
+## 649   55-64    0-39    0- 9 control
+## 650   55-64    0-39   10-19 control
+## 651   55-64  80-119   20-29 control
+## 652   55-64    0-39   10-19    case
+## 653   55-64  80-119    0- 9    case
+## 654   55-64  80-119     30+    case
+## 655   55-64    &lt;NA&gt;     30+    case
+## 656   55-64   40-79   20-29 control
+## 657   55-64    0-39    0- 9 control
+## 658   55-64   40-79   20-29 control
+## 659   55-64    0-39    0- 9 control
+## 660   55-64  80-119     30+    case
+## 661   55-64    0-39     30+ control
+## 662   55-64  80-119    0- 9 control
+## 663   55-64    &lt;NA&gt;    0- 9 control
+## 664   55-64  80-119    0- 9    case
+## 665   55-64   40-79    0- 9 control
+## 666   55-64    &lt;NA&gt;    0- 9    case
+## 667   55-64    0-39   10-19 control
+## 668   55-64   40-79    0- 9 control
+## 669   55-64   40-79    0- 9    case
+## 670   55-64  80-119   10-19 control
+## 671   55-64    &lt;NA&gt;    0- 9    case
+## 672   55-64    0-39    0- 9 control
+## 673   55-64    &lt;NA&gt;    0- 9 control
+## 674   55-64    0-39   10-19 control
+## 675   55-64  80-119   10-19 control
+## 676   55-64    0-39    0- 9 control
+## 677   55-64   40-79    0- 9 control
+## 678   55-64    &lt;NA&gt;   20-29 control
+## 679   55-64   40-79   20-29 control
+## 680   55-64    0-39     30+    case
+## 681   55-64    &lt;NA&gt;   10-19    case
+## 682   55-64    0-39    0- 9 control
+## 683   55-64   40-79   10-19 control
+## 684   55-64    0-39    0- 9 control
+## 685   55-64   40-79   10-19 control
+## 686   55-64    0-39    0- 9 control
+## 687   55-64    &lt;NA&gt;    0- 9 control
+## 688   55-64   40-79    0- 9 control
+## 689   55-64    0-39   10-19 control
+## 690   55-64    0-39    0- 9 control
+## 691   55-64    0-39    0- 9 control
+## 692   55-64   40-79    0- 9    case
+## 693   55-64    0-39    0- 9 control
+## 694   55-64    0-39    0- 9 control
+## 695   55-64    &lt;NA&gt;   10-19    case
+## 696   55-64  80-119    0- 9 control
+## 697   55-64    0-39    0- 9 control
+## 698   55-64   40-79     30+ control
+## 699   55-64   40-79     30+    case
+## 700   55-64   40-79    0- 9    case
+## 701   55-64  80-119   10-19 control
+## 702   55-64    0-39    0- 9 control
+## 703   55-64  80-119   10-19    case
+## 704   55-64   40-79   10-19    case
+## 705   55-64   40-79    0- 9 control
+## 706   55-64   40-79   20-29 control
+## 707   55-64  80-119    0- 9    case
+## 708   55-64    0-39     30+ control
+## 709   55-64   40-79   10-19 control
+## 710   55-64    0-39   10-19 control
+## 711   55-64   40-79    0- 9 control
+## 712   55-64    0-39    0- 9 control
+## 713   55-64    0-39   20-29 control
+## 714   55-64   40-79   10-19    case
+## 715   55-64  80-119     30+    case
+## 716   55-64  80-119    0- 9    case
+## 717   55-64  80-119     30+    case
+## 718   55-64   40-79    0- 9 control
+## 719   55-64  80-119   10-19    case
+## 720   55-64  80-119   20-29    case
+## 721   55-64    0-39     30+    case
+## 722   55-64  80-119    0- 9    case
+## 723   55-64    0-39    0- 9 control
+## 724   55-64    0-39    0- 9 control
+## 725   55-64    0-39   20-29 control
+## 726   55-64  80-119    0- 9 control
+## 727   55-64    0-39    0- 9 control
+## 728   55-64   40-79    0- 9    case
+## 729   55-64    0-39    0- 9 control
+## 730   55-64   40-79   20-29    case
+## 731   55-64   40-79     30+    case
+## 732   55-64    0-39   20-29    case
+## 733   55-64   40-79   20-29    case
+## 734   55-64    0-39    0- 9 control
+## 735   55-64   40-79   10-19 control
+## 736   55-64    0-39    0- 9 control
+## 737   55-64    &lt;NA&gt;   10-19    case
+## 738   55-64    &lt;NA&gt;     30+ control
+## 739   55-64   40-79    0- 9 control
+## 740   55-64    &lt;NA&gt;    0- 9    case
+## 741   55-64  80-119   10-19    case
+## 742   55-64   40-79    0- 9 control
+## 743   55-64   40-79    0- 9 control
+## 744   55-64    0-39    0- 9 control
+## 745   55-64    0-39    0- 9 control
+## 746   55-64  80-119   10-19 control
+## 747   55-64    0-39   10-19 control
+## 748   55-64    0-39   10-19 control
+## 749   55-64  80-119    0- 9    case
+## 750   55-64    0-39   10-19 control
+## 751   55-64  80-119   10-19    case
+## 752   55-64   40-79   20-29 control
+## 753   55-64    &lt;NA&gt;   20-29    case
+## 754   55-64    0-39   10-19 control
+## 755   55-64   40-79     30+ control
+## 756   55-64    0-39   10-19 control
+## 757   55-64   40-79   10-19 control
+## 758   55-64    0-39    0- 9 control
+## 759   55-64    0-39    0- 9 control
+## 760   55-64    0-39    0- 9 control
+## 761   55-64   40-79   10-19 control
+## 762   55-64   40-79   20-29 control
+## 763   55-64    0-39    0- 9 control
+## 764   55-64  80-119    0- 9    case
+## 765   55-64   40-79   10-19 control
+## 766   55-64    0-39    0- 9 control
+## 767   55-64  80-119   10-19    case
+## 768   55-64    0-39    0- 9 control
+## 769   55-64   40-79    0- 9    case
+## 770   55-64   40-79   20-29 control
+## 771   65-74   40-79    0- 9    case
+## 772   65-74    0-39    0- 9 control
+## 773   65-74    0-39    0- 9 control
+## 774   65-74  80-119    0- 9    case
+## 775   65-74    0-39   10-19 control
+## 776   65-74    0-39    0- 9 control
+## 777   65-74  80-119   10-19 control
+## 778   65-74    0-39   10-19 control
+## 779   65-74    &lt;NA&gt;   10-19 control
+## 780   65-74  80-119   10-19 control
+## 781   65-74    0-39    0- 9 control
+## 782   65-74    &lt;NA&gt;    0- 9    case
+## 783   65-74  80-119    0- 9    case
+## 784   65-74  80-119    0- 9    case
+## 785   65-74    0-39    0- 9 control
+## 786   65-74    0-39     30+ control
+## 787   65-74  80-119    0- 9 control
+## 788   65-74    0-39    0- 9 control
+## 789   65-74   40-79   20-29 control
+## 790   65-74   40-79    0- 9 control
+## 791   65-74  80-119   10-19    case
+## 792   65-74   40-79    0- 9 control
+## 793   65-74  80-119   10-19 control
+## 794   65-74   40-79    0- 9 control
+## 795   65-74    &lt;NA&gt;   10-19    case
+## 796   65-74    0-39    0- 9 control
+## 797   65-74   40-79   20-29 control
+## 798   65-74    0-39    0- 9 control
+## 799   65-74    &lt;NA&gt;     30+    case
+## 800   65-74   40-79    0- 9    case
+## 801   65-74   40-79    0- 9 control
+## 802   65-74   40-79    0- 9    case
+## 803   65-74   40-79   20-29    case
+## 804   65-74    0-39   20-29    case
+## 805   65-74   40-79    0- 9    case
+## 806   65-74   40-79    0- 9    case
+## 807   65-74    0-39    0- 9 control
+## 808   65-74    0-39   20-29 control
+## 809   65-74   40-79   20-29 control
+## 810   65-74  80-119   10-19    case
+## 811   65-74  80-119    0- 9 control
+## 812   65-74   40-79    0- 9    case
+## 813   65-74   40-79    0- 9 control
+## 814   65-74  80-119    0- 9 control
+## 815   65-74   40-79   10-19 control
+## 816   65-74   40-79   10-19    case
+## 817   65-74    0-39    0- 9 control
+## 818   65-74   40-79   20-29    case
+## 819   65-74    0-39    0- 9 control
+## 820   65-74    0-39    0- 9 control
+## 821   65-74    0-39    0- 9 control
+## 822   65-74    0-39    0- 9 control
+## 823   65-74    0-39    0- 9 control
+## 824   65-74    0-39    0- 9 control
+## 825   65-74    0-39    0- 9 control
+## 826   65-74   40-79    0- 9 control
+## 827   65-74    0-39    0- 9    case
+## 828   65-74    0-39    0- 9 control
+## 829   65-74  80-119    0- 9    case
+## 830   65-74    0-39    0- 9 control
+## 831   65-74   40-79    0- 9 control
+## 832   65-74    &lt;NA&gt;    0- 9    case
+## 833   65-74   40-79    0- 9 control
+## 834   65-74    0-39    0- 9 control
+## 835   65-74   40-79   10-19 control
+## 836   65-74  80-119     30+    case
+## 837   65-74   40-79    0- 9 control
+## 838   65-74   40-79    0- 9 control
+## 839   65-74   40-79    0- 9    case
+## 840   65-74   40-79   10-19 control
+## 841   65-74    &lt;NA&gt;    0- 9    case
+## 842   65-74    0-39   20-29 control
+## 843   65-74   40-79    0- 9    case
+## 844   65-74    0-39   20-29 control
+## 845   65-74   40-79    0- 9    case
+## 846   65-74    0-39    0- 9 control
+## 847   65-74    0-39   10-19    case
+## 848   65-74   40-79    0- 9    case
+## 849   65-74    0-39   20-29 control
+## 850   65-74  80-119   10-19 control
+## 851   65-74    0-39    0- 9    case
+## 852   65-74   40-79    0- 9    case
+## 853   65-74   40-79    0- 9 control
+## 854   65-74   40-79    0- 9 control
+## 855   65-74   40-79   20-29    case
+## 856   65-74    0-39   10-19    case
+## 857   65-74    0-39    0- 9    case
+## 858   65-74    0-39    0- 9 control
+## 859   65-74   40-79   10-19 control
+## 860   65-74   40-79    0- 9    case
+## 861   65-74   40-79    0- 9    case
+## 862   65-74    0-39   10-19 control
+## 863   65-74    0-39    0- 9 control
+## 864   65-74    0-39    0- 9 control
+## 865   65-74    0-39     30+ control
+## 866   65-74   40-79    0- 9    case
+## 867   65-74    0-39    0- 9 control
+## 868   65-74   40-79    0- 9    case
+## 869   65-74    0-39    0- 9 control
+## 870   65-74    0-39   20-29 control
+## 871   65-74    0-39    0- 9 control
+## 872   65-74    0-39    0- 9 control
+## 873   65-74  80-119   20-29    case
+## 874   65-74    0-39   10-19    case
+## 875   65-74  80-119   10-19 control
+## 876   65-74  80-119    0- 9    case
+## 877   65-74   40-79   10-19    case
+## 878   65-74    0-39    0- 9 control
+## 879   65-74    0-39    0- 9 control
+## 880   65-74   40-79    0- 9 control
+## 881   65-74    0-39   10-19 control
+## 882   65-74    0-39    0- 9 control
+## 883   65-74  80-119   10-19 control
+## 884   65-74    0-39    0- 9 control
+## 885   65-74    0-39   10-19 control
+## 886   65-74  80-119   20-29 control
+## 887   65-74    0-39    0- 9 control
+## 888   65-74    0-39   10-19 control
+## 889   65-74   40-79    0- 9    case
+## 890   65-74  80-119   10-19    case
+## 891   65-74    0-39   10-19 control
+## 892   65-74   40-79   10-19 control
+## 893   65-74  80-119    0- 9 control
+## 894   65-74   40-79    0- 9    case
+## 895   65-74    0-39    0- 9 control
+## 896   65-74    0-39   20-29    case
+## 897   65-74    &lt;NA&gt;    0- 9 control
+## 898   65-74    &lt;NA&gt;   20-29    case
+## 899   65-74    0-39    0- 9    case
+## 900   65-74  80-119    0- 9 control
+## 901   65-74    0-39   10-19 control
+## 902   65-74    0-39   10-19 control
+## 903   65-74    0-39    0- 9 control
+## 904   65-74  80-119    0- 9    case
+## 905   65-74    0-39    0- 9 control
+## 906   65-74    0-39    0- 9 control
+## 907   65-74  80-119    0- 9 control
+## 908   65-74   40-79   10-19    case
+## 909   65-74   40-79    0- 9 control
+## 910   65-74    0-39    0- 9 control
+## 911   65-74  80-119   10-19    case
+## 912   65-74   40-79   10-19 control
+## 913   65-74    0-39    0- 9 control
+## 914   65-74    0-39    0- 9 control
+## 915   65-74    0-39    0- 9 control
+## 916   65-74  80-119   20-29    case
+## 917   65-74   40-79   20-29    case
+## 918   65-74   40-79    0- 9 control
+## 919   65-74    0-39    0- 9    case
+## 920   65-74    0-39    0- 9 control
+## 921   65-74  80-119   10-19 control
+## 922   65-74  80-119    0- 9 control
+## 923   65-74   40-79    0- 9 control
+## 924   65-74   40-79   10-19 control
+## 925   65-74   40-79    0- 9 control
+## 926   65-74  80-119   10-19 control
+## 927   65-74    0-39   10-19    case
+## 928   65-74    0-39   10-19 control
+## 929   65-74   40-79   20-29    case
+## 930   65-74   40-79   20-29 control
+## 931   65-74    0-39    0- 9 control
+## 932     75+    0-39   10-19    case
+## 933     75+    &lt;NA&gt;   10-19    case
+## 934     75+    0-39    0- 9 control
+## 935     75+    0-39     30+    case
+## 936     75+   40-79    0- 9 control
+## 937     75+   40-79   20-29 control
+## 938     75+    0-39    0- 9 control
+## 939     75+   40-79     30+    case
+## 940     75+    0-39     30+ control
+## 941     75+    0-39    0- 9 control
+## 942     75+    0-39    0- 9 control
+## 943     75+    &lt;NA&gt;    0- 9    case
+## 944     75+    0-39    0- 9 control
+## 945     75+    0-39    0- 9 control
+## 946     75+    0-39    0- 9 control
+## 947     75+   40-79    0- 9    case
+## 948     75+    0-39    0- 9 control
+## 949     75+    0-39   10-19    case
+## 950     75+    0-39    0- 9 control
+## 951     75+   40-79   20-29 control
+## 952     75+    0-39    0- 9 control
+## 953     75+    0-39    0- 9 control
+## 954     75+    0-39    0- 9 control
+## 955     75+   40-79   20-29 control
+## 956     75+    0-39   10-19 control
+## 957     75+    0-39     30+ control
+## 958     75+    0-39    0- 9 control
+## 959     75+    0-39    0- 9 control
+## 960     75+    0-39    0- 9 control
+## 961     75+    0-39   10-19 control
+## 962     75+    0-39    0- 9    case
+## 963     75+    &lt;NA&gt;    0- 9    case
+## 964     75+   40-79   10-19 control
+## 965     75+    0-39   10-19 control
+## 966     75+   40-79    0- 9 control
+## 967     75+    0-39    0- 9 control
+## 968     75+  80-119   10-19    case
+## 969     75+    0-39   10-19 control
+## 970     75+   40-79   10-19    case
+## 971     75+  80-119    0- 9    case
+## 972     75+   40-79    0- 9    case
+## 973     75+   40-79    0- 9 control
+## 974     75+   40-79   10-19 control
+## 975     75+    0-39    0- 9 control</code></pre>
+<pre class="r"><code>df %&gt;% 
+  mutate(tob_grp = factor(tob_grp, levels = c(&quot;0- 9&quot;,
+                                              &quot;10-19&quot;,
+                                              &quot;20-29&quot;,
+                                              &quot;30+&quot;
+                                              )))</code></pre>
+<pre><code>##     age_grp alc_grp tob_grp  cc_grp
+## 1     25-34   40-79    0- 9 control
+## 2     25-34    0-39    0- 9 control
+## 3     25-34   40-79     30+ control
+## 4     25-34   40-79   10-19 control
+## 5     25-34   40-79    0- 9 control
+## 6     25-34   40-79    0- 9 control
+## 7     25-34    0-39   10-19 control
+## 8     25-34   40-79   10-19 control
+## 9     25-34   40-79   10-19 control
+## 10    25-34   40-79    0- 9 control
+## 11    25-34   40-79    0- 9 control
+## 12    25-34   40-79   20-29 control
+## 13    25-34   40-79    0- 9 control
+## 14    25-34   40-79    0- 9 control
+## 15    25-34   40-79    0- 9 control
+## 16    25-34    0-39    0- 9 control
+## 17    25-34    0-39    0- 9 control
+## 18    25-34   40-79   20-29 control
+## 19    25-34    0-39    0- 9 control
+## 20    25-34   40-79    0- 9 control
+## 21    25-34    0-39    0- 9 control
+## 22    25-34    0-39    0- 9 control
+## 23    25-34    0-39    0- 9 control
+## 24    25-34    0-39    0- 9 control
+## 25    25-34   40-79     30+ control
+## 26    25-34    0-39   20-29 control
+## 27    25-34    0-39     30+ control
+## 28    25-34    0-39     30+ control
+## 29    25-34    0-39    0- 9 control
+## 30    25-34    0-39    0- 9 control
+## 31    25-34   40-79    0- 9 control
+## 32    25-34   40-79     30+ control
+## 33    25-34    0-39    0- 9 control
+## 34    25-34  80-119   10-19 control
+## 35    25-34    0-39   10-19 control
+## 36    25-34    0-39   10-19 control
+## 37    25-34   40-79    0- 9 control
+## 38    25-34    0-39    0- 9 control
+## 39    25-34    0-39    0- 9 control
+## 40    25-34    0-39   20-29 control
+## 41    25-34    0-39    0- 9 control
+## 42    25-34    0-39    0- 9 control
+## 43    25-34  80-119     30+ control
+## 44    25-34    0-39   10-19 control
+## 45    25-34   40-79     30+ control
+## 46    25-34    0-39    0- 9 control
+## 47    25-34   40-79    0- 9 control
+## 48    25-34   40-79     30+ control
+## 49    25-34    0-39   20-29 control
+## 50    25-34    0-39     30+ control
+## 51    25-34   40-79    0- 9 control
+## 52    25-34   40-79   10-19 control
+## 53    25-34    0-39    0- 9 control
+## 54    25-34    0-39   20-29 control
+## 55    25-34   40-79     30+ control
+## 56    25-34   40-79   20-29 control
+## 57    25-34    0-39   10-19 control
+## 58    25-34  80-119     30+ control
+## 59    25-34   40-79    0- 9 control
+## 60    25-34  80-119    0- 9 control
+## 61    25-34    0-39    0- 9 control
+## 62    25-34    0-39   20-29 control
+## 63    25-34    0-39    0- 9 control
+## 64    25-34    0-39    0- 9 control
+## 65    25-34    0-39    0- 9 control
+## 66    25-34   40-79    0- 9 control
+## 67    25-34   40-79    0- 9 control
+## 68    25-34   40-79   10-19 control
+## 69    25-34    0-39    0- 9 control
+## 70    25-34    0-39    0- 9 control
+## 71    25-34   40-79    0- 9 control
+## 72    25-34    0-39    0- 9 control
+## 73    25-34    0-39    0- 9 control
+## 74    25-34    0-39    0- 9 control
+## 75    25-34    0-39    0- 9 control
+## 76    25-34    0-39    0- 9 control
+## 77    25-34    0-39   20-29 control
+## 78    25-34    0-39    0- 9 control
+## 79    25-34    120+   10-19    case
+## 80    25-34   40-79    0- 9 control
+## 81    25-34    0-39    0- 9 control
+## 82    25-34    0-39    0- 9 control
+## 83    25-34    0-39    0- 9 control
+## 84    25-34   40-79   10-19 control
+## 85    25-34    0-39    0- 9 control
+## 86    25-34    0-39    0- 9 control
+## 87    25-34   40-79    0- 9 control
+## 88    25-34    0-39    0- 9 control
+## 89    25-34    120+     30+ control
+## 90    25-34   40-79    0- 9 control
+## 91    25-34   40-79    0- 9 control
+## 92    25-34    0-39   10-19 control
+## 93    25-34   40-79    0- 9 control
+## 94    25-34    0-39   10-19 control
+## 95    25-34  80-119    0- 9 control
+## 96    25-34    0-39    0- 9 control
+## 97    25-34    0-39     30+ control
+## 98    25-34   40-79    0- 9 control
+## 99    25-34   40-79    0- 9 control
+## 100   25-34    0-39    0- 9 control
+## 101   25-34    0-39    0- 9 control
+## 102   25-34   40-79     30+ control
+## 103   25-34   40-79   10-19 control
+## 104   25-34    120+     30+ control
+## 105   25-34    0-39    0- 9 control
+## 106   25-34   40-79    0- 9 control
+## 107   25-34    120+   20-29 control
+## 108   25-34    0-39    0- 9 control
+## 109   25-34    0-39     30+ control
+## 110   25-34    120+    0- 9 control
+## 111   25-34    0-39   10-19 control
+## 112   25-34   40-79    0- 9 control
+## 113   25-34    0-39   10-19 control
+## 114   25-34   40-79    0- 9 control
+## 115   25-34   40-79   20-29 control
+## 116   25-34    0-39   10-19 control
+## 117   35-44  80-119    0- 9 control
+## 118   35-44    0-39    0- 9 control
+## 119   35-44   40-79    0- 9 control
+## 120   35-44   40-79    0- 9 control
+## 121   35-44   40-79     30+ control
+## 122   35-44   40-79   20-29 control
+## 123   35-44  80-119   10-19 control
+## 124   35-44  80-119   10-19 control
+## 125   35-44    0-39    0- 9 control
+## 126   35-44    0-39    0- 9 control
+## 127   35-44  80-119     30+ control
+## 128   35-44  80-119   20-29 control
+## 129   35-44   40-79    0- 9 control
+## 130   35-44   40-79   20-29 control
+## 131   35-44    0-39    0- 9 control
+## 132   35-44   40-79   20-29 control
+## 133   35-44    0-39    0- 9 control
+## 134   35-44    120+   20-29    case
+## 135   35-44   40-79    0- 9 control
+## 136   35-44    0-39    0- 9 control
+## 137   35-44    0-39    0- 9 control
+## 138   35-44   40-79    0- 9 control
+## 139   35-44    0-39    0- 9 control
+## 140   35-44    0-39   10-19 control
+## 141   35-44    0-39   10-19 control
+## 142   35-44    0-39   20-29 control
+## 143   35-44    0-39    0- 9 control
+## 144   35-44   40-79   10-19 control
+## 145   35-44    120+   10-19 control
+## 146   35-44   40-79    0- 9 control
+## 147   35-44  80-119   20-29 control
+## 148   35-44    0-39    0- 9 control
+## 149   35-44   40-79    0- 9 control
+## 150   35-44   40-79    0- 9 control
+## 151   35-44   40-79    0- 9 control
+## 152   35-44   40-79    0- 9 control
+## 153   35-44    0-39    0- 9 control
+## 154   35-44   40-79   10-19 control
+## 155   35-44   40-79     30+ control
+## 156   35-44    0-39   10-19 control
+## 157   35-44    0-39     30+ control
+## 158   35-44   40-79    0- 9 control
+## 159   35-44  80-119    0- 9 control
+## 160   35-44   40-79   10-19 control
+## 161   35-44   40-79    0- 9 control
+## 162   35-44    0-39     30+ control
+## 163   35-44    0-39     30+ control
+## 164   35-44    0-39    0- 9 control
+## 165   35-44   40-79   10-19 control
+## 166   35-44  80-119    0- 9 control
+## 167   35-44    0-39   20-29 control
+## 168   35-44    0-39    0- 9 control
+## 169   35-44    0-39    0- 9 control
+## 170   35-44    0-39   10-19 control
+## 171   35-44   40-79   10-19    case
+## 172   35-44  80-119    0- 9 control
+## 173   35-44   40-79    0- 9 control
+## 174   35-44    0-39    0- 9 control
+## 175   35-44    120+    0- 9 control
+## 176   35-44    0-39    0- 9 control
+## 177   35-44   40-79   10-19 control
+## 178   35-44   40-79   10-19 control
+## 179   35-44  80-119    0- 9 control
+## 180   35-44   40-79    0- 9 control
+## 181   35-44  80-119    0- 9 control
+## 182   35-44   40-79     30+ control
+## 183   35-44  80-119   10-19 control
+## 184   35-44    120+   20-29 control
+## 185   35-44   40-79   10-19 control
+## 186   35-44    0-39    0- 9 control
+## 187   35-44    0-39    0- 9 control
+## 188   35-44   40-79    0- 9 control
+## 189   35-44    0-39    0- 9 control
+## 190   35-44    0-39    0- 9 control
+## 191   35-44    120+   20-29 control
+## 192   35-44    0-39    0- 9 control
+## 193   35-44   40-79   10-19 control
+## 194   35-44  80-119    0- 9 control
+## 195   35-44    0-39    0- 9 control
+## 196   35-44    0-39    0- 9 control
+## 197   35-44    0-39     30+ control
+## 198   35-44    0-39    0- 9 control
+## 199   35-44   40-79   20-29 control
+## 200   35-44    0-39    0- 9 control
+## 201   35-44   40-79   10-19 control
+## 202   35-44   40-79   20-29 control
+## 203   35-44    0-39   20-29 control
+## 204   35-44    0-39    0- 9 control
+## 205   35-44    0-39   10-19 control
+## 206   35-44    0-39    0- 9 control
+## 207   35-44    0-39    0- 9 control
+## 208   35-44    120+    0- 9    case
+## 209   35-44    0-39   20-29 control
+## 210   35-44   40-79   10-19 control
+## 211   35-44   40-79   10-19    case
+## 212   35-44   40-79    0- 9 control
+## 213   35-44    0-39    0- 9 control
+## 214   35-44    0-39    0- 9 control
+## 215   35-44    0-39    0- 9 control
+## 216   35-44    0-39   10-19 control
+## 217   35-44   40-79   20-29 control
+## 218   35-44    0-39    0- 9 control
+## 219   35-44   40-79    0- 9 control
+## 220   35-44    0-39    0- 9 control
+## 221   35-44    0-39    0- 9 control
+## 222   35-44   40-79     30+ control
+## 223   35-44    0-39    0- 9 control
+## 224   35-44   40-79    0- 9 control
+## 225   35-44    0-39   10-19 control
+## 226   35-44   40-79   10-19 control
+## 227   35-44    0-39    0- 9 control
+## 228   35-44    0-39    0- 9 control
+## 229   35-44    0-39    0- 9 control
+## 230   35-44    0-39    0- 9 control
+## 231   35-44    0-39     30+ control
+## 232   35-44   40-79   20-29 control
+## 233   35-44   40-79   20-29 control
+## 234   35-44   40-79   20-29    case
+## 235   35-44    0-39     30+ control
+## 236   35-44    0-39     30+ control
+## 237   35-44   40-79   10-19    case
+## 238   35-44    0-39   10-19 control
+## 239   35-44    0-39    0- 9 control
+## 240   35-44   40-79    0- 9 control
+## 241   35-44   40-79     30+ control
+## 242   35-44   40-79    0- 9 control
+## 243   35-44  80-119   10-19 control
+## 244   35-44   40-79   20-29 control
+## 245   35-44   40-79   10-19 control
+## 246   35-44    0-39    0- 9 control
+## 247   35-44   40-79     30+ control
+## 248   35-44  80-119    0- 9 control
+## 249   35-44   40-79     30+ control
+## 250   35-44   40-79   20-29 control
+## 251   35-44   40-79    0- 9 control
+## 252   35-44   40-79    0- 9 control
+## 253   35-44   40-79   10-19 control
+## 254   35-44    0-39    0- 9 control
+## 255   35-44  80-119    0- 9 control
+## 256   35-44    0-39   20-29 control
+## 257   35-44   40-79    0- 9 control
+## 258   35-44    0-39    0- 9 control
+## 259   35-44    0-39   10-19 control
+## 260   35-44    0-39    0- 9 control
+## 261   35-44   40-79   20-29 control
+## 262   35-44   40-79   10-19 control
+## 263   35-44    0-39    0- 9 control
+## 264   35-44   40-79   20-29 control
+## 265   35-44    0-39    0- 9 control
+## 266   35-44    0-39   20-29 control
+## 267   35-44    0-39    0- 9 control
+## 268   35-44    0-39   10-19 control
+## 269   35-44    0-39    0- 9 control
+## 270   35-44    0-39   10-19 control
+## 271   35-44    120+   10-19 control
+## 272   35-44    0-39    0- 9 control
+## 273   35-44   40-79    0- 9 control
+## 274   35-44    0-39    0- 9 control
+## 275   35-44   40-79   10-19 control
+## 276   35-44    0-39    0- 9 control
+## 277   35-44  80-119    0- 9 control
+## 278   35-44   40-79    0- 9 control
+## 279   35-44   40-79     30+ control
+## 280   35-44    0-39    0- 9 control
+## 281   35-44  80-119    0- 9 control
+## 282   35-44   40-79   10-19 control
+## 283   35-44  80-119   10-19 control
+## 284   35-44    0-39    0- 9 control
+## 285   35-44    0-39   10-19 control
+## 286   35-44    0-39    0- 9 control
+## 287   35-44   40-79    0- 9 control
+## 288   35-44   40-79    0- 9 control
+## 289   35-44   40-79   10-19 control
+## 290   35-44    0-39    0- 9 control
+## 291   35-44    120+   10-19 control
+## 292   35-44    0-39    0- 9 control
+## 293   35-44   40-79    0- 9 control
+## 294   35-44    0-39    0- 9 control
+## 295   35-44   40-79   10-19 control
+## 296   35-44    0-39    0- 9 control
+## 297   35-44   40-79   10-19 control
+## 298   35-44    0-39    0- 9 control
+## 299   35-44   40-79    0- 9 control
+## 300   35-44   40-79    0- 9 control
+## 301   35-44    120+   20-29    case
+## 302   35-44    120+    0- 9    case
+## 303   35-44   40-79    0- 9 control
+## 304   35-44    0-39   10-19 control
+## 305   35-44    0-39     30+ control
+## 306   35-44   40-79   20-29 control
+## 307   35-44   40-79    0- 9 control
+## 308   35-44   40-79    0- 9 control
+## 309   35-44   40-79   10-19 control
+## 310   35-44   40-79    0- 9 control
+## 311   35-44   40-79    0- 9 control
+## 312   35-44    0-39   20-29 control
+## 313   35-44    0-39    0- 9 control
+## 314   35-44  80-119   10-19 control
+## 315   35-44    0-39   10-19    case
+## 316   45-54  80-119     30+ control
+## 317   45-54    0-39    0- 9 control
+## 318   45-54    120+     30+    case
+## 319   45-54  80-119    0- 9 control
+## 320   45-54   40-79    0- 9 control
+## 321   45-54    0-39    0- 9 control
+## 322   45-54   40-79    0- 9 control
+## 323   45-54    0-39    0- 9 control
+## 324   45-54    0-39    0- 9 control
+## 325   45-54  80-119    0- 9    case
+## 326   45-54   40-79   10-19 control
+## 327   45-54    0-39    0- 9 control
+## 328   45-54  80-119   20-29 control
+## 329   45-54    0-39    0- 9 control
+## 330   45-54    120+   20-29    case
+## 331   45-54   40-79    0- 9 control
+## 332   45-54    0-39    0- 9 control
+## 333   45-54   40-79    0- 9 control
+## 334   45-54   40-79    0- 9 control
+## 335   45-54   40-79    0- 9 control
+## 336   45-54  80-119   10-19    case
+## 337   45-54   40-79   10-19    case
+## 338   45-54  80-119    0- 9 control
+## 339   45-54   40-79   10-19    case
+## 340   45-54    0-39    0- 9 control
+## 341   45-54   40-79    0- 9 control
+## 342   45-54  80-119   20-29 control
+## 343   45-54   40-79    0- 9 control
+## 344   45-54   40-79   20-29    case
+## 345   45-54   40-79   20-29 control
+## 346   45-54    120+    0- 9    case
+## 347   45-54   40-79   10-19 control
+## 348   45-54    0-39   20-29 control
+## 349   45-54    0-39   20-29 control
+## 350   45-54   40-79     30+    case
+## 351   45-54  80-119   10-19    case
+## 352   45-54   40-79   10-19 control
+## 353   45-54    0-39    0- 9 control
+## 354   45-54   40-79     30+    case
+## 355   45-54   40-79    0- 9 control
+## 356   45-54    0-39    0- 9 control
+## 357   45-54    0-39    0- 9 control
+## 358   45-54    120+   10-19    case
+## 359   45-54  80-119   10-19 control
+## 360   45-54   40-79   10-19 control
+## 361   45-54   40-79    0- 9 control
+## 362   45-54   40-79   20-29 control
+## 363   45-54   40-79    0- 9 control
+## 364   45-54   40-79   10-19 control
+## 365   45-54   40-79   20-29    case
+## 366   45-54    0-39   10-19 control
+## 367   45-54   40-79   20-29 control
+## 368   45-54  80-119   10-19 control
+## 369   45-54    0-39   10-19 control
+## 370   45-54   40-79   20-29    case
+## 371   45-54    0-39   10-19 control
+## 372   45-54  80-119     30+    case
+## 373   45-54    120+   20-29 control
+## 374   45-54    0-39   10-19 control
+## 375   45-54    0-39    0- 9 control
+## 376   45-54   40-79    0- 9    case
+## 377   45-54   40-79   20-29 control
+## 378   45-54   40-79   10-19 control
+## 379   45-54   40-79   10-19 control
+## 380   45-54   40-79   10-19    case
+## 381   45-54    0-39     30+ control
+## 382   45-54    0-39    0- 9 control
+## 383   45-54  80-119    0- 9 control
+## 384   45-54    120+   20-29    case
+## 385   45-54  80-119   20-29    case
+## 386   45-54   40-79   20-29 control
+## 387   45-54  80-119    0- 9 control
+## 388   45-54   40-79    0- 9 control
+## 389   45-54    0-39   10-19 control
+## 390   45-54    0-39    0- 9 control
+## 391   45-54    0-39   10-19 control
+## 392   45-54    0-39    0- 9 control
+## 393   45-54    120+     30+    case
+## 394   45-54  80-119   10-19 control
+## 395   45-54  80-119    0- 9 control
+## 396   45-54   40-79    0- 9 control
+## 397   45-54    0-39    0- 9 control
+## 398   45-54   40-79    0- 9    case
+## 399   45-54    120+     30+    case
+## 400   45-54  80-119    0- 9    case
+## 401   45-54    0-39   10-19 control
+## 402   45-54    0-39   10-19 control
+## 403   45-54    0-39    0- 9 control
+## 404   45-54    120+   10-19 control
+## 405   45-54    0-39   10-19 control
+## 406   45-54   40-79     30+    case
+## 407   45-54   40-79   10-19 control
+## 408   45-54   40-79    0- 9 control
+## 409   45-54   40-79    0- 9 control
+## 410   45-54  80-119    0- 9 control
+## 411   45-54   40-79   20-29 control
+## 412   45-54   40-79   10-19 control
+## 413   45-54  80-119   10-19    case
+## 414   45-54    0-39    0- 9 control
+## 415   45-54  80-119    0- 9 control
+## 416   45-54    0-39    0- 9 control
+## 417   45-54    0-39    0- 9 control
+## 418   45-54  80-119   10-19 control
+## 419   45-54  80-119   10-19    case
+## 420   45-54   40-79     30+    case
+## 421   45-54   40-79   20-29    case
+## 422   45-54    120+     30+    case
+## 423   45-54  80-119   10-19 control
+## 424   45-54   40-79    0- 9 control
+## 425   45-54    0-39   10-19 control
+## 426   45-54    0-39   20-29 control
+## 427   45-54    0-39    0- 9 control
+## 428   45-54   40-79   20-29 control
+## 429   45-54    0-39   20-29 control
+## 430   45-54  80-119    0- 9 control
+## 431   45-54  80-119    0- 9    case
+## 432   45-54  80-119   10-19 control
+## 433   45-54   40-79    0- 9 control
+## 434   45-54    0-39    0- 9 control
+## 435   45-54   40-79   10-19 control
+## 436   45-54   40-79    0- 9 control
+## 437   45-54   40-79    0- 9 control
+## 438   45-54   40-79     30+    case
+## 439   45-54    0-39   10-19 control
+## 440   45-54   40-79   10-19    case
+## 441   45-54   40-79   10-19 control
+## 442   45-54  80-119     30+    case
+## 443   45-54   40-79    0- 9    case
+## 444   45-54    0-39     30+ control
+## 445   45-54    0-39   20-29 control
+## 446   45-54    0-39   10-19 control
+## 447   45-54   40-79    0- 9 control
+## 448   45-54   40-79    0- 9 control
+## 449   45-54   40-79    0- 9    case
+## 450   45-54   40-79    0- 9    case
+## 451   45-54   40-79    0- 9 control
+## 452   45-54   40-79    0- 9 control
+## 453   45-54   40-79   20-29 control
+## 454   45-54    0-39   10-19 control
+## 455   45-54    0-39    0- 9 control
+## 456   45-54    0-39   20-29 control
+## 457   45-54    0-39    0- 9 control
+## 458   45-54  80-119   10-19 control
+## 459   45-54  80-119     30+ control
+## 460   45-54    0-39    0- 9 control
+## 461   45-54    0-39   20-29 control
+## 462   45-54    0-39    0- 9 control
+## 463   45-54    0-39   10-19 control
+## 464   45-54    0-39    0- 9 control
+## 465   45-54   40-79   10-19 control
+## 466   45-54    120+    0- 9    case
+## 467   45-54    0-39    0- 9 control
+## 468   45-54   40-79    0- 9 control
+## 469   45-54  80-119    0- 9 control
+## 470   45-54    0-39   20-29 control
+## 471   45-54    0-39    0- 9 control
+## 472   45-54    0-39     30+ control
+## 473   45-54    0-39    0- 9 control
+## 474   45-54    0-39    0- 9 control
+## 475   45-54   40-79   20-29 control
+## 476   45-54  80-119    0- 9 control
+## 477   45-54  80-119   10-19    case
+## 478   45-54   40-79    0- 9 control
+## 479   45-54    0-39   10-19 control
+## 480   45-54  80-119    0- 9 control
+## 481   45-54   40-79   20-29    case
+## 482   45-54   40-79     30+ control
+## 483   45-54    0-39     30+ control
+## 484   45-54   40-79   10-19 control
+## 485   45-54   40-79   10-19 control
+## 486   45-54    120+    0- 9    case
+## 487   45-54   40-79    0- 9 control
+## 488   45-54    0-39    0- 9 control
+## 489   45-54    0-39    0- 9 control
+## 490   45-54    0-39    0- 9 control
+## 491   45-54    120+   10-19    case
+## 492   45-54    0-39    0- 9 control
+## 493   45-54   40-79   20-29 control
+## 494   45-54  80-119    0- 9 control
+## 495   45-54   40-79    0- 9    case
+## 496   45-54    120+    0- 9    case
+## 497   45-54  80-119    0- 9 control
+## 498   45-54  80-119   10-19    case
+## 499   45-54   40-79     30+ control
+## 500   45-54    0-39    0- 9 control
+## 501   45-54    0-39   10-19 control
+## 502   45-54   40-79    0- 9 control
+## 503   45-54   40-79    0- 9 control
+## 504   45-54   40-79   10-19 control
+## 505   45-54    0-39   10-19 control
+## 506   45-54    0-39    0- 9 control
+## 507   45-54  80-119   20-29 control
+## 508   45-54    0-39    0- 9 control
+## 509   45-54    0-39    0- 9 control
+## 510   45-54    0-39    0- 9 control
+## 511   45-54    0-39    0- 9    case
+## 512   45-54   40-79   10-19 control
+## 513   45-54    0-39   20-29 control
+## 514   45-54   40-79    0- 9 control
+## 515   45-54    0-39   10-19 control
+## 516   45-54  80-119   10-19 control
+## 517   45-54    0-39    0- 9 control
+## 518   45-54    0-39    0- 9 control
+## 519   45-54   40-79    0- 9 control
+## 520   45-54    0-39    0- 9 control
+## 521   45-54  80-119   20-29 control
+## 522   45-54    0-39    0- 9 control
+## 523   45-54    120+   10-19    case
+## 524   45-54   40-79   10-19 control
+## 525   45-54    0-39    0- 9 control
+## 526   45-54   40-79    0- 9 control
+## 527   45-54    0-39   20-29 control
+## 528   45-54   40-79    0- 9 control
+## 529   55-64    0-39   10-19 control
+## 530   55-64    0-39    0- 9 control
+## 531   55-64    0-39    0- 9 control
+## 532   55-64    120+   10-19    case
+## 533   55-64   40-79    0- 9 control
+## 534   55-64    0-39   10-19 control
+## 535   55-64  80-119   20-29 control
+## 536   55-64    120+   10-19    case
+## 537   55-64    120+     30+    case
+## 538   55-64  80-119   10-19 control
+## 539   55-64    120+    0- 9    case
+## 540   55-64   40-79   20-29 control
+## 541   55-64    0-39   10-19 control
+## 542   55-64    0-39     30+    case
+## 543   55-64  80-119    0- 9 control
+## 544   55-64   40-79   10-19    case
+## 545   55-64    0-39     30+    case
+## 546   55-64    0-39   10-19    case
+## 547   55-64    0-39    0- 9 control
+## 548   55-64   40-79   10-19 control
+## 549   55-64   40-79    0- 9    case
+## 550   55-64   40-79    0- 9 control
+## 551   55-64    0-39    0- 9 control
+## 552   55-64  80-119    0- 9    case
+## 553   55-64   40-79    0- 9    case
+## 554   55-64    0-39   20-29 control
+## 555   55-64   40-79   10-19 control
+## 556   55-64   40-79    0- 9    case
+## 557   55-64   40-79    0- 9 control
+## 558   55-64  80-119   20-29 control
+## 559   55-64   40-79   10-19    case
+## 560   55-64    0-39    0- 9 control
+## 561   55-64    0-39    0- 9 control
+## 562   55-64    0-39    0- 9 control
+## 563   55-64    0-39    0- 9 control
+## 564   55-64   40-79    0- 9 control
+## 565   55-64  80-119   20-29    case
+## 566   55-64   40-79    0- 9 control
+## 567   55-64    0-39   10-19 control
+## 568   55-64    0-39   20-29 control
+## 569   55-64   40-79   20-29    case
+## 570   55-64   40-79    0- 9 control
+## 571   55-64    0-39   20-29 control
+## 572   55-64    120+   10-19 control
+## 573   55-64   40-79    0- 9 control
+## 574   55-64   40-79    0- 9 control
+## 575   55-64  80-119    0- 9 control
+## 576   55-64  80-119    0- 9 control
+## 577   55-64    120+     30+    case
+## 578   55-64    0-39    0- 9 control
+## 579   55-64   40-79   20-29 control
+## 580   55-64   40-79   20-29 control
+## 581   55-64   40-79     30+    case
+## 582   55-64   40-79   10-19 control
+## 583   55-64   40-79    0- 9 control
+## 584   55-64    0-39   10-19 control
+## 585   55-64  80-119    0- 9 control
+## 586   55-64    120+   10-19    case
+## 587   55-64   40-79   10-19    case
+## 588   55-64    120+   20-29    case
+## 589   55-64   40-79    0- 9 control
+## 590   55-64    0-39    0- 9 control
+## 591   55-64   40-79    0- 9 control
+## 592   55-64  80-119    0- 9 control
+## 593   55-64   40-79   20-29 control
+## 594   55-64    0-39   10-19 control
+## 595   55-64    0-39    0- 9    case
+## 596   55-64   40-79   10-19 control
+## 597   55-64   40-79    0- 9 control
+## 598   55-64    0-39   10-19 control
+## 599   55-64   40-79    0- 9 control
+## 600   55-64   40-79   10-19    case
+## 601   55-64    0-39   20-29 control
+## 602   55-64   40-79   20-29    case
+## 603   55-64   40-79   10-19 control
+## 604   55-64    0-39   20-29    case
+## 605   55-64    0-39   20-29 control
+## 606   55-64  80-119   10-19    case
+## 607   55-64    0-39    0- 9 control
+## 608   55-64    0-39    0- 9 control
+## 609   55-64   40-79    0- 9 control
+## 610   55-64    120+    0- 9 control
+## 611   55-64   40-79    0- 9 control
+## 612   55-64    0-39    0- 9 control
+## 613   55-64   40-79    0- 9 control
+## 614   55-64   40-79    0- 9 control
+## 615   55-64   40-79   10-19 control
+## 616   55-64   40-79    0- 9 control
+## 617   55-64   40-79    0- 9 control
+## 618   55-64    0-39    0- 9    case
+## 619   55-64    0-39    0- 9 control
+## 620   55-64    0-39   20-29 control
+## 621   55-64  80-119   20-29    case
+## 622   55-64    120+    0- 9 control
+## 623   55-64    0-39   10-19 control
+## 624   55-64  80-119   10-19    case
+## 625   55-64    0-39   10-19 control
+## 626   55-64  80-119   10-19 control
+## 627   55-64   40-79    0- 9    case
+## 628   55-64    0-39    0- 9 control
+## 629   55-64   40-79   20-29 control
+## 630   55-64  80-119   10-19    case
+## 631   55-64    0-39   20-29    case
+## 632   55-64  80-119    0- 9 control
+## 633   55-64    0-39    0- 9 control
+## 634   55-64    120+     30+    case
+## 635   55-64    0-39    0- 9 control
+## 636   55-64   40-79    0- 9 control
+## 637   55-64   40-79    0- 9 control
+## 638   55-64   40-79   10-19 control
+## 639   55-64  80-119   10-19 control
+## 640   55-64   40-79   20-29 control
+## 641   55-64  80-119    0- 9    case
+## 642   55-64   40-79   10-19 control
+## 643   55-64   40-79     30+ control
+## 644   55-64    120+     30+    case
+## 645   55-64    0-39   10-19    case
+## 646   55-64    0-39   20-29 control
+## 647   55-64    0-39    0- 9 control
+## 648   55-64    120+    0- 9    case
+## 649   55-64    0-39    0- 9 control
+## 650   55-64    0-39   10-19 control
+## 651   55-64  80-119   20-29 control
+## 652   55-64    0-39   10-19    case
+## 653   55-64  80-119    0- 9    case
+## 654   55-64  80-119     30+    case
+## 655   55-64    120+     30+    case
+## 656   55-64   40-79   20-29 control
+## 657   55-64    0-39    0- 9 control
+## 658   55-64   40-79   20-29 control
+## 659   55-64    0-39    0- 9 control
+## 660   55-64  80-119     30+    case
+## 661   55-64    0-39     30+ control
+## 662   55-64  80-119    0- 9 control
+## 663   55-64    120+    0- 9 control
+## 664   55-64  80-119    0- 9    case
+## 665   55-64   40-79    0- 9 control
+## 666   55-64    120+    0- 9    case
+## 667   55-64    0-39   10-19 control
+## 668   55-64   40-79    0- 9 control
+## 669   55-64   40-79    0- 9    case
+## 670   55-64  80-119   10-19 control
+## 671   55-64    120+    0- 9    case
+## 672   55-64    0-39    0- 9 control
+## 673   55-64    120+    0- 9 control
+## 674   55-64    0-39   10-19 control
+## 675   55-64  80-119   10-19 control
+## 676   55-64    0-39    0- 9 control
+## 677   55-64   40-79    0- 9 control
+## 678   55-64    120+   20-29 control
+## 679   55-64   40-79   20-29 control
+## 680   55-64    0-39     30+    case
+## 681   55-64    120+   10-19    case
+## 682   55-64    0-39    0- 9 control
+## 683   55-64   40-79   10-19 control
+## 684   55-64    0-39    0- 9 control
+## 685   55-64   40-79   10-19 control
+## 686   55-64    0-39    0- 9 control
+## 687   55-64    120+    0- 9 control
+## 688   55-64   40-79    0- 9 control
+## 689   55-64    0-39   10-19 control
+## 690   55-64    0-39    0- 9 control
+## 691   55-64    0-39    0- 9 control
+## 692   55-64   40-79    0- 9    case
+## 693   55-64    0-39    0- 9 control
+## 694   55-64    0-39    0- 9 control
+## 695   55-64    120+   10-19    case
+## 696   55-64  80-119    0- 9 control
+## 697   55-64    0-39    0- 9 control
+## 698   55-64   40-79     30+ control
+## 699   55-64   40-79     30+    case
+## 700   55-64   40-79    0- 9    case
+## 701   55-64  80-119   10-19 control
+## 702   55-64    0-39    0- 9 control
+## 703   55-64  80-119   10-19    case
+## 704   55-64   40-79   10-19    case
+## 705   55-64   40-79    0- 9 control
+## 706   55-64   40-79   20-29 control
+## 707   55-64  80-119    0- 9    case
+## 708   55-64    0-39     30+ control
+## 709   55-64   40-79   10-19 control
+## 710   55-64    0-39   10-19 control
+## 711   55-64   40-79    0- 9 control
+## 712   55-64    0-39    0- 9 control
+## 713   55-64    0-39   20-29 control
+## 714   55-64   40-79   10-19    case
+## 715   55-64  80-119     30+    case
+## 716   55-64  80-119    0- 9    case
+## 717   55-64  80-119     30+    case
+## 718   55-64   40-79    0- 9 control
+## 719   55-64  80-119   10-19    case
+## 720   55-64  80-119   20-29    case
+## 721   55-64    0-39     30+    case
+## 722   55-64  80-119    0- 9    case
+## 723   55-64    0-39    0- 9 control
+## 724   55-64    0-39    0- 9 control
+## 725   55-64    0-39   20-29 control
+## 726   55-64  80-119    0- 9 control
+## 727   55-64    0-39    0- 9 control
+## 728   55-64   40-79    0- 9    case
+## 729   55-64    0-39    0- 9 control
+## 730   55-64   40-79   20-29    case
+## 731   55-64   40-79     30+    case
+## 732   55-64    0-39   20-29    case
+## 733   55-64   40-79   20-29    case
+## 734   55-64    0-39    0- 9 control
+## 735   55-64   40-79   10-19 control
+## 736   55-64    0-39    0- 9 control
+## 737   55-64    120+   10-19    case
+## 738   55-64    120+     30+ control
+## 739   55-64   40-79    0- 9 control
+## 740   55-64    120+    0- 9    case
+## 741   55-64  80-119   10-19    case
+## 742   55-64   40-79    0- 9 control
+## 743   55-64   40-79    0- 9 control
+## 744   55-64    0-39    0- 9 control
+## 745   55-64    0-39    0- 9 control
+## 746   55-64  80-119   10-19 control
+## 747   55-64    0-39   10-19 control
+## 748   55-64    0-39   10-19 control
+## 749   55-64  80-119    0- 9    case
+## 750   55-64    0-39   10-19 control
+## 751   55-64  80-119   10-19    case
+## 752   55-64   40-79   20-29 control
+## 753   55-64    120+   20-29    case
+## 754   55-64    0-39   10-19 control
+## 755   55-64   40-79     30+ control
+## 756   55-64    0-39   10-19 control
+## 757   55-64   40-79   10-19 control
+## 758   55-64    0-39    0- 9 control
+## 759   55-64    0-39    0- 9 control
+## 760   55-64    0-39    0- 9 control
+## 761   55-64   40-79   10-19 control
+## 762   55-64   40-79   20-29 control
+## 763   55-64    0-39    0- 9 control
+## 764   55-64  80-119    0- 9    case
+## 765   55-64   40-79   10-19 control
+## 766   55-64    0-39    0- 9 control
+## 767   55-64  80-119   10-19    case
+## 768   55-64    0-39    0- 9 control
+## 769   55-64   40-79    0- 9    case
+## 770   55-64   40-79   20-29 control
+## 771   65-74   40-79    0- 9    case
+## 772   65-74    0-39    0- 9 control
+## 773   65-74    0-39    0- 9 control
+## 774   65-74  80-119    0- 9    case
+## 775   65-74    0-39   10-19 control
+## 776   65-74    0-39    0- 9 control
+## 777   65-74  80-119   10-19 control
+## 778   65-74    0-39   10-19 control
+## 779   65-74    120+   10-19 control
+## 780   65-74  80-119   10-19 control
+## 781   65-74    0-39    0- 9 control
+## 782   65-74    120+    0- 9    case
+## 783   65-74  80-119    0- 9    case
+## 784   65-74  80-119    0- 9    case
+## 785   65-74    0-39    0- 9 control
+## 786   65-74    0-39     30+ control
+## 787   65-74  80-119    0- 9 control
+## 788   65-74    0-39    0- 9 control
+## 789   65-74   40-79   20-29 control
+## 790   65-74   40-79    0- 9 control
+## 791   65-74  80-119   10-19    case
+## 792   65-74   40-79    0- 9 control
+## 793   65-74  80-119   10-19 control
+## 794   65-74   40-79    0- 9 control
+## 795   65-74    120+   10-19    case
+## 796   65-74    0-39    0- 9 control
+## 797   65-74   40-79   20-29 control
+## 798   65-74    0-39    0- 9 control
+## 799   65-74    120+     30+    case
+## 800   65-74   40-79    0- 9    case
+## 801   65-74   40-79    0- 9 control
+## 802   65-74   40-79    0- 9    case
+## 803   65-74   40-79   20-29    case
+## 804   65-74    0-39   20-29    case
+## 805   65-74   40-79    0- 9    case
+## 806   65-74   40-79    0- 9    case
+## 807   65-74    0-39    0- 9 control
+## 808   65-74    0-39   20-29 control
+## 809   65-74   40-79   20-29 control
+## 810   65-74  80-119   10-19    case
+## 811   65-74  80-119    0- 9 control
+## 812   65-74   40-79    0- 9    case
+## 813   65-74   40-79    0- 9 control
+## 814   65-74  80-119    0- 9 control
+## 815   65-74   40-79   10-19 control
+## 816   65-74   40-79   10-19    case
+## 817   65-74    0-39    0- 9 control
+## 818   65-74   40-79   20-29    case
+## 819   65-74    0-39    0- 9 control
+## 820   65-74    0-39    0- 9 control
+## 821   65-74    0-39    0- 9 control
+## 822   65-74    0-39    0- 9 control
+## 823   65-74    0-39    0- 9 control
+## 824   65-74    0-39    0- 9 control
+## 825   65-74    0-39    0- 9 control
+## 826   65-74   40-79    0- 9 control
+## 827   65-74    0-39    0- 9    case
+## 828   65-74    0-39    0- 9 control
+## 829   65-74  80-119    0- 9    case
+## 830   65-74    0-39    0- 9 control
+## 831   65-74   40-79    0- 9 control
+## 832   65-74    120+    0- 9    case
+## 833   65-74   40-79    0- 9 control
+## 834   65-74    0-39    0- 9 control
+## 835   65-74   40-79   10-19 control
+## 836   65-74  80-119     30+    case
+## 837   65-74   40-79    0- 9 control
+## 838   65-74   40-79    0- 9 control
+## 839   65-74   40-79    0- 9    case
+## 840   65-74   40-79   10-19 control
+## 841   65-74    120+    0- 9    case
+## 842   65-74    0-39   20-29 control
+## 843   65-74   40-79    0- 9    case
+## 844   65-74    0-39   20-29 control
+## 845   65-74   40-79    0- 9    case
+## 846   65-74    0-39    0- 9 control
+## 847   65-74    0-39   10-19    case
+## 848   65-74   40-79    0- 9    case
+## 849   65-74    0-39   20-29 control
+## 850   65-74  80-119   10-19 control
+## 851   65-74    0-39    0- 9    case
+## 852   65-74   40-79    0- 9    case
+## 853   65-74   40-79    0- 9 control
+## 854   65-74   40-79    0- 9 control
+## 855   65-74   40-79   20-29    case
+## 856   65-74    0-39   10-19    case
+## 857   65-74    0-39    0- 9    case
+## 858   65-74    0-39    0- 9 control
+## 859   65-74   40-79   10-19 control
+## 860   65-74   40-79    0- 9    case
+## 861   65-74   40-79    0- 9    case
+## 862   65-74    0-39   10-19 control
+## 863   65-74    0-39    0- 9 control
+## 864   65-74    0-39    0- 9 control
+## 865   65-74    0-39     30+ control
+## 866   65-74   40-79    0- 9    case
+## 867   65-74    0-39    0- 9 control
+## 868   65-74   40-79    0- 9    case
+## 869   65-74    0-39    0- 9 control
+## 870   65-74    0-39   20-29 control
+## 871   65-74    0-39    0- 9 control
+## 872   65-74    0-39    0- 9 control
+## 873   65-74  80-119   20-29    case
+## 874   65-74    0-39   10-19    case
+## 875   65-74  80-119   10-19 control
+## 876   65-74  80-119    0- 9    case
+## 877   65-74   40-79   10-19    case
+## 878   65-74    0-39    0- 9 control
+## 879   65-74    0-39    0- 9 control
+## 880   65-74   40-79    0- 9 control
+## 881   65-74    0-39   10-19 control
+## 882   65-74    0-39    0- 9 control
+## 883   65-74  80-119   10-19 control
+## 884   65-74    0-39    0- 9 control
+## 885   65-74    0-39   10-19 control
+## 886   65-74  80-119   20-29 control
+## 887   65-74    0-39    0- 9 control
+## 888   65-74    0-39   10-19 control
+## 889   65-74   40-79    0- 9    case
+## 890   65-74  80-119   10-19    case
+## 891   65-74    0-39   10-19 control
+## 892   65-74   40-79   10-19 control
+## 893   65-74  80-119    0- 9 control
+## 894   65-74   40-79    0- 9    case
+## 895   65-74    0-39    0- 9 control
+## 896   65-74    0-39   20-29    case
+## 897   65-74    120+    0- 9 control
+## 898   65-74    120+   20-29    case
+## 899   65-74    0-39    0- 9    case
+## 900   65-74  80-119    0- 9 control
+## 901   65-74    0-39   10-19 control
+## 902   65-74    0-39   10-19 control
+## 903   65-74    0-39    0- 9 control
+## 904   65-74  80-119    0- 9    case
+## 905   65-74    0-39    0- 9 control
+## 906   65-74    0-39    0- 9 control
+## 907   65-74  80-119    0- 9 control
+## 908   65-74   40-79   10-19    case
+## 909   65-74   40-79    0- 9 control
+## 910   65-74    0-39    0- 9 control
+## 911   65-74  80-119   10-19    case
+## 912   65-74   40-79   10-19 control
+## 913   65-74    0-39    0- 9 control
+## 914   65-74    0-39    0- 9 control
+## 915   65-74    0-39    0- 9 control
+## 916   65-74  80-119   20-29    case
+## 917   65-74   40-79   20-29    case
+## 918   65-74   40-79    0- 9 control
+## 919   65-74    0-39    0- 9    case
+## 920   65-74    0-39    0- 9 control
+## 921   65-74  80-119   10-19 control
+## 922   65-74  80-119    0- 9 control
+## 923   65-74   40-79    0- 9 control
+## 924   65-74   40-79   10-19 control
+## 925   65-74   40-79    0- 9 control
+## 926   65-74  80-119   10-19 control
+## 927   65-74    0-39   10-19    case
+## 928   65-74    0-39   10-19 control
+## 929   65-74   40-79   20-29    case
+## 930   65-74   40-79   20-29 control
+## 931   65-74    0-39    0- 9 control
+## 932     75+    0-39   10-19    case
+## 933     75+    120+   10-19    case
+## 934     75+    0-39    0- 9 control
+## 935     75+    0-39     30+    case
+## 936     75+   40-79    0- 9 control
+## 937     75+   40-79   20-29 control
+## 938     75+    0-39    0- 9 control
+## 939     75+   40-79     30+    case
+## 940     75+    0-39     30+ control
+## 941     75+    0-39    0- 9 control
+## 942     75+    0-39    0- 9 control
+## 943     75+    120+    0- 9    case
+## 944     75+    0-39    0- 9 control
+## 945     75+    0-39    0- 9 control
+## 946     75+    0-39    0- 9 control
+## 947     75+   40-79    0- 9    case
+## 948     75+    0-39    0- 9 control
+## 949     75+    0-39   10-19    case
+## 950     75+    0-39    0- 9 control
+## 951     75+   40-79   20-29 control
+## 952     75+    0-39    0- 9 control
+## 953     75+    0-39    0- 9 control
+## 954     75+    0-39    0- 9 control
+## 955     75+   40-79   20-29 control
+## 956     75+    0-39   10-19 control
+## 957     75+    0-39     30+ control
+## 958     75+    0-39    0- 9 control
+## 959     75+    0-39    0- 9 control
+## 960     75+    0-39    0- 9 control
+## 961     75+    0-39   10-19 control
+## 962     75+    0-39    0- 9    case
+## 963     75+    120+    0- 9    case
+## 964     75+   40-79   10-19 control
+## 965     75+    0-39   10-19 control
+## 966     75+   40-79    0- 9 control
+## 967     75+    0-39    0- 9 control
+## 968     75+  80-119   10-19    case
+## 969     75+    0-39   10-19 control
+## 970     75+   40-79   10-19    case
+## 971     75+  80-119    0- 9    case
+## 972     75+   40-79    0- 9    case
+## 973     75+   40-79    0- 9 control
+## 974     75+   40-79   10-19 control
+## 975     75+    0-39    0- 9 control</code></pre>
+<p>Now we have the data ready for the analysis!</p>
+<p>Let’s make the table 1</p>
+<pre class="r"><code>df %&gt;% 
+  group_by(age_grp, cc_grp) %&gt;% 
+  summarise(n = n()) %&gt;% 
+  spread(cc_grp, n)</code></pre>
+<pre><code>## # A tibble: 6 x 3
+## # Groups:   age_grp [6]
+##   age_grp  case control
+## * &lt;chr&gt;   &lt;int&gt;   &lt;int&gt;
+## 1 25-34       1     115
+## 2 35-44       9     190
+## 3 45-54      46     167
+## 4 55-64      76     166
+## 5 65-74      55     106
+## 6 75+        13      31</code></pre>
+<p>For alcohol:</p>
+<pre class="r"><code>df %&gt;% 
+  group_by(alc_grp, cc_grp) %&gt;% 
+  summarise(n = n()) %&gt;% 
+  spread(cc_grp, n)</code></pre>
+<pre><code>## # A tibble: 4 x 3
+## # Groups:   alc_grp [4]
+##   alc_grp  case control
+## * &lt;chr&gt;   &lt;int&gt;   &lt;int&gt;
+## 1 0-39       29     386
+## 2 120+       45      22
+## 3 40-79      75     280
+## 4 80-119     51      87</code></pre>
+<p>and tobacco:</p>
+<pre class="r"><code>df %&gt;% 
+  group_by(tob_grp, cc_grp) %&gt;% 
+  summarise(n = n()) %&gt;% 
+  spread(cc_grp, n)</code></pre>
+<pre><code>## # A tibble: 4 x 3
+## # Groups:   tob_grp [4]
+##   tob_grp  case control
+## * &lt;chr&gt;   &lt;int&gt;   &lt;int&gt;
+## 1 0- 9       78     447
+## 2 10-19      58     178
+## 3 20-29      33      99
+## 4 30+        31      51</code></pre>
+<div id="references" class="section level1">
+<h1>References</h1>
+<p><a href="http://www.iarc.fr/en/publications/pdfs-online/stat/sp32/SP32_vol1-4.pdf">Statistical Methods in Cancer Research Volume I - The analysis of case-control studies - CLASSICAL METHODS OF ANALYSIS OF GROUPED DATA</a></p>
+</div>
+
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="/post/post-in-rmd/" data-toggle="tooltip" data-placement="top" title="Post in rmd">&larr; Previous Post</a>
+            </li>
+          
+          
+        </ul>
+      
+
+
+      
+        
+          <div class="disqus-comments">
+            <div id="disqus_thread"></div>
+<script>
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "dental-data-science" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:sergio.uribe@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/sergiouribe" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/dentaldatasci" title="Twitter">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://linkedin.com/in/sergiouribe" title="LinkedIn">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://stackoverflow.com/users/7617/sergiouribe" title="StackOverflow">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            
+            <a href="/index.xml" title="RSS">
+            
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="http://www.sergiouri.be/">Sergio Uribe</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2018
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="/">Dental Data Science</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.37</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="/js/main.js"></script>
+<script src="/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> $(document).ready(function() {$("pre.chroma").css("padding","0");}); </script><script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script>
+<script src="/js/load-photoswipe.js"></script>
+
+
+<script>
+  (function() {
+    var cx = '001914880863475946784:jaiqxnvieeu';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+
+
+
+
+
+  </body>
+</html>
+

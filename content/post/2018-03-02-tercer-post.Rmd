@@ -1,0 +1,223 @@
+---
+title: Wrangling and visualization of case-control studies
+author: Sergio Uribe
+date: '2018-03-02'
+slug: tercer-post
+categories:
+  - data visualization
+  - data wrangling
+  - case-control study
+  - epidemiological research
+tags:
+  - dplyr
+  - ggplot2
+  - case-control
+---
+
+A Case-control study compares patients who have a disease or outcome of interest (cases) with patients who do not have the disease or outcome (controls), and looks back retrospectively to compare how frequently the exposure to a risk factor is present in each group to determine the relationship between the risk factor and the disease.
+
+Case control studies are observational because no intervention is attempted and no attempt is made to alter the course of the disease. The goal is to retrospectively determine the exposure to the risk factor of interest from each of the two groups of individuals: cases and controls. These studies are designed to estimate odds.
+
+Case control studies are also known as "retrospective studies" and "case-referent studies."
+
+In the classic textbook of Breslow and Day about [data analysis of cancer research](http://www.iarc.fr/en/publications/pdfs-online/stat/sp32/index.php),this is the table of the study about risk factors for oesophageal cancer: 
+
+![From Breslow and N. E. Day, ch 4.](/img/grouped-data-case-control.png)
+
+We will use dplyr and ggplot2 to graph this data.
+
+First, we load the meta-package __tidyverse__ thant contains packages as __dplyr__ for data wrangling and __ggplot2__ for data visualization among others. 
+```{r, warning=FALSE, message=FALSE}
+library(tidyverse)
+```
+
+
+```{r}
+df <- read.delim("http://faculty.washington.edu/heagerty/Courses/b513/WEB2002/datasets/esoph.raw", sep = "", header = FALSE)
+```
+
+```{r}
+head(df)
+```
+Data is without column names. The variables are: 
+
+
+| COL   | VAR       | RANGE/VALUES                     |
+|-------|-----------|----------------------------------|
+| 1     | Age group | 1 = 25-34                        |
+|       | (years)   | 2 = 35-44                        |
+|       |           | 3 = 45-54                        |
+|       |           | 4 = 55-64                        |
+|       |           | 5 = 65-74                        |
+|       |           | 6 = 75+                          |
+| 2     | Alcohol   | 1 =  0-39                        |
+|       | (gms/day) | 2 = 40-79                        |
+|       |           | 3 = 80-119                       |
+|       |           | 4 = 120+                         |
+| 3     | Tobacco   | 1 =  0- 9                        |
+|       | (gms/day) | 2 = 10-19                        |
+|       |           | 3 = 20-29                        |
+|       |           | 4 = 30+                          |
+| 4     | Case  or  | 1 = case                         |
+|       | Control   | 0 = control                      |
+
+Add the column names: 
+
+```{r}
+colnames(df) <- (c("age", "alc", "tob", "cc"))
+```
+
+```{r}
+head(df)
+```
+
+Let's recode all the dataset using the funtion `mutate` and `case_when` of `dplyr`
+
+Age groups
+1 = 25-34
+2 = 35-44
+3 = 45-54
+4 = 55-64
+5 = 65-74
+6 = 75+
+
+```{r}
+df <- df %>% 
+  mutate(
+    age_grp = 
+      case_when(
+        age == 1 ~ "25-34", 
+        age == 2 ~ "35-44", 
+        age == 3 ~ "45-54", 
+        age == 4 ~ "55-64", 
+        age == 5 ~ "65-74", 
+        TRUE ~ "75+", 
+      )
+  )
+```
+
+```{r}
+head(df)
+```
+ OK!
+ 
+ The same for the rest of the variables
+ 
+```{r}
+df <- df %>% 
+  mutate(
+    alc_grp = 
+      case_when(
+        alc == 1 ~  "0-39", 
+        alc == 2 ~ "40-79",  
+        alc == 3 ~ "80-119",  
+        TRUE ~ "120+" 
+      )
+  )
+```
+ 
+
+```{r}
+df <- df %>% 
+  mutate(
+    tob_grp = 
+      case_when(
+        tob == 1 ~  "0- 9", 
+        tob == 2 ~ "10-19", 
+        tob == 3 ~ "20-29", 
+        TRUE ~ "30+" 
+      )
+  )
+```
+
+
+```{r}
+df <- df %>% 
+  mutate(
+    cc_grp = 
+      case_when(
+        cc == 0 ~ "control", 
+        TRUE ~ "case"
+      )
+  )
+```
+
+Now, omit the former columns
+
+```{r}
+df <- df %>% 
+  select(age_grp:cc_grp)
+```
+
+and now, we have to give the order of the factors for the ordinal variables age, alcohol and tobbaco
+
+
+```{r}
+df %>% 
+  mutate(age_grp = factor(age_grp, levels = c("25-34",
+                                              "35-44"	,
+                                              "45-54"	,
+                                              "55-64"	,
+                                              "65-74"	,
+                                              "75"
+)))
+```
+
+```{r}
+df %>% 
+  mutate(alc_grp = factor(alc_grp, levels = c("0-39",
+                                              "40-79",
+                                              "80-119",
+                                              "120"
+)))
+```
+
+
+```{r}
+df %>% 
+  mutate(tob_grp = factor(tob_grp, levels = c("0- 9",
+                                              "10-19",
+                                              "20-29",
+                                              "30+"
+                                              )))
+```
+
+Now we have the data ready for the analysis!
+
+Let's make the table 1
+
+```{r}
+df %>% 
+  group_by(age_grp, cc_grp) %>% 
+  summarise(n = n()) %>% 
+  spread(cc_grp, n)
+```
+
+
+
+For alcohol: 
+
+```{r}
+df %>% 
+  group_by(alc_grp, cc_grp) %>% 
+  summarise(n = n()) %>% 
+  spread(cc_grp, n)
+```
+
+and tobacco:
+
+```{r}
+df %>% 
+  group_by(tob_grp, cc_grp) %>% 
+  summarise(n = n()) %>% 
+  spread(cc_grp, n)
+```
+
+
+
+
+
+# References
+
+[Statistical Methods in Cancer Research
+Volume I - The analysis of case-control studies - CLASSICAL METHODS OF ANALYSIS OF GROUPED DATA](http://www.iarc.fr/en/publications/pdfs-online/stat/sp32/SP32_vol1-4.pdf)

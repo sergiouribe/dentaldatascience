@@ -9,11 +9,11 @@
   <meta property="og:title" content="Post in rmd" />
   <meta name="twitter:title" content="Post in rmd" />
   <meta name="description" content="Exploratory data analysis of medical data Here are some code to create boxplots with significance bars
- library(pubh) ## Loading required package: lattice ## Loading required package: latticeExtra ## Loading required package: RColorBrewer library(tidyverse) ## ── Attaching packages ──────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ── ## ✔ ggplot2 2.2.1 ✔ purrr 0.2.4 ## ✔ tibble 1.4.2 ✔ dplyr 0.7.4 ## ✔ tidyr 0.7.2 ✔ stringr 1.2.0 ## ✔ readr 1.1.1 ✔ forcats 0.2.0 ## ── Conflicts ─────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ── ## ✖ dplyr::filter() masks stats::filter() ## ✖ dplyr::lag() masks stats::lag() ## ✖ ggplot2::layer() masks latticeExtra::layer() Dataset data(Hodgkin)  Exploring the raw dataset head(Hodgkin) ## CD4 CD8 Group ## 1 396 836 Hodgkin ## 2 568 978 Hodgkin ## 3 1212 1678 Hodgkin ## 4 171 212 Hodgkin ## 5 554 670 Hodgkin ## 6 1104 1335 Hodgkin  Summary tables Hodgkin %&gt;% gather(key = &quot;Cell&quot;, value = value, CD4:CD8) %&gt;% group_by(Group, Cell) %&gt;% summarise(Mean = mean(value)) %&gt;% spread(Cell, Mean) ## # A tibble: 2 x 3 ## # Groups: Group [2] ## Group CD4 CD8 ## * &lt;fct&gt; &lt;dbl&gt; &lt;dbl&gt; ## 1 Non-Hodgkin 522 260 ## 2 Hodgkin 823 614  Visualizations Histogram Hodgkin %&gt;% mutate(&quot;CD4/CD8 ratio&quot; = CD4 / CD8) %&gt;% ggplot(aes(x = `CD4/CD8 ratio`, fill = Group)) &#43; geom_histogram(bins = 9, alpha = 0.">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dictum augue ut purus rhoncus egestas. Proin euismod pharetra dolor vel volutpat. Etiam ante turpis, semper vitae lacus quis, dictum pretium purus. Nam sed nulla volutpat, blandit est et, accumsan orci. Sed ac ultricies mi. Fusce commodo urna vitae posuere rhoncus. Nullam ut augue quis sem egestas iaculis sed non nisl.">
   <meta property="og:description" content="Exploratory data analysis of medical data Here are some code to create boxplots with significance bars
- library(pubh) ## Loading required package: lattice ## Loading required package: latticeExtra ## Loading required package: RColorBrewer library(tidyverse) ## ── Attaching packages ──────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse 1.2.1 ── ## ✔ ggplot2 2.2.1 ✔ purrr 0.2.4 ## ✔ tibble 1.4.2 ✔ dplyr 0.7.4 ## ✔ tidyr 0.7.2 ✔ stringr 1.2.0 ## ✔ readr 1.1.1 ✔ forcats 0.2.0 ## ── Conflicts ─────────────────────────────────────────────────────────────────────────────────────────────────────────── tidyverse_conflicts() ── ## ✖ dplyr::filter() masks stats::filter() ## ✖ dplyr::lag() masks stats::lag() ## ✖ ggplot2::layer() masks latticeExtra::layer() Dataset data(Hodgkin)  Exploring the raw dataset head(Hodgkin) ## CD4 CD8 Group ## 1 396 836 Hodgkin ## 2 568 978 Hodgkin ## 3 1212 1678 Hodgkin ## 4 171 212 Hodgkin ## 5 554 670 Hodgkin ## 6 1104 1335 Hodgkin  Summary tables Hodgkin %&gt;% gather(key = &quot;Cell&quot;, value = value, CD4:CD8) %&gt;% group_by(Group, Cell) %&gt;% summarise(Mean = mean(value)) %&gt;% spread(Cell, Mean) ## # A tibble: 2 x 3 ## # Groups: Group [2] ## Group CD4 CD8 ## * &lt;fct&gt; &lt;dbl&gt; &lt;dbl&gt; ## 1 Non-Hodgkin 522 260 ## 2 Hodgkin 823 614  Visualizations Histogram Hodgkin %&gt;% mutate(&quot;CD4/CD8 ratio&quot; = CD4 / CD8) %&gt;% ggplot(aes(x = `CD4/CD8 ratio`, fill = Group)) &#43; geom_histogram(bins = 9, alpha = 0.">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dictum augue ut purus rhoncus egestas. Proin euismod pharetra dolor vel volutpat. Etiam ante turpis, semper vitae lacus quis, dictum pretium purus. Nam sed nulla volutpat, blandit est et, accumsan orci. Sed ac ultricies mi. Fusce commodo urna vitae posuere rhoncus. Nullam ut augue quis sem egestas iaculis sed non nisl.">
   <meta name="twitter:description" content="Exploratory data analysis of medical data Here are some code to create boxplots with significance bars
- library(pubh) ## Loading required package: lattice ## Loading required package: latticeExtra ## …">
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dictum augue ut purus rhoncus …">
   <meta name="author" content="Sergio Uribe"/>
   <link href='/img/favicon.png' rel='icon' type='image/x-icon'/>
   <meta property="og:image" content="/img/icon.png" />
@@ -216,7 +216,7 @@ ga('send', 'pageview');
   
   
   &nbsp;|&nbsp;
-  <i class="fa fa-clock-o"></i> 2 minutes (402 words)
+  <i class="fa fa-clock-o"></i> 5 minutes (893 words)
   
   
 </span>
@@ -239,6 +239,11 @@ ga('send', 'pageview');
         <div id="exploratory-data-analysis-of-medical-data" class="section level1">
 <h1>Exploratory data analysis of medical data</h1>
 <p>Here are some code to create boxplots with significance bars</p>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent dictum augue ut purus rhoncus egestas. Proin euismod pharetra dolor vel volutpat. Etiam ante turpis, semper vitae lacus quis, dictum pretium purus. Nam sed nulla volutpat, blandit est et, accumsan orci. Sed ac ultricies mi. Fusce commodo urna vitae posuere rhoncus. Nullam ut augue quis sem egestas iaculis sed non nisl. Vestibulum laoreet felis volutpat mollis feugiat. Nullam sed libero non urna accumsan accumsan at sed enim. Vestibulum lobortis ex turpis, in varius lectus dictum at. In eget molestie felis.</p>
+<p>Sed lobortis pretium interdum. Cras varius eu nulla et placerat. Donec fermentum dolor ut turpis consequat, ut rutrum sem dictum. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Donec ut risus orci. Integer feugiat commodo arcu, volutpat aliquam nulla placerat sit amet. Proin quis vulputate lectus, at efficitur leo. Praesent mollis et lorem ac iaculis. Donec lacinia sem in pellentesque blandit. In tellus sapien, molestie vel ipsum non, pellentesque mattis nunc. In id nisi a justo tincidunt facilisis. Maecenas maximus pulvinar posuere. Vivamus quis lorem libero. Nullam ullamcorper sem sit amet mi gravida congue eget vitae risus. Sed id malesuada ante, eget porttitor arcu. Donec at nunc metus.</p>
+<p>Ut at bibendum nisl, id dapibus felis. In vitae tempor leo. Etiam et eros interdum, scelerisque elit non, consequat ipsum. Quisque dignissim venenatis sem, eu dictum lectus consectetur at. Integer bibendum nibh odio, quis gravida tortor ornare at. Praesent at urna sit amet lacus commodo pharetra varius id nisi. Vestibulum ipsum purus, gravida mollis diam et, luctus convallis nunc. Fusce ultrices sapien nec odio efficitur, eget eleifend ante euismod. Integer placerat elementum est ultricies mattis. Cras ac ipsum ac diam maximus iaculis sit amet id sapien. Nunc condimentum velit turpis, non posuere libero efficitur sed.</p>
+<p>In vitae erat vulputate, ornare nisi nec, posuere lorem. Nullam quam urna, laoreet quis justo quis, finibus pulvinar orci. Sed rhoncus sed nulla in venenatis. Vestibulum malesuada orci non sagittis vestibulum. In mollis varius nunc, at iaculis mi dictum eget. Vivamus varius dapibus bibendum. Aliquam quis imperdiet dui. Nam et nibh ultricies, volutpat enim et, dignissim ex. Integer eu nisl a nisl porta rutrum et eu lectus.</p>
+<p>Phasellus congue tincidunt erat, vel commodo tellus volutpat sit amet. Ut rutrum odio ex, eu porta mi volutpat id. Vestibulum nec orci finibus, varius augue vitae, tempus tortor. Cras molestie sapien nec luctus blandit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sit amet ligula leo. Duis pharetra dolor et ornare semper. Fusce in urna eget purus efficitur ultricies a a diam. Sed a mauris vulputate, tempus felis aliquam, consectetur velit. Sed eros ligula, maximus eget placerat lacinia, venenatis ac sapien. Nunc finibus, ante eget tincidunt ornare, libero ex ultricies augue, vitae hendrerit libero urna sed nisi. Ut hendrerit vitae tellus eu iaculis. Nunc pellentesque elit id mauris posuere sagittis. Quisque convallis, justo vel lobortis sodales, erat libero pellentesque sem, ac scelerisque erat velit et ante.</p>
 <!--more-->
 <pre class="r"><code>library(pubh)</code></pre>
 <pre><code>## Loading required package: lattice</code></pre>
@@ -358,6 +363,14 @@ ga('send', 'pageview');
       
         <ul class="pager blog-pager">
           
+            <li class="previous">
+              <a href="/post/segundo-post/" data-toggle="tooltip" data-placement="top" title="segundo post">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="/post/tercer-post/" data-toggle="tooltip" data-placement="top" title="Wrangling and visualization of case-control studies">Next Post &rarr;</a>
+            </li>
           
         </ul>
       
