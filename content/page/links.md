@@ -26,6 +26,7 @@ comments: false
   - [Fundamentals of Data Visualization (Wilke, 2018)](http://serialmentor.com/dataviz/index.html)
   - [The Elements of Statistical Learning: Data Mining, Inference, and Prediction.](https://web.stanford.edu/~hastie/ElemStatLearn/)
   - [An Introduction to Statistical Learning](http://www-bcf.usc.edu/~gareth/ISL/)
+  - [Population Health Data Science with R](https://bookdown.org/medepi/phds/)
   
 # Tutorials
   - [swirl()](http://swirlstats.com/students.html)

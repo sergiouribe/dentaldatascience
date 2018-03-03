@@ -232,8 +232,22 @@ df %>%
   select(-n) %>% 
   spread(cc_grp, prop)
 ```
-I still don't figure it how to make prop table with % for column with dplyr, but [found](https://stackoverflow.com/questions/40266062/dplyr-how-to-get-two-way-tables-with-marginal-proportions) a solution using the [janitor](https://cran.r-project.org/web/packages/janitor/index.html) package. 
+The `dplyr` version of the table with proportions is 
+
 ```{r}
+options(digits = 3)
+df %>%
+  count(age_grp, cc_grp) %>%
+  group_by(cc_grp) %>%
+  mutate(prop = n / sum(n)) %>%
+  select(-n) %>%
+  spread(cc_grp, prop, fill = 0)
+```
+
+
+Also, there is a new package called `janitor`, full of nice functions. One of them allow to make such table with a simple syntax: 
+
+```{r table prop with janitor}
 df %>% 
   janitor::crosstab(age_grp, cc_grp, percent = 'col')  # this means: use the package janitor to create a crosstable of this variables and adding the percent by columns. You can change the latter to 'row'
 ```
@@ -258,6 +272,7 @@ df %>%
 ```
 
 
+So, in this post we had recreated the table from the case-control study of (o)esophageal cancer in Ille-et-Vilaine, France in the Breslow and Day textbook. 
 
 
 
