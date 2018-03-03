@@ -215,7 +215,7 @@ ga('send', 'pageview');
   
   
   &nbsp;|&nbsp;
-  <i class="fa fa-clock-o"></i> 7 minutes (1402 words)
+  <i class="fa fa-clock-o"></i> 7 minutes (1412 words)
   
   
 </span>
@@ -485,7 +485,7 @@ prop.table(table(df$age_grp, df$cc_grp))*100</code></pre>
 ##   65-74  5.64   10.87
 ##   75+    1.33    3.18</code></pre>
 <p>Since the size of the groups is different, this table is not useful. But we can change the calculation of the proportion, to add the prop by columns instead of rows:</p>
-<pre class="r"><code>prop.table(table(df$age_grp, df$cc_grp), 2)*100</code></pre>
+<pre class="r"><code>prop.table(table(df$age_grp, df$cc_grp), 2)*100 # note the ,2 added. That means % by col. </code></pre>
 <pre><code>##        
 ##         case control
 ##   25-34  0.5    14.8

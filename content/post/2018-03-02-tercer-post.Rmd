@@ -210,7 +210,7 @@ prop.table(table(df$age_grp, df$cc_grp))*100
 Since the size of the groups is different, this table is not useful. But we can change the calculation of the proportion, to add the prop by columns instead of rows: 
 
 ```{r prop table x 100}
-prop.table(table(df$age_grp, df$cc_grp), 2)*100
+prop.table(table(df$age_grp, df$cc_grp), 2)*100 # note the ,2 added. That means % by col. 
 ```
 This is better. 
 
