@@ -209,7 +209,7 @@ prop.table(table(df$age_grp, df$cc_grp))*100
 ```
 Since the size of the groups is different, this table is not useful. But we can change the calculation of the proportion, to add the prop by columns instead of rows: 
 
-```{r prop table x 100}
+```{r}
 prop.table(table(df$age_grp, df$cc_grp), 2)*100
 ```
 This is better. 
@@ -234,11 +234,7 @@ df %>%
 ```
 The `dplyr` version of the table with proportions is 
 
-<<<<<<< HEAD
-```{r prop table dplyr percentage by col}
-=======
 ```{r}
->>>>>>> 0619a8c5984b93d09d46eddac4fa1c8c80ad23b2
 options(digits = 3)
 df %>%
   count(age_grp, cc_grp) %>%

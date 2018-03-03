@@ -234,11 +234,7 @@ df %>%
 ```
 The `dplyr` version of the table with proportions is 
 
-<<<<<<< HEAD
 ```{r prop table dplyr percentage by col}
-=======
-```{r}
->>>>>>> 0619a8c5984b93d09d46eddac4fa1c8c80ad23b2
 options(digits = 3)
 df %>%
   count(age_grp, cc_grp) %>%
