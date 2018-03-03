@@ -8,7 +8,6 @@ tags:
 - ggplot2
 - case-control
 categories:
-- data visualization
 - data wrangling
 - case-control study
 - epidemiological research
@@ -208,6 +207,12 @@ or make a proportional table, with
 options(digits = 2) # limit the digits to two decimals
 prop.table(table(df$age_grp, df$cc_grp))*100
 ```
+Since the size of the groups is different, this table is not useful. But we can change the calculation of the proportion, to add the prop by columns instead of rows: 
+
+```{r}
+prop.table(table(df$age_grp, df$cc_grp), 2)*100
+```
+This is better. 
 
 The same table in the dplyr way: 
 
@@ -222,10 +227,15 @@ df %>%
  
 ```{r table dplyr prop}
 df %>%
-  count(age_grp, cc_grp) %>%
+  count(age_grp, cc_grp ) %>%
   mutate(prop = prop.table(n)*100) %>% 
   select(-n) %>% 
   spread(cc_grp, prop)
+```
+I still don't figure it how to make prop table with % for column with dplyr, but [found](https://stackoverflow.com/questions/40266062/dplyr-how-to-get-two-way-tables-with-marginal-proportions) a solution using the [janitor](https://cran.r-project.org/web/packages/janitor/index.html) package. 
+```{r}
+df %>% 
+  janitor::crosstab(age_grp, cc_grp, percent = 'col')  # this means: use the package janitor to create a crosstable of this variables and adding the percent by columns. You can change the latter to 'row'
 ```
 
 
