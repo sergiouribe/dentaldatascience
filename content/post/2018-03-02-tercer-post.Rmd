@@ -1,17 +1,17 @@
 ---
-title: Wrangling and visualization of case-control studies
-author: Sergio Uribe
+title: "Data wrangling and table summaries of case-control studies"
+author: "Sergio Uribe"
 date: '2018-03-02'
 slug: tercer-post
-categories:
-  - data visualization
-  - data wrangling
-  - case-control study
-  - epidemiological research
 tags:
-  - dplyr
-  - ggplot2
-  - case-control
+- dplyr
+- ggplot2
+- case-control
+categories:
+- data visualization
+- data wrangling
+- case-control study
+- epidemiological research
 ---
 
 A Case-control study compares patients who have a disease or outcome of interest (cases) with patients who do not have the disease or outcome (controls), and looks back retrospectively to compare how frequently the exposure to a risk factor is present in each group to determine the relationship between the risk factor and the disease.
@@ -25,18 +25,22 @@ In the classic textbook of Breslow and Day about [data analysis of cancer resear
 ![From Breslow and N. E. Day, ch 4.](/img/grouped-data-case-control.png)
 
 We will use dplyr and ggplot2 to graph this data.
+In this project, we will recreate this table the `tidyverse` way.
 
-First, we load the meta-package __tidyverse__ thant contains packages as __dplyr__ for data wrangling and __ggplot2__ for data visualization among others. 
-```{r, warning=FALSE, message=FALSE}
+First, we load the meta-package __tidyverse__ thant contains packages as __dplyr__ for data wrangling among others.
+
+```{r tidyverse, warning=FALSE, message=FALSE}
 library(tidyverse)
 ```
 
+The dataset of the book can be found here
 
-```{r}
-df <- read.delim("http://faculty.washington.edu/heagerty/Courses/b513/WEB2002/datasets/esoph.raw", sep = "", header = FALSE)
+```{r dataset}
+df <- read_csv("http://bit.ly/data_esoph", col_names = FALSE)
 ```
 
-```{r}
+Let's see the first six rows of the dataset
+```{r head 1}
 head(df)
 ```
 Data is without column names. The variables are: 
@@ -61,17 +65,18 @@ Data is without column names. The variables are:
 | 4     | Case  or  | 1 = case                         |
 |       | Control   | 0 = control                      |
 
-Add the column names: 
+Now, we will ad the column names: 
 
-```{r}
+```{r add colnames}
 colnames(df) <- (c("age", "alc", "tob", "cc"))
 ```
 
-```{r}
+Check: 
+```{r head 2}
 head(df)
 ```
 
-Let's recode all the dataset using the funtion `mutate` and `case_when` of `dplyr`
+Since we know the codes, we will recode all the dataset using the function `mutate` and `case_when` of `dplyr`
 
 Age groups
 1 = 25-34
@@ -81,7 +86,7 @@ Age groups
 5 = 65-74
 6 = 75+
 
-```{r}
+```{r mutate age}
 df <- df %>% 
   mutate(
     age_grp = 
@@ -96,14 +101,15 @@ df <- df %>%
   )
 ```
 
-```{r}
+```{r check head}
 head(df)
 ```
  OK!
  
  The same for the rest of the variables
+__Alcohol__
  
-```{r}
+```{r mutate alc}
 df <- df %>% 
   mutate(
     alc_grp = 
@@ -116,8 +122,9 @@ df <- df %>%
   )
 ```
  
+__Tobacco__
 
-```{r}
+```{r mutate tob}
 df <- df %>% 
   mutate(
     tob_grp = 
@@ -130,8 +137,8 @@ df <- df %>%
   )
 ```
 
-
-```{r}
+__Group__
+```{r mutate cc}
 df <- df %>% 
   mutate(
     cc_grp = 
@@ -144,7 +151,7 @@ df <- df %>%
 
 Now, omit the former columns
 
-```{r}
+```{r unselect}
 df <- df %>% 
   select(age_grp:cc_grp)
 ```
@@ -152,7 +159,7 @@ df <- df %>%
 and now, we have to give the order of the factors for the ordinal variables age, alcohol and tobbaco
 
 
-```{r}
+```{r factor age, results='hide'}
 df %>% 
   mutate(age_grp = factor(age_grp, levels = c("25-34",
                                               "35-44"	,
@@ -163,7 +170,7 @@ df %>%
 )))
 ```
 
-```{r}
+```{r factor alc, results='hide'}
 df %>% 
   mutate(alc_grp = factor(alc_grp, levels = c("0-39",
                                               "40-79",
@@ -173,7 +180,7 @@ df %>%
 ```
 
 
-```{r}
+```{r factor tob, results='hide'}
 df %>% 
   mutate(tob_grp = factor(tob_grp, levels = c("0- 9",
                                               "10-19",
@@ -185,19 +192,46 @@ df %>%
 Now we have the data ready for the analysis!
 
 Let's make the table 1
+We have two options, first the traditional table: 
 
-```{r}
+```{r table 1}
+table(df$age_grp, df$cc_grp)
+```
+
+Here we can add the margins with
+
+```{r margins}
+addmargins(table(df$age_grp, df$cc_grp))
+```
+or make a proportional table, with
+```{r prop}
+options(digits = 2) # limit the digits to two decimals
+prop.table(table(df$age_grp, df$cc_grp))*100
+```
+
+The same table in the dplyr way: 
+
+```{r table tidy}
 df %>% 
   group_by(age_grp, cc_grp) %>% 
   summarise(n = n()) %>% 
   spread(cc_grp, n)
 ```
 
+ or as proportional table: 
+ 
+```{r table dplyr prop}
+df %>%
+  count(age_grp, cc_grp) %>%
+  mutate(prop = prop.table(n)*100) %>% 
+  select(-n) %>% 
+  spread(cc_grp, prop)
+```
 
 
 For alcohol: 
 
-```{r}
+```{r table alcohol dplyr}
 df %>% 
   group_by(alc_grp, cc_grp) %>% 
   summarise(n = n()) %>% 
@@ -206,7 +240,7 @@ df %>%
 
 and tobacco:
 
-```{r}
+```{r table tob dplyr}
 df %>% 
   group_by(tob_grp, cc_grp) %>% 
   summarise(n = n()) %>% 
