@@ -8,7 +8,6 @@ tags:
 - ggplot2
 - case-control
 categories:
-- data visualization
 - data wrangling
 - case-control study
 - epidemiological research
@@ -265,6 +264,17 @@ prop.table(table(df$age_grp, df$cc_grp))*100</code></pre>
 ##   55-64  7.79   17.03
 ##   65-74  5.64   10.87
 ##   75+    1.33    3.18</code></pre>
+<p>Since the size of the groups is different, this table is not useful. But we can change the calculation of the proportion, to add the prop by columns instead of rows:</p>
+<pre class="r"><code>prop.table(table(df$age_grp, df$cc_grp), 2)*100</code></pre>
+<pre><code>##        
+##         case control
+##   25-34  0.5    14.8
+##   35-44  4.5    24.5
+##   45-54 23.0    21.5
+##   55-64 38.0    21.4
+##   65-74 27.5    13.7
+##   75+    6.5     4.0</code></pre>
+<p>This is better.</p>
 <p>The same table in the dplyr way:</p>
 <pre class="r"><code>df %&gt;% 
   group_by(age_grp, cc_grp) %&gt;% 
@@ -282,7 +292,7 @@ prop.table(table(df$age_grp, df$cc_grp))*100</code></pre>
 ## 6 75+        13      31</code></pre>
 <p>or as proportional table:</p>
 <pre class="r"><code>df %&gt;%
-  count(age_grp, cc_grp) %&gt;%
+  count(age_grp, cc_grp ) %&gt;%
   mutate(prop = prop.table(n)*100) %&gt;% 
   select(-n) %&gt;% 
   spread(cc_grp, prop)</code></pre>
@@ -295,6 +305,33 @@ prop.table(table(df$age_grp, df$cc_grp))*100</code></pre>
 ## 4 55-64   7.79    17.0 
 ## 5 65-74   5.64    10.9 
 ## 6 75+     1.33     3.18</code></pre>
+<p>The <code>dplyr</code> version of the table with proportions is</p>
+<pre class="r"><code>options(digits = 3)
+df %&gt;%
+  count(age_grp, cc_grp) %&gt;%
+  group_by(cc_grp) %&gt;%
+  mutate(prop = n / sum(n)) %&gt;%
+  select(-n) %&gt;%
+  spread(cc_grp, prop, fill = 0)</code></pre>
+<pre><code>## # A tibble: 6 x 3
+##   age_grp    case control
+##   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;
+## 1 25-34   0.00500  0.148 
+## 2 35-44   0.0450   0.245 
+## 3 45-54   0.230    0.215 
+## 4 55-64   0.380    0.214 
+## 5 65-74   0.275    0.137 
+## 6 75+     0.0650   0.0400</code></pre>
+<p>Also, there is a new package called <code>janitor</code>, full of nice functions. One of them allow to make such table with a simple syntax:</p>
+<pre class="r"><code>df %&gt;% 
+  janitor::crosstab(age_grp, cc_grp, percent = &#39;col&#39;)  # this means: use the package janitor to create a crosstable of this variables and adding the percent by columns. You can change the latter to &#39;row&#39;</code></pre>
+<pre><code>##   age_grp  case control
+## 1   25-34 0.005   0.148
+## 2   35-44 0.045   0.245
+## 3   45-54 0.230   0.215
+## 4   55-64 0.380   0.214
+## 5   65-74 0.275   0.137
+## 6     75+ 0.065   0.040</code></pre>
 <p>For alcohol:</p>
 <pre class="r"><code>df %&gt;% 
   group_by(alc_grp, cc_grp) %&gt;% 
@@ -321,6 +358,7 @@ prop.table(table(df$age_grp, df$cc_grp))*100</code></pre>
 ## 2 10-19      58     178
 ## 3 20-29      33      99
 ## 4 30+        31      51</code></pre>
+<p>So, in this post we had recreated the table from the case-control study of (o)esophageal cancer in Ille-et-Vilaine, France in the Breslow and Day textbook.</p>
 <div id="references" class="section level1">
 <h1>References</h1>
 <p><a href="http://www.iarc.fr/en/publications/pdfs-online/stat/sp32/SP32_vol1-4.pdf">Statistical Methods in Cancer Research Volume I - The analysis of case-control studies - CLASSICAL METHODS OF ANALYSIS OF GROUPED DATA</a></p>
