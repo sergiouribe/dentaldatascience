@@ -1,0 +1,302 @@
+---
+title: Visualizing caries trend at age 12 from OECD dataset
+author: Sergio Uribe
+date: '2018-03-04'
+draft : true
+slug: visualizing-caries-trend-at-age-12-from-oecd-dataset
+categories:
+  - visualization
+tags:
+  - ggplot2 dental caries
+---
+
+
+
+```{r package tidyverse}
+library(tidyverse)
+```
+
+```{r read df}
+df <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vStv7Pr69DtRKv6Nw6gVBep8hbT3pEeO6B1vNwxK_1DUHgpoTgbuRpZ4SvgtHFQnBZJVGeeQVyRuXZl/pub?gid=1485746444&single=true&output=csv")
+```
+
+```{r head df}
+head(df)
+```
+
+```{r create var dentists per 10000}
+df <- df %>% 
+  mutate(DentistPer10000h = DentistsPer1000h*10)
+```
+
+```{r first plot}
+df %>% 
+  ggplot(aes(x = DentistPer10000h, y = DMFT_12_2006)) +
+  geom_point()
+```
+Is there any trend?
+We can add a regression line
+
+```{r plot with lineal regr line}
+df %>% 
+  ggplot(aes(x = DentistPer10000h, y = DMFT_12_2006)) +
+  geom_point() +
+  geom_smooth(method = "gam") # this add a regression
+
+```
+
+To be more realistic, we can use `geom_smooth(method = "loess")`. LOESS LOESS works by trying to identify pattern in the relationship between response and covariates without the user having to specify what form that relationship is. 
+```{r plot with LOESS line}
+df %>% 
+  ggplot(aes(x = DentistPer10000h, y = DMFT_12_2006)) +
+  geom_point() +
+  geom_smooth(method = "loess")
+
+```
+Ok, here we have something interesting. 
+Let's add the labels
+```{r add labels}
+df %>% 
+  ggplot(aes(x = DentistPer10000h, y = DMFT_12_2006)) +
+  geom_point() +
+  geom_smooth() +
+  geom_text(aes(label = Country), # text to add to any point
+            hjust = 1, vjust = 1, # the position
+            size = 2.5) # the size of the text
+
+```
+__Observations:__ 
+ - seems that there is some area, between 5 and 7.5 dentists per 10000 inhabitants that is an optimal ratio
+ - Greece is an anomaly: many dentists and caries over the OECD average.
+ - Chile and Iceland have more dentists than the OECD average and more caries. 
+ - UK have few dentists and low caries level. Also Netherland and Switzerland.
+ 
+We can add more information to the graph. For example, let's add the investment in health per country for the 2006. Hence. download the [data](https://data.oecd.org/healthres/health-spending.htm)
+
+This indicator is presented as a total and by type of financing (“Government/compulsory”, “Voluntary”, “Out-of-pocket”) and is measured as a share of GDP, as a share of total health spending and in USD per capita.
+
+```{r spend df}
+spend2006 <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vStv7Pr69DtRKv6Nw6gVBep8hbT3pEeO6B1vNwxK_1DUHgpoTgbuRpZ4SvgtHFQnBZJVGeeQVyRuXZl/pub?gid=1551359674&single=true&output=csv")
+```
+
+```{r head spend}
+head(spend2006)
+```
+Now we need to merge those datasets. In the first we have the country names and in the second the country codes. I will use a third dataset with the information from the countries and 
+```{r codes df}
+codes <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vStv7Pr69DtRKv6Nw6gVBep8hbT3pEeO6B1vNwxK_1DUHgpoTgbuRpZ4SvgtHFQnBZJVGeeQVyRuXZl/pub?gid=157877590&single=true&output=csv")
+```
+```{r head codes}
+head(codes)
+```
+
+I will add the code to the first dataset and then join with the second: 
+
+```{r join codes to df}
+df <- inner_join(df, codes, by = "Country")
+```
+Check
+```{r check df}
+head(df)
+```
+Perfect, now we have a CODE column. I will use it to merge with the spending dataset
+We have to change the name of 
+```{r rename df column location no code}
+spend2006 <- spend2006 %>%
+  rename(CODE = LOCATION)
+```
+heck spend dataset
+```{r head spend 2}
+head(spend2006)
+```
+
+Now merge by CODE column
+```{r inner join 2}
+df <- inner_join(df, spend2006, by = "CODE")
+```
+Let's check
+```{r final df?}
+head(df)
+```
+
+Let's only the relevant variables
+```{r select only cols}
+df <- df %>% 
+  select(Country, DMFT_12_2006, DentistsPer1000h, CODE, Value)
+```
+Check
+```{r final df with few columns}
+head(df)
+```
+
+Great. 
+
+Now let's see
+
+```{r plot with 3 vars}
+df %>% 
+  ggplot(aes(x = DentistsPer1000h, y = DMFT_12_2006, color = Value)) +
+  geom_point() +
+  geom_text(aes(label = Country), # text to add to any point
+            hjust = 1, vjust = 1, # the position
+            size = 2.5) # the size of the text
+  
+```
+
+I would expect some gradient in the plot, but it's not clear. 
+
+Let's explore the relationship between the spending and the number of dentists
+
+```{r spend vs dentists}
+df %>% 
+  ggplot(aes(x = Value, y = DentistsPer1000h)) + 
+  geom_point() + 
+  geom_smooth() +
+  geom_text(aes(label = Country), # text to add to any point
+            hjust = 1, vjust = 1, # the position
+            size = 2.5) # the size of the text
+```
+
+__Observations 2__
+  - Seems to be a linear trend below 3e+06 
+  - From 3e+06 seems to be no relationship between spend and numbers of dentists
+  
+
+
+One observation in the time could be not enough, hence let's see the data for all available years. 
+First, the numbers of dentists
+
+```{r dentists}
+dentists <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vStv7Pr69DtRKv6Nw6gVBep8hbT3pEeO6B1vNwxK_1DUHgpoTgbuRpZ4SvgtHFQnBZJVGeeQVyRuXZl/pub?gid=1330297229&single=true&output=csv")
+```
+
+```{r summarize dentists}
+dentists %>% 
+  filter(Variable == "Dentists graduates",  Measure == "Per 100 000 population") %>%
+  group_by(Country, Year) %>% 
+  summarise(n = n()) %>% 
+  spread(Year, n)
+```
+
+Let's see
+```{r see dentists}
+dentists %>% 
+  filter(Variable == "Dentists graduates",  Measure == "Per 100 000 population") %>% 
+  ggplot(aes(x = Year, y = Value, fill = Country )) + 
+  geom_line() + 
+  facet_wrap(~Country) + 
+  labs(title = "Dentists graduates per country", 
+       subtitle = "Data: OECD", 
+       y = "Dentists graduates per 100 000 population") +
+  theme(axis.text.x = element_text(size=10))
+```
+
+```{r}
+inner_join(df, dentists, by = "Country")
+```
+
+```{r}
+head(dentists)
+```
+
+```{r}
+table(dentists$Variable)
+```
+```{r}
+dentists %>%
+  filter(Variable == "Dentists graduates") %>% 
+  group_by(Year, Country) %>% 
+  summarise(n = sum(Value)) %>% 
+  spread(Year, n)
+```
+
+```{r}
+population <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vStv7Pr69DtRKv6Nw6gVBep8hbT3pEeO6B1vNwxK_1DUHgpoTgbuRpZ4SvgtHFQnBZJVGeeQVyRuXZl/pub?gid=141580680&single=true&output=csv")
+```
+```{r}
+population <- population %>% 
+  gather(key = Year, value, `2008 [YR2008]`: `2017 [YR2017]`) 
+
+population$Year <-  substr(population$Year, 1, 4)
+
+population <- population %>% 
+  unite(id, `Country Code`, Year, sep = "_", remove = FALSE)
+
+dentists <- dentists %>% 
+  unite(id, COU, Year, sep = "_", remove = FALSE)
+
+
+
+dentists <- inner_join(dentists, population, by = "id")
+
+
+
+```
+
+```{r}
+dentists <- dentists %>% 
+    rename( year = Year.x, 
+          population = value) %>% 
+  select(Variable, id, COU, Country, Value, `Series Name`, population) 
+```
+
+House cleaning
+```{r}
+rm(population)
+rm(codes)
+rm(df, dmft12, spend2006)
+```
+
+
+
+
+
+Now I will join
+
+## DMFT OECD
+```{r}
+dmft12 <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vStv7Pr69DtRKv6Nw6gVBep8hbT3pEeO6B1vNwxK_1DUHgpoTgbuRpZ4SvgtHFQnBZJVGeeQVyRuXZl/pub?gid=1520266523&single=true&output=csv")
+```
+```{r}
+
+dmft12 <- dmft12 %>% 
+  unite(id, COU, Year, sep = "_", remove = FALSE)
+
+
+
+dentists <- inner_join(dentists, dmft12, by = "id")
+rm(dmft12)
+
+dentists <- dentists %>% 
+  rename(HowMany = Variable.x, 
+         Cou = COU.x, 
+         Country = Country.x, 
+         Dentists = Value.x, 
+         DMFT = Value.y) %>% 
+  select(HowMany, 
+         id, 
+         Cou, 
+         Country, 
+         Dentists,
+         population, 
+         Measure, 
+         DMFT, 
+         Year)
+```
+
+
+Agregar 
+Health spending
+GDP
+
+__Prepare the plot for presentation__
+
+To avoid the overlap of the labels we will use the package `library(ggrepel)`
+
+
+```{r greppel}
+library(ggrepel)
+```
+
+__Disclaimer:__ 
+Correlation does not imply causation (except when it does)
