@@ -7,10 +7,21 @@
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>sergio.uribe@gmail.com (Sergio Uribe)</managingEditor>
     <webMaster>sergio.uribe@gmail.com (Sergio Uribe)</webMaster>
-    <lastBuildDate>Fri, 02 Mar 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 03 Mar 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/ggplot2/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Visualization of categorical data in dental research</title>
+      <link>/post/visualization-of-categorical-data-in-dental-research/</link>
+      <pubDate>Sat, 03 Mar 2018 00:00:00 +0000</pubDate>
+      <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
+      <guid>/post/visualization-of-categorical-data-in-dental-research/</guid>
+      <description>Categorical data is often found in dental research reports. From the clinical perspective, it’s easier to deal and understand since many clinical decisions are categorical: does this surface has caries? have this patient active caries? should I give a treatment?
+Usually, this data are presented in tables, but there are some visualizations helpful to discover some associations.
+For example, a survey research investigate the perception of children and their mothers as regards orthodontic treatment need and satisfaction with dental aesthetics (De Souza et al.</description>
+    </item>
     
     <item>
       <title>Data wrangling and table summaries of case-control studies</title>

@@ -31,11 +31,29 @@
     </item>
     
     <item>
+      <title>Datasets</title>
+      <link>/categories/datasets/</link>
+      <pubDate>Sun, 04 Mar 2018 00:00:00 +0000</pubDate>
+      <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
+      <guid>/categories/datasets/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Epidemiological Research</title>
       <link>/categories/epidemiological-research/</link>
       <pubDate>Fri, 02 Mar 2018 00:00:00 +0000</pubDate>
       <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
       <guid>/categories/epidemiological-research/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Visualization</title>
+      <link>/categories/visualization/</link>
+      <pubDate>Sun, 04 Mar 2018 00:00:00 +0000</pubDate>
+      <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
+      <guid>/categories/visualization/</guid>
       <description></description>
     </item>
     

@@ -1,0 +1,368 @@
+---
+title: Visualization of categorical data in dental research
+author: Sergio Uribe
+date: '2018-03-03'
+slug: visualization-of-categorical-data-in-dental-research
+draft: true
+categories:
+  - visualization
+tags:
+  - ggplot2
+  - categorical data
+---
+
+
+
+<p>Categorical data is often found in dental research reports. From the clinical perspective, it’s easier to deal and understand since many clinical decisions are categorical: does this surface has caries? have this patient active caries? should I give a treatment?</p>
+<p>Usually, this data are presented in tables, but there are some visualizations helpful to discover some associations.</p>
+<p>For example, a survey research investigate the perception of children and their mothers as regards orthodontic treatment need and satisfaction with dental aesthetics (<a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC5107559/">De Souza et al. 2016</a>)</p>
+<p>The association of perceived of treatment need and satisfaction with appearance between children and their mothers is show in Table 4 of the paper:</p>
+<div class="figure">
+<img src="/img/categ-data-table.png" alt="From De Souza et al. 2016" />
+<p class="caption">From De Souza et al. 2016</p>
+</div>
+<p>The p value = 0 is a frequent mistake in dental research reports. A p value represent a probability, hence p never has a value of 0 (or 1). If such were the case, p would no longer be a probability, but would become c, a certainty.</p>
+<p>Let’s recreate the table:</p>
+<pre class="r"><code>table4 &lt;- matrix(c(188, 29, 20, 51), ncol = 2, byrow = TRUE)
+colnames(table4) &lt;- c(&quot;yes&quot;,&quot;no&quot;) #mother
+rownames(table4) &lt;- c(&quot;yes&quot;, &quot;no&quot;)#children
+names(table4)[1] &lt;- &quot;Children&quot;
+names(table4)[2] &lt;- &quot;Mothers&quot;
+table4 &lt;- as.table(table4)
+table4</code></pre>
+<pre><code>##     yes  no
+## yes 188  29
+## no   20  51</code></pre>
+<p>Ok.</p>
+<p>We can visualize this data with</p>
+<pre class="r"><code>mosaicplot(table4)</code></pre>
+<p><img src="/post/2018-03-03-visualization-of-categorical-data-in-dental-research_files/figure-html/unnamed-chunk-2-1.png" width="672" /> But a useful option is to add shade to to display a legend for the Pearson residual.</p>
+<pre class="r"><code>mosaicplot(table4, shade = TRUE)</code></pre>
+<p><img src="/post/2018-03-03-visualization-of-categorical-data-in-dental-research_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<p>The interpretation of the colors are: <strong>blue</strong> means there are more observations in that cell than would be expected under the null model (independence). <strong>Red</strong> means there are fewer observations than would have been expected.</p>
+<p>Another option is to visualize with ggplot2, but first we have to <a href="https://stackoverflow.com/questions/49091515/create-fake-data-to-recreate-a-contingency-table">recreate</a></p>
+<pre class="r"><code>x &lt;-  c()
+for(row in rownames(table4)) {
+    for(col in colnames(table4)) {
+        x = rbind(x, matrix(rep(c(row, col), table4[row,col]), ncol = 2, byrow = TRUE))
+    }
+}
+
+df &lt;- data.frame(as.table(table4))[rep(sequence(prod(dim(table4))), 
+                                        c(table4)), c(1, 2)]
+
+df</code></pre>
+<pre><code>##       Var1 Var2
+## 1      yes  yes
+## 1.1    yes  yes
+## 1.2    yes  yes
+## 1.3    yes  yes
+## 1.4    yes  yes
+## 1.5    yes  yes
+## 1.6    yes  yes
+## 1.7    yes  yes
+## 1.8    yes  yes
+## 1.9    yes  yes
+## 1.10   yes  yes
+## 1.11   yes  yes
+## 1.12   yes  yes
+## 1.13   yes  yes
+## 1.14   yes  yes
+## 1.15   yes  yes
+## 1.16   yes  yes
+## 1.17   yes  yes
+## 1.18   yes  yes
+## 1.19   yes  yes
+## 1.20   yes  yes
+## 1.21   yes  yes
+## 1.22   yes  yes
+## 1.23   yes  yes
+## 1.24   yes  yes
+## 1.25   yes  yes
+## 1.26   yes  yes
+## 1.27   yes  yes
+## 1.28   yes  yes
+## 1.29   yes  yes
+## 1.30   yes  yes
+## 1.31   yes  yes
+## 1.32   yes  yes
+## 1.33   yes  yes
+## 1.34   yes  yes
+## 1.35   yes  yes
+## 1.36   yes  yes
+## 1.37   yes  yes
+## 1.38   yes  yes
+## 1.39   yes  yes
+## 1.40   yes  yes
+## 1.41   yes  yes
+## 1.42   yes  yes
+## 1.43   yes  yes
+## 1.44   yes  yes
+## 1.45   yes  yes
+## 1.46   yes  yes
+## 1.47   yes  yes
+## 1.48   yes  yes
+## 1.49   yes  yes
+## 1.50   yes  yes
+## 1.51   yes  yes
+## 1.52   yes  yes
+## 1.53   yes  yes
+## 1.54   yes  yes
+## 1.55   yes  yes
+## 1.56   yes  yes
+## 1.57   yes  yes
+## 1.58   yes  yes
+## 1.59   yes  yes
+## 1.60   yes  yes
+## 1.61   yes  yes
+## 1.62   yes  yes
+## 1.63   yes  yes
+## 1.64   yes  yes
+## 1.65   yes  yes
+## 1.66   yes  yes
+## 1.67   yes  yes
+## 1.68   yes  yes
+## 1.69   yes  yes
+## 1.70   yes  yes
+## 1.71   yes  yes
+## 1.72   yes  yes
+## 1.73   yes  yes
+## 1.74   yes  yes
+## 1.75   yes  yes
+## 1.76   yes  yes
+## 1.77   yes  yes
+## 1.78   yes  yes
+## 1.79   yes  yes
+## 1.80   yes  yes
+## 1.81   yes  yes
+## 1.82   yes  yes
+## 1.83   yes  yes
+## 1.84   yes  yes
+## 1.85   yes  yes
+## 1.86   yes  yes
+## 1.87   yes  yes
+## 1.88   yes  yes
+## 1.89   yes  yes
+## 1.90   yes  yes
+## 1.91   yes  yes
+## 1.92   yes  yes
+## 1.93   yes  yes
+## 1.94   yes  yes
+## 1.95   yes  yes
+## 1.96   yes  yes
+## 1.97   yes  yes
+## 1.98   yes  yes
+## 1.99   yes  yes
+## 1.100  yes  yes
+## 1.101  yes  yes
+## 1.102  yes  yes
+## 1.103  yes  yes
+## 1.104  yes  yes
+## 1.105  yes  yes
+## 1.106  yes  yes
+## 1.107  yes  yes
+## 1.108  yes  yes
+## 1.109  yes  yes
+## 1.110  yes  yes
+## 1.111  yes  yes
+## 1.112  yes  yes
+## 1.113  yes  yes
+## 1.114  yes  yes
+## 1.115  yes  yes
+## 1.116  yes  yes
+## 1.117  yes  yes
+## 1.118  yes  yes
+## 1.119  yes  yes
+## 1.120  yes  yes
+## 1.121  yes  yes
+## 1.122  yes  yes
+## 1.123  yes  yes
+## 1.124  yes  yes
+## 1.125  yes  yes
+## 1.126  yes  yes
+## 1.127  yes  yes
+## 1.128  yes  yes
+## 1.129  yes  yes
+## 1.130  yes  yes
+## 1.131  yes  yes
+## 1.132  yes  yes
+## 1.133  yes  yes
+## 1.134  yes  yes
+## 1.135  yes  yes
+## 1.136  yes  yes
+## 1.137  yes  yes
+## 1.138  yes  yes
+## 1.139  yes  yes
+## 1.140  yes  yes
+## 1.141  yes  yes
+## 1.142  yes  yes
+## 1.143  yes  yes
+## 1.144  yes  yes
+## 1.145  yes  yes
+## 1.146  yes  yes
+## 1.147  yes  yes
+## 1.148  yes  yes
+## 1.149  yes  yes
+## 1.150  yes  yes
+## 1.151  yes  yes
+## 1.152  yes  yes
+## 1.153  yes  yes
+## 1.154  yes  yes
+## 1.155  yes  yes
+## 1.156  yes  yes
+## 1.157  yes  yes
+## 1.158  yes  yes
+## 1.159  yes  yes
+## 1.160  yes  yes
+## 1.161  yes  yes
+## 1.162  yes  yes
+## 1.163  yes  yes
+## 1.164  yes  yes
+## 1.165  yes  yes
+## 1.166  yes  yes
+## 1.167  yes  yes
+## 1.168  yes  yes
+## 1.169  yes  yes
+## 1.170  yes  yes
+## 1.171  yes  yes
+## 1.172  yes  yes
+## 1.173  yes  yes
+## 1.174  yes  yes
+## 1.175  yes  yes
+## 1.176  yes  yes
+## 1.177  yes  yes
+## 1.178  yes  yes
+## 1.179  yes  yes
+## 1.180  yes  yes
+## 1.181  yes  yes
+## 1.182  yes  yes
+## 1.183  yes  yes
+## 1.184  yes  yes
+## 1.185  yes  yes
+## 1.186  yes  yes
+## 1.187  yes  yes
+## 2       no  yes
+## 2.1     no  yes
+## 2.2     no  yes
+## 2.3     no  yes
+## 2.4     no  yes
+## 2.5     no  yes
+## 2.6     no  yes
+## 2.7     no  yes
+## 2.8     no  yes
+## 2.9     no  yes
+## 2.10    no  yes
+## 2.11    no  yes
+## 2.12    no  yes
+## 2.13    no  yes
+## 2.14    no  yes
+## 2.15    no  yes
+## 2.16    no  yes
+## 2.17    no  yes
+## 2.18    no  yes
+## 2.19    no  yes
+## 3      yes   no
+## 3.1    yes   no
+## 3.2    yes   no
+## 3.3    yes   no
+## 3.4    yes   no
+## 3.5    yes   no
+## 3.6    yes   no
+## 3.7    yes   no
+## 3.8    yes   no
+## 3.9    yes   no
+## 3.10   yes   no
+## 3.11   yes   no
+## 3.12   yes   no
+## 3.13   yes   no
+## 3.14   yes   no
+## 3.15   yes   no
+## 3.16   yes   no
+## 3.17   yes   no
+## 3.18   yes   no
+## 3.19   yes   no
+## 3.20   yes   no
+## 3.21   yes   no
+## 3.22   yes   no
+## 3.23   yes   no
+## 3.24   yes   no
+## 3.25   yes   no
+## 3.26   yes   no
+## 3.27   yes   no
+## 3.28   yes   no
+## 4       no   no
+## 4.1     no   no
+## 4.2     no   no
+## 4.3     no   no
+## 4.4     no   no
+## 4.5     no   no
+## 4.6     no   no
+## 4.7     no   no
+## 4.8     no   no
+## 4.9     no   no
+## 4.10    no   no
+## 4.11    no   no
+## 4.12    no   no
+## 4.13    no   no
+## 4.14    no   no
+## 4.15    no   no
+## 4.16    no   no
+## 4.17    no   no
+## 4.18    no   no
+## 4.19    no   no
+## 4.20    no   no
+## 4.21    no   no
+## 4.22    no   no
+## 4.23    no   no
+## 4.24    no   no
+## 4.25    no   no
+## 4.26    no   no
+## 4.27    no   no
+## 4.28    no   no
+## 4.29    no   no
+## 4.30    no   no
+## 4.31    no   no
+## 4.32    no   no
+## 4.33    no   no
+## 4.34    no   no
+## 4.35    no   no
+## 4.36    no   no
+## 4.37    no   no
+## 4.38    no   no
+## 4.39    no   no
+## 4.40    no   no
+## 4.41    no   no
+## 4.42    no   no
+## 4.43    no   no
+## 4.44    no   no
+## 4.45    no   no
+## 4.46    no   no
+## 4.47    no   no
+## 4.48    no   no
+## 4.49    no   no
+## 4.50    no   no</code></pre>
+<pre class="r"><code>df &lt;-  as.data.frame(x)</code></pre>
+<p>Now we add the names</p>
+<pre class="r"><code>names(df)[1] &lt;- &quot;Children&quot;
+names(df)[2] &lt;- &quot;Mothers&quot;</code></pre>
+<pre class="r"><code>table(df$Children, df$Mothers)</code></pre>
+<pre><code>##      
+##        no yes
+##   no   51  20
+##   yes  29 188</code></pre>
+<pre class="r"><code>mosaicplot(table(df$Children,df$Mothers), 
+           shade = TRUE)</code></pre>
+<p><img src="/post/2018-03-03-visualization-of-categorical-data-in-dental-research_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>## -- Attaching packages --------------------------------------------------------- tidyverse 1.2.1 --</code></pre>
+<pre><code>## v ggplot2 2.2.1     v purrr   0.2.4
+## v tibble  1.4.2     v dplyr   0.7.4
+## v tidyr   0.8.0     v stringr 1.3.0
+## v readr   1.1.1     v forcats 0.3.0</code></pre>
+<pre><code>## -- Conflicts ------------------------------------------------------------ tidyverse_conflicts() --
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>df %&gt;% 
+  ggplot(aes(x = Mothers, y = Children)) + 
+  geom_count()</code></pre>
+<p><img src="/post/2018-03-03-visualization-of-categorical-data-in-dental-research_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>

@@ -191,18 +191,18 @@ dentists %>%
   theme(axis.text.x = element_text(size=10))
 ```
 
-```{r}
+```{r inner join df}
 inner_join(df, dentists, by = "Country")
 ```
 
-```{r}
+```{r head dentists }
 head(dentists)
 ```
 
-```{r}
+```{r check var dentists}
 table(dentists$Variable)
 ```
-```{r}
+```{r table dentists}
 dentists %>%
   filter(Variable == "Dentists graduates") %>% 
   group_by(Year, Country) %>% 
@@ -210,12 +210,15 @@ dentists %>%
   spread(Year, n)
 ```
 
-```{r}
+```{r population}
 population <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vStv7Pr69DtRKv6Nw6gVBep8hbT3pEeO6B1vNwxK_1DUHgpoTgbuRpZ4SvgtHFQnBZJVGeeQVyRuXZl/pub?gid=141580680&single=true&output=csv")
 ```
-```{r}
+```{r }
 population <- population %>% 
   gather(key = Year, value, `2008 [YR2008]`: `2017 [YR2017]`) 
+```
+
+```{r}
 
 population$Year <-  substr(population$Year, 1, 4)
 
@@ -229,22 +232,29 @@ dentists <- dentists %>%
 
 dentists <- inner_join(dentists, population, by = "id")
 
-
-
 ```
+
+
+# Creo una nueva variable dentVar 
+```{r}
+dentists <- dentists %>% 
+  unite(dentVar, Variable, Measure, sep = " ", remove = TRUE)
+```
+
+
 
 ```{r}
 dentists <- dentists %>% 
     rename( year = Year.x, 
           population = value) %>% 
-  select(Variable, id, COU, Country, Value, `Series Name`, population) 
+  select(dentVar, id, COU, Country, Value, `Series Name`, population) 
 ```
 
 House cleaning
 ```{r}
 rm(population)
 rm(codes)
-rm(df, dmft12, spend2006)
+rm(df, spend2006)
 ```
 
 
@@ -257,6 +267,8 @@ Now I will join
 ```{r}
 dmft12 <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vStv7Pr69DtRKv6Nw6gVBep8hbT3pEeO6B1vNwxK_1DUHgpoTgbuRpZ4SvgtHFQnBZJVGeeQVyRuXZl/pub?gid=1520266523&single=true&output=csv")
 ```
+
+
 ```{r}
 
 dmft12 <- dmft12 %>% 
@@ -268,20 +280,37 @@ dentists <- inner_join(dentists, dmft12, by = "id")
 rm(dmft12)
 
 dentists <- dentists %>% 
-  rename(HowMany = Variable.x, 
-         Cou = COU.x, 
-         Country = Country.x, 
-         Dentists = Value.x, 
-         DMFT = Value.y) %>% 
-  select(HowMany, 
+  rename(cou = COU.x, 
+         country = Country.x, 
+         dentists = Value.x, 
+         DMFT12 = Value.y, 
+         year = Year) %>% 
+  select(dentVar, 
          id, 
-         Cou, 
-         Country, 
-         Dentists,
+         cou, 
+         country, 
+         dentists,
          population, 
          Measure, 
-         DMFT, 
-         Year)
+         DMFT12, 
+         year)
+```
+
+```{r}
+table(dentists$dentVar)
+```
+
+
+------------------- PIERDO A CHILE UN POCO ANTES DE ESTO; VERIFICAR ---------------
+
+
+```{r}
+
+dentists %>% 
+  filter(dentVar == "Practising dentists Density per 1 000 population (head counts)") %>% 
+  ggplot(aes(x = year, y = dentists)) +
+  geom_line() + 
+  facet_wrap(~country)
 ```
 
 
