@@ -19,7 +19,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Dental Data Science" />
 
-  <meta name="generator" content="Hugo 0.36.1" />
+  <meta name="generator" content="Hugo 0.37" />
   <link rel="canonical" href="/page/" />
   <link rel="alternate" href="/page/index.xml" type="application/rss+xml" title="Dental Data Science">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
@@ -254,6 +254,27 @@ Main topics are
 
             </article>
           
+            <article class="post-preview">
+              <a href="/page/tricks/">
+                <h2 class="post-title">Tricks</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on January 1, 0001
+              </p>
+              <div class="post-entry">
+                
+                  Search &amp; Replace tidyverse way library(tidyverse) df &lt;- data.frame( c1 = letters[1:5], c2 = 5:9, c3 = LETTERS[5:9], stringsAsFactors = FALSE) df ## c1 c2 c3 ## 1 a 5 E ## 2 b 6 F ## 3 c 7 G ## 4 d 8 H ## 5 e 9 I df %&gt;% mutate_if(is.character, str_replace_all, pattern = &#39;[aeouAEOU]&#39;, replacement = &#39;ths should be aeouAEIOU except i or I &#39;) ## c1 c2 ## 1 ths should be aeouAEIOU except i or I 5 ## 2 b 6 ## 3 c 7 ## 4 d 8 ## 5 ths should be aeouAEIOU except i or I 9 ## c3 ## 1 ths should be aeouAEIOU except i or I ## 2 F ## 3 G ## 4 H ## 5 I  Find NAs `new_DF &lt;- df[is.
+                  <a href="/page/tricks/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+
+            </article>
+          
         </div>
         
       </div>
@@ -336,7 +357,7 @@ Main topics are
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.36.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          <a href="http://gohugo.io">Hugo v0.37</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
           
         </p>
       </div>

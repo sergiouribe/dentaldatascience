@@ -5,9 +5,12 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Categories</title>
-  <meta property="og:title" content="Categories" />
-  <meta name="twitter:title" content="Categories" />
+  <title>Tricks</title>
+  <meta property="og:title" content="Tricks" />
+  <meta name="twitter:title" content="Tricks" />
+  <meta name="description" content="Search &amp; Replace tidyverse way library(tidyverse) df &lt;- data.frame( c1 = letters[1:5], c2 = 5:9, c3 = LETTERS[5:9], stringsAsFactors = FALSE) df ## c1 c2 c3 ## 1 a 5 E ## 2 b 6 F ## 3 c 7 G ## 4 d 8 H ## 5 e 9 I df %&gt;% mutate_if(is.character, str_replace_all, pattern = &#39;[aeouAEOU]&#39;, replacement = &#39;ths should be aeouAEIOU except i or I &#39;) ## c1 c2 ## 1 ths should be aeouAEIOU except i or I 5 ## 2 b 6 ## 3 c 7 ## 4 d 8 ## 5 ths should be aeouAEIOU except i or I 9 ## c3 ## 1 ths should be aeouAEIOU except i or I ## 2 F ## 3 G ## 4 H ## 5 I  Find NAs `new_DF &lt;- df[is.">
+  <meta property="og:description" content="Search &amp; Replace tidyverse way library(tidyverse) df &lt;- data.frame( c1 = letters[1:5], c2 = 5:9, c3 = LETTERS[5:9], stringsAsFactors = FALSE) df ## c1 c2 c3 ## 1 a 5 E ## 2 b 6 F ## 3 c 7 G ## 4 d 8 H ## 5 e 9 I df %&gt;% mutate_if(is.character, str_replace_all, pattern = &#39;[aeouAEOU]&#39;, replacement = &#39;ths should be aeouAEIOU except i or I &#39;) ## c1 c2 ## 1 ths should be aeouAEIOU except i or I 5 ## 2 b 6 ## 3 c 7 ## 4 d 8 ## 5 ths should be aeouAEIOU except i or I 9 ## c3 ## 1 ths should be aeouAEIOU except i or I ## 2 F ## 3 G ## 4 H ## 5 I  Find NAs `new_DF &lt;- df[is.">
+  <meta name="twitter:description" content="Search &amp; Replace tidyverse way library(tidyverse) df &lt;- data.frame( c1 = letters[1:5], c2 = 5:9, c3 = LETTERS[5:9], stringsAsFactors = FALSE) df ## c1 c2 c3 ## 1 a 5 E ## 2 b 6 F ## 3 c 7 G ## …">
   <meta name="author" content="Sergio Uribe"/>
   <link href='/img/favicon.png' rel='icon' type='image/x-icon'/>
   <meta property="og:image" content="/img/icon.png" />
@@ -15,13 +18,13 @@
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:site" content="@dentaldatasci" />
   <meta name="twitter:creator" content="@dentaldatasci" />
-  <meta property="og:url" content="/categories/" />
+  <meta property="og:url" content="/page/tricks/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Dental Data Science" />
 
   <meta name="generator" content="Hugo 0.37" />
-  <link rel="canonical" href="/categories/" />
-  <link rel="alternate" href="/categories/index.xml" type="application/rss+xml" title="Dental Data Science">
+  <link rel="canonical" href="/page/tricks/" />
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Dental Data Science">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -199,8 +202,8 @@ ga('send', 'pageview');
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <div class="categories-heading">
-              <h1>Categories</h1>
+            <div class="page-heading">
+              <h1>Tricks</h1>
                 
                 
             </div>
@@ -212,137 +215,82 @@ ga('send', 'pageview');
 
 
     
-
-
-
 <div class="container" role="main">
-  <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"> 
-    <article class="post-preview">
-      <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
-        
-          <div class="panel panel-default">
-            <a class="collapsed" role="button" data-toggle="collapse" data-target="#collapsevisualization" data-parent="#accordion"
-               href="#" aria-expanded="false" aria-controls="collapsevisualization">
-                <div class="panel-heading" role="tab" id="headervisualization">
-                  <h4 class="panel-title">
-                      visualization
-                    <span class="badge">2</span>
-                  </h4>
-                </div>
-            </a>
-            <div id="collapsevisualization" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingvisualization">
-              <div class="panel-body">
-                <a href="/categories/visualization/" class="list-group-item view-all">
-                View all</a>
-                <div class="list-group">
-                  
-                    <a href="/post/visualizing-caries-trend-at-age-12-from-oecd-dataset/" class="list-group-item">Visualizing caries trend at age 12 from OECD dataset</a>
-                  
-                    <a href="/post/visualization-of-categorical-data-in-dental-research/" class="list-group-item">Visualization of categorical data in dental research</a>
-                  
-                </div>
-              </div>
-            </div>
-          </div>
-        
-          <div class="panel panel-default">
-            <a class="collapsed" role="button" data-toggle="collapse" data-target="#collapsecase-control-study" data-parent="#accordion"
-               href="#" aria-expanded="false" aria-controls="collapsecase-control-study">
-                <div class="panel-heading" role="tab" id="headercase-control-study">
-                  <h4 class="panel-title">
-                      case-control-study
-                    <span class="badge">1</span>
-                  </h4>
-                </div>
-            </a>
-            <div id="collapsecase-control-study" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingcase-control-study">
-              <div class="panel-body">
-                <a href="/categories/case-control-study/" class="list-group-item view-all">
-                View all</a>
-                <div class="list-group">
-                  
-                    <a href="/post/tercer-post/" class="list-group-item">Data wrangling and table summaries of case-control studies</a>
-                  
-                </div>
-              </div>
-            </div>
-          </div>
-        
-          <div class="panel panel-default">
-            <a class="collapsed" role="button" data-toggle="collapse" data-target="#collapsedata-wrangling" data-parent="#accordion"
-               href="#" aria-expanded="false" aria-controls="collapsedata-wrangling">
-                <div class="panel-heading" role="tab" id="headerdata-wrangling">
-                  <h4 class="panel-title">
-                      data-wrangling
-                    <span class="badge">1</span>
-                  </h4>
-                </div>
-            </a>
-            <div id="collapsedata-wrangling" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingdata-wrangling">
-              <div class="panel-body">
-                <a href="/categories/data-wrangling/" class="list-group-item view-all">
-                View all</a>
-                <div class="list-group">
-                  
-                    <a href="/post/tercer-post/" class="list-group-item">Data wrangling and table summaries of case-control studies</a>
-                  
-                </div>
-              </div>
-            </div>
-          </div>
-        
-          <div class="panel panel-default">
-            <a class="collapsed" role="button" data-toggle="collapse" data-target="#collapsedatasets" data-parent="#accordion"
-               href="#" aria-expanded="false" aria-controls="collapsedatasets">
-                <div class="panel-heading" role="tab" id="headerdatasets">
-                  <h4 class="panel-title">
-                      datasets
-                    <span class="badge">1</span>
-                  </h4>
-                </div>
-            </a>
-            <div id="collapsedatasets" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingdatasets">
-              <div class="panel-body">
-                <a href="/categories/datasets/" class="list-group-item view-all">
-                View all</a>
-                <div class="list-group">
-                  
-                    <a href="/post/create-dataframe-from-tables/" class="list-group-item">Create dataframe from tables</a>
-                  
-                </div>
-              </div>
-            </div>
-          </div>
-        
-          <div class="panel panel-default">
-            <a class="collapsed" role="button" data-toggle="collapse" data-target="#collapseepidemiological-research" data-parent="#accordion"
-               href="#" aria-expanded="false" aria-controls="collapseepidemiological-research">
-                <div class="panel-heading" role="tab" id="headerepidemiological-research">
-                  <h4 class="panel-title">
-                      epidemiological-research
-                    <span class="badge">1</span>
-                  </h4>
-                </div>
-            </a>
-            <div id="collapseepidemiological-research" class="panel-collapse collapse" role="tabpanel" aria-labelledby="headingepidemiological-research">
-              <div class="panel-body">
-                <a href="/categories/epidemiological-research/" class="list-group-item view-all">
-                View all</a>
-                <div class="list-group">
-                  
-                    <a href="/post/tercer-post/" class="list-group-item">Data wrangling and table summaries of case-control studies</a>
-                  
-                </div>
-              </div>
-            </div>
-          </div>
-        
-      </div>
-    </article>
-  </div>
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        <div id="search-replace-tidyverse-way" class="section level1">
+<h1>Search &amp; Replace tidyverse way</h1>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre class="r"><code>df &lt;- data.frame(
+  c1 = letters[1:5], 
+  c2 = 5:9, 
+  c3 = LETTERS[5:9], 
+  stringsAsFactors = FALSE)</code></pre>
+<pre class="r"><code>df</code></pre>
+<pre><code>##   c1 c2 c3
+## 1  a  5  E
+## 2  b  6  F
+## 3  c  7  G
+## 4  d  8  H
+## 5  e  9  I</code></pre>
+<pre class="r"><code>df %&gt;% 
+  mutate_if(is.character, str_replace_all, pattern = &#39;[aeouAEOU]&#39;, replacement = &#39;ths should be aeouAEIOU except i or I &#39;)</code></pre>
+<pre><code>##                                       c1 c2
+## 1 ths should be aeouAEIOU except i or I   5
+## 2                                      b  6
+## 3                                      c  7
+## 4                                      d  8
+## 5 ths should be aeouAEIOU except i or I   9
+##                                       c3
+## 1 ths should be aeouAEIOU except i or I 
+## 2                                      F
+## 3                                      G
+## 4                                      H
+## 5                                      I</code></pre>
+</div>
+<div id="find-nas" class="section level1">
+<h1>Find NAs</h1>
+<pre class="r"><code>`new_DF &lt;- df[is.na(df$columna),]`</code></pre>
+</div>
+<div id="create-fake-data-from-a-table" class="section level1">
+<h1>Create fake data from a table</h1>
+<p>Create table</p>
+<pre class="r"><code>originalTable &lt;- matrix(c(188, 29, 20, 51), ncol = 2, byrow = TRUE)
+colnames(originalTable) &lt;- c(&quot;A&quot;, &quot;B&quot;)
+rownames(originalTable) &lt;- c(&quot;C&quot;, &quot;D&quot;)
+originalTable</code></pre>
+<p>Package splitstackshape</p>
+<pre class="r"><code>library(splitstackshape)
+df &lt;- expandRows(data.frame(as.table(originalTable)), &quot;Freq&quot;)
+table(df$Var1, df$Var2)</code></pre>
+</div>
+<div id="sum-rows" class="section level1">
+<h1>Sum rows</h1>
+<pre class="r"><code> mutate(newVar = rowSums( cbind (colA,colB), na.rm=TRUE))</code></pre>
+</div>
+<div id="clean-data-from-rectangular-dataframes" class="section level1">
+<h1>Clean data from rectangular dataframes</h1>
+<pre class="r"><code>x = data.frame(a = c(1, NA, 2), b = c(2, NA, 3), c = c(NA, &quot;A&quot;, NA))</code></pre>
+<pre class="r"><code>as.data.frame(lapply(x, na.omit))</code></pre>
+</div>
+<div id="re-ordering-columns" class="section level1">
+<h1>Re-ordering columns</h1>
+<pre class="r"><code>mtcars %&gt;% 
+    select(cyl, disp, hp, everything()) %&gt;% 
+    head()</code></pre>
 </div>
 
+      </article>
 
+      
+
+
+      
+
+    </div>
+  </div>
+</div>
 
     <footer>
   <div class="container">
@@ -393,7 +341,7 @@ ga('send', 'pageview');
           
           <li>
             
-            <a href="/categories/index.xml" title="RSS">
+            <a href="/index.xml" title="RSS">
             
               <span class="fa-stack fa-lg">
                 <i class="fa fa-circle fa-stack-2x"></i>
