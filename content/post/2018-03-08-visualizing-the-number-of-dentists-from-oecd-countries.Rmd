@@ -135,8 +135,9 @@ dent_oecd %>%
   labs(y = "Dentists graduation per 100 000 hab") 
 ```
 
+## Pivot table
 
-And a pivot table in the `dplyr` way
+Pivot table in the `dplyr` way
 ```{r}
 dent_oecd %>% 
   group_by(Country, Year) %>% 

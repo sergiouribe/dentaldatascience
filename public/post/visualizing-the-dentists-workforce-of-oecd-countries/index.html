@@ -5,17 +5,17 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Visualizing the dentists workforce of OECD countries</title>
-  <meta property="og:title" content="Visualizing the dentists workforce of OECD countries" />
-  <meta name="twitter:title" content="Visualizing the dentists workforce of OECD countries" />
+  <title>Visualizing the dental workforce of OECD countries I</title>
+  <meta property="og:title" content="Visualizing the dental workforce of OECD countries I" />
+  <meta name="twitter:title" content="Visualizing the dental workforce of OECD countries I" />
   <meta name="description" content="The Organisation for Economic Co-operation and Development host a database with extensive data. In this post we will some visualizations to compare the number of dentists in each country.
-Packages used: - tidyverse - gghighlight - kableExtra
-First we load the data. Now there is a package (OECD) able to extract the datasets, but I will use a local copy:
-dent_oecd &lt;- read_csv(&quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vStv7Pr69DtRKv6Nw6gVBep8hbT3pEeO6B1vNwxK_1DUHgpoTgbuRpZ4SvgtHFQnBZJVGeeQVyRuXZl/pub?gid=1330297229&amp;single=true&amp;output=csv&quot;)## Parsed with column specification:## cols(## VAR = col_character(),## Variable = col_character(),## UNIT = col_character(),## Measure = col_character(),## COU = col_character(),## Country = col_character(),## YEA = col_integer(),## Year = col_integer(),## Value = col_double(),## `Flag Codes` = col_character(),## Flags = col_character()## )Always is preferable to take a look the data and its structure:">
+Packages used:
+ tidyverse gghighlight kableExtra  First we load the data. Now there is a package (OECD) able to extract the datasets, but I will use a local copy:
+dent_oecd &lt;- read_csv(&quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vStv7Pr69DtRKv6Nw6gVBep8hbT3pEeO6B1vNwxK_1DUHgpoTgbuRpZ4SvgtHFQnBZJVGeeQVyRuXZl/pub?gid=1330297229&amp;single=true&amp;output=csv&quot;) ## Parsed with column specification: ## cols( ## VAR = col_character(), ## Variable = col_character(), ## UNIT = col_character(), ## Measure = col_character(), ## COU = col_character(), ## Country = col_character(), ## YEA = col_integer(), ## Year = col_integer(), ## Value = col_double(), ## `Flag Codes` = col_character(), ## Flags = col_character() ## ) Always is preferable to take a look the data and its structure:">
   <meta property="og:description" content="The Organisation for Economic Co-operation and Development host a database with extensive data. In this post we will some visualizations to compare the number of dentists in each country.
-Packages used: - tidyverse - gghighlight - kableExtra
-First we load the data. Now there is a package (OECD) able to extract the datasets, but I will use a local copy:
-dent_oecd &lt;- read_csv(&quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vStv7Pr69DtRKv6Nw6gVBep8hbT3pEeO6B1vNwxK_1DUHgpoTgbuRpZ4SvgtHFQnBZJVGeeQVyRuXZl/pub?gid=1330297229&amp;single=true&amp;output=csv&quot;)## Parsed with column specification:## cols(## VAR = col_character(),## Variable = col_character(),## UNIT = col_character(),## Measure = col_character(),## COU = col_character(),## Country = col_character(),## YEA = col_integer(),## Year = col_integer(),## Value = col_double(),## `Flag Codes` = col_character(),## Flags = col_character()## )Always is preferable to take a look the data and its structure:">
+Packages used:
+ tidyverse gghighlight kableExtra  First we load the data. Now there is a package (OECD) able to extract the datasets, but I will use a local copy:
+dent_oecd &lt;- read_csv(&quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vStv7Pr69DtRKv6Nw6gVBep8hbT3pEeO6B1vNwxK_1DUHgpoTgbuRpZ4SvgtHFQnBZJVGeeQVyRuXZl/pub?gid=1330297229&amp;single=true&amp;output=csv&quot;) ## Parsed with column specification: ## cols( ## VAR = col_character(), ## Variable = col_character(), ## UNIT = col_character(), ## Measure = col_character(), ## COU = col_character(), ## Country = col_character(), ## YEA = col_integer(), ## Year = col_integer(), ## Value = col_double(), ## `Flag Codes` = col_character(), ## Flags = col_character() ## ) Always is preferable to take a look the data and its structure:">
   <meta name="twitter:description" content="The Organisation for Economic Co-operation and Development host a database with extensive data. In this post we will some visualizations to compare the number of dentists in each country.
 Packages …">
   <meta name="author" content="Sergio Uribe"/>
@@ -29,7 +29,7 @@ Packages …">
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Dental Data Science" />
 
-  <meta name="generator" content="Hugo 0.36.1" />
+  <meta name="generator" content="Hugo 0.37" />
   <link rel="canonical" href="/post/visualizing-the-dentists-workforce-of-oecd-countries/" />
   <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Dental Data Science">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
@@ -210,7 +210,7 @@ ga('send', 'pageview');
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="post-heading">
-              <h1>Visualizing the dentists workforce of OECD countries</h1>
+              <h1>Visualizing the dental workforce of OECD countries I</h1>
                 
                 
                   <span class="post-meta">
@@ -220,7 +220,7 @@ ga('send', 'pageview');
   
   
   &nbsp;|&nbsp;
-  <i class="fa fa-clock-o"></i> 6 minutes (1234 words)
+  <i class="fa fa-clock-o"></i> 8 minutes (1658 words)
   
   
 </span>
@@ -240,8 +240,17 @@ ga('send', 'pageview');
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        <p>The Organisation for Economic Co-operation and Development host a <a href="https://data.oecd.org/">database</a> with extensive data. In this post we will some visualizations to compare the number of dentists in each country.</p>
-<p>Packages used: - tidyverse - gghighlight - kableExtra</p>
+        <div class="figure">
+<img src="/img/dentists_oecd.jpg" />
+
+</div>
+<p>The Organisation for Economic Co-operation and Development host a <a href="https://data.oecd.org/">database</a> with extensive data. In this post we will some visualizations to compare the number of dentists in each country.</p>
+<p>Packages used:</p>
+<ul>
+<li>tidyverse</li>
+<li>gghighlight</li>
+<li>kableExtra</li>
+</ul>
 <p>First we load the data. Now there is a package (<a href="https://cran.r-project.org/web/packages/OECD/index.html">OECD</a>) able to extract the datasets, but I will use a local copy:</p>
 <pre class="r"><code>dent_oecd &lt;- read_csv(&quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vStv7Pr69DtRKv6Nw6gVBep8hbT3pEeO6B1vNwxK_1DUHgpoTgbuRpZ4SvgtHFQnBZJVGeeQVyRuXZl/pub?gid=1330297229&amp;single=true&amp;output=csv&quot;)</code></pre>
 <pre><code>## Parsed with column specification:
@@ -263,12 +272,12 @@ ga('send', 'pageview');
 <pre><code>## # A tibble: 6 x 11
 ##   VAR     Variable        UNIT    Measure COU   Country    YEA  Year Value
 ##   &lt;chr&gt;   &lt;chr&gt;           &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;int&gt; &lt;int&gt; &lt;dbl&gt;
-## 1 HEDUDN~ Dentists gradu~ NOMBRE~ Number  AUS   Austral~  2008  2008  552.
-## 2 HEDUDN~ Dentists gradu~ NOMBRE~ Number  AUS   Austral~  2009  2009  632.
-## 3 HEDUDN~ Dentists gradu~ NOMBRE~ Number  AUS   Austral~  2010  2010  665.
-## 4 HEDUDN~ Dentists gradu~ NOMBRE~ Number  AUS   Austral~  2011  2011  684.
-## 5 HEDUDN~ Dentists gradu~ NOMBRE~ Number  AUS   Austral~  2012  2012  723.
-## 6 HEDUDN~ Dentists gradu~ NOMBRE~ Number  AUS   Austral~  2013  2013  894.
+## 1 HEDUDN… Dentists gradu… NOMBRE… Number  AUS   Austral…  2008  2008  552.
+## 2 HEDUDN… Dentists gradu… NOMBRE… Number  AUS   Austral…  2009  2009  632.
+## 3 HEDUDN… Dentists gradu… NOMBRE… Number  AUS   Austral…  2010  2010  665.
+## 4 HEDUDN… Dentists gradu… NOMBRE… Number  AUS   Austral…  2011  2011  684.
+## 5 HEDUDN… Dentists gradu… NOMBRE… Number  AUS   Austral…  2012  2012  723.
+## 6 HEDUDN… Dentists gradu… NOMBRE… Number  AUS   Austral…  2013  2013  894.
 ## # ... with 2 more variables: `Flag Codes` &lt;chr&gt;, Flags &lt;chr&gt;</code></pre>
 <pre class="r"><code>glimpse(dent_oecd)</code></pre>
 <pre><code>## Observations: 956
@@ -284,42 +293,91 @@ ga('send', 'pageview');
 ## $ Value        &lt;dbl&gt; 552, 632, 665, 684, 723, 894, 861, 957, 118, 134,...
 ## $ `Flag Codes` &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N...
 ## $ Flags        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N...</code></pre>
+<p>And a summary:</p>
+<pre class="r"><code>summary(dent_oecd)</code></pre>
+<pre><code>##      VAR              Variable             UNIT          
+##  Length:956         Length:956         Length:956        
+##  Class :character   Class :character   Class :character  
+##  Mode  :character   Mode  :character   Mode  :character  
+##                                                          
+##                                                          
+##                                                          
+##    Measure              COU              Country               YEA      
+##  Length:956         Length:956         Length:956         Min.   :2008  
+##  Class :character   Class :character   Class :character   1st Qu.:2010  
+##  Mode  :character   Mode  :character   Mode  :character   Median :2012  
+##                                                           Mean   :2012  
+##                                                           3rd Qu.:2014  
+##                                                           Max.   :2016  
+##       Year          Value            Flag Codes           Flags          
+##  Min.   :2008   Min.   :     0.00   Length:956         Length:956        
+##  1st Qu.:2010   1st Qu.:     1.34   Class :character   Class :character  
+##  Median :2012   Median :     6.00   Mode  :character   Mode  :character  
+##  Mean   :2012   Mean   :  3064.18                                        
+##  3rd Qu.:2014   3rd Qu.:  1071.00                                        
+##  Max.   :2016   Max.   :100994.00</code></pre>
 <p>I will use the <code>Dentists graduates</code>, and <code>Per 100 000 population</code> so let’s filter and replace the former data set</p>
 <pre class="r"><code>dent_oecd &lt;- dent_oecd %&gt;% 
   filter(Variable == &quot;Dentists graduates&quot;, 
          Measure == &quot;Per 100 000 population&quot;)</code></pre>
+<p>There are some useless columns, so unselect them</p>
+<pre class="r"><code>dent_oecd &lt;- select(dent_oecd, -c(VAR, UNIT, COU, YEA,`Flag Codes`, Flags))</code></pre>
 <p>Let’s plot. Since is a temporal trend, a line plot could be a good idea:</p>
 <pre class="r"><code>dent_oecd %&gt;%  # this means: take the dent_oecd dataframe, and
   ggplot(aes(x = Year, y = Value, color = Country)) + #plot the year in the X axis, the value in the y axis and color the lines per country
-  geom_line()</code></pre>
-<p><img src="/post/2018-03-08-visualizing-the-number-of-dentists-from-oecd-countries_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+  geom_line() + 
+  labs(y = &quot;Dentists graduation per 100 000 hab&quot;)</code></pre>
+<p><img src="/post/2018-03-08-visualizing-the-number-of-dentists-from-oecd-countries_files/figure-html/messy%20plot-1.png" width="672" /></p>
 <p>Hmmm….the problem here is that isn’t easy to differentiate the countries.</p>
-<p>We have to choices: - plot each country separate, or - highlight one or few countries from the group we can use the package</p>
-<div id="plot-each-country-separate" class="section level2">
-<h2>Plot each country separate</h2>
+<p>We have to choices: 1. plot each country separate, or 2. highlight one or few countries from the group we can use the package</p>
+<div id="plotting-one-graph-per-country-faceting." class="section level2">
+<h2>1. Plotting one graph per country: faceting.</h2>
 <pre class="r"><code>dent_oecd  %&gt;% 
     ggplot(aes(x = Year, y = Value)) + # we delete the color = Country, since is not necessary
   geom_line() + 
   facet_wrap(~Country) + #this means: plot separately each country 
-  theme(axis.text.x = element_text(colour=&quot;grey20&quot;,size=6))</code></pre>
-<p><img src="/post/2018-03-08-visualizing-the-number-of-dentists-from-oecd-countries_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
-<p>This is great. Here we can see that Chile has increased his dentist workforce significantly more than other OECD countries.</p>
-<p><em>TODO: learn how to order the plots </em></p>
+  theme(axis.text.x = element_text(colour=&quot;grey20&quot;,size=6)) + 
+  labs(y = &quot;Dentists graduation per 100 000 hab&quot;)</code></pre>
+<p><img src="/post/2018-03-08-visualizing-the-number-of-dentists-from-oecd-countries_files/figure-html/facetted%20plot-1.png" width="672" /></p>
+<p>That’s much better. Some observations</p>
+<ul>
+<li>seem in general dentist graduating per 100 000 habitants has been stable in OECD countries,</li>
+<li>Chile seems to be increasing at a higher rate his graduation rate. Also Lithuania seems to share this trend.</li>
+<li>The line in Portugal is higher than in the rest of the countries</li>
+<li>Few countries decrease their graduation rate, seems that Denmark, Finland and Norway share this trend</li>
+</ul>
+<p><em>TODO: learn how to order the plots, e.g. from higher rate to lower </em></p>
+<p>We can transform the Value var using the log10. With <code>ggplot2</code> we can directly add the transformation to any axis, as y-axis in this case. We use <code>scale_y_log10()</code>. Sometimes is worth to use to expand some small differences or to graph data with orders of magnitude of difference.</p>
+<pre class="r"><code>dent_oecd  %&gt;% 
+  filter(Year &lt; 2016) %&gt;% 
+    ggplot(aes(x = Year, y = Value)) + 
+  geom_line() + 
+  facet_wrap(~Country) + 
+  theme(axis.text.x = element_text(size=6)) + 
+  labs(y = &quot;log10 Dentists graduation per 100 000 hab&quot;) + 
+  scale_y_log10()</code></pre>
+<p><img src="/post/2018-03-08-visualizing-the-number-of-dentists-from-oecd-countries_files/figure-html/facetted%20plot%202%20log10-1.png" width="672" /></p>
 </div>
 <div id="using-gghighlight" class="section level2">
-<h2>Using <code>gghighlight</code></h2>
+<h2>2. Using <code>gghighlight</code></h2>
 <p><code>gghighlight</code> is a package that highlight ggplot’s Lines and Points with Predicates</p>
-<p>Now we can fix this mess:</p>
+<p>Remember the first graph:</p>
 <pre class="r"><code>dent_oecd %&gt;%  
   ggplot(aes(x = Year, y = Value, color = Country)) + 
-  geom_line() </code></pre>
-<p><img src="/post/2018-03-08-visualizing-the-number-of-dentists-from-oecd-countries_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
-<p>First we calculate the mean of dentists per 100 000 hab in OECD countries for the last year:</p>
+  geom_line() + 
+  labs(y = &quot;Dentists graduation per 100 000 hab&quot;)</code></pre>
+<p><img src="/post/2018-03-08-visualizing-the-number-of-dentists-from-oecd-countries_files/figure-html/messy%20plot%20again-1.png" width="672" /></p>
+<p>With gghighlight we can, as the name implies, highlight some lines according to a criteria or predicate.</p>
 <pre class="r"><code>dent_oecd %&gt;% 
+  filter(Year &lt; 2016) %&gt;% 
   gghighlight_line(aes(x = Year, y = Value, color = Country), 
-                   predicate = max(Value) &gt; 5) </code></pre>
-<p><img src="/post/2018-03-08-visualizing-the-number-of-dentists-from-oecd-countries_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
-<p>And a pivot table in the <code>dplyr</code> way</p>
+                   predicate = mean(Value) &gt; 5) + # this is the threshold
+  labs(y = &quot;Dentists graduation per 100 000 hab&quot;) </code></pre>
+<p><img src="/post/2018-03-08-visualizing-the-number-of-dentists-from-oecd-countries_files/figure-html/highlighted%20and%20nice%20line%20plot-1.png" width="672" /></p>
+</div>
+<div id="pivot-table" class="section level2">
+<h2>Pivot table</h2>
+<p>Pivot table in the <code>dplyr</code> way</p>
 <pre class="r"><code>dent_oecd %&gt;% 
   group_by(Country, Year) %&gt;% 
   summarise(average = mean(Value)) %&gt;% 
@@ -328,12 +386,12 @@ ga('send', 'pageview');
 ## # Groups:   Country [36]
 ##    Country  `2008` `2009` `2010` `2011` `2012` `2013` `2014` `2015` `2016`
 ##    &lt;chr&gt;     &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-##  1 Austral~   2.60   2.91   3.02   3.06   3.18   3.87   3.67   4.02  NA   
+##  1 Austral…   2.60   2.91   3.02   3.06   3.18   3.87   3.67   4.02  NA   
 ##  2 Austria    1.42   1.61   1.57   1.50   1.28   1.25   1.65  NA     NA   
 ##  3 Belgium    1.14   1.44   1.57   1.32   1.46   1.62   1.95   2.05   2.09
 ##  4 Canada     1.53   1.52   1.47   1.48   1.30   1.51  NA     NA     NA   
 ##  5 Chile      2.98   4.32   4.11   4.82   5.57   5.86   6.35   7.50   7.17
-##  6 Czech R~   1.59   3.90   3.37   2.86   2.49   3.15   3.26   3.75  NA   
+##  6 Czech R…   1.59   3.90   3.37   2.86   2.49   3.15   3.26   3.75  NA   
 ##  7 Denmark    4.28   3.20   3.37   3.41   2.92   2.80   2.73  NA     NA   
 ##  8 Estonia    3.07   2.17   2.40   2.34   1.74   2.12   1.90   2.13  NA   
 ##  9 Finland    1.34   1.35   2.44   2.56   3.27   2.87   2.38  NA     NA   
@@ -342,14 +400,25 @@ ga('send', 'pageview');
 <p>Now enhance the table with the package <code>kableExtra</code>:</p>
 <p><code>install.packages(&quot;kableExtra&quot;)</code></p>
 <p><code>library(kableExtra)</code></p>
+<p>Addf the average as reference value</p>
+<pre class="r"><code>dent_oecd_avg &lt;- dent_oecd %&gt;% 
+  group_by(Year) %&gt;% 
+  summarise(Value = mean(Value, na.omit = TRUE)) # create a new dataframe with the average per year  
+
+dent_oecd_avg[,&quot;Country&quot;] &lt;- &quot;OECD average&quot;  # add a column and fill with a string
+dent_oecd &lt;- bind_rows(dent_oecd_avg, dent_oecd) # bind the dataframes by columns
+rm(dent_oecd_avg) # remove the average dataset</code></pre>
+<p>First I create the table and store as an object called <code>table_dent</code></p>
 <pre class="r"><code>table_dent &lt;- dent_oecd %&gt;% 
   group_by(Country, Year) %&gt;% 
   summarise(average = mean(Value)) %&gt;% 
   spread(Year, average) </code></pre>
+<p>then apply the <code>kable</code> enhance to the object <code>table_dent</code> to show a nice formatted table:</p>
 <pre class="r"><code>knitr::kable(table_dent, 
-             caption = &quot;Dentists graduating per 100 000 habs. OECD countries&quot;)</code></pre>
+             caption = &quot;Dentists graduating per 100 000 habs. OECD countries&quot;, 
+             digits = 1)</code></pre>
 <table>
-<caption><span id="tab:unnamed-chunk-14">Table 1: </span>Dentists graduating per 100 000 habs. OECD countries</caption>
+<caption><span id="tab:unnamed-chunk-5">Table 1: </span>Dentists graduating per 100 000 habs. OECD countries</caption>
 <thead>
 <tr class="header">
 <th align="left">Country</th>
@@ -367,438 +436,456 @@ ga('send', 'pageview');
 <tbody>
 <tr class="odd">
 <td align="left">Australia</td>
-<td align="right">2.60</td>
-<td align="right">2.91</td>
-<td align="right">3.02</td>
-<td align="right">3.06</td>
-<td align="right">3.18</td>
-<td align="right">3.87</td>
-<td align="right">3.67</td>
-<td align="right">4.02</td>
+<td align="right">2.6</td>
+<td align="right">2.9</td>
+<td align="right">3.0</td>
+<td align="right">3.1</td>
+<td align="right">3.2</td>
+<td align="right">3.9</td>
+<td align="right">3.7</td>
+<td align="right">4.0</td>
 <td align="right">NA</td>
 </tr>
 <tr class="even">
 <td align="left">Austria</td>
-<td align="right">1.42</td>
-<td align="right">1.61</td>
-<td align="right">1.57</td>
-<td align="right">1.50</td>
-<td align="right">1.28</td>
-<td align="right">1.25</td>
-<td align="right">1.65</td>
+<td align="right">1.4</td>
+<td align="right">1.6</td>
+<td align="right">1.6</td>
+<td align="right">1.5</td>
+<td align="right">1.3</td>
+<td align="right">1.2</td>
+<td align="right">1.6</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 </tr>
 <tr class="odd">
 <td align="left">Belgium</td>
-<td align="right">1.14</td>
-<td align="right">1.44</td>
-<td align="right">1.57</td>
-<td align="right">1.32</td>
-<td align="right">1.46</td>
-<td align="right">1.62</td>
-<td align="right">1.95</td>
-<td align="right">2.05</td>
-<td align="right">2.09</td>
+<td align="right">1.1</td>
+<td align="right">1.4</td>
+<td align="right">1.6</td>
+<td align="right">1.3</td>
+<td align="right">1.5</td>
+<td align="right">1.6</td>
+<td align="right">2.0</td>
+<td align="right">2.0</td>
+<td align="right">2.1</td>
 </tr>
 <tr class="even">
 <td align="left">Canada</td>
-<td align="right">1.53</td>
-<td align="right">1.52</td>
-<td align="right">1.47</td>
-<td align="right">1.48</td>
-<td align="right">1.30</td>
-<td align="right">1.51</td>
+<td align="right">1.5</td>
+<td align="right">1.5</td>
+<td align="right">1.5</td>
+<td align="right">1.5</td>
+<td align="right">1.3</td>
+<td align="right">1.5</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 </tr>
 <tr class="odd">
 <td align="left">Chile</td>
-<td align="right">2.98</td>
-<td align="right">4.32</td>
-<td align="right">4.11</td>
-<td align="right">4.82</td>
-<td align="right">5.57</td>
-<td align="right">5.86</td>
-<td align="right">6.35</td>
-<td align="right">7.50</td>
-<td align="right">7.17</td>
+<td align="right">3.0</td>
+<td align="right">4.3</td>
+<td align="right">4.1</td>
+<td align="right">4.8</td>
+<td align="right">5.6</td>
+<td align="right">5.9</td>
+<td align="right">6.3</td>
+<td align="right">7.5</td>
+<td align="right">7.2</td>
 </tr>
 <tr class="even">
 <td align="left">Czech Republic</td>
-<td align="right">1.59</td>
-<td align="right">3.90</td>
-<td align="right">3.37</td>
-<td align="right">2.86</td>
-<td align="right">2.49</td>
-<td align="right">3.15</td>
-<td align="right">3.26</td>
-<td align="right">3.75</td>
+<td align="right">1.6</td>
+<td align="right">3.9</td>
+<td align="right">3.4</td>
+<td align="right">2.9</td>
+<td align="right">2.5</td>
+<td align="right">3.1</td>
+<td align="right">3.3</td>
+<td align="right">3.8</td>
 <td align="right">NA</td>
 </tr>
 <tr class="odd">
 <td align="left">Denmark</td>
-<td align="right">4.28</td>
-<td align="right">3.20</td>
-<td align="right">3.37</td>
-<td align="right">3.41</td>
-<td align="right">2.92</td>
-<td align="right">2.80</td>
-<td align="right">2.73</td>
+<td align="right">4.3</td>
+<td align="right">3.2</td>
+<td align="right">3.4</td>
+<td align="right">3.4</td>
+<td align="right">2.9</td>
+<td align="right">2.8</td>
+<td align="right">2.7</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 </tr>
 <tr class="even">
 <td align="left">Estonia</td>
-<td align="right">3.07</td>
-<td align="right">2.17</td>
-<td align="right">2.40</td>
-<td align="right">2.34</td>
-<td align="right">1.74</td>
-<td align="right">2.12</td>
-<td align="right">1.90</td>
-<td align="right">2.13</td>
+<td align="right">3.1</td>
+<td align="right">2.2</td>
+<td align="right">2.4</td>
+<td align="right">2.3</td>
+<td align="right">1.7</td>
+<td align="right">2.1</td>
+<td align="right">1.9</td>
+<td align="right">2.1</td>
 <td align="right">NA</td>
 </tr>
 <tr class="odd">
 <td align="left">Finland</td>
-<td align="right">1.34</td>
-<td align="right">1.35</td>
-<td align="right">2.44</td>
-<td align="right">2.56</td>
-<td align="right">3.27</td>
-<td align="right">2.87</td>
-<td align="right">2.38</td>
+<td align="right">1.3</td>
+<td align="right">1.4</td>
+<td align="right">2.4</td>
+<td align="right">2.6</td>
+<td align="right">3.3</td>
+<td align="right">2.9</td>
+<td align="right">2.4</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 </tr>
 <tr class="even">
 <td align="left">France</td>
-<td align="right">1.36</td>
-<td align="right">1.33</td>
-<td align="right">1.49</td>
-<td align="right">1.72</td>
-<td align="right">1.57</td>
-<td align="right">1.66</td>
-<td align="right">1.48</td>
-<td align="right">1.88</td>
+<td align="right">1.4</td>
+<td align="right">1.3</td>
+<td align="right">1.5</td>
+<td align="right">1.7</td>
+<td align="right">1.6</td>
+<td align="right">1.7</td>
+<td align="right">1.5</td>
+<td align="right">1.9</td>
 <td align="right">NA</td>
 </tr>
 <tr class="odd">
 <td align="left">Germany</td>
-<td align="right">2.24</td>
-<td align="right">2.22</td>
-<td align="right">2.55</td>
-<td align="right">2.72</td>
-<td align="right">2.95</td>
-<td align="right">2.78</td>
-<td align="right">2.86</td>
-<td align="right">2.81</td>
+<td align="right">2.2</td>
+<td align="right">2.2</td>
+<td align="right">2.5</td>
+<td align="right">2.7</td>
+<td align="right">3.0</td>
+<td align="right">2.8</td>
+<td align="right">2.9</td>
+<td align="right">2.8</td>
 <td align="right">NA</td>
 </tr>
 <tr class="even">
 <td align="left">Greece</td>
-<td align="right">2.46</td>
-<td align="right">2.44</td>
-<td align="right">2.32</td>
-<td align="right">2.33</td>
-<td align="right">1.59</td>
-<td align="right">1.84</td>
+<td align="right">2.5</td>
+<td align="right">2.4</td>
+<td align="right">2.3</td>
+<td align="right">2.3</td>
+<td align="right">1.6</td>
+<td align="right">1.8</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 </tr>
 <tr class="odd">
 <td align="left">Hungary</td>
-<td align="right">1.84</td>
-<td align="right">2.19</td>
-<td align="right">2.54</td>
-<td align="right">2.80</td>
-<td align="right">3.45</td>
-<td align="right">3.05</td>
-<td align="right">3.35</td>
-<td align="right">3.13</td>
+<td align="right">1.8</td>
+<td align="right">2.2</td>
+<td align="right">2.5</td>
+<td align="right">2.8</td>
+<td align="right">3.5</td>
+<td align="right">3.0</td>
+<td align="right">3.4</td>
+<td align="right">3.1</td>
 <td align="right">NA</td>
 </tr>
 <tr class="even">
 <td align="left">Iceland</td>
-<td align="right">1.89</td>
-<td align="right">1.88</td>
-<td align="right">1.89</td>
-<td align="right">1.88</td>
-<td align="right">1.87</td>
-<td align="right">1.85</td>
+<td align="right">1.9</td>
+<td align="right">1.9</td>
+<td align="right">1.9</td>
+<td align="right">1.9</td>
+<td align="right">1.9</td>
+<td align="right">1.8</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 </tr>
 <tr class="odd">
 <td align="left">Ireland</td>
-<td align="right">1.67</td>
-<td align="right">1.59</td>
-<td align="right">1.49</td>
-<td align="right">1.53</td>
-<td align="right">1.74</td>
-<td align="right">1.94</td>
-<td align="right">1.75</td>
-<td align="right">1.92</td>
+<td align="right">1.7</td>
+<td align="right">1.6</td>
+<td align="right">1.5</td>
+<td align="right">1.5</td>
+<td align="right">1.7</td>
+<td align="right">1.9</td>
+<td align="right">1.8</td>
+<td align="right">1.9</td>
 <td align="right">NA</td>
 </tr>
 <tr class="even">
 <td align="left">Israel</td>
-<td align="right">0.82</td>
-<td align="right">0.73</td>
-<td align="right">1.08</td>
-<td align="right">1.16</td>
-<td align="right">0.77</td>
-<td align="right">0.81</td>
-<td align="right">0.73</td>
-<td align="right">0.61</td>
+<td align="right">0.8</td>
+<td align="right">0.7</td>
+<td align="right">1.1</td>
+<td align="right">1.2</td>
+<td align="right">0.8</td>
+<td align="right">0.8</td>
+<td align="right">0.7</td>
+<td align="right">0.6</td>
 <td align="right">NA</td>
 </tr>
 <tr class="odd">
 <td align="left">Italy</td>
-<td align="right">1.81</td>
-<td align="right">1.65</td>
-<td align="right">1.68</td>
-<td align="right">1.42</td>
-<td align="right">1.38</td>
-<td align="right">1.40</td>
-<td align="right">0.57</td>
-<td align="right">1.00</td>
+<td align="right">1.8</td>
+<td align="right">1.6</td>
+<td align="right">1.7</td>
+<td align="right">1.4</td>
+<td align="right">1.4</td>
+<td align="right">1.4</td>
+<td align="right">0.6</td>
+<td align="right">1.0</td>
 <td align="right">NA</td>
 </tr>
 <tr class="even">
 <td align="left">Japan</td>
-<td align="right">1.94</td>
-<td align="right">1.98</td>
-<td align="right">1.84</td>
-<td align="right">1.90</td>
-<td align="right">1.82</td>
-<td align="right">1.89</td>
-<td align="right">1.86</td>
-<td align="right">1.61</td>
-<td align="right">1.63</td>
+<td align="right">1.9</td>
+<td align="right">2.0</td>
+<td align="right">1.8</td>
+<td align="right">1.9</td>
+<td align="right">1.8</td>
+<td align="right">1.9</td>
+<td align="right">1.9</td>
+<td align="right">1.6</td>
+<td align="right">1.6</td>
 </tr>
 <tr class="odd">
 <td align="left">Korea</td>
-<td align="right">1.82</td>
-<td align="right">1.48</td>
-<td align="right">1.73</td>
-<td align="right">1.78</td>
-<td align="right">1.91</td>
-<td align="right">2.21</td>
-<td align="right">2.61</td>
-<td align="right">2.59</td>
-<td align="right">2.93</td>
+<td align="right">1.8</td>
+<td align="right">1.5</td>
+<td align="right">1.7</td>
+<td align="right">1.8</td>
+<td align="right">1.9</td>
+<td align="right">2.2</td>
+<td align="right">2.6</td>
+<td align="right">2.6</td>
+<td align="right">2.9</td>
 </tr>
 <tr class="even">
 <td align="left">Latvia</td>
-<td align="right">1.33</td>
-<td align="right">1.59</td>
-<td align="right">1.57</td>
-<td align="right">2.09</td>
-<td align="right">1.82</td>
-<td align="right">2.53</td>
-<td align="right">2.01</td>
-<td align="right">2.48</td>
-<td align="right">2.29</td>
+<td align="right">1.3</td>
+<td align="right">1.6</td>
+<td align="right">1.6</td>
+<td align="right">2.1</td>
+<td align="right">1.8</td>
+<td align="right">2.5</td>
+<td align="right">2.0</td>
+<td align="right">2.5</td>
+<td align="right">2.3</td>
 </tr>
 <tr class="odd">
 <td align="left">Lithuania</td>
-<td align="right">4.41</td>
-<td align="right">4.65</td>
-<td align="right">5.17</td>
-<td align="right">4.66</td>
-<td align="right">5.22</td>
-<td align="right">5.51</td>
-<td align="right">5.80</td>
-<td align="right">6.37</td>
+<td align="right">4.4</td>
+<td align="right">4.7</td>
+<td align="right">5.2</td>
+<td align="right">4.7</td>
+<td align="right">5.2</td>
+<td align="right">5.5</td>
+<td align="right">5.8</td>
+<td align="right">6.4</td>
 <td align="right">NA</td>
 </tr>
 <tr class="even">
 <td align="left">Luxembourg</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
-<td align="right">0.00</td>
+<td align="right">0.0</td>
+<td align="right">0.0</td>
+<td align="right">0.0</td>
+<td align="right">0.0</td>
+<td align="right">0.0</td>
+<td align="right">0.0</td>
+<td align="right">0.0</td>
+<td align="right">0.0</td>
+<td align="right">0.0</td>
 </tr>
 <tr class="odd">
 <td align="left">Mexico</td>
-<td align="right">4.49</td>
-<td align="right">4.68</td>
-<td align="right">4.59</td>
-<td align="right">4.65</td>
-<td align="right">4.95</td>
-<td align="right">3.84</td>
-<td align="right">4.33</td>
-<td align="right">4.03</td>
-<td align="right">4.33</td>
+<td align="right">4.5</td>
+<td align="right">4.7</td>
+<td align="right">4.6</td>
+<td align="right">4.7</td>
+<td align="right">5.0</td>
+<td align="right">3.8</td>
+<td align="right">4.3</td>
+<td align="right">4.0</td>
+<td align="right">4.3</td>
 </tr>
 <tr class="even">
 <td align="left">Netherlands</td>
-<td align="right">1.48</td>
-<td align="right">1.50</td>
-<td align="right">1.52</td>
-<td align="right">1.67</td>
-<td align="right">1.35</td>
-<td align="right">1.07</td>
-<td align="right">1.05</td>
-<td align="right">1.44</td>
-<td align="right">1.35</td>
+<td align="right">1.5</td>
+<td align="right">1.5</td>
+<td align="right">1.5</td>
+<td align="right">1.7</td>
+<td align="right">1.4</td>
+<td align="right">1.1</td>
+<td align="right">1.1</td>
+<td align="right">1.4</td>
+<td align="right">1.4</td>
 </tr>
 <tr class="odd">
 <td align="left">New Zealand</td>
-<td align="right">1.83</td>
-<td align="right">2.05</td>
-<td align="right">2.09</td>
-<td align="right">2.10</td>
-<td align="right">2.40</td>
-<td align="right">2.30</td>
-<td align="right">2.31</td>
-<td align="right">2.11</td>
-<td align="right">2.19</td>
+<td align="right">1.8</td>
+<td align="right">2.0</td>
+<td align="right">2.1</td>
+<td align="right">2.1</td>
+<td align="right">2.4</td>
+<td align="right">2.3</td>
+<td align="right">2.3</td>
+<td align="right">2.1</td>
+<td align="right">2.2</td>
 </tr>
 <tr class="even">
 <td align="left">Norway</td>
-<td align="right">2.24</td>
-<td align="right">2.69</td>
-<td align="right">2.31</td>
-<td align="right">2.73</td>
-<td align="right">2.97</td>
-<td align="right">2.54</td>
-<td align="right">2.30</td>
-<td align="right">2.12</td>
+<td align="right">2.2</td>
+<td align="right">2.7</td>
+<td align="right">2.3</td>
+<td align="right">2.7</td>
+<td align="right">3.0</td>
+<td align="right">2.5</td>
+<td align="right">2.3</td>
+<td align="right">2.1</td>
 <td align="right">NA</td>
 </tr>
 <tr class="odd">
+<td align="left">OECD average</td>
+<td align="right">2.2</td>
+<td align="right">2.2</td>
+<td align="right">2.3</td>
+<td align="right">2.4</td>
+<td align="right">2.3</td>
+<td align="right">2.5</td>
+<td align="right">2.5</td>
+<td align="right">2.8</td>
+<td align="right">2.7</td>
+</tr>
+<tr class="even">
 <td align="left">Poland</td>
-<td align="right">2.20</td>
-<td align="right">2.47</td>
-<td align="right">2.46</td>
-<td align="right">2.52</td>
-<td align="right">2.51</td>
-<td align="right">2.57</td>
-<td align="right">2.41</td>
-<td align="right">2.46</td>
+<td align="right">2.2</td>
+<td align="right">2.5</td>
+<td align="right">2.5</td>
+<td align="right">2.5</td>
+<td align="right">2.5</td>
+<td align="right">2.6</td>
+<td align="right">2.4</td>
+<td align="right">2.5</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Portugal</td>
-<td align="right">7.06</td>
-<td align="right">7.14</td>
-<td align="right">7.45</td>
-<td align="right">6.85</td>
-<td align="right">5.64</td>
-<td align="right">5.90</td>
-<td align="right">6.17</td>
-<td align="right">6.66</td>
+<td align="right">7.1</td>
+<td align="right">7.1</td>
+<td align="right">7.5</td>
+<td align="right">6.8</td>
+<td align="right">5.6</td>
+<td align="right">5.9</td>
+<td align="right">6.2</td>
+<td align="right">6.7</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Slovak Republic</td>
-<td align="right">0.84</td>
-<td align="right">0.82</td>
-<td align="right">1.19</td>
-<td align="right">1.46</td>
-<td align="right">1.46</td>
-<td align="right">1.85</td>
-<td align="right">1.73</td>
+<td align="right">0.8</td>
+<td align="right">0.8</td>
+<td align="right">1.2</td>
+<td align="right">1.5</td>
+<td align="right">1.5</td>
+<td align="right">1.8</td>
+<td align="right">1.7</td>
 <td align="right">NA</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Slovenia</td>
-<td align="right">2.08</td>
-<td align="right">1.72</td>
-<td align="right">1.95</td>
-<td align="right">1.85</td>
-<td align="right">1.99</td>
-<td align="right">3.35</td>
-<td align="right">2.57</td>
-<td align="right">3.34</td>
+<td align="right">2.1</td>
+<td align="right">1.7</td>
+<td align="right">2.0</td>
+<td align="right">1.8</td>
+<td align="right">2.0</td>
+<td align="right">3.4</td>
+<td align="right">2.6</td>
+<td align="right">3.3</td>
 <td align="right">NA</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">Spain</td>
-<td align="right">3.21</td>
-<td align="right">2.78</td>
-<td align="right">3.05</td>
-<td align="right">2.98</td>
-<td align="right">3.28</td>
-<td align="right">3.45</td>
-<td align="right">3.84</td>
-<td align="right">3.75</td>
+<td align="right">3.2</td>
+<td align="right">2.8</td>
+<td align="right">3.0</td>
+<td align="right">3.0</td>
+<td align="right">3.3</td>
+<td align="right">3.5</td>
+<td align="right">3.8</td>
+<td align="right">3.8</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">Sweden</td>
-<td align="right">1.96</td>
-<td align="right">2.11</td>
-<td align="right">2.37</td>
-<td align="right">2.26</td>
-<td align="right">2.13</td>
-<td align="right">2.25</td>
-<td align="right">2.50</td>
-<td align="right">2.52</td>
-<td align="right">NA</td>
-</tr>
-<tr class="odd">
-<td align="left">Switzerland</td>
-<td align="right">1.50</td>
-<td align="right">1.55</td>
-<td align="right">1.35</td>
-<td align="right">1.31</td>
-<td align="right">1.31</td>
-<td align="right">1.26</td>
-<td align="right">1.17</td>
-<td align="right">NA</td>
+<td align="right">2.0</td>
+<td align="right">2.1</td>
+<td align="right">2.4</td>
+<td align="right">2.3</td>
+<td align="right">2.1</td>
+<td align="right">2.2</td>
+<td align="right">2.5</td>
+<td align="right">2.5</td>
 <td align="right">NA</td>
 </tr>
 <tr class="even">
-<td align="left">Turkey</td>
-<td align="right">1.40</td>
-<td align="right">1.29</td>
-<td align="right">1.30</td>
-<td align="right">1.48</td>
-<td align="right">1.44</td>
-<td align="right">1.84</td>
-<td align="right">2.03</td>
-<td align="right">2.19</td>
+<td align="left">Switzerland</td>
+<td align="right">1.5</td>
+<td align="right">1.6</td>
+<td align="right">1.4</td>
+<td align="right">1.3</td>
+<td align="right">1.3</td>
+<td align="right">1.3</td>
+<td align="right">1.2</td>
+<td align="right">NA</td>
 <td align="right">NA</td>
 </tr>
 <tr class="odd">
+<td align="left">Turkey</td>
+<td align="right">1.4</td>
+<td align="right">1.3</td>
+<td align="right">1.3</td>
+<td align="right">1.5</td>
+<td align="right">1.4</td>
+<td align="right">1.8</td>
+<td align="right">2.0</td>
+<td align="right">2.2</td>
+<td align="right">NA</td>
+</tr>
+<tr class="even">
 <td align="left">United Kingdom</td>
 <td align="right">NA</td>
-<td align="right">1.74</td>
-<td align="right">1.85</td>
-<td align="right">1.88</td>
-<td align="right">1.91</td>
-<td align="right">1.87</td>
-<td align="right">1.85</td>
-<td align="right">1.88</td>
+<td align="right">1.7</td>
+<td align="right">1.8</td>
+<td align="right">1.9</td>
+<td align="right">1.9</td>
+<td align="right">1.9</td>
+<td align="right">1.8</td>
+<td align="right">1.9</td>
 <td align="right">NA</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">United States</td>
-<td align="right">1.58</td>
-<td align="right">1.59</td>
-<td align="right">1.62</td>
-<td align="right">1.64</td>
-<td align="right">1.68</td>
-<td align="right">1.70</td>
-<td align="right">1.74</td>
-<td align="right">1.81</td>
+<td align="right">1.6</td>
+<td align="right">1.6</td>
+<td align="right">1.6</td>
+<td align="right">1.6</td>
+<td align="right">1.7</td>
+<td align="right">1.7</td>
+<td align="right">1.7</td>
+<td align="right">1.8</td>
 <td align="right">NA</td>
 </tr>
 </tbody>
 </table>
+<p>More information about ggplot2</p>
+<ul>
+<li><a href="https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf">ggplot2 cheat sheet</a></li>
+<li><a href="https://www.computerworld.com/article/2935394/business-intelligence/my-ggplot2-cheat-sheet-search-by-task.html">ggplot2 Search by task</a></li>
+<li><a href="http://ggplot2.tidyverse.org/reference/">ggplot 2 reference manual</a></li>
+</ul>
 </div>
 
       </article>
@@ -923,7 +1010,7 @@ ga('send', 'pageview');
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.36.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          <a href="http://gohugo.io">Hugo v0.37</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
           
         </p>
       </div>
