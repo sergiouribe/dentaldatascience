@@ -1,0 +1,53 @@
+---
+title: Visualizing the dental workforce of OECD countries  II
+author: Sergio Uribe
+date: '2018-03-08'
+draft : true
+slug: visualizing-the-dental-workforce-of-oecd-countries-ii
+categories:
+  - vis
+tags:
+  - ggplot2
+---
+
+```{r packages, echo=F, results='hide'}
+library(tidyverse)
+```
+
+```{r dataset}
+dent <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vStv7Pr69DtRKv6Nw6gVBep8hbT3pEeO6B1vNwxK_1DUHgpoTgbuRpZ4SvgtHFQnBZJVGeeQVyRuXZl/pub?gid=1330297229&single=true&output=csv")
+
+```
+
+```{r}
+table(dent$Variable)
+
+```
+
+```{r}
+table(dent$Variable, dent$Measure)
+```
+
+```{r}
+dent <- dent %>% 
+  filter(Variable == "Practising dentists", 
+         Measure == "Density per 1 000 population (head counts)") %>% 
+  select(-c(VAR, UNIT, COU, YEA, `Flag Codes`, Flags))
+head(dent)
+```
+```{r}
+dent %>% 
+  group_by(Country, Year) %>% 
+  summarise(Mean = mean(Value)) %>% 
+  spread(Year, Mean)
+```
+
+
+```{r}
+dent %>% 
+  ggplot(aes(x = Year, y = Value) ) + 
+  geom_line() + 
+  facet_wrap(~Country) +
+  
+```
+

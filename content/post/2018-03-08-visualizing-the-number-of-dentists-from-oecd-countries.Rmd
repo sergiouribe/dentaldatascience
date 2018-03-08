@@ -8,7 +8,6 @@ categories:
 tags:
   - ggplot2
 ---
-![](/img/dentists_oecd.jpg)
 
 The Organisation for Economic Co-operation and Development host a [database](https://data.oecd.org/) with extensive data. In this post we will some visualizations to compare the number of dentists in each country. 
 
