@@ -8,6 +8,7 @@ categories:
 tags:
   - ggplot2
 ---
+![](/img/dentists_oecd.jpg)
 
 The Organisation for Economic Co-operation and Development host a [database](https://data.oecd.org/) with extensive data. In this post we will some visualizations to compare the number of dentists in each country. 
 
@@ -17,42 +18,50 @@ Packages used:
   - gghighlight
   - kableExtra
 
-```{r, echo=FALSE, results='hide', warning=FALSE, message=FALSE}
+```{r tidyverse, echo=FALSE, results='hide', warning=FALSE, message=FALSE}
 library(tidyverse)
 ```
 
 
 First we load the data. Now there is a package ([OECD](https://cran.r-project.org/web/packages/OECD/index.html)) able to extract the datasets, but I will use a local copy: 
 
-```{r}
+```{r dataset}
 dent_oecd <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vStv7Pr69DtRKv6Nw6gVBep8hbT3pEeO6B1vNwxK_1DUHgpoTgbuRpZ4SvgtHFQnBZJVGeeQVyRuXZl/pub?gid=1330297229&single=true&output=csv")
 ```
 Always is preferable to take a look the data and its structure: 
 
-```{r}
+```{r head}
 head(dent_oecd)
 ```
-```{r}
+```{r glimpse}
 glimpse(dent_oecd)
 ```
 
 And a summary: 
 
-```{r}
+```{r summary}
 summary(dent_oecd)
 ```
 
 
+
 I will use the `Dentists graduates`, and `Per 100 000 population` so let's filter and replace the former data set
 
-```{r}
+```{r filter only graduate and 100 000}
 dent_oecd <- dent_oecd %>% 
   filter(Variable == "Dentists graduates", 
          Measure == "Per 100 000 population")
 ```
 
+
+There are some useless columns, so unselect them
+
+```{r unselect vars}
+dent_oecd <- select(dent_oecd, -c(VAR, UNIT, COU, YEA,`Flag Codes`, Flags))
+```
+
 Let's plot. Since is a temporal trend, a line plot could be a good idea: 
-```{r}
+```{r messy plot}
 dent_oecd %>%  # this means: take the dent_oecd dataframe, and
   ggplot(aes(x = Year, y = Value, color = Country)) + #plot the year in the X axis, the value in the y axis and color the lines per country
   geom_line() + 
@@ -62,11 +71,11 @@ dent_oecd %>%  # this means: take the dent_oecd dataframe, and
 Hmmm....the problem here is that isn't easy to differentiate the countries. 
 
 We have to choices: 
-  - plot each country separate, or
-  - highlight one or few countries from the group we can use the package
+  1. plot each country separate, or
+  2. highlight one or few countries from the group we can use the package
   
-## Plotting one graph per country: faceting.
-```{r}
+## 1. Plotting one graph per country: faceting.
+```{r facetted plot}
 dent_oecd  %>% 
     ggplot(aes(x = Year, y = Value)) + # we delete the color = Country, since is not necessary
   geom_line() + 
@@ -88,7 +97,7 @@ _TODO: learn how to order the plots, e.g. from higher rate to lower _
 
 We can transform the Value var using the log10. With `ggplot2` we can directly add the transformation to any axis, as y-axis in this case. We use `scale_y_log10()`. Sometimes is worth to use to expand some small differences or to graph data with orders of magnitude of difference. 
 
-```{r}
+```{r facetted plot 2 log10, warning=FALSE}
 dent_oecd  %>% 
   filter(Year < 2016) %>% 
     ggplot(aes(x = Year, y = Value)) + 
@@ -100,16 +109,16 @@ dent_oecd  %>%
   
 ```
 
-## Using `gghighlight`
+## 2. Using `gghighlight`
 `gghighlight` is a package that highlight ggplot's Lines and Points with Predicates
 
-```{r, echo=FALSE, results='hide'}
+```{r package ggh, echo=FALSE, results='hide'}
 library(gghighlight)
 ```
 
 Remember the first graph: 
 
-```{r}
+```{r messy plot again}
 dent_oecd %>%  
   ggplot(aes(x = Year, y = Value, color = Country)) + 
   geom_line() + 
@@ -118,13 +127,14 @@ dent_oecd %>%
 
 With gghighlight we can, as the name implies, highlight some lines according to a criteria or predicate. 
 
-```{r}
+```{r highlighted and nice line plot}
 dent_oecd %>% 
   filter(Year < 2016) %>% 
   gghighlight_line(aes(x = Year, y = Value, color = Country), 
                    predicate = mean(Value) > 5) + # this is the threshold
   labs(y = "Dentists graduation per 100 000 hab") 
 ```
+
 
 And a pivot table in the `dplyr` way
 ```{r}
@@ -143,6 +153,20 @@ Now enhance the table with the package `kableExtra`:
 ```{r, echo=FALSE, results='hide'}
 library(kableExtra)
 ```
+Addf the average as reference value
+
+
+```{r}
+dent_oecd_avg <- dent_oecd %>% 
+  group_by(Year) %>% 
+  summarise(Value = mean(Value, na.omit = TRUE)) # create a new dataframe with the average per year  
+
+dent_oecd_avg[,"Country"] <- "OECD average"  # add a column and fill with a string
+dent_oecd <- bind_rows(dent_oecd_avg, dent_oecd) # bind the dataframes by columns
+rm(dent_oecd_avg) # remove the average dataset
+
+```
+
 First I create the table and store as an object called `table_dent`
 ```{r}
 table_dent <- dent_oecd %>% 
@@ -155,7 +179,8 @@ then apply the `kable` enhance to the object `table_dent` to show a nice formatt
 
 ```{r, results='asis'}
 knitr::kable(table_dent, 
-             caption = "Dentists graduating per 100 000 habs. OECD countries")
+             caption = "Dentists graduating per 100 000 habs. OECD countries", 
+             digits = 1)
 ```
 
 More information about ggplot2
