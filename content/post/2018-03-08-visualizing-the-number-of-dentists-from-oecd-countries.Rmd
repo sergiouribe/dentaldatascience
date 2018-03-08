@@ -48,7 +48,8 @@ Let's plot. Since is a temporal trend, a line plot could be a good idea:
 ```{r}
 dent_oecd %>%  # this means: take the dent_oecd dataframe, and
   ggplot(aes(x = Year, y = Value, color = Country)) + #plot the year in the X axis, the value in the y axis and color the lines per country
-  geom_line()
+  geom_line() + 
+  labs(y = "Dentists graduation per 100 000 hab")
 ```
 
 Hmmm....the problem here is that isn't easy to differentiate the countries. 
@@ -63,7 +64,8 @@ dent_oecd  %>%
     ggplot(aes(x = Year, y = Value)) + # we delete the color = Country, since is not necessary
   geom_line() + 
   facet_wrap(~Country) + #this means: plot separately each country 
-  theme(axis.text.x = element_text(colour="grey20",size=6))
+  theme(axis.text.x = element_text(colour="grey20",size=6)) + 
+  labs(y = "Dentists graduation per 100 000 hab")
   
 ```
 
@@ -82,7 +84,8 @@ Now we can fix this mess:
 ```{r}
 dent_oecd %>%  
   ggplot(aes(x = Year, y = Value, color = Country)) + 
-  geom_line() 
+  geom_line() + 
+  labs(y = "Dentists graduation per 100 000 hab")
 ```
 
 First we calculate the mean of dentists per 100 000 hab in OECD countries for the last year: 
@@ -90,10 +93,11 @@ First we calculate the mean of dentists per 100 000 hab in OECD countries for th
 ```{r}
 dent_oecd %>% 
   gghighlight_line(aes(x = Year, y = Value, color = Country), 
-                   predicate = max(Value) > 5) 
+                   predicate = max(Value) > 5) + 
+  labs(y = "Dentists graduation per 100 000 hab")
 ```
 
-And a pivot table in the `dplyr` way 
+And a pivot table in the `dplyr` way
 ```{r}
 dent_oecd %>% 
   group_by(Country, Year) %>% 
