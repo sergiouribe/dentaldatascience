@@ -19,7 +19,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Dental Data Science" />
 
-  <meta name="generator" content="Hugo 0.37" />
+  <meta name="generator" content="Hugo 0.36.1" />
   <link rel="canonical" href="/tags/ggplot2/" />
   <link rel="alternate" href="/tags/ggplot2/index.xml" type="application/rss+xml" title="Dental Data Science">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
@@ -206,7 +206,37 @@ ga('send', 'pageview');
         <div class="posts-list">
           
             <article class="post-preview">
-              <a href="/post/visualization-of-categorical-data-in-dental-research/">
+              <a href="/post/visualizing-the-dentists-workforce-of-oecd-countries/">
+                <h2 class="post-title">Visualizing the dentists workforce of OECD countries</h2>
+
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on March 8, 2018
+              </p>
+              <div class="post-entry">
+                
+                  The Organisation for Economic Co-operation and Development host a database with extensive data. IN this post we will some visualizations to compare the number of dentists in each country.
+Package required: tidyverse
+First we load the data. Now there is a package (OECD) able to extract the datasets, but I will use a local copy:
+dent_oecd &lt;- read_csv(&quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vStv7Pr69DtRKv6Nw6gVBep8hbT3pEeO6B1vNwxK_1DUHgpoTgbuRpZ4SvgtHFQnBZJVGeeQVyRuXZl/pub?gid=1330297229&amp;single=true&amp;output=csv&quot;)## Parsed with column specification:## cols(## VAR = col_character(),## Variable = col_character(),## UNIT = col_character(),## Measure = col_character(),## COU = col_character(),## Country = col_character(),## YEA = col_integer(),## Year = col_integer(),## Value = col_double(),## `Flag Codes` = col_character(),## Flags = col_character()## )Always is preferable to take a look the data and its structure:
+                  <a href="/post/visualizing-the-dentists-workforce-of-oecd-countries/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="//tags/ggplot2/">ggplot2</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/drafts/visualization-of-categorical-data-in-dental-research/">
                 <h2 class="post-title">Visualization of categorical data in dental research</h2>
 
                 
@@ -220,7 +250,7 @@ ga('send', 'pageview');
                   Categorical data is often found in dental research reports. From the clinical perspective, it’s easier to deal and understand since many clinical decisions are categorical: does this surface has caries? have this patient active caries? should I give a treatment?
 Usually, this data are presented in tables, but there are some visualizations helpful to discover some associations.
 For example, a survey research investigate the perception of children and their mothers as regards orthodontic treatment need and satisfaction with dental aesthetics (De Souza et al.
-                  <a href="/post/visualization-of-categorical-data-in-dental-research/" class="post-read-more">[Read More]</a>
+                  <a href="/drafts/visualization-of-categorical-data-in-dental-research/" class="post-read-more">[Read More]</a>
                 
               </div>
 
@@ -350,7 +380,7 @@ Case control studies are observational because no intervention is attempted and 
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.37</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          <a href="http://gohugo.io">Hugo v0.36.1</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
           
         </p>
       </div>

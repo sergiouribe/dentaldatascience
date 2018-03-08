@@ -3,17 +3,22 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>/post/create-dataframe-from-tables/</loc>
+    <loc>/post/visualizing-the-dentists-workforce-of-oecd-countries/</loc>
+    <lastmod>2018-03-08T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/drafts/create-dataframe-from-tables/</loc>
     <lastmod>2018-03-04T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/visualizing-caries-trend-at-age-12-from-oecd-dataset/</loc>
+    <loc>/drafts/visualizing-caries-trend-at-age-12-from-oecd-dataset/</loc>
     <lastmod>2018-03-04T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/post/visualization-of-categorical-data-in-dental-research/</loc>
+    <loc>/drafts/visualization-of-categorical-data-in-dental-research/</loc>
     <lastmod>2018-03-03T00:00:00+00:00</lastmod>
   </url>
   
@@ -70,13 +75,19 @@
   
   <url>
     <loc>/</loc>
-    <lastmod>2018-03-04T00:00:00+00:00</lastmod>
+    <lastmod>2018-03-08T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>/tags/dplyr/</loc>
     <lastmod>2018-03-02T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>/drafts/</loc>
+    <lastmod>2018-03-04T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -88,7 +99,7 @@
   
   <url>
     <loc>/tags/ggplot2/</loc>
-    <lastmod>2018-03-03T00:00:00+00:00</lastmod>
+    <lastmod>2018-03-08T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -115,7 +126,7 @@
   
   <url>
     <loc>/post/</loc>
-    <lastmod>2018-03-04T00:00:00+00:00</lastmod>
+    <lastmod>2018-03-08T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -131,7 +142,7 @@
   
   <url>
     <loc>/categories/visualization/</loc>
-    <lastmod>2018-03-04T00:00:00+00:00</lastmod>
+    <lastmod>2018-03-08T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

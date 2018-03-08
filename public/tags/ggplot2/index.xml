@@ -7,17 +7,29 @@
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>sergio.uribe@gmail.com (Sergio Uribe)</managingEditor>
     <webMaster>sergio.uribe@gmail.com (Sergio Uribe)</webMaster>
-    <lastBuildDate>Sat, 03 Mar 2018 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 08 Mar 2018 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/ggplot2/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Visualizing the dentists workforce of OECD countries</title>
+      <link>/post/visualizing-the-dentists-workforce-of-oecd-countries/</link>
+      <pubDate>Thu, 08 Mar 2018 00:00:00 +0000</pubDate>
+      <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
+      <guid>/post/visualizing-the-dentists-workforce-of-oecd-countries/</guid>
+      <description>The Organisation for Economic Co-operation and Development host a database with extensive data. IN this post we will some visualizations to compare the number of dentists in each country.
+Package required: tidyverse
+First we load the data. Now there is a package (OECD) able to extract the datasets, but I will use a local copy:
+dent_oecd &amp;lt;- read_csv(&amp;quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vStv7Pr69DtRKv6Nw6gVBep8hbT3pEeO6B1vNwxK_1DUHgpoTgbuRpZ4SvgtHFQnBZJVGeeQVyRuXZl/pub?gid=1330297229&amp;amp;single=true&amp;amp;output=csv&amp;quot;)## Parsed with column specification:## cols(## VAR = col_character(),## Variable = col_character(),## UNIT = col_character(),## Measure = col_character(),## COU = col_character(),## Country = col_character(),## YEA = col_integer(),## Year = col_integer(),## Value = col_double(),## `Flag Codes` = col_character(),## Flags = col_character()## )Always is preferable to take a look the data and its structure:</description>
+    </item>
+    
+    <item>
       <title>Visualization of categorical data in dental research</title>
-      <link>/post/visualization-of-categorical-data-in-dental-research/</link>
+      <link>/drafts/visualization-of-categorical-data-in-dental-research/</link>
       <pubDate>Sat, 03 Mar 2018 00:00:00 +0000</pubDate>
       <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
-      <guid>/post/visualization-of-categorical-data-in-dental-research/</guid>
+      <guid>/drafts/visualization-of-categorical-data-in-dental-research/</guid>
       <description>Categorical data is often found in dental research reports. From the clinical perspective, it’s easier to deal and understand since many clinical decisions are categorical: does this surface has caries? have this patient active caries? should I give a treatment?
 Usually, this data are presented in tables, but there are some visualizations helpful to discover some associations.
 For example, a survey research investigate the perception of children and their mothers as regards orthodontic treatment need and satisfaction with dental aesthetics (De Souza et al.</description>

@@ -14,10 +14,10 @@
     
     <item>
       <title>Visualizing caries trend at age 12 from OECD dataset</title>
-      <link>/post/visualizing-caries-trend-at-age-12-from-oecd-dataset/</link>
+      <link>/drafts/visualizing-caries-trend-at-age-12-from-oecd-dataset/</link>
       <pubDate>Sun, 04 Mar 2018 00:00:00 +0000</pubDate>
       <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
-      <guid>/post/visualizing-caries-trend-at-age-12-from-oecd-dataset/</guid>
+      <guid>/drafts/visualizing-caries-trend-at-age-12-from-oecd-dataset/</guid>
       <description>library(tidyverse)## -- Attaching packages --------------------------------------------------------- tidyverse 1.2.1 --## v ggplot2 2.2.1 v purrr 0.2.4## v tibble 1.4.2 v dplyr 0.7.4## v tidyr 0.8.0 v stringr 1.3.0## v readr 1.1.1 v forcats 0.3.0## -- Conflicts ------------------------------------------------------------ tidyverse_conflicts() --## x dplyr::filter() masks stats::filter()## x dplyr::lag() masks stats::lag()df &amp;lt;- read_csv(&amp;quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vStv7Pr69DtRKv6Nw6gVBep8hbT3pEeO6B1vNwxK_1DUHgpoTgbuRpZ4SvgtHFQnBZJVGeeQVyRuXZl/pub?gid=1485746444&amp;amp;single=true&amp;amp;output=csv&amp;quot;)## Parsed with column specification:## cols(## Country = col_character(),## DMFT_12_2006 = col_double(),## DentistsPer1000h = col_double()## )head(df)## # A tibble: 6 x 3## Country DMFT_12_2006 DentistsPer1000h## &amp;lt;chr&amp;gt; &amp;lt;dbl&amp;gt; &amp;lt;dbl&amp;gt;## 1 Australia 1.</description>
     </item>
     
