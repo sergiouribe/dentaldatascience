@@ -22,24 +22,6 @@
     </item>
     
     <item>
-      <title>Categorical Data</title>
-      <link>/tags/categorical-data/</link>
-      <pubDate>Sat, 03 Mar 2018 00:00:00 +0000</pubDate>
-      <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
-      <guid>/tags/categorical-data/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Dataframe</title>
-      <link>/tags/dataframe/</link>
-      <pubDate>Sun, 04 Mar 2018 00:00:00 +0000</pubDate>
-      <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
-      <guid>/tags/dataframe/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>Dplyr</title>
       <link>/tags/dplyr/</link>
       <pubDate>Fri, 02 Mar 2018 00:00:00 +0000</pubDate>
@@ -54,24 +36,6 @@
       <pubDate>Thu, 08 Mar 2018 00:00:00 +0000</pubDate>
       <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
       <guid>/tags/ggplot2/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Ggplot2 Dental Caries</title>
-      <link>/tags/ggplot2-dental-caries/</link>
-      <pubDate>Sun, 04 Mar 2018 00:00:00 +0000</pubDate>
-      <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
-      <guid>/tags/ggplot2-dental-caries/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Package</title>
-      <link>/tags/package/</link>
-      <pubDate>Sun, 04 Mar 2018 00:00:00 +0000</pubDate>
-      <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
-      <guid>/tags/package/</guid>
       <description></description>
     </item>
     

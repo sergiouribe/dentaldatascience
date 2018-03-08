@@ -254,27 +254,6 @@ Main topics are
 
             </article>
           
-            <article class="post-preview">
-              <a href="/page/tricks/">
-                <h2 class="post-title">Tricks</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on January 1, 0001
-              </p>
-              <div class="post-entry">
-                
-                  Search &amp; Replace tidyverse way library(tidyverse) df &lt;- data.frame( c1 = letters[1:5], c2 = 5:9, c3 = LETTERS[5:9], stringsAsFactors = FALSE) df ## c1 c2 c3 ## 1 a 5 E ## 2 b 6 F ## 3 c 7 G ## 4 d 8 H ## 5 e 9 I df %&gt;% mutate_if(is.character, str_replace_all, pattern = &#39;[aeouAEOU]&#39;, replacement = &#39;ths should be aeouAEIOU except i or I &#39;) ## c1 c2 ## 1 ths should be aeouAEIOU except i or I 5 ## 2 b 6 ## 3 c 7 ## 4 d 8 ## 5 ths should be aeouAEIOU except i or I 9 ## c3 ## 1 ths should be aeouAEIOU except i or I ## 2 F ## 3 G ## 4 H ## 5 I  Find NAs `new_DF &lt;- df[is.
-                  <a href="/page/tricks/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-
-            </article>
-          
         </div>
         
       </div>

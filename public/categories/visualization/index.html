@@ -217,8 +217,8 @@ ga('send', 'pageview');
               </p>
               <div class="post-entry">
                 
-                  The Organisation for Economic Co-operation and Development host a database with extensive data. IN this post we will some visualizations to compare the number of dentists in each country.
-Package required: tidyverse
+                  The Organisation for Economic Co-operation and Development host a database with extensive data. In this post we will some visualizations to compare the number of dentists in each country.
+Packages used: - tidyverse - gghighlight - kableExtra
 First we load the data. Now there is a package (OECD) able to extract the datasets, but I will use a local copy:
 dent_oecd &lt;- read_csv(&quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vStv7Pr69DtRKv6Nw6gVBep8hbT3pEeO6B1vNwxK_1DUHgpoTgbuRpZ4SvgtHFQnBZJVGeeQVyRuXZl/pub?gid=1330297229&amp;single=true&amp;output=csv&quot;)## Parsed with column specification:## cols(## VAR = col_character(),## Variable = col_character(),## UNIT = col_character(),## Measure = col_character(),## COU = col_character(),## Country = col_character(),## YEA = col_integer(),## Year = col_integer(),## Value = col_double(),## `Flag Codes` = col_character(),## Flags = col_character()## )Always is preferable to take a look the data and its structure:
                   <a href="/post/visualizing-the-dentists-workforce-of-oecd-countries/" class="post-read-more">[Read More]</a>
@@ -229,64 +229,6 @@ dent_oecd &lt;- read_csv(&quot;https://docs.google.com/spreadsheets/d/e/2PACX-1v
                 <span class="post-meta">
                   
                     #<a href="//tags/ggplot2/">ggplot2</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="/drafts/visualizing-caries-trend-at-age-12-from-oecd-dataset/">
-                <h2 class="post-title">Visualizing caries trend at age 12 from OECD dataset</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on March 4, 2018
-              </p>
-              <div class="post-entry">
-                
-                  library(tidyverse)## -- Attaching packages --------------------------------------------------------- tidyverse 1.2.1 --## v ggplot2 2.2.1 v purrr 0.2.4## v tibble 1.4.2 v dplyr 0.7.4## v tidyr 0.8.0 v stringr 1.3.0## v readr 1.1.1 v forcats 0.3.0## -- Conflicts ------------------------------------------------------------ tidyverse_conflicts() --## x dplyr::filter() masks stats::filter()## x dplyr::lag() masks stats::lag()df &lt;- read_csv(&quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vStv7Pr69DtRKv6Nw6gVBep8hbT3pEeO6B1vNwxK_1DUHgpoTgbuRpZ4SvgtHFQnBZJVGeeQVyRuXZl/pub?gid=1485746444&amp;single=true&amp;output=csv&quot;)## Parsed with column specification:## cols(## Country = col_character(),## DMFT_12_2006 = col_double(),## DentistsPer1000h = col_double()## )head(df)## # A tibble: 6 x 3## Country DMFT_12_2006 DentistsPer1000h## &lt;chr&gt; &lt;dbl&gt; &lt;dbl&gt;## 1 Australia 1.
-                  <a href="/drafts/visualizing-caries-trend-at-age-12-from-oecd-dataset/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="//tags/ggplot2-dental-caries/">ggplot2 dental caries</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
-          
-            <article class="post-preview">
-              <a href="/drafts/visualization-of-categorical-data-in-dental-research/">
-                <h2 class="post-title">Visualization of categorical data in dental research</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on March 3, 2018
-              </p>
-              <div class="post-entry">
-                
-                  Categorical data is often found in dental research reports. From the clinical perspective, it’s easier to deal and understand since many clinical decisions are categorical: does this surface has caries? have this patient active caries? should I give a treatment?
-Usually, this data are presented in tables, but there are some visualizations helpful to discover some associations.
-For example, a survey research investigate the perception of children and their mothers as regards orthodontic treatment need and satisfaction with dental aesthetics (De Souza et al.
-                  <a href="/drafts/visualization-of-categorical-data-in-dental-research/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="//tags/ggplot2/">ggplot2</a>&nbsp;
-                  
-                    #<a href="//tags/categorical-data/">categorical data</a>&nbsp;
                   
                 </span>
               

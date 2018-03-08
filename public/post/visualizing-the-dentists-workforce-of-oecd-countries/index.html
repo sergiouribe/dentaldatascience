@@ -8,16 +8,16 @@
   <title>Visualizing the dentists workforce of OECD countries</title>
   <meta property="og:title" content="Visualizing the dentists workforce of OECD countries" />
   <meta name="twitter:title" content="Visualizing the dentists workforce of OECD countries" />
-  <meta name="description" content="The Organisation for Economic Co-operation and Development host a database with extensive data. IN this post we will some visualizations to compare the number of dentists in each country.
-Package required: tidyverse
+  <meta name="description" content="The Organisation for Economic Co-operation and Development host a database with extensive data. In this post we will some visualizations to compare the number of dentists in each country.
+Packages used: - tidyverse - gghighlight - kableExtra
 First we load the data. Now there is a package (OECD) able to extract the datasets, but I will use a local copy:
 dent_oecd &lt;- read_csv(&quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vStv7Pr69DtRKv6Nw6gVBep8hbT3pEeO6B1vNwxK_1DUHgpoTgbuRpZ4SvgtHFQnBZJVGeeQVyRuXZl/pub?gid=1330297229&amp;single=true&amp;output=csv&quot;)## Parsed with column specification:## cols(## VAR = col_character(),## Variable = col_character(),## UNIT = col_character(),## Measure = col_character(),## COU = col_character(),## Country = col_character(),## YEA = col_integer(),## Year = col_integer(),## Value = col_double(),## `Flag Codes` = col_character(),## Flags = col_character()## )Always is preferable to take a look the data and its structure:">
-  <meta property="og:description" content="The Organisation for Economic Co-operation and Development host a database with extensive data. IN this post we will some visualizations to compare the number of dentists in each country.
-Package required: tidyverse
+  <meta property="og:description" content="The Organisation for Economic Co-operation and Development host a database with extensive data. In this post we will some visualizations to compare the number of dentists in each country.
+Packages used: - tidyverse - gghighlight - kableExtra
 First we load the data. Now there is a package (OECD) able to extract the datasets, but I will use a local copy:
 dent_oecd &lt;- read_csv(&quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vStv7Pr69DtRKv6Nw6gVBep8hbT3pEeO6B1vNwxK_1DUHgpoTgbuRpZ4SvgtHFQnBZJVGeeQVyRuXZl/pub?gid=1330297229&amp;single=true&amp;output=csv&quot;)## Parsed with column specification:## cols(## VAR = col_character(),## Variable = col_character(),## UNIT = col_character(),## Measure = col_character(),## COU = col_character(),## Country = col_character(),## YEA = col_integer(),## Year = col_integer(),## Value = col_double(),## `Flag Codes` = col_character(),## Flags = col_character()## )Always is preferable to take a look the data and its structure:">
-  <meta name="twitter:description" content="The Organisation for Economic Co-operation and Development host a database with extensive data. IN this post we will some visualizations to compare the number of dentists in each country.
-Package …">
+  <meta name="twitter:description" content="The Organisation for Economic Co-operation and Development host a database with extensive data. In this post we will some visualizations to compare the number of dentists in each country.
+Packages …">
   <meta name="author" content="Sergio Uribe"/>
   <link href='/img/favicon.png' rel='icon' type='image/x-icon'/>
   <meta property="og:image" content="/img/icon.png" />
@@ -220,7 +220,7 @@ ga('send', 'pageview');
   
   
   &nbsp;|&nbsp;
-  <i class="fa fa-clock-o"></i> 6 minutes (1228 words)
+  <i class="fa fa-clock-o"></i> 6 minutes (1234 words)
   
   
 </span>
@@ -240,8 +240,8 @@ ga('send', 'pageview');
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
-        <p>The Organisation for Economic Co-operation and Development host a <a href="https://data.oecd.org/">database</a> with extensive data. IN this post we will some visualizations to compare the number of dentists in each country.</p>
-<p>Package required: <code>tidyverse</code></p>
+        <p>The Organisation for Economic Co-operation and Development host a <a href="https://data.oecd.org/">database</a> with extensive data. In this post we will some visualizations to compare the number of dentists in each country.</p>
+<p>Packages used: - tidyverse - gghighlight - kableExtra</p>
 <p>First we load the data. Now there is a package (<a href="https://cran.r-project.org/web/packages/OECD/index.html">OECD</a>) able to extract the datasets, but I will use a local copy:</p>
 <pre class="r"><code>dent_oecd &lt;- read_csv(&quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vStv7Pr69DtRKv6Nw6gVBep8hbT3pEeO6B1vNwxK_1DUHgpoTgbuRpZ4SvgtHFQnBZJVGeeQVyRuXZl/pub?gid=1330297229&amp;single=true&amp;output=csv&quot;)</code></pre>
 <pre><code>## Parsed with column specification:
@@ -284,7 +284,7 @@ ga('send', 'pageview');
 ## $ Value        &lt;dbl&gt; 552, 632, 665, 684, 723, 894, 861, 957, 118, 134,...
 ## $ `Flag Codes` &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N...
 ## $ Flags        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N...</code></pre>
-<p>I will use the <code>Dentists graduates</code>, and <code>Per 100 000 population</code> so let’s filter and replace the former dataset</p>
+<p>I will use the <code>Dentists graduates</code>, and <code>Per 100 000 population</code> so let’s filter and replace the former data set</p>
 <pre class="r"><code>dent_oecd &lt;- dent_oecd %&gt;% 
   filter(Variable == &quot;Dentists graduates&quot;, 
          Measure == &quot;Per 100 000 population&quot;)</code></pre>
@@ -294,7 +294,7 @@ ga('send', 'pageview');
   geom_line()</code></pre>
 <p><img src="/post/2018-03-08-visualizing-the-number-of-dentists-from-oecd-countries_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
 <p>Hmmm….the problem here is that isn’t easy to differentiate the countries.</p>
-<p>We have to choices: - plot each country separate, or - higlight one or few countries from the group we can use the package</p>
+<p>We have to choices: - plot each country separate, or - highlight one or few countries from the group we can use the package</p>
 <div id="plot-each-country-separate" class="section level2">
 <h2>Plot each country separate</h2>
 <pre class="r"><code>dent_oecd  %&gt;% 
@@ -339,7 +339,7 @@ ga('send', 'pageview');
 ##  9 Finland    1.34   1.35   2.44   2.56   3.27   2.87   2.38  NA     NA   
 ## 10 France     1.36   1.33   1.49   1.72   1.57   1.66   1.48   1.88  NA   
 ## # ... with 26 more rows</code></pre>
-<p>Now enchance the table with the package <code>kableExtra</code>:</p>
+<p>Now enhance the table with the package <code>kableExtra</code>:</p>
 <p><code>install.packages(&quot;kableExtra&quot;)</code></p>
 <p><code>library(kableExtra)</code></p>
 <pre class="r"><code>table_dent &lt;- dent_oecd %&gt;% 
