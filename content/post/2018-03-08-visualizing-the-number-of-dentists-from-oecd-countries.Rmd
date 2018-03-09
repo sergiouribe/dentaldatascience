@@ -2,14 +2,16 @@
 title: Visualizing the dental workforce of OECD countries I
 author: Sergio Uribe
 date: '2018-03-08'
-slug: visualizing-the-dentists-workforce-of-oecd-countries
+slug: visualizing-the-dentists-workforce-of-oecd-countries I
 categories:
   - visualization
 tags:
   - ggplot2
 ---
 
-The Organisation for Economic Co-operation and Development host a [database](https://data.oecd.org/) with extensive data. In this post we will some visualizations to compare the number of dentists in each country. 
+![]()
+
+The Organisation for Economic Co-operation and Development host a [database](https://data.oecd.org/) with extensive data. In this post we will do some visualizations to compare the number of dentists in each country. 
 
 Packages used: 
 
@@ -137,7 +139,7 @@ dent_oecd %>%
 ## Pivot table
 
 Pivot table in the `dplyr` way
-```{r}
+```{r pivot table in dplyr way}
 dent_oecd %>% 
   group_by(Country, Year) %>% 
   summarise(average = mean(Value)) %>% 
@@ -150,13 +152,13 @@ Now enhance the table with the package `kableExtra`:
 
 `library(kableExtra)`
 
-```{r, echo=FALSE, results='hide'}
+```{r lib kable, echo=FALSE, results='hide'}
 library(kableExtra)
 ```
 Addf the average as reference value
 
 
-```{r}
+```{r create average}
 dent_oecd_avg <- dent_oecd %>% 
   group_by(Year) %>% 
   summarise(Value = mean(Value, na.omit = TRUE)) # create a new dataframe with the average per year  
@@ -168,7 +170,7 @@ rm(dent_oecd_avg) # remove the average dataset
 ```
 
 First I create the table and store as an object called `table_dent`
-```{r}
+```{r table_dent}
 table_dent <- dent_oecd %>% 
   group_by(Country, Year) %>% 
   summarise(average = mean(Value)) %>% 
@@ -177,7 +179,7 @@ table_dent <- dent_oecd %>%
 
 then apply the `kable` enhance to the object `table_dent` to show a nice formatted table: 
 
-```{r, results='asis'}
+```{r table nice, results='asis'}
 knitr::kable(table_dent, 
              caption = "Dentists graduating per 100 000 habs. OECD countries", 
              digits = 1)
