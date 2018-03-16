@@ -47,3 +47,7 @@ Data Carpentry contributors](http://www.datacarpentry.org/R-ecology-lesson/01-in
   - [#rstats on Twitter](https://twitter.com/search?q=%23rstats&src=typd)
   - [Practical Data Science for Stats - a PeerJ Collection](https://peerj.com/collections/50-practicaldatascistats/)
   - [Recommended Resources for Beginners](http://www.datasciguide.com/recommended-resources-for-beginners/)
+
+# Blogs
+  - [R Weekly](https://rweekly.org/)
+  - [R Bloggers](https://www.r-bloggers.com.)
