@@ -1,0 +1,261 @@
+---
+title: "Exploratory Data Analysis with Tables"
+author: "Sergio Uribe"
+date: '2019-09-05'
+slug: eda-with-tables
+tags:
+- janitor
+- table1
+- EDA
+- table
+categories: eda
+---
+
+# Introduction
+
+Tables allow you to explore and summarize data efficiently. While graphs are more intuitive for discovering relationships and trends, the tables have the advantage that without simple to perform and allow detecting the presence of errors in the tabulation of data.
+
+Usually scientific articles in medicine begin with a table that shows the characteristics of the sample of patients. In this post, we will use the janitor and table1 packages to summarize data and make an example of table 1 using the NHANES database. 
+
+
+# Packages used
+
+
+  - tidyverse
+  - janitor
+  - table1
+  - NHANES
+
+Before using each of these packages you must install them using the command
+
+_install.packages("package")_
+
+and then call using the command
+
+_library(package)_
+
+Also after installed, each package be invoked specifically for command via the format
+
+_package::command()_
+
+for example, after install the package janitor, you can use function clean_names via
+
+_janitor::clean_names(dataset)_
+
+
+
+I suggest using the pacman package to handle other packages, and can be installed with
+
+_install.packages("pacman")_
+
+
+```{r tidyverse, echo=FALSE, results='hide', warning=FALSE, message=FALSE}
+pacman::p_load(tidyverse, table1, janitor) #pacman allow to use the library or install if isn't
+```
+
+# Dataset
+
+The National Health and Nutrition Examination Survey (NHANES) is a program of studies designed to assess the health and nutritional status of adults and children in the United States.  More information at https://wwwn.cdc.gov/nchs/nhanes/tutorials/default.aspx
+
+```{r, warning=FALSE, message=FALSE}
+# install.packages("NHANES") 
+library(NHANES)
+data(NHANES)
+
+```
+
+
+# Tables with r-base
+
+
+## One variable table
+Univariate tables are useful for detecting the presence of errors in coding and for obtaining a general summary of the data.
+
+the command table allows to create a table of 
+Check the number of males and females
+
+The general syntaxis to indicate a column or variable in R is _dataset__$__variable_
+
+```{r}
+table(NHANES$Gender)
+```
+To obtain the total we use the command _addmargins()_
+```{r}
+addmargins(table(NHANES$Gender))
+```
+
+Now a table by marital status
+```{r}
+table(NHANES$MaritalStatus)
+```
+
+
+
+To get the percentages you use the command _prop.table_ and add *100 at the end to make it more readable
+```{r}
+prop.table(table(NHANES$MaritalStatus)) * 100 
+```
+
+The equivalent in tidyverse format is:
+```{r}
+NHANES %>% 
+ group_by(Gender) %>% 
+  summarise(n = n())
+```
+
+
+
+## Two variables table
+Tables become more useful even when used to cross tabulate between two nominal variables.
+
+For example, to make a summary table indicating race by gender, the command is:
+The proportion table is
+```{r}
+prop.table(table(NHANES$Race1, NHANES$Gender))
+```
+Now in percentage
+```{r}
+prop.table(table(NHANES$Race1, NHANES$Gender)) * 100
+```
+and with the percentage by row
+```{r}
+prop.table(table(NHANES$Race1, NHANES$Gender), 1) * 100
+```
+We can choose the number of digits with _options(digits = n)_
+```{r}
+options(digits = 3)
+prop.table(table(NHANES$Race1, NHANES$Gender), 1) * 100
+```
+
+```{r}
+addmargins(prop.table(table(NHANES$Race1, NHANES$Gender), 1) * 100)
+```
+
+```{r}
+addmargins(prop.table(table(NHANES$Race1, NHANES$Gender), 2) * 100)
+
+```
+# Tables in tidyverse syle
+To create this table
+```{r}
+table(NHANES$Race1, NHANES$Gender)
+```
+
+In tidyverse format is:
+
+```{r}
+NHANES %>% 
+  group_by(Gender, Race1) %>% 
+  summarise(n = n()) %>% 
+  spread(Gender, n)
+```
+## Proportion table in tidyverse style
+
+This table: 
+```{r}
+prop.table(table(NHANES$Race1, NHANES$Gender), 2) *100
+```
+
+And to get the proportions in tidyverse style, is: 
+
+```{r}
+NHANES %>%
+  group_by(Gender, Race1) %>%
+  summarise(n = n()) %>%
+  mutate(freq = n / sum(n) * 100) %>% 
+  select(-n) %>% 
+  spread(Gender, freq)
+```
+
+
+# Tables with janitor::tabyl
+The janitor package, designed for data cleaning, contains the tabyl command which is a table 2.0, with some of the following utilities:
+
+```{r}
+NHANES %>% 
+  janitor::tabyl(Race1) 
+
+```
+
+
+Or a two-variables table: 
+```{r}
+NHANES %>% 
+  janitor::tabyl(Race1, Gender) %>% 
+  janitor::adorn_totals(where = "row")
+```
+```{r}
+NHANES %>% 
+  janitor::tabyl(Race1, Gender) %>% 
+  janitor::adorn_totals(where = "col")
+```
+
+You can add the margins with  _janitor::adorn_totals(where = c("row","col"))_
+```{r}
+NHANES %>% 
+  janitor::tabyl(Race1, Gender) %>% 
+  janitor::adorn_totals(where = c("row","col"))
+```
+
+To limit the number of decimals, we do it in the following way:
+
+```{r}
+NHANES %>% 
+  janitor::tabyl(Race1, Gender) %>% 
+  janitor::adorn_percentages(denominator = "col") %>% 
+  janitor::adorn_pct_formatting(digits = 0) 
+```
+```{r}
+NHANES %>% 
+  janitor::tabyl(Race1, Gender) %>% 
+  janitor::adorn_percentages(denominator = "row") %>% 
+  janitor::adorn_pct_formatting(digits = 0) 
+```
+
+One of the most useful functions of tabyl is that it allows you to make a table by combining totals and percentages, either by row or column.
+
+```{r}
+NHANES %>% 
+  janitor::tabyl(Race1, Gender) %>% 
+  janitor::adorn_totals(where = c("row","col")) %>% 
+  janitor::adorn_percentages(denominator = "col") %>% 
+  janitor::adorn_pct_formatting(digits = 0) %>% 
+  janitor::adorn_ns(position = "front")
+```
+
+
+
+```{r}
+NHANES %>% 
+  janitor::tabyl(Race1, Gender) %>% 
+  janitor::adorn_totals(where = c("row","col")) %>% 
+  janitor::adorn_percentages(denominator = "col") %>% 
+  janitor::adorn_pct_formatting(digits = 0) %>% 
+  janitor::adorn_ns(position = "front") 
+```
+
+
+```{r}
+NHANES %>% 
+  janitor::tabyl(Race1, Gender) %>% 
+  janitor::adorn_totals(where = c("row","col")) %>% 
+  janitor::adorn_percentages(denominator = "row") %>% 
+  janitor::adorn_pct_formatting(digits = 1, rounding = "half to even", affix_sign = FALSE) %>% 
+  janitor::adorn_ns(position = "front") 
+```
+
+
+# Table 1
+
+Finally, to make the first table of a scientific report, the Table1 package allows summarizing several variables grouped by factors, as follows
+
+```{r}
+NHANES %>% 
+  table1::table1(~Age + Poverty + Race1 | Gender, data = .)
+```
+
+
+```{r}
+table1::table1( ~ Age + Poverty + Race1| Gender, data = NHANES, 
+                topclass="Rtable1-zebra" )
+```
