@@ -19,7 +19,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Dental Data Science" />
 
-  <meta name="generator" content="Hugo 0.37" />
+  <meta name="generator" content="Hugo 0.58.1" />
   <link rel="canonical" href="/" />
   <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Dental Data Science">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
@@ -81,12 +81,16 @@
     </div>
 </div>
 
-<script>
-window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-ga('create', 'UA-113383529-1', 'auto');
-ga('send', 'pageview');
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-113383529-1', 'auto');
+	
+	ga('send', 'pageview');
+}
 </script>
-<script async src='//www.google-analytics.com/analytics.js'></script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
 
 </head>
 
@@ -226,8 +230,8 @@ ga('send', 'pageview');
           
           
             <article class="post-preview">
-              <a href="/post/visualizing-the-dentists-workforce-of-oecd-countries-i/">
-                <h2 class="post-title">Visualizing the dental workforce of OECD countries I</h2>
+              <a href="/post/">
+                <h2 class="post-title">Posts</h2>
                 
                 
               </a>
@@ -235,11 +239,11 @@ ga('send', 'pageview');
               <span class="post-meta">
   
   
-  <i class="fa fa-calendar-o"></i>&nbsp;Posted on March 8, 2018
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on September 5, 2019
   
   
   &nbsp;|&nbsp;
-  <i class="fa fa-clock-o"></i> 8 minutes (1658 words)
+  <i class="fa fa-clock-o"></i> 0 minutes (0 words)
   
   
 </span>
@@ -247,61 +251,10 @@ ga('send', 'pageview');
 
               <div class="post-entry">
                 
-                  The Organisation for Economic Co-operation and Development host a database with extensive data. In this post we will do some visualizations to compare the number of dentists in each country.
-Packages used:
- tidyverse gghighlight kableExtra  First we load the data. Now there is a package (OECD) able to extract the datasets, but I will use a local copy:
-dent_oecd &lt;- read_csv(&quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vStv7Pr69DtRKv6Nw6gVBep8hbT3pEeO6B1vNwxK_1DUHgpoTgbuRpZ4SvgtHFQnBZJVGeeQVyRuXZl/pub?gid=1330297229&amp;single=true&amp;output=csv&quot;) ## Parsed with column specification: ## cols( ## VAR = col_character(), ## Variable = col_character(), ## UNIT = col_character(), ## Measure = col_character(), ## COU = col_character(), ## Country = col_character(), ## YEA = col_integer(), ## Year = col_integer(), ## Value = col_double(), ## `Flag Codes` = col_character(), ## Flags = col_character() ## ) Always is preferable to take a look the data and its structure:
-                  <a href="/post/visualizing-the-dentists-workforce-of-oecd-countries-i/" class="post-read-more">[Read More]</a>
+                  
                 
               </div>
 
-              
-                <span class="post-meta">
-                
-                  #<a href="//tags/ggplot2/">ggplot2</a>&nbsp;
-                
-                </span>
-              
-            </article>
-          
-            <article class="post-preview">
-              <a href="/post/tercer-post/">
-                <h2 class="post-title">Data wrangling and table summaries of case-control studies</h2>
-                
-                
-              </a>
-
-              <span class="post-meta">
-  
-  
-  <i class="fa fa-calendar-o"></i>&nbsp;Posted on March 2, 2018
-  
-  
-  &nbsp;|&nbsp;
-  <i class="fa fa-clock-o"></i> 7 minutes (1412 words)
-  
-  
-</span>
-
-
-              <div class="post-entry">
-                
-                  A Case-control study compares patients who have a disease or outcome of interest (cases) with patients who do not have the disease or outcome (controls), and looks back retrospectively to compare how frequently the exposure to a risk factor is present in each group to determine the relationship between the risk factor and the disease.
-Case control studies are observational because no intervention is attempted and no attempt is made to alter the course of the disease.
-                  <a href="/post/tercer-post/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                
-                  #<a href="//tags/dplyr/">dplyr</a>&nbsp;
-                
-                  #<a href="//tags/ggplot2/">ggplot2</a>&nbsp;
-                
-                  #<a href="//tags/case-control/">case-control</a>&nbsp;
-                
-                </span>
               
             </article>
           
@@ -379,7 +332,7 @@ Case control studies are observational because no intervention is attempted and 
           
 
           &nbsp;&bull;&nbsp;
-          2018
+          2019
 
           
             &nbsp;&bull;&nbsp;
@@ -388,7 +341,7 @@ Case control studies are observational because no intervention is attempted and 
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.37</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>. This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC 4.0</a>.
+          <a href="http://gohugo.io">Hugo v0.58.1</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>. This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC 4.0</a>.
           
         </p>
       </div>

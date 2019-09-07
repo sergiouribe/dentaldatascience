@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Data Wrangling on Dental Data Science</title>
+    <title>data wrangling on Dental Data Science</title>
     <link>/categories/data-wrangling/</link>
-    <description>Recent content in Data Wrangling on Dental Data Science</description>
+    <description>Recent content in data wrangling on Dental Data Science</description>
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>sergio.uribe@gmail.com (Sergio Uribe)</managingEditor>
     <webMaster>sergio.uribe@gmail.com (Sergio Uribe)</webMaster>
