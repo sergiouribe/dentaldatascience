@@ -277,19 +277,7 @@ prop.table(table(NHANES$Race1, NHANES$Gender), 1) * 100</code></pre>
 ##     White 3221  (64%) 3151  (63%)  6372  (64%)
 ##     Other  413   (8%)  393   (8%)   806   (8%)
 ##     Total 5020 (100%) 4980 (100%) 10000 (100%)</code></pre>
-<pre class="r"><code>NHANES %&gt;% 
-  janitor::tabyl(Race1, Gender) %&gt;% 
-  janitor::adorn_totals(where = c(&quot;row&quot;,&quot;col&quot;)) %&gt;% 
-  janitor::adorn_percentages(denominator = &quot;col&quot;) %&gt;% 
-  janitor::adorn_pct_formatting(digits = 0) %&gt;% 
-  janitor::adorn_ns(position = &quot;front&quot;) </code></pre>
-<pre><code>##     Race1      female        male        Total
-##     Black  614  (12%)  583  (12%)  1197  (12%)
-##  Hispanic  320   (6%)  290   (6%)   610   (6%)
-##   Mexican  452   (9%)  563  (11%)  1015  (10%)
-##     White 3221  (64%) 3151  (63%)  6372  (64%)
-##     Other  413   (8%)  393   (8%)   806   (8%)
-##     Total 5020 (100%) 4980 (100%) 10000 (100%)</code></pre>
+<p>Now withouth the % sign</p>
 <pre class="r"><code>NHANES %&gt;% 
   janitor::tabyl(Race1, Gender) %&gt;% 
   janitor::adorn_totals(where = c(&quot;row&quot;,&quot;col&quot;)) %&gt;% 
@@ -400,6 +388,7 @@ prop.table(table(NHANES$Race1, NHANES$Gender), 1) * 100</code></pre>
 </tbody>
 </table>
 </div>
+<p>and with some shading</p>
 <pre class="r"><code>table1::table1( ~ Age + Poverty + Race1| Gender, data = NHANES, 
                 topclass=&quot;Rtable1-zebra&quot; )</code></pre>
 <div class="Rtable1"><table class="Rtable1-zebra">

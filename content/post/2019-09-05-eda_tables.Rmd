@@ -227,15 +227,8 @@ NHANES %>%
 
 
 
-```{r}
-NHANES %>% 
-  janitor::tabyl(Race1, Gender) %>% 
-  janitor::adorn_totals(where = c("row","col")) %>% 
-  janitor::adorn_percentages(denominator = "col") %>% 
-  janitor::adorn_pct_formatting(digits = 0) %>% 
-  janitor::adorn_ns(position = "front") 
-```
 
+Now withouth the % sign
 
 ```{r}
 NHANES %>% 
@@ -256,6 +249,8 @@ NHANES %>%
   table1::table1(~Age + Poverty + Race1 | Gender, data = .)
 ```
 
+
+and with some shading
 
 ```{r}
 table1::table1( ~ Age + Poverty + Race1| Gender, data = NHANES, 
