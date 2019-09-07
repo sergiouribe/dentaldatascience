@@ -11,6 +11,8 @@ tags:
 categories: eda
 ---
 
+![]()
+
 # Introduction
 
 Tables allow you to explore and summarize data efficiently. While graphs are more intuitive for discovering relationships and trends, the tables have the advantage that without simple to perform and allow detecting the presence of errors in the tabulation of data.
