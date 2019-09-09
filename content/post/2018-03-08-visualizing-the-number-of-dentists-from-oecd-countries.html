@@ -32,8 +32,8 @@ tags:
 ##   Measure = col_character(),
 ##   COU = col_character(),
 ##   Country = col_character(),
-##   YEA = col_integer(),
-##   Year = col_integer(),
+##   YEA = col_double(),
+##   Year = col_double(),
 ##   Value = col_double(),
 ##   `Flag Codes` = col_character(),
 ##   Flags = col_character()
@@ -41,29 +41,29 @@ tags:
 <p>Always is preferable to take a look the data and its structure:</p>
 <pre class="r"><code>head(dent_oecd)</code></pre>
 <pre><code>## # A tibble: 6 x 11
-##   VAR     Variable        UNIT    Measure COU   Country    YEA  Year Value
-##   &lt;chr&gt;   &lt;chr&gt;           &lt;chr&gt;   &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;    &lt;int&gt; &lt;int&gt; &lt;dbl&gt;
-## 1 HEDUDN… Dentists gradu… NOMBRE… Number  AUS   Austral…  2008  2008  552.
-## 2 HEDUDN… Dentists gradu… NOMBRE… Number  AUS   Austral…  2009  2009  632.
-## 3 HEDUDN… Dentists gradu… NOMBRE… Number  AUS   Austral…  2010  2010  665.
-## 4 HEDUDN… Dentists gradu… NOMBRE… Number  AUS   Austral…  2011  2011  684.
-## 5 HEDUDN… Dentists gradu… NOMBRE… Number  AUS   Austral…  2012  2012  723.
-## 6 HEDUDN… Dentists gradu… NOMBRE… Number  AUS   Austral…  2013  2013  894.
-## # ... with 2 more variables: `Flag Codes` &lt;chr&gt;, Flags &lt;chr&gt;</code></pre>
+##   VAR   Variable UNIT  Measure COU   Country   YEA  Year Value `Flag Codes`
+##   &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;       
+## 1 HEDU… Dentist… NOMB… Number  AUS   Austra…  2008  2008   552 &lt;NA&gt;        
+## 2 HEDU… Dentist… NOMB… Number  AUS   Austra…  2009  2009   632 &lt;NA&gt;        
+## 3 HEDU… Dentist… NOMB… Number  AUS   Austra…  2010  2010   665 &lt;NA&gt;        
+## 4 HEDU… Dentist… NOMB… Number  AUS   Austra…  2011  2011   684 &lt;NA&gt;        
+## 5 HEDU… Dentist… NOMB… Number  AUS   Austra…  2012  2012   723 &lt;NA&gt;        
+## 6 HEDU… Dentist… NOMB… Number  AUS   Austra…  2013  2013   894 &lt;NA&gt;        
+## # … with 1 more variable: Flags &lt;chr&gt;</code></pre>
 <pre class="r"><code>glimpse(dent_oecd)</code></pre>
 <pre><code>## Observations: 956
 ## Variables: 11
-## $ VAR          &lt;chr&gt; &quot;HEDUDNGR&quot;, &quot;HEDUDNGR&quot;, &quot;HEDUDNGR&quot;, &quot;HEDUDNGR&quot;, &quot;...
-## $ Variable     &lt;chr&gt; &quot;Dentists graduates&quot;, &quot;Dentists graduates&quot;, &quot;Dent...
-## $ UNIT         &lt;chr&gt; &quot;NOMBRENB&quot;, &quot;NOMBRENB&quot;, &quot;NOMBRENB&quot;, &quot;NOMBRENB&quot;, &quot;...
-## $ Measure      &lt;chr&gt; &quot;Number&quot;, &quot;Number&quot;, &quot;Number&quot;, &quot;Number&quot;, &quot;Number&quot;,...
-## $ COU          &lt;chr&gt; &quot;AUS&quot;, &quot;AUS&quot;, &quot;AUS&quot;, &quot;AUS&quot;, &quot;AUS&quot;, &quot;AUS&quot;, &quot;AUS&quot;, ...
-## $ Country      &lt;chr&gt; &quot;Australia&quot;, &quot;Australia&quot;, &quot;Australia&quot;, &quot;Australia...
-## $ YEA          &lt;int&gt; 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2...
-## $ Year         &lt;int&gt; 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2...
-## $ Value        &lt;dbl&gt; 552, 632, 665, 684, 723, 894, 861, 957, 118, 134,...
-## $ `Flag Codes` &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N...
-## $ Flags        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, N...</code></pre>
+## $ VAR          &lt;chr&gt; &quot;HEDUDNGR&quot;, &quot;HEDUDNGR&quot;, &quot;HEDUDNGR&quot;, &quot;HEDUDNGR&quot;, &quot;HE…
+## $ Variable     &lt;chr&gt; &quot;Dentists graduates&quot;, &quot;Dentists graduates&quot;, &quot;Dentis…
+## $ UNIT         &lt;chr&gt; &quot;NOMBRENB&quot;, &quot;NOMBRENB&quot;, &quot;NOMBRENB&quot;, &quot;NOMBRENB&quot;, &quot;NO…
+## $ Measure      &lt;chr&gt; &quot;Number&quot;, &quot;Number&quot;, &quot;Number&quot;, &quot;Number&quot;, &quot;Number&quot;, &quot;…
+## $ COU          &lt;chr&gt; &quot;AUS&quot;, &quot;AUS&quot;, &quot;AUS&quot;, &quot;AUS&quot;, &quot;AUS&quot;, &quot;AUS&quot;, &quot;AUS&quot;, &quot;A…
+## $ Country      &lt;chr&gt; &quot;Australia&quot;, &quot;Australia&quot;, &quot;Australia&quot;, &quot;Australia&quot;,…
+## $ YEA          &lt;dbl&gt; 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 200…
+## $ Year         &lt;dbl&gt; 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 200…
+## $ Value        &lt;dbl&gt; 552, 632, 665, 684, 723, 894, 861, 957, 118, 134, 1…
+## $ `Flag Codes` &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ Flags        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…</code></pre>
 <p>And a summary:</p>
 <pre class="r"><code>summary(dent_oecd)</code></pre>
 <pre><code>##      VAR              Variable             UNIT          
@@ -155,22 +155,27 @@ tags:
   spread(Year, average)</code></pre>
 <pre><code>## # A tibble: 36 x 10
 ## # Groups:   Country [36]
-##    Country  `2008` `2009` `2010` `2011` `2012` `2013` `2014` `2015` `2016`
-##    &lt;chr&gt;     &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
-##  1 Austral…   2.60   2.91   3.02   3.06   3.18   3.87   3.67   4.02  NA   
-##  2 Austria    1.42   1.61   1.57   1.50   1.28   1.25   1.65  NA     NA   
-##  3 Belgium    1.14   1.44   1.57   1.32   1.46   1.62   1.95   2.05   2.09
-##  4 Canada     1.53   1.52   1.47   1.48   1.30   1.51  NA     NA     NA   
-##  5 Chile      2.98   4.32   4.11   4.82   5.57   5.86   6.35   7.50   7.17
-##  6 Czech R…   1.59   3.90   3.37   2.86   2.49   3.15   3.26   3.75  NA   
-##  7 Denmark    4.28   3.20   3.37   3.41   2.92   2.80   2.73  NA     NA   
-##  8 Estonia    3.07   2.17   2.40   2.34   1.74   2.12   1.90   2.13  NA   
-##  9 Finland    1.34   1.35   2.44   2.56   3.27   2.87   2.38  NA     NA   
-## 10 France     1.36   1.33   1.49   1.72   1.57   1.66   1.48   1.88  NA   
-## # ... with 26 more rows</code></pre>
+##    Country   `2008` `2009` `2010` `2011` `2012` `2013` `2014` `2015` `2016`
+##    &lt;chr&gt;      &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+##  1 Australia   2.6    2.91   3.02   3.06   3.18   3.87   3.67   4.02  NA   
+##  2 Austria     1.42   1.61   1.57   1.5    1.28   1.25   1.65  NA     NA   
+##  3 Belgium     1.14   1.44   1.57   1.32   1.46   1.62   1.95   2.05   2.09
+##  4 Canada      1.53   1.52   1.47   1.48   1.3    1.51  NA     NA     NA   
+##  5 Chile       2.98   4.32   4.11   4.82   5.57   5.86   6.35   7.5    7.17
+##  6 Czech Re…   1.59   3.9    3.37   2.86   2.49   3.15   3.26   3.75  NA   
+##  7 Denmark     4.28   3.2    3.37   3.41   2.92   2.8    2.73  NA     NA   
+##  8 Estonia     3.07   2.17   2.4    2.34   1.74   2.12   1.9    2.13  NA   
+##  9 Finland     1.34   1.35   2.44   2.56   3.27   2.87   2.38  NA     NA   
+## 10 France      1.36   1.33   1.49   1.72   1.57   1.66   1.48   1.88  NA   
+## # … with 26 more rows</code></pre>
 <p>Now enhance the table with the package <code>kableExtra</code>:</p>
 <p><code>install.packages(&quot;kableExtra&quot;)</code></p>
 <p><code>library(kableExtra)</code></p>
+<pre><code>## 
+## Attaching package: &#39;kableExtra&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
+## 
+##     group_rows</code></pre>
 <p>Addf the average as reference value</p>
 <pre class="r"><code>dent_oecd_avg &lt;- dent_oecd %&gt;% 
   group_by(Year) %&gt;% 
@@ -189,465 +194,1227 @@ rm(dent_oecd_avg) # remove the average dataset</code></pre>
              caption = &quot;Dentists graduating per 100 000 habs. OECD countries&quot;, 
              digits = 1)</code></pre>
 <table>
-<caption>(#tab:table nice)Dentists graduating per 100 000 habs. OECD countries</caption>
+<caption>
+(#tab:table nice)Dentists graduating per 100 000 habs. OECD countries
+</caption>
 <thead>
-<tr class="header">
-<th align="left">Country</th>
-<th align="right">2008</th>
-<th align="right">2009</th>
-<th align="right">2010</th>
-<th align="right">2011</th>
-<th align="right">2012</th>
-<th align="right">2013</th>
-<th align="right">2014</th>
-<th align="right">2015</th>
-<th align="right">2016</th>
+<tr>
+<th style="text-align:left;">
+Country
+</th>
+<th style="text-align:right;">
+2008
+</th>
+<th style="text-align:right;">
+2009
+</th>
+<th style="text-align:right;">
+2010
+</th>
+<th style="text-align:right;">
+2011
+</th>
+<th style="text-align:right;">
+2012
+</th>
+<th style="text-align:right;">
+2013
+</th>
+<th style="text-align:right;">
+2014
+</th>
+<th style="text-align:right;">
+2015
+</th>
+<th style="text-align:right;">
+2016
+</th>
 </tr>
 </thead>
 <tbody>
-<tr class="odd">
-<td align="left">Australia</td>
-<td align="right">2.6</td>
-<td align="right">2.9</td>
-<td align="right">3.0</td>
-<td align="right">3.1</td>
-<td align="right">3.2</td>
-<td align="right">3.9</td>
-<td align="right">3.7</td>
-<td align="right">4.0</td>
-<td align="right">NA</td>
+<tr>
+<td style="text-align:left;">
+Australia
+</td>
+<td style="text-align:right;">
+2.6
+</td>
+<td style="text-align:right;">
+2.9
+</td>
+<td style="text-align:right;">
+3.0
+</td>
+<td style="text-align:right;">
+3.1
+</td>
+<td style="text-align:right;">
+3.2
+</td>
+<td style="text-align:right;">
+3.9
+</td>
+<td style="text-align:right;">
+3.7
+</td>
+<td style="text-align:right;">
+4.0
+</td>
+<td style="text-align:right;">
+NA
+</td>
 </tr>
-<tr class="even">
-<td align="left">Austria</td>
-<td align="right">1.4</td>
-<td align="right">1.6</td>
-<td align="right">1.6</td>
-<td align="right">1.5</td>
-<td align="right">1.3</td>
-<td align="right">1.2</td>
-<td align="right">1.6</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
+<tr>
+<td style="text-align:left;">
+Austria
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+1.3
+</td>
+<td style="text-align:right;">
+1.2
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Belgium</td>
-<td align="right">1.1</td>
-<td align="right">1.4</td>
-<td align="right">1.6</td>
-<td align="right">1.3</td>
-<td align="right">1.5</td>
-<td align="right">1.6</td>
-<td align="right">2.0</td>
-<td align="right">2.0</td>
-<td align="right">2.1</td>
+<tr>
+<td style="text-align:left;">
+Belgium
+</td>
+<td style="text-align:right;">
+1.1
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+1.3
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+2.0
+</td>
+<td style="text-align:right;">
+2.0
+</td>
+<td style="text-align:right;">
+2.1
+</td>
 </tr>
-<tr class="even">
-<td align="left">Canada</td>
-<td align="right">1.5</td>
-<td align="right">1.5</td>
-<td align="right">1.5</td>
-<td align="right">1.5</td>
-<td align="right">1.3</td>
-<td align="right">1.5</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
+<tr>
+<td style="text-align:left;">
+Canada
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+1.3
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Chile</td>
-<td align="right">3.0</td>
-<td align="right">4.3</td>
-<td align="right">4.1</td>
-<td align="right">4.8</td>
-<td align="right">5.6</td>
-<td align="right">5.9</td>
-<td align="right">6.3</td>
-<td align="right">7.5</td>
-<td align="right">7.2</td>
+<tr>
+<td style="text-align:left;">
+Chile
+</td>
+<td style="text-align:right;">
+3.0
+</td>
+<td style="text-align:right;">
+4.3
+</td>
+<td style="text-align:right;">
+4.1
+</td>
+<td style="text-align:right;">
+4.8
+</td>
+<td style="text-align:right;">
+5.6
+</td>
+<td style="text-align:right;">
+5.9
+</td>
+<td style="text-align:right;">
+6.3
+</td>
+<td style="text-align:right;">
+7.5
+</td>
+<td style="text-align:right;">
+7.2
+</td>
 </tr>
-<tr class="even">
-<td align="left">Czech Republic</td>
-<td align="right">1.6</td>
-<td align="right">3.9</td>
-<td align="right">3.4</td>
-<td align="right">2.9</td>
-<td align="right">2.5</td>
-<td align="right">3.1</td>
-<td align="right">3.3</td>
-<td align="right">3.8</td>
-<td align="right">NA</td>
+<tr>
+<td style="text-align:left;">
+Czech Republic
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+3.9
+</td>
+<td style="text-align:right;">
+3.4
+</td>
+<td style="text-align:right;">
+2.9
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:right;">
+3.1
+</td>
+<td style="text-align:right;">
+3.3
+</td>
+<td style="text-align:right;">
+3.8
+</td>
+<td style="text-align:right;">
+NA
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Denmark</td>
-<td align="right">4.3</td>
-<td align="right">3.2</td>
-<td align="right">3.4</td>
-<td align="right">3.4</td>
-<td align="right">2.9</td>
-<td align="right">2.8</td>
-<td align="right">2.7</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
+<tr>
+<td style="text-align:left;">
+Denmark
+</td>
+<td style="text-align:right;">
+4.3
+</td>
+<td style="text-align:right;">
+3.2
+</td>
+<td style="text-align:right;">
+3.4
+</td>
+<td style="text-align:right;">
+3.4
+</td>
+<td style="text-align:right;">
+2.9
+</td>
+<td style="text-align:right;">
+2.8
+</td>
+<td style="text-align:right;">
+2.7
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
 </tr>
-<tr class="even">
-<td align="left">Estonia</td>
-<td align="right">3.1</td>
-<td align="right">2.2</td>
-<td align="right">2.4</td>
-<td align="right">2.3</td>
-<td align="right">1.7</td>
-<td align="right">2.1</td>
-<td align="right">1.9</td>
-<td align="right">2.1</td>
-<td align="right">NA</td>
+<tr>
+<td style="text-align:left;">
+Estonia
+</td>
+<td style="text-align:right;">
+3.1
+</td>
+<td style="text-align:right;">
+2.2
+</td>
+<td style="text-align:right;">
+2.4
+</td>
+<td style="text-align:right;">
+2.3
+</td>
+<td style="text-align:right;">
+1.7
+</td>
+<td style="text-align:right;">
+2.1
+</td>
+<td style="text-align:right;">
+1.9
+</td>
+<td style="text-align:right;">
+2.1
+</td>
+<td style="text-align:right;">
+NA
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Finland</td>
-<td align="right">1.3</td>
-<td align="right">1.4</td>
-<td align="right">2.4</td>
-<td align="right">2.6</td>
-<td align="right">3.3</td>
-<td align="right">2.9</td>
-<td align="right">2.4</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
+<tr>
+<td style="text-align:left;">
+Finland
+</td>
+<td style="text-align:right;">
+1.3
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+2.4
+</td>
+<td style="text-align:right;">
+2.6
+</td>
+<td style="text-align:right;">
+3.3
+</td>
+<td style="text-align:right;">
+2.9
+</td>
+<td style="text-align:right;">
+2.4
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
 </tr>
-<tr class="even">
-<td align="left">France</td>
-<td align="right">1.4</td>
-<td align="right">1.3</td>
-<td align="right">1.5</td>
-<td align="right">1.7</td>
-<td align="right">1.6</td>
-<td align="right">1.7</td>
-<td align="right">1.5</td>
-<td align="right">1.9</td>
-<td align="right">NA</td>
+<tr>
+<td style="text-align:left;">
+France
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+1.3
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+1.7
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+1.7
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+1.9
+</td>
+<td style="text-align:right;">
+NA
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Germany</td>
-<td align="right">2.2</td>
-<td align="right">2.2</td>
-<td align="right">2.5</td>
-<td align="right">2.7</td>
-<td align="right">3.0</td>
-<td align="right">2.8</td>
-<td align="right">2.9</td>
-<td align="right">2.8</td>
-<td align="right">NA</td>
+<tr>
+<td style="text-align:left;">
+Germany
+</td>
+<td style="text-align:right;">
+2.2
+</td>
+<td style="text-align:right;">
+2.2
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:right;">
+2.7
+</td>
+<td style="text-align:right;">
+3.0
+</td>
+<td style="text-align:right;">
+2.8
+</td>
+<td style="text-align:right;">
+2.9
+</td>
+<td style="text-align:right;">
+2.8
+</td>
+<td style="text-align:right;">
+NA
+</td>
 </tr>
-<tr class="even">
-<td align="left">Greece</td>
-<td align="right">2.5</td>
-<td align="right">2.4</td>
-<td align="right">2.3</td>
-<td align="right">2.3</td>
-<td align="right">1.6</td>
-<td align="right">1.8</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
+<tr>
+<td style="text-align:left;">
+Greece
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:right;">
+2.4
+</td>
+<td style="text-align:right;">
+2.3
+</td>
+<td style="text-align:right;">
+2.3
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Hungary</td>
-<td align="right">1.8</td>
-<td align="right">2.2</td>
-<td align="right">2.5</td>
-<td align="right">2.8</td>
-<td align="right">3.5</td>
-<td align="right">3.0</td>
-<td align="right">3.4</td>
-<td align="right">3.1</td>
-<td align="right">NA</td>
+<tr>
+<td style="text-align:left;">
+Hungary
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+<td style="text-align:right;">
+2.2
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:right;">
+2.8
+</td>
+<td style="text-align:right;">
+3.5
+</td>
+<td style="text-align:right;">
+3.0
+</td>
+<td style="text-align:right;">
+3.4
+</td>
+<td style="text-align:right;">
+3.1
+</td>
+<td style="text-align:right;">
+NA
+</td>
 </tr>
-<tr class="even">
-<td align="left">Iceland</td>
-<td align="right">1.9</td>
-<td align="right">1.9</td>
-<td align="right">1.9</td>
-<td align="right">1.9</td>
-<td align="right">1.9</td>
-<td align="right">1.8</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
+<tr>
+<td style="text-align:left;">
+Iceland
+</td>
+<td style="text-align:right;">
+1.9
+</td>
+<td style="text-align:right;">
+1.9
+</td>
+<td style="text-align:right;">
+1.9
+</td>
+<td style="text-align:right;">
+1.9
+</td>
+<td style="text-align:right;">
+1.9
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Ireland</td>
-<td align="right">1.7</td>
-<td align="right">1.6</td>
-<td align="right">1.5</td>
-<td align="right">1.5</td>
-<td align="right">1.7</td>
-<td align="right">1.9</td>
-<td align="right">1.8</td>
-<td align="right">1.9</td>
-<td align="right">NA</td>
+<tr>
+<td style="text-align:left;">
+Ireland
+</td>
+<td style="text-align:right;">
+1.7
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+1.7
+</td>
+<td style="text-align:right;">
+1.9
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+<td style="text-align:right;">
+1.9
+</td>
+<td style="text-align:right;">
+NA
+</td>
 </tr>
-<tr class="even">
-<td align="left">Israel</td>
-<td align="right">0.8</td>
-<td align="right">0.7</td>
-<td align="right">1.1</td>
-<td align="right">1.2</td>
-<td align="right">0.8</td>
-<td align="right">0.8</td>
-<td align="right">0.7</td>
-<td align="right">0.6</td>
-<td align="right">NA</td>
+<tr>
+<td style="text-align:left;">
+Israel
+</td>
+<td style="text-align:right;">
+0.8
+</td>
+<td style="text-align:right;">
+0.7
+</td>
+<td style="text-align:right;">
+1.1
+</td>
+<td style="text-align:right;">
+1.2
+</td>
+<td style="text-align:right;">
+0.8
+</td>
+<td style="text-align:right;">
+0.8
+</td>
+<td style="text-align:right;">
+0.7
+</td>
+<td style="text-align:right;">
+0.6
+</td>
+<td style="text-align:right;">
+NA
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Italy</td>
-<td align="right">1.8</td>
-<td align="right">1.6</td>
-<td align="right">1.7</td>
-<td align="right">1.4</td>
-<td align="right">1.4</td>
-<td align="right">1.4</td>
-<td align="right">0.6</td>
-<td align="right">1.0</td>
-<td align="right">NA</td>
+<tr>
+<td style="text-align:left;">
+Italy
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+1.7
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+0.6
+</td>
+<td style="text-align:right;">
+1.0
+</td>
+<td style="text-align:right;">
+NA
+</td>
 </tr>
-<tr class="even">
-<td align="left">Japan</td>
-<td align="right">1.9</td>
-<td align="right">2.0</td>
-<td align="right">1.8</td>
-<td align="right">1.9</td>
-<td align="right">1.8</td>
-<td align="right">1.9</td>
-<td align="right">1.9</td>
-<td align="right">1.6</td>
-<td align="right">1.6</td>
+<tr>
+<td style="text-align:left;">
+Japan
+</td>
+<td style="text-align:right;">
+1.9
+</td>
+<td style="text-align:right;">
+2.0
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+<td style="text-align:right;">
+1.9
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+<td style="text-align:right;">
+1.9
+</td>
+<td style="text-align:right;">
+1.9
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+1.6
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Korea</td>
-<td align="right">1.8</td>
-<td align="right">1.5</td>
-<td align="right">1.7</td>
-<td align="right">1.8</td>
-<td align="right">1.9</td>
-<td align="right">2.2</td>
-<td align="right">2.6</td>
-<td align="right">2.6</td>
-<td align="right">2.9</td>
+<tr>
+<td style="text-align:left;">
+Korea
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+1.7
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+<td style="text-align:right;">
+1.9
+</td>
+<td style="text-align:right;">
+2.2
+</td>
+<td style="text-align:right;">
+2.6
+</td>
+<td style="text-align:right;">
+2.6
+</td>
+<td style="text-align:right;">
+2.9
+</td>
 </tr>
-<tr class="even">
-<td align="left">Latvia</td>
-<td align="right">1.3</td>
-<td align="right">1.6</td>
-<td align="right">1.6</td>
-<td align="right">2.1</td>
-<td align="right">1.8</td>
-<td align="right">2.5</td>
-<td align="right">2.0</td>
-<td align="right">2.5</td>
-<td align="right">2.3</td>
+<tr>
+<td style="text-align:left;">
+Latvia
+</td>
+<td style="text-align:right;">
+1.3
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+2.1
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:right;">
+2.0
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:right;">
+2.3
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Lithuania</td>
-<td align="right">4.4</td>
-<td align="right">4.7</td>
-<td align="right">5.2</td>
-<td align="right">4.7</td>
-<td align="right">5.2</td>
-<td align="right">5.5</td>
-<td align="right">5.8</td>
-<td align="right">6.4</td>
-<td align="right">NA</td>
+<tr>
+<td style="text-align:left;">
+Lithuania
+</td>
+<td style="text-align:right;">
+4.4
+</td>
+<td style="text-align:right;">
+4.7
+</td>
+<td style="text-align:right;">
+5.2
+</td>
+<td style="text-align:right;">
+4.7
+</td>
+<td style="text-align:right;">
+5.2
+</td>
+<td style="text-align:right;">
+5.5
+</td>
+<td style="text-align:right;">
+5.8
+</td>
+<td style="text-align:right;">
+6.4
+</td>
+<td style="text-align:right;">
+NA
+</td>
 </tr>
-<tr class="even">
-<td align="left">Luxembourg</td>
-<td align="right">0.0</td>
-<td align="right">0.0</td>
-<td align="right">0.0</td>
-<td align="right">0.0</td>
-<td align="right">0.0</td>
-<td align="right">0.0</td>
-<td align="right">0.0</td>
-<td align="right">0.0</td>
-<td align="right">0.0</td>
+<tr>
+<td style="text-align:left;">
+Luxembourg
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Mexico</td>
-<td align="right">4.5</td>
-<td align="right">4.7</td>
-<td align="right">4.6</td>
-<td align="right">4.7</td>
-<td align="right">5.0</td>
-<td align="right">3.8</td>
-<td align="right">4.3</td>
-<td align="right">4.0</td>
-<td align="right">4.3</td>
+<tr>
+<td style="text-align:left;">
+Mexico
+</td>
+<td style="text-align:right;">
+4.5
+</td>
+<td style="text-align:right;">
+4.7
+</td>
+<td style="text-align:right;">
+4.6
+</td>
+<td style="text-align:right;">
+4.7
+</td>
+<td style="text-align:right;">
+5.0
+</td>
+<td style="text-align:right;">
+3.8
+</td>
+<td style="text-align:right;">
+4.3
+</td>
+<td style="text-align:right;">
+4.0
+</td>
+<td style="text-align:right;">
+4.3
+</td>
 </tr>
-<tr class="even">
-<td align="left">Netherlands</td>
-<td align="right">1.5</td>
-<td align="right">1.5</td>
-<td align="right">1.5</td>
-<td align="right">1.7</td>
-<td align="right">1.4</td>
-<td align="right">1.1</td>
-<td align="right">1.1</td>
-<td align="right">1.4</td>
-<td align="right">1.4</td>
+<tr>
+<td style="text-align:left;">
+Netherlands
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+1.7
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+1.1
+</td>
+<td style="text-align:right;">
+1.1
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+1.4
+</td>
 </tr>
-<tr class="odd">
-<td align="left">New Zealand</td>
-<td align="right">1.8</td>
-<td align="right">2.0</td>
-<td align="right">2.1</td>
-<td align="right">2.1</td>
-<td align="right">2.4</td>
-<td align="right">2.3</td>
-<td align="right">2.3</td>
-<td align="right">2.1</td>
-<td align="right">2.2</td>
+<tr>
+<td style="text-align:left;">
+New Zealand
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+<td style="text-align:right;">
+2.0
+</td>
+<td style="text-align:right;">
+2.1
+</td>
+<td style="text-align:right;">
+2.1
+</td>
+<td style="text-align:right;">
+2.4
+</td>
+<td style="text-align:right;">
+2.3
+</td>
+<td style="text-align:right;">
+2.3
+</td>
+<td style="text-align:right;">
+2.1
+</td>
+<td style="text-align:right;">
+2.2
+</td>
 </tr>
-<tr class="even">
-<td align="left">Norway</td>
-<td align="right">2.2</td>
-<td align="right">2.7</td>
-<td align="right">2.3</td>
-<td align="right">2.7</td>
-<td align="right">3.0</td>
-<td align="right">2.5</td>
-<td align="right">2.3</td>
-<td align="right">2.1</td>
-<td align="right">NA</td>
+<tr>
+<td style="text-align:left;">
+Norway
+</td>
+<td style="text-align:right;">
+2.2
+</td>
+<td style="text-align:right;">
+2.7
+</td>
+<td style="text-align:right;">
+2.3
+</td>
+<td style="text-align:right;">
+2.7
+</td>
+<td style="text-align:right;">
+3.0
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:right;">
+2.3
+</td>
+<td style="text-align:right;">
+2.1
+</td>
+<td style="text-align:right;">
+NA
+</td>
 </tr>
-<tr class="odd">
-<td align="left">OECD average</td>
-<td align="right">2.2</td>
-<td align="right">2.2</td>
-<td align="right">2.3</td>
-<td align="right">2.4</td>
-<td align="right">2.3</td>
-<td align="right">2.5</td>
-<td align="right">2.5</td>
-<td align="right">2.8</td>
-<td align="right">2.7</td>
+<tr>
+<td style="text-align:left;">
+OECD average
+</td>
+<td style="text-align:right;">
+2.2
+</td>
+<td style="text-align:right;">
+2.2
+</td>
+<td style="text-align:right;">
+2.3
+</td>
+<td style="text-align:right;">
+2.4
+</td>
+<td style="text-align:right;">
+2.3
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:right;">
+2.8
+</td>
+<td style="text-align:right;">
+2.7
+</td>
 </tr>
-<tr class="even">
-<td align="left">Poland</td>
-<td align="right">2.2</td>
-<td align="right">2.5</td>
-<td align="right">2.5</td>
-<td align="right">2.5</td>
-<td align="right">2.5</td>
-<td align="right">2.6</td>
-<td align="right">2.4</td>
-<td align="right">2.5</td>
-<td align="right">NA</td>
+<tr>
+<td style="text-align:left;">
+Poland
+</td>
+<td style="text-align:right;">
+2.2
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:right;">
+2.6
+</td>
+<td style="text-align:right;">
+2.4
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:right;">
+NA
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Portugal</td>
-<td align="right">7.1</td>
-<td align="right">7.1</td>
-<td align="right">7.5</td>
-<td align="right">6.8</td>
-<td align="right">5.6</td>
-<td align="right">5.9</td>
-<td align="right">6.2</td>
-<td align="right">6.7</td>
-<td align="right">NA</td>
+<tr>
+<td style="text-align:left;">
+Portugal
+</td>
+<td style="text-align:right;">
+7.1
+</td>
+<td style="text-align:right;">
+7.1
+</td>
+<td style="text-align:right;">
+7.5
+</td>
+<td style="text-align:right;">
+6.8
+</td>
+<td style="text-align:right;">
+5.6
+</td>
+<td style="text-align:right;">
+5.9
+</td>
+<td style="text-align:right;">
+6.2
+</td>
+<td style="text-align:right;">
+6.7
+</td>
+<td style="text-align:right;">
+NA
+</td>
 </tr>
-<tr class="even">
-<td align="left">Slovak Republic</td>
-<td align="right">0.8</td>
-<td align="right">0.8</td>
-<td align="right">1.2</td>
-<td align="right">1.5</td>
-<td align="right">1.5</td>
-<td align="right">1.8</td>
-<td align="right">1.7</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
+<tr>
+<td style="text-align:left;">
+Slovak Republic
+</td>
+<td style="text-align:right;">
+0.8
+</td>
+<td style="text-align:right;">
+0.8
+</td>
+<td style="text-align:right;">
+1.2
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+<td style="text-align:right;">
+1.7
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Slovenia</td>
-<td align="right">2.1</td>
-<td align="right">1.7</td>
-<td align="right">2.0</td>
-<td align="right">1.8</td>
-<td align="right">2.0</td>
-<td align="right">3.4</td>
-<td align="right">2.6</td>
-<td align="right">3.3</td>
-<td align="right">NA</td>
+<tr>
+<td style="text-align:left;">
+Slovenia
+</td>
+<td style="text-align:right;">
+2.1
+</td>
+<td style="text-align:right;">
+1.7
+</td>
+<td style="text-align:right;">
+2.0
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+<td style="text-align:right;">
+2.0
+</td>
+<td style="text-align:right;">
+3.4
+</td>
+<td style="text-align:right;">
+2.6
+</td>
+<td style="text-align:right;">
+3.3
+</td>
+<td style="text-align:right;">
+NA
+</td>
 </tr>
-<tr class="even">
-<td align="left">Spain</td>
-<td align="right">3.2</td>
-<td align="right">2.8</td>
-<td align="right">3.0</td>
-<td align="right">3.0</td>
-<td align="right">3.3</td>
-<td align="right">3.5</td>
-<td align="right">3.8</td>
-<td align="right">3.8</td>
-<td align="right">NA</td>
+<tr>
+<td style="text-align:left;">
+Spain
+</td>
+<td style="text-align:right;">
+3.2
+</td>
+<td style="text-align:right;">
+2.8
+</td>
+<td style="text-align:right;">
+3.0
+</td>
+<td style="text-align:right;">
+3.0
+</td>
+<td style="text-align:right;">
+3.3
+</td>
+<td style="text-align:right;">
+3.5
+</td>
+<td style="text-align:right;">
+3.8
+</td>
+<td style="text-align:right;">
+3.8
+</td>
+<td style="text-align:right;">
+NA
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Sweden</td>
-<td align="right">2.0</td>
-<td align="right">2.1</td>
-<td align="right">2.4</td>
-<td align="right">2.3</td>
-<td align="right">2.1</td>
-<td align="right">2.2</td>
-<td align="right">2.5</td>
-<td align="right">2.5</td>
-<td align="right">NA</td>
+<tr>
+<td style="text-align:left;">
+Sweden
+</td>
+<td style="text-align:right;">
+2.0
+</td>
+<td style="text-align:right;">
+2.1
+</td>
+<td style="text-align:right;">
+2.4
+</td>
+<td style="text-align:right;">
+2.3
+</td>
+<td style="text-align:right;">
+2.1
+</td>
+<td style="text-align:right;">
+2.2
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:right;">
+NA
+</td>
 </tr>
-<tr class="even">
-<td align="left">Switzerland</td>
-<td align="right">1.5</td>
-<td align="right">1.6</td>
-<td align="right">1.4</td>
-<td align="right">1.3</td>
-<td align="right">1.3</td>
-<td align="right">1.3</td>
-<td align="right">1.2</td>
-<td align="right">NA</td>
-<td align="right">NA</td>
+<tr>
+<td style="text-align:left;">
+Switzerland
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+1.3
+</td>
+<td style="text-align:right;">
+1.3
+</td>
+<td style="text-align:right;">
+1.3
+</td>
+<td style="text-align:right;">
+1.2
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
 </tr>
-<tr class="odd">
-<td align="left">Turkey</td>
-<td align="right">1.4</td>
-<td align="right">1.3</td>
-<td align="right">1.3</td>
-<td align="right">1.5</td>
-<td align="right">1.4</td>
-<td align="right">1.8</td>
-<td align="right">2.0</td>
-<td align="right">2.2</td>
-<td align="right">NA</td>
+<tr>
+<td style="text-align:left;">
+Turkey
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+1.3
+</td>
+<td style="text-align:right;">
+1.3
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+<td style="text-align:right;">
+2.0
+</td>
+<td style="text-align:right;">
+2.2
+</td>
+<td style="text-align:right;">
+NA
+</td>
 </tr>
-<tr class="even">
-<td align="left">United Kingdom</td>
-<td align="right">NA</td>
-<td align="right">1.7</td>
-<td align="right">1.8</td>
-<td align="right">1.9</td>
-<td align="right">1.9</td>
-<td align="right">1.9</td>
-<td align="right">1.8</td>
-<td align="right">1.9</td>
-<td align="right">NA</td>
+<tr>
+<td style="text-align:left;">
+United Kingdom
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+1.7
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+<td style="text-align:right;">
+1.9
+</td>
+<td style="text-align:right;">
+1.9
+</td>
+<td style="text-align:right;">
+1.9
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+<td style="text-align:right;">
+1.9
+</td>
+<td style="text-align:right;">
+NA
+</td>
 </tr>
-<tr class="odd">
-<td align="left">United States</td>
-<td align="right">1.6</td>
-<td align="right">1.6</td>
-<td align="right">1.6</td>
-<td align="right">1.6</td>
-<td align="right">1.7</td>
-<td align="right">1.7</td>
-<td align="right">1.7</td>
-<td align="right">1.8</td>
-<td align="right">NA</td>
+<tr>
+<td style="text-align:left;">
+United States
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+1.7
+</td>
+<td style="text-align:right;">
+1.7
+</td>
+<td style="text-align:right;">
+1.7
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+<td style="text-align:right;">
+NA
+</td>
 </tr>
 </tbody>
 </table>

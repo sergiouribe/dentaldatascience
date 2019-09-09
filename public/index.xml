@@ -2,54 +2,54 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Dental Data Science</title>
-    <link>/</link>
+    <link>https://dentaldatascience.org/</link>
     <description>Recent content on Dental Data Science</description>
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>sergio.uribe@gmail.com (Sergio Uribe)</managingEditor>
     <webMaster>sergio.uribe@gmail.com (Sergio Uribe)</webMaster>
     <lastBuildDate>Thu, 05 Sep 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://dentaldatascience.org/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Exploratory Data Analysis with Tables</title>
-      <link>/post/eda-with-tables/</link>
+      <link>https://dentaldatascience.org/post/eda-with-tables/</link>
       <pubDate>Thu, 05 Sep 2019 00:00:00 +0000</pubDate>
       <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
-      <guid>/post/eda-with-tables/</guid>
-      <description>Introduction Tables allow you to explore and summarize data efficiently. While graphs are more intuitive for discovering relationships and trends, the tables have the advantage that without simple to perform and allow detecting the presence of errors in the tabulation of data.
+      <guid>https://dentaldatascience.org/post/eda-with-tables/</guid>
+      <description>Introduction Tables allow you to explore and summarize data efficiently. While graphs are more intuitive for discovering relationships and trends, tables have the advantage of providing detailed information and allowing descriptive statistics and data summaries to be delivered.
 Usually scientific articles in medicine begin with a table that shows the characteristics of the sample of patients. In this post, we will use the janitor and table1 packages to summarize data and make an example of table 1 using the NHANES database.</description>
     </item>
     
     <item>
       <title>Visualizing the dental workforce of OECD countries I</title>
-      <link>/post/visualizing-the-dentists-workforce-of-oecd-countries-i/</link>
+      <link>https://dentaldatascience.org/post/visualizing-the-dentists-workforce-of-oecd-countries-i/</link>
       <pubDate>Thu, 08 Mar 2018 00:00:00 +0000</pubDate>
       <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
-      <guid>/post/visualizing-the-dentists-workforce-of-oecd-countries-i/</guid>
+      <guid>https://dentaldatascience.org/post/visualizing-the-dentists-workforce-of-oecd-countries-i/</guid>
       <description>The Organisation for Economic Co-operation and Development host a database with extensive data. In this post we will do some visualizations to compare the number of dentists in each country.
 Packages used:
  tidyverse gghighlight kableExtra  First we load the data. Now there is a package (OECD) able to extract the datasets, but I will use a local copy:
-dent_oecd &amp;lt;- read_csv(&amp;quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vStv7Pr69DtRKv6Nw6gVBep8hbT3pEeO6B1vNwxK_1DUHgpoTgbuRpZ4SvgtHFQnBZJVGeeQVyRuXZl/pub?gid=1330297229&amp;amp;single=true&amp;amp;output=csv&amp;quot;) ## Parsed with column specification: ## cols( ## VAR = col_character(), ## Variable = col_character(), ## UNIT = col_character(), ## Measure = col_character(), ## COU = col_character(), ## Country = col_character(), ## YEA = col_integer(), ## Year = col_integer(), ## Value = col_double(), ## `Flag Codes` = col_character(), ## Flags = col_character() ## ) Always is preferable to take a look the data and its structure:</description>
+dent_oecd &amp;lt;- read_csv(&amp;quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vStv7Pr69DtRKv6Nw6gVBep8hbT3pEeO6B1vNwxK_1DUHgpoTgbuRpZ4SvgtHFQnBZJVGeeQVyRuXZl/pub?gid=1330297229&amp;amp;single=true&amp;amp;output=csv&amp;quot;) ## Parsed with column specification: ## cols( ## VAR = col_character(), ## Variable = col_character(), ## UNIT = col_character(), ## Measure = col_character(), ## COU = col_character(), ## Country = col_character(), ## YEA = col_double(), ## Year = col_double(), ## Value = col_double(), ## `Flag Codes` = col_character(), ## Flags = col_character() ## ) Always is preferable to take a look the data and its structure:</description>
     </item>
     
     <item>
       <title>Data wrangling and table summaries of case-control studies</title>
-      <link>/post/tercer-post/</link>
+      <link>https://dentaldatascience.org/post/tercer-post/</link>
       <pubDate>Fri, 02 Mar 2018 00:00:00 +0000</pubDate>
       <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
-      <guid>/post/tercer-post/</guid>
+      <guid>https://dentaldatascience.org/post/tercer-post/</guid>
       <description>A Case-control study compares patients who have a disease or outcome of interest (cases) with patients who do not have the disease or outcome (controls), and looks back retrospectively to compare how frequently the exposure to a risk factor is present in each group to determine the relationship between the risk factor and the disease.
 Case control studies are observational because no intervention is attempted and no attempt is made to alter the course of the disease.</description>
     </item>
     
     <item>
       <title>About DDS</title>
-      <link>/page/about/</link>
+      <link>https://dentaldatascience.org/page/about/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
-      <guid>/page/about/</guid>
+      <guid>https://dentaldatascience.org/page/about/</guid>
       <description>Statistical thinking will one day be as necessary a qualification for efficient citizenship as the ability to read and write. HG Wells
  Purpose of this site This site is dedicated to discuss issues about data generated by medical and dental research, and tools to explore those data, extract information and generate knowledge in a valid and reproducible way.
 Main topics are
@@ -58,10 +58,10 @@ Main topics are
     
     <item>
       <title>Links</title>
-      <link>/page/links/</link>
+      <link>https://dentaldatascience.org/page/links/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
-      <guid>/page/links/</guid>
+      <guid>https://dentaldatascience.org/page/links/</guid>
       <description>Communities  Tidyverse forum  Cheat Sheets  Dates and Times Cheat Sheet Work with Strings Cheat Sheet Data Import Cheat Sheet Data Transformation Cheat Sheet R Markdown Cheat Sheet RStudio IDE Cheat Sheet Data Visualization Cheat Sheet RStudio Keyboard Shortcuts by RStudio   Books  R for Data Science A (very) short introduction to R (Torfs &amp;amp; Bauer, 2014) R in Action: Data Analysis and Graphics with R (Kabacoff, 2011) Fundamentals of Data Visualization (Wilke, 2018) The Elements of Statistical Learning: Data Mining, Inference, and Prediction.</description>
     </item>
     

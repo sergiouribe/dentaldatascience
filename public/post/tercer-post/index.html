@@ -14,25 +14,25 @@ Case control studies are observational because no intervention is attempted and 
 Case control studies are observational because no intervention is attempted and no attempt is made to alter the course of the disease.">
   <meta name="twitter:description" content="A Case-control study compares patients who have a disease or outcome of interest (cases) with patients who do not have the disease or outcome (controls), and looks back retrospectively to compare how …">
   <meta name="author" content="Sergio Uribe"/>
-  <link href='/img/favicon.png' rel='icon' type='image/x-icon'/>
-  <meta property="og:image" content="/img/icon.png" />
-  <meta name="twitter:image" content="/img/icon.png" />
+  <link href='https://dentaldatascience.org/img/favicon.png' rel='icon' type='image/x-icon'/>
+  <meta property="og:image" content="https://dentaldatascience.org/img/icon.png" />
+  <meta name="twitter:image" content="https://dentaldatascience.org/img/icon.png" />
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:site" content="@dentaldatasci" />
   <meta name="twitter:creator" content="@dentaldatasci" />
-  <meta property="og:url" content="/post/tercer-post/" />
+  <meta property="og:url" content="https://dentaldatascience.org/post/tercer-post/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Dental Data Science" />
 
   <meta name="generator" content="Hugo 0.58.1" />
-  <link rel="canonical" href="/post/tercer-post/" />
-  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Dental Data Science">
+  <link rel="canonical" href="https://dentaldatascience.org/post/tercer-post/" />
+  <link rel="alternate" href="https://dentaldatascience.org/index.xml" type="application/rss+xml" title="Dental Data Science">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-  <link rel="stylesheet" href="/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://dentaldatascience.org/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
-  <link rel="stylesheet" href="/css/highlight.min.css" /><link rel="stylesheet" href="/css/codeblock.css" />
+  <link rel="stylesheet" href="https://dentaldatascience.org/css/highlight.min.css" /><link rel="stylesheet" href="https://dentaldatascience.org/css/codeblock.css" />
 
 
 
@@ -109,7 +109,7 @@ if (!doNotTrack) {
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/">Dental Data Science</a>
+      <a class="navbar-brand" href="https://dentaldatascience.org/">Dental Data Science</a>
     </div>
 
     <div class="collapse navbar-collapse" id="main-navbar">
@@ -161,8 +161,8 @@ if (!doNotTrack) {
     <div class="avatar-container">
       <div class="avatar-img-border">
         
-          <a title="Dental Data Science" href="/">
-            <img class="avatar-img" src="/img/icon.png" alt="Dental Data Science" />
+          <a title="Dental Data Science" href="https://dentaldatascience.org/">
+            <img class="avatar-img" src="https://dentaldatascience.org/img/icon.png" alt="Dental Data Science" />
           </a>
         
       </div>
@@ -219,7 +219,7 @@ if (!doNotTrack) {
   
   
   &nbsp;|&nbsp;
-  <i class="fa fa-clock-o"></i> 7 minutes (1412 words)
+  <i class="fa fa-clock-o"></i> 7 minutes (1421 words)
   
   
 </span>
@@ -257,16 +257,16 @@ if (!doNotTrack) {
 <pre class="r"><code>df &lt;- read_csv(&quot;http://bit.ly/data_esoph&quot;, col_names = FALSE)</code></pre>
 <pre><code>## Parsed with column specification:
 ## cols(
-##   X1 = col_integer(),
-##   X2 = col_integer(),
-##   X3 = col_integer(),
-##   X4 = col_integer()
+##   X1 = col_double(),
+##   X2 = col_double(),
+##   X3 = col_double(),
+##   X4 = col_double()
 ## )</code></pre>
 <p>Let’s see the first six rows of the dataset</p>
 <pre class="r"><code>head(df)</code></pre>
 <pre><code>## # A tibble: 6 x 4
 ##      X1    X2    X3    X4
-##   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 ## 1     1     2     1     0
 ## 2     1     1     1     0
 ## 3     1     2     4     0
@@ -371,7 +371,7 @@ if (!doNotTrack) {
 <pre class="r"><code>head(df)</code></pre>
 <pre><code>## # A tibble: 6 x 4
 ##     age   alc   tob    cc
-##   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 ## 1     1     2     1     0
 ## 2     1     1     1     0
 ## 3     1     2     4     0
@@ -395,7 +395,7 @@ if (!doNotTrack) {
 <pre class="r"><code>head(df)</code></pre>
 <pre><code>## # A tibble: 6 x 5
 ##     age   alc   tob    cc age_grp
-##   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;  
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  
 ## 1     1     2     1     0 25-34  
 ## 2     1     1     1     0 25-34  
 ## 3     1     2     4     0 25-34  
@@ -541,24 +541,27 @@ df %&gt;%
   select(-n) %&gt;%
   spread(cc_grp, prop, fill = 0)</code></pre>
 <pre><code>## # A tibble: 6 x 3
-##   age_grp    case control
-##   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;
-## 1 25-34   0.00500  0.148 
-## 2 35-44   0.0450   0.245 
-## 3 45-54   0.230    0.215 
-## 4 55-64   0.380    0.214 
-## 5 65-74   0.275    0.137 
-## 6 75+     0.0650   0.0400</code></pre>
+##   age_grp  case control
+##   &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+## 1 25-34   0.005   0.148
+## 2 35-44   0.045   0.245
+## 3 45-54   0.23    0.215
+## 4 55-64   0.38    0.214
+## 5 65-74   0.275   0.137
+## 6 75+     0.065   0.04</code></pre>
 <p>Also, there is a new package called <code>janitor</code>, full of nice functions. One of them allow to make such table with a simple syntax:</p>
 <pre class="r"><code>df %&gt;% 
   janitor::crosstab(age_grp, cc_grp, percent = &#39;col&#39;)  # this means: use the package janitor to create a crosstable of this variables and adding the percent by columns. You can change the latter to &#39;row&#39;</code></pre>
-<pre><code>##   age_grp  case control
-## 1   25-34 0.005   0.148
-## 2   35-44 0.045   0.245
-## 3   45-54 0.230   0.215
-## 4   55-64 0.380   0.214
-## 5   65-74 0.275   0.137
-## 6     75+ 0.065   0.040</code></pre>
+<pre><code>## Warning: &#39;janitor::crosstab&#39; is deprecated.
+## Use &#39;tabyl(dat, var1, var2, ...)&#39; instead.
+## See help(&quot;Deprecated&quot;)</code></pre>
+<pre><code>##  age_grp  case control
+##    25-34 0.005   0.148
+##    35-44 0.045   0.245
+##    45-54 0.230   0.215
+##    55-64 0.380   0.214
+##    65-74 0.275   0.137
+##      75+ 0.065   0.040</code></pre>
 <p>For alcohol:</p>
 <pre class="r"><code>df %&gt;% 
   group_by(alc_grp, cc_grp) %&gt;% 
@@ -598,7 +601,7 @@ df %&gt;%
           
           
             <li class="next">
-              <a href="/post/visualizing-the-dentists-workforce-of-oecd-countries-i/" data-toggle="tooltip" data-placement="top" title="Visualizing the dental workforce of OECD countries I">Next Post &rarr;</a>
+              <a href="https://dentaldatascience.org/post/visualizing-the-dentists-workforce-of-oecd-countries-i/" data-toggle="tooltip" data-placement="top" title="Visualizing the dental workforce of OECD countries I">Next Post &rarr;</a>
             </li>
           
         </ul>
@@ -686,7 +689,7 @@ df %&gt;%
           
           <li>
             
-            <a href="/index.xml" title="RSS">
+            <a href="https://dentaldatascience.org/index.xml" title="RSS">
             
               <span class="fa-stack fa-lg">
                 <i class="fa fa-circle fa-stack-2x"></i>
@@ -708,7 +711,7 @@ df %&gt;%
 
           
             &nbsp;&bull;&nbsp;
-            <a href="/">Dental Data Science</a>
+            <a href="https://dentaldatascience.org/">Dental Data Science</a>
           
         </p>
         
@@ -725,13 +728,13 @@ df %&gt;%
 <script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
 <script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-<script src="/js/main.js"></script>
-<script src="/js/highlight.min.js"></script>
+<script src="https://dentaldatascience.org/js/main.js"></script>
+<script src="https://dentaldatascience.org/js/highlight.min.js"></script>
 <script> hljs.initHighlightingOnLoad(); </script>
 <script> $(document).ready(function() {$("pre.chroma").css("padding","0");}); </script><script> renderMathInElement(document.body); </script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script>
-<script src="/js/load-photoswipe.js"></script>
+<script src="https://dentaldatascience.org/js/load-photoswipe.js"></script>
 
 
 <script>

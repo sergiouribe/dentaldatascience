@@ -30,16 +30,16 @@ categories:
 <pre class="r"><code>df &lt;- read_csv(&quot;http://bit.ly/data_esoph&quot;, col_names = FALSE)</code></pre>
 <pre><code>## Parsed with column specification:
 ## cols(
-##   X1 = col_integer(),
-##   X2 = col_integer(),
-##   X3 = col_integer(),
-##   X4 = col_integer()
+##   X1 = col_double(),
+##   X2 = col_double(),
+##   X3 = col_double(),
+##   X4 = col_double()
 ## )</code></pre>
 <p>Let’s see the first six rows of the dataset</p>
 <pre class="r"><code>head(df)</code></pre>
 <pre><code>## # A tibble: 6 x 4
 ##      X1    X2    X3    X4
-##   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 ## 1     1     2     1     0
 ## 2     1     1     1     0
 ## 3     1     2     4     0
@@ -144,7 +144,7 @@ categories:
 <pre class="r"><code>head(df)</code></pre>
 <pre><code>## # A tibble: 6 x 4
 ##     age   alc   tob    cc
-##   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt;
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;
 ## 1     1     2     1     0
 ## 2     1     1     1     0
 ## 3     1     2     4     0
@@ -168,7 +168,7 @@ categories:
 <pre class="r"><code>head(df)</code></pre>
 <pre><code>## # A tibble: 6 x 5
 ##     age   alc   tob    cc age_grp
-##   &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;int&gt; &lt;chr&gt;  
+##   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;  
 ## 1     1     2     1     0 25-34  
 ## 2     1     1     1     0 25-34  
 ## 3     1     2     4     0 25-34  
@@ -314,24 +314,27 @@ df %&gt;%
   select(-n) %&gt;%
   spread(cc_grp, prop, fill = 0)</code></pre>
 <pre><code>## # A tibble: 6 x 3
-##   age_grp    case control
-##   &lt;chr&gt;     &lt;dbl&gt;   &lt;dbl&gt;
-## 1 25-34   0.00500  0.148 
-## 2 35-44   0.0450   0.245 
-## 3 45-54   0.230    0.215 
-## 4 55-64   0.380    0.214 
-## 5 65-74   0.275    0.137 
-## 6 75+     0.0650   0.0400</code></pre>
+##   age_grp  case control
+##   &lt;chr&gt;   &lt;dbl&gt;   &lt;dbl&gt;
+## 1 25-34   0.005   0.148
+## 2 35-44   0.045   0.245
+## 3 45-54   0.23    0.215
+## 4 55-64   0.38    0.214
+## 5 65-74   0.275   0.137
+## 6 75+     0.065   0.04</code></pre>
 <p>Also, there is a new package called <code>janitor</code>, full of nice functions. One of them allow to make such table with a simple syntax:</p>
 <pre class="r"><code>df %&gt;% 
   janitor::crosstab(age_grp, cc_grp, percent = &#39;col&#39;)  # this means: use the package janitor to create a crosstable of this variables and adding the percent by columns. You can change the latter to &#39;row&#39;</code></pre>
-<pre><code>##   age_grp  case control
-## 1   25-34 0.005   0.148
-## 2   35-44 0.045   0.245
-## 3   45-54 0.230   0.215
-## 4   55-64 0.380   0.214
-## 5   65-74 0.275   0.137
-## 6     75+ 0.065   0.040</code></pre>
+<pre><code>## Warning: &#39;janitor::crosstab&#39; is deprecated.
+## Use &#39;tabyl(dat, var1, var2, ...)&#39; instead.
+## See help(&quot;Deprecated&quot;)</code></pre>
+<pre><code>##  age_grp  case control
+##    25-34 0.005   0.148
+##    35-44 0.045   0.245
+##    45-54 0.230   0.215
+##    55-64 0.380   0.214
+##    65-74 0.275   0.137
+##      75+ 0.065   0.040</code></pre>
 <p>For alcohol:</p>
 <pre class="r"><code>df %&gt;% 
   group_by(alc_grp, cc_grp) %&gt;% 

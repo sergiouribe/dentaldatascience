@@ -2,26 +2,26 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>visualization on Dental Data Science</title>
-    <link>/categories/visualization/</link>
+    <link>https://dentaldatascience.org/categories/visualization/</link>
     <description>Recent content in visualization on Dental Data Science</description>
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>sergio.uribe@gmail.com (Sergio Uribe)</managingEditor>
     <webMaster>sergio.uribe@gmail.com (Sergio Uribe)</webMaster>
     <lastBuildDate>Thu, 08 Mar 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="/categories/visualization/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="https://dentaldatascience.org/categories/visualization/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Visualizing the dental workforce of OECD countries I</title>
-      <link>/post/visualizing-the-dentists-workforce-of-oecd-countries-i/</link>
+      <link>https://dentaldatascience.org/post/visualizing-the-dentists-workforce-of-oecd-countries-i/</link>
       <pubDate>Thu, 08 Mar 2018 00:00:00 +0000</pubDate>
       <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
-      <guid>/post/visualizing-the-dentists-workforce-of-oecd-countries-i/</guid>
+      <guid>https://dentaldatascience.org/post/visualizing-the-dentists-workforce-of-oecd-countries-i/</guid>
       <description>The Organisation for Economic Co-operation and Development host a database with extensive data. In this post we will do some visualizations to compare the number of dentists in each country.
 Packages used:
  tidyverse gghighlight kableExtra  First we load the data. Now there is a package (OECD) able to extract the datasets, but I will use a local copy:
-dent_oecd &amp;lt;- read_csv(&amp;quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vStv7Pr69DtRKv6Nw6gVBep8hbT3pEeO6B1vNwxK_1DUHgpoTgbuRpZ4SvgtHFQnBZJVGeeQVyRuXZl/pub?gid=1330297229&amp;amp;single=true&amp;amp;output=csv&amp;quot;) ## Parsed with column specification: ## cols( ## VAR = col_character(), ## Variable = col_character(), ## UNIT = col_character(), ## Measure = col_character(), ## COU = col_character(), ## Country = col_character(), ## YEA = col_integer(), ## Year = col_integer(), ## Value = col_double(), ## `Flag Codes` = col_character(), ## Flags = col_character() ## ) Always is preferable to take a look the data and its structure:</description>
+dent_oecd &amp;lt;- read_csv(&amp;quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vStv7Pr69DtRKv6Nw6gVBep8hbT3pEeO6B1vNwxK_1DUHgpoTgbuRpZ4SvgtHFQnBZJVGeeQVyRuXZl/pub?gid=1330297229&amp;amp;single=true&amp;amp;output=csv&amp;quot;) ## Parsed with column specification: ## cols( ## VAR = col_character(), ## Variable = col_character(), ## UNIT = col_character(), ## Measure = col_character(), ## COU = col_character(), ## Country = col_character(), ## YEA = col_double(), ## Year = col_double(), ## Value = col_double(), ## `Flag Codes` = col_character(), ## Flags = col_character() ## ) Always is preferable to take a look the data and its structure:</description>
     </item>
     
   </channel>
