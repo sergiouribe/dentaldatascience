@@ -23,10 +23,12 @@ Usually scientific articles in medicine begin with a table that shows the charac
 # Packages used
 
 
-  - tidyverse
-  - janitor
-  - table1
-  - NHANES
+  - [tidyverse](https://www.tidyverse.org/)
+  - [pacman](https://github.com/trinker/pacman)
+  - [janitor](https://github.com/sfirke/janitor)
+  - [table1](https://cran.r-project.org/web/packages/table1/vignettes/table1-examples.html)
+  - [NHANES](https://cran.r-project.org/web/packages/NHANES/index.html)
+  - [expss](https://gdemin.github.io/expss/)
 
 Before using each of these packages you must install them using the command
 
@@ -73,10 +75,7 @@ data(NHANES)
 ## One variable table
 Univariate tables are useful for detecting the presence of errors in coding and for obtaining a general summary of the data.
 
-the command table allows to create a table of 
-Check the number of males and females
-
-The general syntaxis to indicate a column or variable in R is _dataset__$__variable_
+The general syntaxis to indicate a column or variable in R is _dataset$variable_. For example, if we want to select the column __Gender__ from the __NHANES__ dataframe, the command is
 
 ```{r}
 table(NHANES$Gender)
@@ -239,6 +238,29 @@ NHANES %>%
   janitor::adorn_ns(position = "front") 
 ```
 
+# Tables in (old) SPSS style
+
+The [ _expss_](https://gdemin.github.io/expss/) package provides tabulation functions with support for ‘SPSS’-style labels, multiple / nested banners, weights, multiple-response variables and significance testing. 
+
+```{r, warning=FALSE, message=FALSE}
+pacman::p_load(expss)
+
+```
+Now, we can create a table
+
+
+```{r}
+
+NHANES::NHANES %>% 
+  expss::tab_cells(AgeDecade, Race1, Education) %>% 
+  expss::tab_cols(Gender) %>% 
+  expss::tab_stat_cpct() %>% 
+  expss::tab_last_sig_means(subtable_marks = "both") %>% 
+  expss::tab_pivot() %>% 
+  expss::set_caption("Table with summary statistics and significance marks.") %>% 
+  htmlTable()
+```
+
 
 # Table 1
 
@@ -256,3 +278,8 @@ and with some shading
 table1::table1( ~ Age + Poverty + Race1| Gender, data = NHANES, 
                 topclass="Rtable1-zebra" )
 ```
+
+The J Clin Epidemiology published an excellent guide that helps to design table 1, available at Hayes-Larson, E., Kezios, K.L., Mooney, S.J., Lovasi, G., 2019. [Who is in this study, anyway? Guidelines for a useful Table 1.](https://www.sciencedirect.com/science/article/pii/S0895435618309867?via%3Dihub) _J. Clin. Epidemiol_. 114, 125–132.
+
+
+![](/post/2019-09-05-eda_tables_files/1-s2.0-S0895435618309867-gr2.jpg)

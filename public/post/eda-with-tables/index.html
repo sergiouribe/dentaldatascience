@@ -219,7 +219,7 @@ if (!doNotTrack) {
   
   
   &nbsp;|&nbsp;
-  <i class="fa fa-clock-o"></i> 8 minutes (1507 words)
+  <i class="fa fa-clock-o"></i> 9 minutes (1710 words)
   
   
 </span>
@@ -243,7 +243,10 @@ if (!doNotTrack) {
 <link href="/rmarkdown-libs/table1/table1_defaults.css" rel="stylesheet" />
 
 
-<p><img src="" /></p>
+<div class="figure">
+<img src="" />
+
+</div>
 <div id="introduction" class="section level1">
 <h1>Introduction</h1>
 <p>Tables allow you to explore and summarize data efficiently. While graphs are more intuitive for discovering relationships and trends, the tables have the advantage that without simple to perform and allow detecting the presence of errors in the tabulation of data.</p>
@@ -252,10 +255,12 @@ if (!doNotTrack) {
 <div id="packages-used" class="section level1">
 <h1>Packages used</h1>
 <ul>
-<li>tidyverse</li>
-<li>janitor</li>
-<li>table1</li>
-<li>NHANES</li>
+<li><a href="https://www.tidyverse.org/">tidyverse</a></li>
+<li><a href="https://github.com/trinker/pacman">pacman</a></li>
+<li><a href="https://github.com/sfirke/janitor">janitor</a></li>
+<li><a href="https://cran.r-project.org/web/packages/table1/vignettes/table1-examples.html">table1</a></li>
+<li><a href="https://cran.r-project.org/web/packages/NHANES/index.html">NHANES</a></li>
+<li><a href="https://gdemin.github.io/expss/">expss</a></li>
 </ul>
 <p>Before using each of these packages you must install them using the command</p>
 <p><em>install.packages(“package”)</em></p>
@@ -280,9 +285,7 @@ data(NHANES)</code></pre>
 <div id="one-variable-table" class="section level2">
 <h2>One variable table</h2>
 <p>Univariate tables are useful for detecting the presence of errors in coding and for obtaining a general summary of the data.</p>
-<p>the command table allows to create a table of
-Check the number of males and females</p>
-<p>The general syntaxis to indicate a column or variable in R is _dataset__$__variable_</p>
+<p>The general syntaxis to indicate a column or variable in R is <em>dataset$variable</em>. For example, if we want to select the column <strong>Gender</strong> from the <strong>NHANES</strong> dataframe, the command is</p>
 <pre class="r"><code>table(NHANES$Gender)</code></pre>
 <pre><code>## 
 ## female   male 
@@ -319,8 +322,7 @@ Check the number of males and females</p>
 <div id="two-variables-table" class="section level2">
 <h2>Two variables table</h2>
 <p>Tables become more useful even when used to cross tabulate between two nominal variables.</p>
-<p>For example, to make a summary table indicating race by gender, the command is:
-The proportion table is</p>
+<p>For example, to make a summary table indicating race by gender, the command is: The proportion table is</p>
 <pre class="r"><code>prop.table(table(NHANES$Race1, NHANES$Gender))</code></pre>
 <pre><code>##           
 ##            female   male
@@ -521,6 +523,373 @@ prop.table(table(NHANES$Race1, NHANES$Gender), 1) * 100</code></pre>
 ##     Other  413 (51.2)  393 (48.8)   806 (100.0)
 ##     Total 5020 (50.2) 4980 (49.8) 10000 (100.0)</code></pre>
 </div>
+<div id="tables-in-old-spss-style" class="section level1">
+<h1>Tables in (old) SPSS style</h1>
+<p>The <a href="https://gdemin.github.io/expss/"><em>expss</em></a> package provides tabulation functions with support for ‘SPSS’-style labels, multiple / nested banners, weights, multiple-response variables and significance testing.</p>
+<pre class="r"><code>pacman::p_load(expss)</code></pre>
+<p>Now, we can create a table</p>
+<pre class="r"><code>NHANES::NHANES %&gt;% 
+  expss::tab_cells(AgeDecade, Race1, Education) %&gt;% 
+  expss::tab_cols(Gender) %&gt;% 
+  expss::tab_stat_cpct() %&gt;% 
+  expss::tab_last_sig_means(subtable_marks = &quot;both&quot;) %&gt;% 
+  expss::tab_pivot() %&gt;% 
+  expss::set_caption(&quot;Table with summary statistics and significance marks.&quot;) %&gt;% 
+  htmlTable()</code></pre>
+<table class="gmisc_table" style="border-collapse: collapse; margin-top: 1em; margin-bottom: 1em;">
+<thead>
+<tr>
+<td colspan="4" style="text-align: left;">
+Table with summary statistics and significance marks.
+</td>
+</tr>
+<tr>
+<th style="border-top: 2px solid grey;">
+</th>
+<th colspan="3" style="font-weight: 900; border-bottom: 1px solid grey; border-top: 2px solid grey; text-align: center;">
+ Gender 
+</th>
+</tr>
+<tr>
+<th style>
+</th>
+<th colspan="1" style="font-weight: 900; border-bottom: 1px solid grey; text-align: center;">
+ female 
+</th>
+<th style="; border-bottom: hidden;">
+ 
+</th>
+<th colspan="1" style="font-weight: 900; border-bottom: 1px solid grey; text-align: center;">
+ male 
+</th>
+</tr>
+<tr>
+<th style="font-weight: 900; border-bottom: 1px solid grey; text-align: center;">
+</th>
+<th style="border-bottom: 1px solid grey; text-align: center;">
+ A 
+</th>
+<th style="border-bottom: 1px solid grey;" colspan="1">
+ 
+</th>
+<th style="border-bottom: 1px solid grey; text-align: center;">
+ B 
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="4" style="font-weight: 900;">
+ AgeDecade 
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+    0-9 
+</td>
+<td style="text-align: right;">
+13.5  
+</td>
+<td style colspan="1">
+ 
+</td>
+<td style="text-align: right;">
+15.2  
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+    10-19 
+</td>
+<td style="text-align: right;">
+14.2  
+</td>
+<td style colspan="1">
+ 
+</td>
+<td style="text-align: right;">
+14.3  
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+    20-29 
+</td>
+<td style="text-align: right;">
+14.1  
+</td>
+<td style colspan="1">
+ 
+</td>
+<td style="text-align: right;">
+13.9  
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+    30-39 
+</td>
+<td style="text-align: right;">
+14.0  
+</td>
+<td style colspan="1">
+ 
+</td>
+<td style="text-align: right;">
+13.7  
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+    40-49 
+</td>
+<td style="text-align: right;">
+14.1  
+</td>
+<td style colspan="1">
+ 
+</td>
+<td style="text-align: right;">
+14.8  
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+    50-59 
+</td>
+<td style="text-align: right;">
+12.9  
+</td>
+<td style colspan="1">
+ 
+</td>
+<td style="text-align: right;">
+14.1  
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+    60-69 
+</td>
+<td style="text-align: right;">
+9.9 &gt; B
+</td>
+<td style colspan="1">
+ 
+</td>
+<td style="text-align: right;">
+9.1 &lt; A
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+    70+ 
+</td>
+<td style="text-align: right;">
+7.2  
+</td>
+<td style colspan="1">
+ 
+</td>
+<td style="text-align: right;">
+4.9  
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+   #Total cases 
+</td>
+<td style="text-align: right;">
+4827.0  
+</td>
+<td style colspan="1">
+ 
+</td>
+<td style="text-align: right;">
+4840.0  
+</td>
+</tr>
+<tr>
+<td colspan="4" style="font-weight: 900;">
+ Race1 
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+   Black 
+</td>
+<td style="text-align: right;">
+12.2  
+</td>
+<td style colspan="1">
+ 
+</td>
+<td style="text-align: right;">
+11.7  
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+   Hispanic 
+</td>
+<td style="text-align: right;">
+6.4  
+</td>
+<td style colspan="1">
+ 
+</td>
+<td style="text-align: right;">
+5.8  
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+   Mexican 
+</td>
+<td style="text-align: right;">
+9.0  
+</td>
+<td style colspan="1">
+ 
+</td>
+<td style="text-align: right;">
+11.3  
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+   White 
+</td>
+<td style="text-align: right;">
+64.2 &gt; B
+</td>
+<td style colspan="1">
+ 
+</td>
+<td style="text-align: right;">
+63.3 &lt; A
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+   Other 
+</td>
+<td style="text-align: right;">
+8.2  
+</td>
+<td style colspan="1">
+ 
+</td>
+<td style="text-align: right;">
+7.9  
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+   #Total cases 
+</td>
+<td style="text-align: right;">
+5020.0  
+</td>
+<td style colspan="1">
+ 
+</td>
+<td style="text-align: right;">
+4980.0  
+</td>
+</tr>
+<tr>
+<td colspan="4" style="font-weight: 900;">
+ Education 
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+   8th Grade 
+</td>
+<td style="text-align: right;">
+5.7  
+</td>
+<td style colspan="1">
+ 
+</td>
+<td style="text-align: right;">
+6.8  
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+   9 - 11th Grade 
+</td>
+<td style="text-align: right;">
+10.9  
+</td>
+<td style colspan="1">
+ 
+</td>
+<td style="text-align: right;">
+13.7  
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+   High School 
+</td>
+<td style="text-align: right;">
+20.9  
+</td>
+<td style colspan="1">
+ 
+</td>
+<td style="text-align: right;">
+21.1  
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+   Some College 
+</td>
+<td style="text-align: right;">
+32.6 &gt; B
+</td>
+<td style colspan="1">
+ 
+</td>
+<td style="text-align: right;">
+30.2 &lt; A
+</td>
+</tr>
+<tr>
+<td style="text-align: left;">
+   College Grad 
+</td>
+<td style="text-align: right;">
+29.9  
+</td>
+<td style colspan="1">
+ 
+</td>
+<td style="text-align: right;">
+28.2  
+</td>
+</tr>
+<tr>
+<td style="border-bottom: 2px solid grey; text-align: left;">
+   #Total cases 
+</td>
+<td style="border-bottom: 2px solid grey; text-align: right;">
+3677.0  
+</td>
+<td style="border-bottom: 2px solid grey;" colspan="1">
+ 
+</td>
+<td style="border-bottom: 2px solid grey; text-align: right;">
+3544.0  
+</td>
+</tr>
+</tbody>
+</table>
+</div>
 <div id="table-1" class="section level1">
 <h1>Table 1</h1>
 <p>Finally, to make the first table of a scientific report, the Table1 package allows summarizing several variables grouped by factors, as follows</p>
@@ -710,6 +1079,11 @@ prop.table(table(NHANES$Race1, NHANES$Gender), 1) * 100</code></pre>
 </tr>
 </tbody>
 </table>
+</div>
+<p>The J Clin Epidemiology published an excellent guide that helps to design table 1, available at Hayes-Larson, E., Kezios, K.L., Mooney, S.J., Lovasi, G., 2019. <a href="https://www.sciencedirect.com/science/article/pii/S0895435618309867?via%3Dihub">Who is in this study, anyway? Guidelines for a useful Table 1.</a> <em>J. Clin. Epidemiol</em>. 114, 125–132.</p>
+<div class="figure">
+<img src="/post/2019-09-05-eda_tables_files/1-s2.0-S0895435618309867-gr2.jpg" />
+
 </div>
 </div>
 
