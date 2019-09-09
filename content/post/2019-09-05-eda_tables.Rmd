@@ -15,7 +15,7 @@ categories: eda
 
 # Introduction
 
-Tables allow you to explore and summarize data efficiently. While graphs are more intuitive for discovering relationships and trends, the tables have the advantage that without simple to perform and allow detecting the presence of errors in the tabulation of data.
+Tables allow you to explore and summarize data efficiently. While graphs are more intuitive for discovering relationships and trends, tables have the advantage of providing detailed information and allowing descriptive statistics and data summaries to be delivered. 
 
 Usually scientific articles in medicine begin with a table that shows the characteristics of the sample of patients. In this post, we will use the janitor and table1 packages to summarize data and make an example of table 1 using the NHANES database. 
 
