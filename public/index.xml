@@ -25,6 +25,16 @@ data(Oncho) Oncho %&amp;gt;% head()  idmfareaagegrpsexmfloadlesions  1InfectedSa
     </item>
     
     <item>
+      <title>Regression Modelling for Epidemiology</title>
+      <link>/post/regression-modelling-for-epidemiology/</link>
+      <pubDate>Fri, 24 Jul 2020 00:00:00 +0000</pubDate>
+      <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
+      <guid>/post/regression-modelling-for-epidemiology/</guid>
+      <description>Riga Stradins University Workshop, July 2020
+pacman::p_load( car, broom, tidyverse, ggfortify, mosaic, huxtable, jtools, latex2exp, pubh, sjlabelled, sjPlot, sjmisc ) theme_set(sjPlot::theme_sjplot2(base_size = 10)) theme_update(legend.position = &amp;quot;top&amp;quot;) # options(&amp;#39;huxtable.knit_print_df&amp;#39; = FALSE) options(&amp;#39;huxtable.knit_print_df_theme&amp;#39; = theme_article) options(&amp;#39;huxtable.autoformat_number_format&amp;#39; = list(numeric = &amp;quot;%5.2f&amp;quot;)) knitr::opts_chunk$set(collapse = TRUE, comment = NA) Regression data(birthwt, package = &amp;quot;MASS&amp;quot;) birthwt &amp;lt;- birthwt %&amp;gt;% mutate(smoke = factor(smoke, labels = c(&amp;quot;Non-smoker&amp;quot;, &amp;quot;Smoker&amp;quot;)), race = factor(race, labels = c(&amp;quot;White&amp;quot;, &amp;quot;African American&amp;quot;, &amp;quot;Other&amp;quot;))) %&amp;gt;% var_labels(bwt = &amp;#39;Birth weight (g)&amp;#39;, smoke = &amp;#39;Smoking status&amp;#39;, race = &amp;#39;Race&amp;#39;) birthwt %&amp;gt;% group_by(race, smoke) %&amp;gt;% summarise( n = n(), Mean = mean(bwt, na.</description>
+    </item>
+    
+    <item>
       <title>Exploratory Data Analysis with Tables</title>
       <link>/post/eda-with-tables/</link>
       <pubDate>Thu, 05 Sep 2019 00:00:00 +0000</pubDate>

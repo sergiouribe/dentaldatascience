@@ -1,0 +1,428 @@
+---
+title: Regression Modelling for Epidemiology
+author: Sergio Uribe
+date: '2020-07-24'
+slug: regression-modelling-for-epidemiology
+categories:
+  - regression
+  - epidemiological research
+tags:
+  - regression
+  - epidemiology
+subtitle: 'Riga Stradins University Workshop, July 2020'
+---
+Riga Stradins University Workshop, July 2020
+
+
+```{r}
+pacman::p_load(
+  car,
+  broom,
+  tidyverse,
+  ggfortify,
+  mosaic,
+  huxtable,
+  jtools,
+  latex2exp,
+  pubh,
+  sjlabelled,
+  sjPlot,
+  sjmisc
+)
+
+theme_set(sjPlot::theme_sjplot2(base_size = 10))
+theme_update(legend.position = "top")
+# options('huxtable.knit_print_df' = FALSE)
+options('huxtable.knit_print_df_theme' = theme_article)
+options('huxtable.autoformat_number_format' = list(numeric = "%5.2f"))
+knitr::opts_chunk$set(collapse = TRUE, comment = NA)
+```
+
+
+# Regression
+```{r}
+data(birthwt, package = "MASS")
+birthwt <- birthwt %>%
+  mutate(smoke = factor(smoke, labels = c("Non-smoker", "Smoker")),
+         race = factor(race, labels = c("White", "African American", "Other"))) %>%
+  var_labels(bwt = 'Birth weight (g)',
+             smoke = 'Smoking status',
+             race = 'Race')
+```
+
+```{r}
+birthwt %>%
+  group_by(race, smoke) %>%
+  summarise(
+    n = n(),
+    Mean = mean(bwt, na.rm = TRUE),
+    SD = sd(bwt, na.rm = TRUE),
+    Median = median(bwt, na.rm = TRUE),
+    CV = rel_dis(bwt)
+  )
+```
+
+```{r}
+birthwt %>%
+  gen_bst_df(bwt ~ race|smoke)
+```
+
+```{r}
+birthwt %>%
+  bar_error(bwt ~ race, fill = ~ smoke) %>%
+  axis_labs() %>%
+  gf_labs(fill = "Smoking status:")
+```
+
+```{r}
+model_norm <- lm(bwt ~ smoke + race, data = birthwt)
+```
+
+```{r}
+model_norm %>% Anova() %>% tidy()
+```
+
+```{r}
+model_norm %>% tidy()
+```
+
+```{r}
+model_norm %>% 
+  glm_coef(labels = model_labels(model_norm))
+```
+Compare models
+```{r}
+model_norm %>%
+  glm_coef(se_rob = TRUE, labels = model_labels(model_norm))
+```
+
+```{r}
+model_norm %>% glance()
+```
+
+```{r}
+model_norm %>%
+  plot_model("pred", terms = ~race|smoke, dot.size = 1.5, title = "")
+```
+
+```{r}
+emmip(model_norm, smoke ~ race) %>%
+  gf_labs(y = get_label(birthwt$bwt), x = "", col = "Smoking status")
+```
+
+## Logistic regression
+
+```{r}
+data(diet, package = "Epi")
+diet <- diet %>%
+  mutate(
+    chd = factor(chd, labels = c("No CHD", "CHD"))
+  ) %>%
+  var_labels(
+    chd = "Coronary Heart Disease",
+    fibre = "Fibre intake (10 g/day)"
+    )
+```
+
+```{r}
+diet %>% estat(~ fibre|chd)
+```
+
+```{r}
+diet %>%
+  gf_boxploth(chd ~ fibre, fill = "indianred3", alpha = 0.7) %>%
+  axis_labs()
+```
+
+```{r}
+model_binom <- glm(chd ~ fibre, data = diet, family = binomial)
+
+model_binom %>%
+  glm_coef(labels = model_labels(model_binom))
+```
+
+```{r}
+model_binom %>%
+  plot_model("pred", terms = "fibre [all]", title = "")
+```
+
+## Matched Case-Control Studies: Conditional Logistic Regression
+
+```{r}
+data(bdendo, package = "Epi") 
+bdendo <- bdendo %>%
+  mutate(
+    cancer = factor(d, labels = c('Control', 'Case')),
+    gall = factor(gall, labels = c("No GBD", "GBD")),
+    est = factor(est, labels = c("No oestrogen", "Oestrogen"))
+  ) %>%
+  var_labels(
+    cancer = 'Endometrial cancer',
+    gall = 'Gall bladder disease',
+    est = 'Oestrogen'
+  )
+```
+
+```{r}
+bdendo %>%
+  mutate(
+    cancer = relevel(cancer, ref = "Case"),
+    est = relevel(est, ref = "Oestrogen"),
+    gall = relevel(gall, ref = "GBD")
+  ) %>%
+  copy_labels(bdendo) %>%
+  cross_tab(cancer ~ est + gall) 
+```
+
+```{r}
+library(survival)
+model_clogit <- clogit(cancer == 'Case'  ~ est * gall + strata(set), data = bdendo)
+
+model_clogit %>%
+  glm_coef(labels = c("Oestrogen/No oestrogen", "GBD/No GBD",
+                      "Oestrogen:GBD Interaction"))
+```
+
+```{r}
+require(ggeffects)
+bdendo_pred <- ggemmeans(model_clogit, terms = c('gall', 'est'))
+```
+
+```{r}
+bdendo_pred %>%
+  gf_pointrange(predicted + conf.low + conf.high ~ x|group, col = ~ x) %>%
+  gf_labs(y = "P(cancer)", x = "", col = get_label(bdendo$gall))
+```
+
+## Ordinal Logistic Regression
+
+```{r}
+library(ordinal)
+data(housing, package = "MASS")
+housing <- housing %>%
+  var_labels(
+    Sat = "Satisfaction",
+    Infl = "Perceived influence",
+    Type = "Type of rental",
+    Cont = "Contact"
+    )
+```
+
+```{r}
+model_clm <- clm(Sat ~ Infl + Type + Cont, weights = Freq, data = housing)
+```
+
+```{r}
+model_clm %>%
+  glm_coef(labels = model_labels(model_clm, intercept = FALSE))
+```
+
+```{r}
+model_clm %>%
+  plot_model(type = "pred", terms = c("Infl", "Cont"), 
+           dot.size = 1, title = "") %>%
+  gf_theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+```{r}
+model_clm %>%
+  plot_model(type = "pred", terms = c("Infl", "Type"), 
+           dot.size = 1, title = "") %>%
+  gf_theme(axis.text.x = element_text(angle = 45, hjust = 1))
+```
+
+```{r}
+emmip(model_clm, Infl ~ Type |Cont) %>%
+  gf_labs(x = "Type of rental", col = "Perceived influence")
+```
+
+## Poisson Regression
+```{r}
+data(quine, package = "MASS")
+levels(quine$Eth) <- c("Aboriginal", "White")
+levels(quine$Sex) <- c("Female", "Male")
+```
+
+```{r}
+quine <- quine %>%
+  var_labels(
+    Days = "Number of absent days",
+    Eth = "Ethnicity",
+    Age = "Age group"
+    )
+```
+
+EDA
+```{r}
+quine %>%
+  group_by(Eth, Sex, Age) %>%
+  summarise(
+    n = n(),
+    Mean = mean(Days, na.rm = TRUE),
+    SD = sd(Days, na.rm = TRUE),
+    Median = median(Days, na.rm = TRUE),
+    CV = rel_dis(Days)
+  )
+```
+Model
+```{r}
+model_pois <- glm(Days ~ Eth + Sex + Age, family = poisson, data = quine)
+
+model_pois %>%
+  glm_coef(labels = model_labels(model_pois), se_rob = TRUE)
+```
+```{r}
+model_pois %>% glance()
+```
+
+## Negative-binomial
+```{r}
+deviance(model_pois) / df.residual(model_pois)
+
+```
+
+Thus, we have over-dispersion. One option is to use a negative binomial distribution.
+```{r}
+library(MASS)
+model_negbin <- glm.nb(Days ~ Eth + Sex + Age, data = quine)
+
+model_negbin %>%
+  glm_coef(labels = model_labels(model_negbin), se_rob = TRUE)
+```
+
+```{r}
+model_negbin %>% glance()
+```
+
+ age group is a factor with more than two levels and is significant:
+ 
+```{r}
+model_negbin %>% Anova()
+```
+```{r}
+model_negbin %>%
+  plot_model(type = "pred", terms = c("Age", "Eth"), 
+           dot.size = 1.5, title = "")
+```
+```{r}
+emmip(model_negbin, Eth ~ Age|Sex) %>%
+  gf_labs(y = "Number of absent days", x = "Age group", col = "Ethnicity")
+```
+## Adjusting CIs and p-values for multiple comparisons
+ 
+```{r}
+multiple(model_negbin, ~ Age|Eth)$df
+```
+```{r}
+multiple(model_negbin, ~ Age|Eth)$fig_ci %>%
+  gf_labs(x = "IRR")
+```
+```{r}
+multiple(model_negbin, ~ Age|Eth)$fig_ci %>%
+  gf_labs(x = "IRR")
+```
+
+## Survival Analysis
+
+effect of thiotepa versus placebo on the development of bladder cancer.
+ 
+```{r}
+library(survival)
+data(bladder)
+bladder <- bladder %>%
+  mutate(times = stop,
+         rx = factor(rx, labels=c("Placebo", "Thiotepa"))
+         ) %>%
+  var_labels(times = "Survival time",
+             rx = "Treatment")
+```
+
+
+### Parametric method
+
+```{r}
+model_surv <- survreg(Surv(times, event) ~ rx, data = bladder)
+```
+
+```{r}
+model_surv %>%
+  glm_coef(labels = c("Treatment: Thiotepa/Placebo", "Scale"), se_rob = TRUE)
+```
+```{r}
+model_exp <- survreg(Surv(times, event) ~ rx, data = bladder, dist = "exponential")
+```
+
+```{r}
+model_exp %>%
+  glm_coef(labels = c("Treatment: Thiotepa/Placebo"), se_rob = TRUE)
+```
+Interpretation: Patients receiving Thiotepa live on average 64% more than those in the Placebo group.
+
+Using naive standard errors
+```{r}
+model_exp %>%
+  glm_coef(labels = c("Treatment: Thiotepa/Placebo"))
+```
+```{r}
+model_exp %>%
+  plot_model(type = "pred", terms = ~ rx, dot.size = 1.5, title = "") %>%
+  gf_labs(y = "Survival time", x = "Treatment", title = "")
+```
+### Cox proportional hazards regression
+
+```{r}
+model_cox <-  coxph(Surv(times, event) ~ rx, data = bladder)
+```
+
+```{r}
+model_cox %>%
+  glm_coef(labels = c("Treatment: Thiotepa/Placebo"))
+```
+```{r}
+model_cox %>%
+  plot_model(type = "pred", terms = ~ rx, dot.size = 1.5, 
+           title = "") %>%
+  gf_labs(x = "Treatment", title = "")
+```
+
+## Mixed Linear Regression Models
+
+### Continuous outcomes
+
+relationship between sex and age on the distance from the pituitary to the pterygomaxillary fissure (mm).
+
+```{r}
+library(nlme)
+data(Orthodont)
+```
+
+```{r}
+Orthodont <- Orthodont %>%
+  var_labels(
+    distance = "Pituitary distance (mm)",
+    age = "Age (years)"
+    )
+```
+
+```{r}
+model_lme <- lme(distance ~ Sex * I(age - mean(age, na.rm = TRUE)), random = ~ 1|Subject, 
+                 method = "ML", data = Orthodont)
+```
+
+```{r}
+model_lme %>%
+  glm_coef(labels = c(
+    "Constant", 
+    "Sex: female-male", 
+    "Age (years)",
+    "Sex:Age interaction"
+    ))
+```
+
+```{r}
+model_lme %>%
+  plot_model("pred", terms = age ~ Sex, 
+           show.data = TRUE, jitter = 0.1, dot.size = 1.5) %>%
+  gf_labs(y = get_label(Orthodont$distance), x = "Age (years)", title = "")
+```
+

@@ -5,8 +5,10 @@ date: '2020-07-24'
 slug: epidemiological-analysis-with-r
 categories:
   - epidemiological research
-tags: []
-subtitle: ''
+tags:
+  - EDA
+  - epidemiology
+subtitle: 'Riga Stradins University Workshop, July 2020'
 ---
 
 

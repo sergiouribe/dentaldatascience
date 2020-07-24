@@ -13,6 +13,11 @@
   </url>
   
   <url>
+    <loc>/tags/eda/</loc>
+    <lastmod>2020-07-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/epidemiological-analysis-with-r/</loc>
     <lastmod>2020-07-24T00:00:00+00:00</lastmod>
   </url>
@@ -23,13 +28,33 @@
   </url>
   
   <url>
+    <loc>/tags/epidemiology/</loc>
+    <lastmod>2020-07-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>/post/</loc>
     <lastmod>2020-07-24T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>/tags/eda/</loc>
-    <lastmod>2019-09-05T00:00:00+00:00</lastmod>
+    <loc>/tags/regression/</loc>
+    <lastmod>2020-07-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/regression/</loc>
+    <lastmod>2020-07-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/regression-modelling-for-epidemiology/</loc>
+    <lastmod>2020-07-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/</loc>
+    <lastmod>2020-07-24T00:00:00+00:00</lastmod>
   </url>
   
   <url>
@@ -54,11 +79,6 @@
   
   <url>
     <loc>/tags/table1/</loc>
-    <lastmod>2019-09-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>/tags/</loc>
     <lastmod>2019-09-05T00:00:00+00:00</lastmod>
   </url>
   

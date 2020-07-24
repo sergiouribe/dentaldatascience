@@ -5,9 +5,9 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Regression</title>
-  <meta property="og:title" content="Regression" />
-  <meta name="twitter:title" content="Regression" />
+  <title>regression</title>
+  <meta property="og:title" content="regression" />
+  <meta name="twitter:title" content="regression" />
   <meta name="author" content="Sergio Uribe"/>
   <link href='/img/favicon.png' rel='icon' type='image/x-icon'/>
   <meta property="og:image" content="/img/icon.png" />
@@ -19,7 +19,7 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Dental Data Science" />
 
-  <meta name="generator" content="Hugo 0.37" />
+  <meta name="generator" content="Hugo 0.71.0" />
   <link rel="canonical" href="/tags/regression/" />
   <link rel="alternate" href="/tags/regression/index.xml" type="application/rss+xml" title="Dental Data Science">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
@@ -81,12 +81,16 @@
     </div>
 </div>
 
-<script>
-window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
-ga('create', 'UA-113383529-1', 'auto');
-ga('send', 'pageview');
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-113383529-1', 'auto');
+	
+	ga('send', 'pageview');
+}
 </script>
-<script async src='//www.google-analytics.com/analytics.js'></script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
 
 </head>
 
@@ -114,12 +118,6 @@ ga('send', 'pageview');
         
           
             <li>
-              <a title="About" href="/page/about/">About</a>
-            </li>
-          
-        
-          
-            <li>
               <a title="Categ" href="/categories">Categ</a>
             </li>
           
@@ -133,6 +131,12 @@ ga('send', 'pageview');
           
             <li>
               <a title="Links" href="/page/links/">Links</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/page/about/">About</a>
             </li>
           
         
@@ -189,7 +193,7 @@ ga('send', 'pageview');
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="page-heading">
-              <h1>#Regression</h1>
+              <h1>#regression</h1>
               <hr class="small">
             </div>
           </div>
@@ -206,32 +210,33 @@ ga('send', 'pageview');
         <div class="posts-list">
           
             <article class="post-preview">
-              <a href="/post/2015-07-23-r-rmarkdown/">
-                <h2 class="post-title">Hello R Markdown</h2>
+              <a href="/post/regression-modelling-for-epidemiology/">
+                <h2 class="post-title">Regression Modelling for Epidemiology</h2>
 
+                
+                  <h3 class="post-subtitle">
+                    Riga Stradins University Workshop, July 2020
+                  </h3>
                 
               </a>
 
               <p class="post-meta">
-                Posted on July 23, 2015
+                Posted on July 24, 2020
               </p>
               <div class="post-entry">
                 
-                  R Markdown This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see http://rmarkdown.rstudio.com.
-You can embed an R code chunk like this:
-summary(cars) ## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 26.00 ## Median :15.0 Median : 36.00 ## Mean :15.4 Mean : 42.98 ## 3rd Qu.
-                  <a href="/post/2015-07-23-r-rmarkdown/" class="post-read-more">[Read More]</a>
+                  Riga Stradins University Workshop, July 2020
+pacman::p_load( car, broom, tidyverse, ggfortify, mosaic, huxtable, jtools, latex2exp, pubh, sjlabelled, sjPlot, sjmisc ) theme_set(sjPlot::theme_sjplot2(base_size = 10)) theme_update(legend.position = &quot;top&quot;) # options(&#39;huxtable.knit_print_df&#39; = FALSE) options(&#39;huxtable.knit_print_df_theme&#39; = theme_article) options(&#39;huxtable.autoformat_number_format&#39; = list(numeric = &quot;%5.2f&quot;)) knitr::opts_chunk$set(collapse = TRUE, comment = NA) Regression data(birthwt, package = &quot;MASS&quot;) birthwt &lt;- birthwt %&gt;% mutate(smoke = factor(smoke, labels = c(&quot;Non-smoker&quot;, &quot;Smoker&quot;)), race = factor(race, labels = c(&quot;White&quot;, &quot;African American&quot;, &quot;Other&quot;))) %&gt;% var_labels(bwt = &#39;Birth weight (g)&#39;, smoke = &#39;Smoking status&#39;, race = &#39;Race&#39;) birthwt %&gt;% group_by(race, smoke) %&gt;% summarise( n = n(), Mean = mean(bwt, na.
+                  <a href="/post/regression-modelling-for-epidemiology/" class="post-read-more">[Read More]</a>
                 
               </div>
 
               
                 <span class="post-meta">
                   
-                    #<a href="//tags/r-markdown/">R Markdown</a>&nbsp;
-                  
-                    #<a href="//tags/plot/">plot</a>&nbsp;
-                  
                     #<a href="//tags/regression/">regression</a>&nbsp;
+                  
+                    #<a href="//tags/epidemiology/">epidemiology</a>&nbsp;
                   
                 </span>
               
@@ -283,7 +288,7 @@ summary(cars) ## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 2
                 </a>
               </li>
               <li>
-                <a href="https://stackoverflow.com/users/7617/sergiouribe" title="StackOverflow">
+                <a href="https://stackoverflow.com/users/4930967/sergiouribe" title="StackOverflow">
                   <span class="fa-stack fa-lg">
                     <i class="fa fa-circle fa-stack-2x"></i>
                     <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
@@ -311,7 +316,7 @@ summary(cars) ## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 2
           
 
           &nbsp;&bull;&nbsp;
-          2017
+          2020
 
           
             &nbsp;&bull;&nbsp;
@@ -320,7 +325,7 @@ summary(cars) ## speed dist ## Min. : 4.0 Min. : 2.00 ## 1st Qu.:12.0 1st Qu.: 2
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="http://gohugo.io">Hugo v0.37</a> powered &nbsp;&bull;&nbsp; Theme by <a href="http://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a> adapted to <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>
+          <a href="http://gohugo.io">Hugo v0.71.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>. This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC 4.0</a>.
           
         </p>
       </div>

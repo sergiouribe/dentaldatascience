@@ -214,6 +214,10 @@ if (!doNotTrack) {
                 <h2 class="post-title">Epidemiological analysis with R</h2>
 
                 
+                  <h3 class="post-subtitle">
+                    Riga Stradins University Workshop, July 2020
+                  </h3>
+                
               </a>
 
               <p class="post-meta">
@@ -229,6 +233,48 @@ data(Oncho) Oncho %&gt;% head()  idmfareaagegrpsexmfloadlesions  1InfectedSavann
                 
               </div>
 
+              
+                <span class="post-meta">
+                  
+                    #<a href="//tags/eda/">EDA</a>&nbsp;
+                  
+                    #<a href="//tags/epidemiology/">epidemiology</a>&nbsp;
+                  
+                </span>
+              
+
+            </article>
+          
+            <article class="post-preview">
+              <a href="/post/regression-modelling-for-epidemiology/">
+                <h2 class="post-title">Regression Modelling for Epidemiology</h2>
+
+                
+                  <h3 class="post-subtitle">
+                    Riga Stradins University Workshop, July 2020
+                  </h3>
+                
+              </a>
+
+              <p class="post-meta">
+                Posted on July 24, 2020
+              </p>
+              <div class="post-entry">
+                
+                  Riga Stradins University Workshop, July 2020
+pacman::p_load( car, broom, tidyverse, ggfortify, mosaic, huxtable, jtools, latex2exp, pubh, sjlabelled, sjPlot, sjmisc ) theme_set(sjPlot::theme_sjplot2(base_size = 10)) theme_update(legend.position = &quot;top&quot;) # options(&#39;huxtable.knit_print_df&#39; = FALSE) options(&#39;huxtable.knit_print_df_theme&#39; = theme_article) options(&#39;huxtable.autoformat_number_format&#39; = list(numeric = &quot;%5.2f&quot;)) knitr::opts_chunk$set(collapse = TRUE, comment = NA) Regression data(birthwt, package = &quot;MASS&quot;) birthwt &lt;- birthwt %&gt;% mutate(smoke = factor(smoke, labels = c(&quot;Non-smoker&quot;, &quot;Smoker&quot;)), race = factor(race, labels = c(&quot;White&quot;, &quot;African American&quot;, &quot;Other&quot;))) %&gt;% var_labels(bwt = &#39;Birth weight (g)&#39;, smoke = &#39;Smoking status&#39;, race = &#39;Race&#39;) birthwt %&gt;% group_by(race, smoke) %&gt;% summarise( n = n(), Mean = mean(bwt, na.
+                  <a href="/post/regression-modelling-for-epidemiology/" class="post-read-more">[Read More]</a>
+                
+              </div>
+
+              
+                <span class="post-meta">
+                  
+                    #<a href="//tags/regression/">regression</a>&nbsp;
+                  
+                    #<a href="//tags/epidemiology/">epidemiology</a>&nbsp;
+                  
+                </span>
               
 
             </article>

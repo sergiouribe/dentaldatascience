@@ -7,7 +7,7 @@
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>sergio.uribe@gmail.com (Sergio Uribe)</managingEditor>
     <webMaster>sergio.uribe@gmail.com (Sergio Uribe)</webMaster>
-    <lastBuildDate>Thu, 05 Sep 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 24 Jul 2020 00:00:00 +0000</lastBuildDate>
     
 	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
@@ -15,9 +15,27 @@
     <item>
       <title>EDA</title>
       <link>/tags/eda/</link>
-      <pubDate>Thu, 05 Sep 2019 00:00:00 +0000</pubDate>
+      <pubDate>Fri, 24 Jul 2020 00:00:00 +0000</pubDate>
       <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
       <guid>/tags/eda/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>epidemiology</title>
+      <link>/tags/epidemiology/</link>
+      <pubDate>Fri, 24 Jul 2020 00:00:00 +0000</pubDate>
+      <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
+      <guid>/tags/epidemiology/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>regression</title>
+      <link>/tags/regression/</link>
+      <pubDate>Fri, 24 Jul 2020 00:00:00 +0000</pubDate>
+      <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
+      <guid>/tags/regression/</guid>
       <description></description>
     </item>
     
