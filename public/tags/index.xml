@@ -1,77 +1,77 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Dental Data Science</title>
-    <link>https://dentaldatascience.org/tags/</link>
+    <link>/tags/</link>
     <description>Recent content in Tags on Dental Data Science</description>
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>sergio.uribe@gmail.com (Sergio Uribe)</managingEditor>
     <webMaster>sergio.uribe@gmail.com (Sergio Uribe)</webMaster>
     <lastBuildDate>Thu, 05 Sep 2019 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://dentaldatascience.org/tags/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>EDA</title>
-      <link>https://dentaldatascience.org/tags/eda/</link>
+      <link>/tags/eda/</link>
       <pubDate>Thu, 05 Sep 2019 00:00:00 +0000</pubDate>
       <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
-      <guid>https://dentaldatascience.org/tags/eda/</guid>
+      <guid>/tags/eda/</guid>
       <description></description>
     </item>
     
     <item>
       <title>janitor</title>
-      <link>https://dentaldatascience.org/tags/janitor/</link>
+      <link>/tags/janitor/</link>
       <pubDate>Thu, 05 Sep 2019 00:00:00 +0000</pubDate>
       <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
-      <guid>https://dentaldatascience.org/tags/janitor/</guid>
+      <guid>/tags/janitor/</guid>
       <description></description>
     </item>
     
     <item>
       <title>table</title>
-      <link>https://dentaldatascience.org/tags/table/</link>
+      <link>/tags/table/</link>
       <pubDate>Thu, 05 Sep 2019 00:00:00 +0000</pubDate>
       <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
-      <guid>https://dentaldatascience.org/tags/table/</guid>
+      <guid>/tags/table/</guid>
       <description></description>
     </item>
     
     <item>
       <title>table1</title>
-      <link>https://dentaldatascience.org/tags/table1/</link>
+      <link>/tags/table1/</link>
       <pubDate>Thu, 05 Sep 2019 00:00:00 +0000</pubDate>
       <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
-      <guid>https://dentaldatascience.org/tags/table1/</guid>
+      <guid>/tags/table1/</guid>
       <description></description>
     </item>
     
     <item>
       <title>ggplot2</title>
-      <link>https://dentaldatascience.org/tags/ggplot2/</link>
+      <link>/tags/ggplot2/</link>
       <pubDate>Thu, 08 Mar 2018 00:00:00 +0000</pubDate>
       <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
-      <guid>https://dentaldatascience.org/tags/ggplot2/</guid>
+      <guid>/tags/ggplot2/</guid>
       <description></description>
     </item>
     
     <item>
       <title>case-control</title>
-      <link>https://dentaldatascience.org/tags/case-control/</link>
+      <link>/tags/case-control/</link>
       <pubDate>Fri, 02 Mar 2018 00:00:00 +0000</pubDate>
       <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
-      <guid>https://dentaldatascience.org/tags/case-control/</guid>
+      <guid>/tags/case-control/</guid>
       <description></description>
     </item>
     
     <item>
       <title>dplyr</title>
-      <link>https://dentaldatascience.org/tags/dplyr/</link>
+      <link>/tags/dplyr/</link>
       <pubDate>Fri, 02 Mar 2018 00:00:00 +0000</pubDate>
       <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
-      <guid>https://dentaldatascience.org/tags/dplyr/</guid>
+      <guid>/tags/dplyr/</guid>
       <description></description>
     </item>
     

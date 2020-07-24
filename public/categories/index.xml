@@ -1,59 +1,59 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Dental Data Science</title>
-    <link>https://dentaldatascience.org/categories/</link>
+    <link>/categories/</link>
     <description>Recent content in Categories on Dental Data Science</description>
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>sergio.uribe@gmail.com (Sergio Uribe)</managingEditor>
     <webMaster>sergio.uribe@gmail.com (Sergio Uribe)</webMaster>
-    <lastBuildDate>Thu, 05 Sep 2019 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 24 Jul 2020 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://dentaldatascience.org/categories/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>epidemiological research</title>
+      <link>/categories/epidemiological-research/</link>
+      <pubDate>Fri, 24 Jul 2020 00:00:00 +0000</pubDate>
+      <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
+      <guid>/categories/epidemiological-research/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>eda</title>
-      <link>https://dentaldatascience.org/categories/eda/</link>
+      <link>/categories/eda/</link>
       <pubDate>Thu, 05 Sep 2019 00:00:00 +0000</pubDate>
       <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
-      <guid>https://dentaldatascience.org/categories/eda/</guid>
+      <guid>/categories/eda/</guid>
       <description></description>
     </item>
     
     <item>
       <title>visualization</title>
-      <link>https://dentaldatascience.org/categories/visualization/</link>
+      <link>/categories/visualization/</link>
       <pubDate>Thu, 08 Mar 2018 00:00:00 +0000</pubDate>
       <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
-      <guid>https://dentaldatascience.org/categories/visualization/</guid>
+      <guid>/categories/visualization/</guid>
       <description></description>
     </item>
     
     <item>
       <title>case-control study</title>
-      <link>https://dentaldatascience.org/categories/case-control-study/</link>
+      <link>/categories/case-control-study/</link>
       <pubDate>Fri, 02 Mar 2018 00:00:00 +0000</pubDate>
       <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
-      <guid>https://dentaldatascience.org/categories/case-control-study/</guid>
+      <guid>/categories/case-control-study/</guid>
       <description></description>
     </item>
     
     <item>
       <title>data wrangling</title>
-      <link>https://dentaldatascience.org/categories/data-wrangling/</link>
+      <link>/categories/data-wrangling/</link>
       <pubDate>Fri, 02 Mar 2018 00:00:00 +0000</pubDate>
       <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
-      <guid>https://dentaldatascience.org/categories/data-wrangling/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>epidemiological research</title>
-      <link>https://dentaldatascience.org/categories/epidemiological-research/</link>
-      <pubDate>Fri, 02 Mar 2018 00:00:00 +0000</pubDate>
-      <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
-      <guid>https://dentaldatascience.org/categories/epidemiological-research/</guid>
+      <guid>/categories/data-wrangling/</guid>
       <description></description>
     </item>
     

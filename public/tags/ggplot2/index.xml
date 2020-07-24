@@ -1,23 +1,23 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>ggplot2 on Dental Data Science</title>
-    <link>https://dentaldatascience.org/tags/ggplot2/</link>
+    <link>/tags/ggplot2/</link>
     <description>Recent content in ggplot2 on Dental Data Science</description>
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>sergio.uribe@gmail.com (Sergio Uribe)</managingEditor>
     <webMaster>sergio.uribe@gmail.com (Sergio Uribe)</webMaster>
     <lastBuildDate>Thu, 08 Mar 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://dentaldatascience.org/tags/ggplot2/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/tags/ggplot2/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Visualizing the dental workforce of OECD countries I</title>
-      <link>https://dentaldatascience.org/post/visualizing-the-dentists-workforce-of-oecd-countries-i/</link>
+      <link>/post/visualizing-the-dentists-workforce-of-oecd-countries-i/</link>
       <pubDate>Thu, 08 Mar 2018 00:00:00 +0000</pubDate>
       <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
-      <guid>https://dentaldatascience.org/post/visualizing-the-dentists-workforce-of-oecd-countries-i/</guid>
+      <guid>/post/visualizing-the-dentists-workforce-of-oecd-countries-i/</guid>
       <description>The Organisation for Economic Co-operation and Development host a database with extensive data. In this post we will do some visualizations to compare the number of dentists in each country.
 Packages used:
  tidyverse gghighlight kableExtra  First we load the data. Now there is a package (OECD) able to extract the datasets, but I will use a local copy:
@@ -26,10 +26,10 @@ dent_oecd &amp;lt;- read_csv(&amp;quot;https://docs.google.com/spreadsheets/d/e/
     
     <item>
       <title>Data wrangling and table summaries of case-control studies</title>
-      <link>https://dentaldatascience.org/post/tercer-post/</link>
+      <link>/post/tercer-post/</link>
       <pubDate>Fri, 02 Mar 2018 00:00:00 +0000</pubDate>
       <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
-      <guid>https://dentaldatascience.org/post/tercer-post/</guid>
+      <guid>/post/tercer-post/</guid>
       <description>A Case-control study compares patients who have a disease or outcome of interest (cases) with patients who do not have the disease or outcome (controls), and looks back retrospectively to compare how frequently the exposure to a risk factor is present in each group to determine the relationship between the risk factor and the disease.
 Case control studies are observational because no intervention is attempted and no attempt is made to alter the course of the disease.</description>
     </item>

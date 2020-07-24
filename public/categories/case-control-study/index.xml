@@ -1,23 +1,23 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>case-control study on Dental Data Science</title>
-    <link>https://dentaldatascience.org/categories/case-control-study/</link>
+    <link>/categories/case-control-study/</link>
     <description>Recent content in case-control study on Dental Data Science</description>
     <generator>Hugo -- gohugo.io</generator>
     <managingEditor>sergio.uribe@gmail.com (Sergio Uribe)</managingEditor>
     <webMaster>sergio.uribe@gmail.com (Sergio Uribe)</webMaster>
     <lastBuildDate>Fri, 02 Mar 2018 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="https://dentaldatascience.org/categories/case-control-study/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="/categories/case-control-study/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Data wrangling and table summaries of case-control studies</title>
-      <link>https://dentaldatascience.org/post/tercer-post/</link>
+      <link>/post/tercer-post/</link>
       <pubDate>Fri, 02 Mar 2018 00:00:00 +0000</pubDate>
       <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
-      <guid>https://dentaldatascience.org/post/tercer-post/</guid>
+      <guid>/post/tercer-post/</guid>
       <description>A Case-control study compares patients who have a disease or outcome of interest (cases) with patients who do not have the disease or outcome (controls), and looks back retrospectively to compare how frequently the exposure to a risk factor is present in each group to determine the relationship between the risk factor and the disease.
 Case control studies are observational because no intervention is attempted and no attempt is made to alter the course of the disease.</description>
     </item>

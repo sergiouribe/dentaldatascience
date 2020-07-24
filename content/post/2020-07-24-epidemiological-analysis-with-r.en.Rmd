@@ -1,0 +1,328 @@
+---
+title: Epidemiological analysis with R
+author: Sergio Uribe
+date: '2020-07-24'
+slug: epidemiological-analysis-with-r
+categories:
+  - epidemiological research
+tags: []
+subtitle: ''
+---
+
+
+Riga Stradins University, July 2020
+
+Required packages
+
+```{r}
+pacman::p_load(
+  car,
+  broom,
+  tidyverse,
+  ggfortify,
+  mosaic,
+  huxtable,
+  jtools,
+  latex2exp,
+  pubh,
+  sjlabelled,
+  sjPlot,
+  sjmisc
+)
+
+theme_set(sjPlot::theme_sjplot2(base_size = 10))
+theme_update(legend.position = "top")
+# options('huxtable.knit_print_df' = FALSE)
+options('huxtable.knit_print_df_theme' = theme_article)
+options('huxtable.autoformat_number_format' = list(numeric = "%5.2f"))
+knitr::opts_chunk$set(collapse = TRUE, comment = NA)
+```
+
+# Epidemiological Descriptive Analysis 
+
+Onchocerciasis in Sierra Leone.
+```{r}
+data(Oncho)
+Oncho %>% head()
+```
+A two-by-two contingency table:
+```{r}
+Oncho %>%
+  mutate(mf = relevel(mf, ref = "Infected")) %>%
+  copy_labels(Oncho) %>%
+  cross_tab(mf ~ area) 
+```
+
+Table with all descriptive statistics except id and mfload:
+
+```{r}
+Oncho %>%
+  # dplyr:select(-c(id, mfload)) %>%
+  dplyr::select(-id) %>%
+  dplyr::select(-mfload) %>%  # just for example
+  mutate(mf = relevel(mf, ref = "Infected")) %>%
+  copy_labels(Oncho) %>%
+  cross_tab(mf ~ area + .) 
+```
+
+Data set about blood counts of T cells from patients in remission from Hodgkin's disease or in remission from disseminated malignancies. We generate the new variable Ratio and add labels to the variables.
+```{r}
+data(Hodgkin)
+Hodgkin <- Hodgkin %>%
+  mutate(Ratio = CD4/CD8) %>%
+  var_labels(
+    Ratio = "CD4+ / CD8+ T-cells ratio"
+    )
+
+Hodgkin %>% head()
+```
+
+Descriptive statistics for CD4+ T cells:
+```{r}
+Hodgkin %>%
+  estat(~ CD4)
+```
+For stratification, estat recognises the following two syntaxes:
+
+ - outcome ~ exposure
+ - ~ outcome | exposure
+ 
+where, outcome is continuous and exposure is a categorical (factor) variable.
+
+```{r}
+Hodgkin %>%
+  estat(~ Ratio|Group)
+```
+
+descriptive statistics for all variables in the data set:
+
+```{r}
+Hodgkin %>%
+  mutate(Group = relevel(Group, ref = "Hodgkin")) %>%
+  copy_labels(Hodgkin) %>%
+  cross_tab(Group ~ CD4 + .)
+  # theme_article() %>%
+  # add_footnote("Values are medians with interquartile range.")
+```
+## Inferential statistics
+
+```{r}
+var.test(Ratio ~ Group, data = Hodgkin)
+```
+
+QQ-plots against the standard Normal distribution.
+```{r}
+Hodgkin %>%
+  qq_plot(~ Ratio|Group) %>%
+  axis_labs()
+```
+non-parametric test to compare the groups:
+```{r}
+wilcox.test(Ratio ~ Group, data = Hodgkin)
+```
+
+For relatively small samples (for example, less than 30 observations per group) is a standard practice to show the actual data in dot plots with error bars. The pubh package offers two options to show graphically differences in continuous outcomes among groups:
+
+For small samples: strip_error
+For medium to large samples: bar_error
+
+```{r}
+Hodgkin %>%
+  strip_error(Ratio ~ Group) %>%
+  axis_labs()
+```
+
+In the previous code, axis_labs applies labels from labelled data to the axis.
+
+The error bars represent 95% confidence intervals around mean values.
+
+Is relatively easy to add a line on top, to show that the two groups are significantly different. The function gf_star needs the reference point on how to draw an horizontal line to display statistical difference or to annotate a plot; in summary, gf_star:
+
+```{r}
+Hodgkin %>%
+  strip_error(Ratio ~ Group) %>%
+  axis_labs() %>%
+  gf_star(x1 = 1, y1 = 4, x2 = 2, y2 = 4.05, y3 = 4.1, "**")
+```
+
+For larger samples we could use bar charts with error bars. For example:
+
+```{r}
+data(birthwt, package = "MASS")
+birthwt <- birthwt %>%
+  mutate(
+    smoke = factor(smoke, labels = c("Non-smoker", "Smoker")),
+    Race = factor(race > 1, labels = c("White", "Non-white")),
+    race = factor(race, labels = c("White", "Afican American", "Other"))
+    ) %>%
+  var_labels(
+    bwt = 'Birth weight (g)',
+    smoke = 'Smoking status',
+    race = 'Race',
+  )
+```
+
+```{r}
+birthwt %>%
+  bar_error(bwt ~ smoke) %>%
+  axis_labs()
+```
+
+Quick normality check:
+
+```{r}
+birthwt %>%
+  qq_plot(~ bwt|smoke) %>%
+  axis_labs()
+```
+The (unadjusted) t-test:
+```{r}
+t.test(bwt ~ smoke, data = birthwt)
+```
+Final plot with annotation to highlight statistical difference (unadjusted):
+```{r}
+birthwt %>%
+  bar_error(bwt ~ smoke) %>%
+  axis_labs() %>%
+  gf_star(x1 = 1, x2 = 2, y1 = 3400, y2 = 3500, y3 = 3550, "**")
+```
+strip_error and bar_error can generate plots stratified by a third variable, for example:
+```{r}
+birthwt %>%
+  bar_error(bwt ~ smoke, fill = ~ Race) %>%
+  gf_refine(ggsci::scale_fill_jama()) %>%
+  axis_labs()
+```
+
+```{r}
+birthwt %>%
+  bar_error(bwt ~ smoke|Race) %>%
+  axis_labs()
+```
+ analysis of the linear model of smoking on birth weight, adjusting by race (and not by other potential confounders)
+```{r}
+birthwt %>%
+  strip_error(bwt ~ smoke, pch = ~ Race, col = ~ Race) %>%
+  gf_refine(ggsci::scale_color_jama()) %>%
+  axis_labs()
+```
+ analysis of the linear model of smoking on birth weight, adjusting by race (and not by other potential confounders)
+```{r}
+model_bwt <- lm(bwt ~ smoke + race, data = birthwt)
+
+model_bwt %>%
+  glm_coef(labels = model_labels(model_bwt))
+```
+
+Similar results can be obtained with the function tab_model from the sjPlot package.
+```{r}
+sjPlot::tab_model(model_bwt,  collapse.ci = TRUE)
+```
+
+```{r}
+pubh::multiple(model_bwt, ~ race)$df
+```
+
+
+Some advantages of glm_coef over tab_model are:
+
+Script documents can be knitted to Word and LaTEX
+ (besides HTML).
+Uses robust standard errors by default. The option to not use robust standard errors is part of the arguments.
+Recognises some type of models that tab_model does not recognise.
+Some advantages of tab_model over glm_coef are:
+
+Recognises labels from variables and use those labels to display the table.
+Includes some statistics about the model.
+It can display more than one model on the same output.
+Tables are more aesthetically appealing.
+In the previous table of coefficients confidence intervals and p-values for race had not been adjusted for multiple comparisons. We use functions from the emmeans package to make the corrections.
+
+```{r}
+multiple(model_bwt, ~ race)$fig_ci %>%
+  gf_labs(x = "Difference in birth weights (g)")
+```
+
+```{r}
+multiple(model_bwt, ~ race)$fig_pval %>%
+  gf_labs(y = " ")
+```
+
+```{r}
+data(Bernard)
+head(Bernard)
+```
+
+```{r}
+Bernard %>%
+  mutate(
+    fate = relevel(fate, ref = "Dead"),
+    treat = relevel(treat, ref = "Ibuprofen")
+  ) %>%
+  copy_labels(Bernard) %>%
+  pubh::cross_tab(fate ~ treat) 
+```
+
+```{r}
+dat <- matrix(c(84, 140 , 92, 139), 
+              nrow = 2, byrow = TRUE)
+epiR::epi.2by2(as.table(dat))
+```
+
+```{r}
+Bernard %>%
+  pubh::contingency(fate ~ treat)
+```
+
+```{r}
+data(oswego, package = "epitools")
+
+oswego <- oswego %>%
+  mutate(
+    ill = factor(ill, labels = c("No", "Yes")),
+    sex = factor(sex, labels = c("Female", "Male")),
+    chocolate.ice.cream = factor(chocolate.ice.cream, labels = c("No", "Yes"))
+  ) %>%
+  var_labels(
+    ill = "Developed illness",
+    sex = "Sex",
+    chocolate.ice.cream = "Consumed chocolate ice cream"
+  )
+```
+
+```{r}
+oswego %>%
+  mutate(
+    ill = relevel(ill, ref = "Yes"),
+    chocolate.ice.cream = relevel(chocolate.ice.cream, ref = "Yes")
+  ) %>%
+  copy_labels(oswego) %>%
+  pubh::cross_tab(ill ~ sex + chocolate.ice.cream) 
+```
+
+```{r}
+oswego %>%
+  pubh::mhor(ill ~ sex/chocolate.ice.cream)
+```
+
+```{r}
+data(Oncho)
+
+
+pubh::odds_trend(mf ~ agegrp, data = Oncho, angle = 0, hjust = 0.5)$fig
+```
+# Diagnostic test
+
+```{r}
+Freq <- c(1739, 8, 51, 22)
+BCG <- gl(2, 1, 4, labels=c("Negative", "Positive"))
+Xray <- gl(2, 2, labels=c("Negative", "Positive"))
+tb <- data.frame(Freq, BCG, Xray)
+tb <- expand_df(tb)
+
+pubh::diag_test(BCG ~ Xray, data = tb)
+```
+
+```{r}
+pubh::diag_test2(22, 51, 8, 1739)
+```

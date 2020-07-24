@@ -1,112 +1,117 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://dentaldatascience.org/categories/</loc>
+    <loc>/categories/</loc>
+    <lastmod>2020-07-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/</loc>
+    <lastmod>2020-07-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/epidemiological-analysis-with-r/</loc>
+    <lastmod>2020-07-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/categories/epidemiological-research/</loc>
+    <lastmod>2020-07-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/post/</loc>
+    <lastmod>2020-07-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>/tags/eda/</loc>
     <lastmod>2019-09-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://dentaldatascience.org/</loc>
+    <loc>/categories/eda/</loc>
     <lastmod>2019-09-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://dentaldatascience.org/tags/eda/</loc>
+    <loc>/post/eda-with-tables/</loc>
     <lastmod>2019-09-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://dentaldatascience.org/categories/eda/</loc>
+    <loc>/tags/janitor/</loc>
     <lastmod>2019-09-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://dentaldatascience.org/post/eda-with-tables/</loc>
+    <loc>/tags/table/</loc>
     <lastmod>2019-09-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://dentaldatascience.org/tags/janitor/</loc>
+    <loc>/tags/table1/</loc>
     <lastmod>2019-09-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://dentaldatascience.org/post/</loc>
+    <loc>/tags/</loc>
     <lastmod>2019-09-05T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://dentaldatascience.org/tags/table/</loc>
-    <lastmod>2019-09-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dentaldatascience.org/tags/table1/</loc>
-    <lastmod>2019-09-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dentaldatascience.org/tags/</loc>
-    <lastmod>2019-09-05T00:00:00+00:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://dentaldatascience.org/tags/ggplot2/</loc>
+    <loc>/tags/ggplot2/</loc>
     <lastmod>2018-03-08T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://dentaldatascience.org/categories/visualization/</loc>
+    <loc>/categories/visualization/</loc>
     <lastmod>2018-03-08T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://dentaldatascience.org/post/visualizing-the-dentists-workforce-of-oecd-countries-i/</loc>
+    <loc>/post/visualizing-the-dentists-workforce-of-oecd-countries-i/</loc>
     <lastmod>2018-03-08T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://dentaldatascience.org/tags/case-control/</loc>
+    <loc>/tags/case-control/</loc>
     <lastmod>2018-03-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://dentaldatascience.org/categories/case-control-study/</loc>
+    <loc>/categories/case-control-study/</loc>
     <lastmod>2018-03-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://dentaldatascience.org/categories/data-wrangling/</loc>
+    <loc>/categories/data-wrangling/</loc>
     <lastmod>2018-03-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://dentaldatascience.org/post/tercer-post/</loc>
+    <loc>/post/tercer-post/</loc>
     <lastmod>2018-03-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://dentaldatascience.org/tags/dplyr/</loc>
+    <loc>/tags/dplyr/</loc>
     <lastmod>2018-03-02T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>https://dentaldatascience.org/categories/epidemiological-research/</loc>
-    <lastmod>2018-03-02T00:00:00+00:00</lastmod>
+    <loc>/page/about/</loc>
   </url>
   
   <url>
-    <loc>https://dentaldatascience.org/page/about/</loc>
+    <loc>/page/links/</loc>
   </url>
   
   <url>
-    <loc>https://dentaldatascience.org/page/links/</loc>
-  </url>
-  
-  <url>
-    <loc>https://dentaldatascience.org/page/</loc>
+    <loc>/page/</loc>
   </url>
   
 </urlset>
