@@ -10,9 +10,9 @@ tags:
   - epidemiology
 subtitle: 'Riga Stradins University Workshop, July 2020'
 ---
++ Lecturer: Sergio Uribe, Assoc Prof, PhD
++ Riga Stradins University, July 2020
 
-
-Riga Stradins University, July 2020
 
 Required packages
 
