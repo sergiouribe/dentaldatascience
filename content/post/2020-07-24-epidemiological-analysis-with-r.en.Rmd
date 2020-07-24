@@ -226,16 +226,18 @@ pubh::multiple(model_bwt, ~ race)$df
 
 Some advantages of glm_coef over tab_model are:
 
-Script documents can be knitted to Word and LaTEX
- (besides HTML).
-Uses robust standard errors by default. The option to not use robust standard errors is part of the arguments.
-Recognises some type of models that tab_model does not recognise.
++ Script documents can be knitted to Word and LaTEX
+ (+ (besides HTML).
++ Uses robust standard errors by default. The option to not use robust standard errors is part of the arguments.
++ Recognises some type of models that tab_model does not recognise.
+
 Some advantages of tab_model over glm_coef are:
 
-Recognises labels from variables and use those labels to display the table.
-Includes some statistics about the model.
-It can display more than one model on the same output.
-Tables are more aesthetically appealing.
++ Recognises labels from variables and use those labels to display the table.
++ Includes some statistics about the model.
++ It can display more than one model on the same output.
++ Tables are more aesthetically appealing.
+
 In the previous table of coefficients confidence intervals and p-values for race had not been adjusted for multiple comparisons. We use functions from the emmeans package to make the corrections.
 
 ```{r}
