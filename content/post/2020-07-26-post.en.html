@@ -1,0 +1,282 @@
+---
+title: Post
+author: Sergio Uribe
+date: '2020-07-26'
+slug: post
+categories:
+  - eda
+tags:
+  - tidyverse
+  - tricks
+subtitle: ''
+---
+
+
+
+<p>Original from <a href="https://www.youtube.com/watch?v=ZM04jn95YP0" class="uri">https://www.youtube.com/watch?v=ZM04jn95YP0</a></p>
+<div id="install.packagestidyverse" class="section level1">
+<h1>install.packages(“tidyverse”)</h1>
+<pre class="r"><code>library(tidyverse)</code></pre>
+<pre><code>## ── Attaching packages ─────────────────────────────── tidyverse 1.3.0 ──</code></pre>
+<pre><code>## ✓ ggplot2 3.3.2     ✓ purrr   0.3.4
+## ✓ tibble  3.0.3     ✓ dplyr   1.0.0
+## ✓ tidyr   1.1.0     ✓ stringr 1.4.0
+## ✓ readr   1.3.1     ✓ forcats 0.5.0</code></pre>
+<pre><code>## ── Conflicts ────────────────────────────────── tidyverse_conflicts() ──
+## x dplyr::filter() masks stats::filter()
+## x dplyr::lag()    masks stats::lag()</code></pre>
+<pre class="r"><code>library(lubridate)</code></pre>
+<pre><code>## 
+## Attaching package: &#39;lubridate&#39;</code></pre>
+<pre><code>## The following objects are masked from &#39;package:base&#39;:
+## 
+##     date, intersect, setdiff, union</code></pre>
+<pre class="r"><code># install.packages(&quot;nycflights13&quot;)
+library(nycflights13)
+
+View(flights)</code></pre>
+</div>
+<div id="tip-1-of-18-create-new-columns-in-a-count-or-group_by" class="section level1">
+<h1>Tip 1 of 18: Create new columns in a count or group_by</h1>
+<pre class="r"><code>flights %&gt;%
+  mutate(long_flight = (air_time &gt;= 6 * 60)) %&gt;%
+  View()
+
+flights %&gt;%
+  mutate(long_flight = (air_time &gt;= 6 * 60)) %&gt;%
+  count(long_flight)</code></pre>
+<pre><code>## # A tibble: 3 x 2
+##   long_flight      n
+##   &lt;lgl&gt;        &lt;int&gt;
+## 1 FALSE       322630
+## 2 TRUE          4716
+## 3 NA            9430</code></pre>
+<pre class="r"><code>flights %&gt;%
+  count(long_flight = air_time &gt;= 6 * 60)</code></pre>
+<pre><code>## # A tibble: 3 x 2
+##   long_flight      n
+##   &lt;lgl&gt;        &lt;int&gt;
+## 1 FALSE       322630
+## 2 TRUE          4716
+## 3 NA            9430</code></pre>
+<pre class="r"><code>flights %&gt;%
+  count(flight_path = str_c(origin, &quot; -&gt; &quot;, dest), sort = TRUE)</code></pre>
+<pre><code>## # A tibble: 224 x 2
+##    flight_path     n
+##    &lt;chr&gt;       &lt;int&gt;
+##  1 JFK -&gt; LAX  11262
+##  2 LGA -&gt; ATL  10263
+##  3 LGA -&gt; ORD   8857
+##  4 JFK -&gt; SFO   8204
+##  5 LGA -&gt; CLT   6168
+##  6 EWR -&gt; ORD   6100
+##  7 JFK -&gt; BOS   5898
+##  8 LGA -&gt; MIA   5781
+##  9 JFK -&gt; MCO   5464
+## 10 EWR -&gt; BOS   5327
+## # … with 214 more rows</code></pre>
+<pre class="r"><code>flights %&gt;%
+  group_by(date = make_date(year, month, day)) %&gt;%
+  summarise(flights_n = n(), air_time_median = median(air_time, na.rm = TRUE)) %&gt;%
+  ungroup()</code></pre>
+<pre><code>## `summarise()` ungrouping output (override with `.groups` argument)</code></pre>
+<pre><code>## # A tibble: 365 x 3
+##    date       flights_n air_time_median
+##    &lt;date&gt;         &lt;int&gt;           &lt;dbl&gt;
+##  1 2013-01-01       842            149 
+##  2 2013-01-02       943            148 
+##  3 2013-01-03       914            148 
+##  4 2013-01-04       915            140 
+##  5 2013-01-05       720            147 
+##  6 2013-01-06       832            147 
+##  7 2013-01-07       933            126.
+##  8 2013-01-08       899            126.
+##  9 2013-01-09       902            135 
+## 10 2013-01-10       932            126 
+## # … with 355 more rows</code></pre>
+</div>
+<div id="tip-2-of-18-sample-and-randomly-shuffle-data-with-slice_sample" class="section level1">
+<h1>Tip 2 of 18: Sample and randomly shuffle data with slice_sample()</h1>
+<p>flights %&gt;%
+slice_sample(n = 10)</p>
+<p>flights %&gt;%
+slice_sample(prop = 0.01)</p>
+<p>flights %&gt;%
+slice_sample(prop = 1)</p>
+<p>flights %&gt;%
+group_by(origin) %&gt;%
+slice_sample(n = 3) %&gt;%
+ungroup()</p>
+</div>
+<div id="tip-3-of-18-create-a-date-column-specifying-year-month-and-day" class="section level1">
+<h1>Tip 3 of 18: Create a date column specifying year, month, and day</h1>
+<p>flights %&gt;%
+select(year, month, day) %&gt;%
+mutate(date = make_date(year, month, day))</p>
+</div>
+<div id="tip-4-of-18-parse-numbers-with-parse_number" class="section level1">
+<h1>Tip 4 of 18: Parse numbers with parse_number()</h1>
+<p>numbers_1 &lt;- tibble(number_col = c(“#1”, “#2”, “#3”))
+numbers_2 &lt;- tibble(number_col = c(“Number 5”, “#6”, “7”))
+numbers_3 &lt;- tibble(number_col = c(“1.2%”, “2.5%”, “50.9%”))</p>
+<p>numbers_1
+numbers_1 %&gt;% mutate(number_col = parse_number(number_col))</p>
+<p>numbers_2
+numbers_2 %&gt;% mutate(number_col = parse_number(number_col))</p>
+<p>numbers_3
+numbers_3 %&gt;% mutate(number_col = parse_number(number_col))</p>
+</div>
+<div id="tip-5-of-18-select-columns-with-starts_with-ends_with-etc." class="section level1">
+<h1>Tip 5 of 18: Select columns with starts_with, ends_with, etc.</h1>
+<p>flights %&gt;%
+select(starts_with(“dep_”))</p>
+<p>flights %&gt;%
+select(starts_with(“dep_”), everything())</p>
+<p>flights %&gt;%
+select(ends_with(“hour”))</p>
+<p>flights %&gt;%
+select(contains(“dep”))</p>
+</div>
+<div id="tip-6-of-18-case_when-to-create-or-change-a-column-when-conditions-are-met" class="section level1">
+<h1>Tip 6 of 18: case_when to create or change a column when conditions are met</h1>
+<p>flights %&gt;%
+select(origin)</p>
+<p>flights %&gt;%
+mutate(origin = case_when(
+(origin == “EWR”) &amp; dep_delay &gt; 20 ~ “Newark International Airport - DELAYED”,
+(origin == “EWR”) &amp; dep_delay &lt;= 20 ~ “Newark International Airport - ON TIME DEPARTURE”,
+origin == “JFK” ~ “John F. Kennedy International Airport”,
+origin == “LGA” ~ “LaGuardia Airport”
+)) %&gt;%
+count(origin)</p>
+</div>
+<div id="tip-7-of-18-str_replace_all-to-find-and-replace-multiple-options-at-once" class="section level1">
+<h1>Tip 7 of 18: str_replace_all to find and replace multiple options at once</h1>
+<p>flights %&gt;%
+mutate(origin = str_replace_all(origin, c(
+“^EWR<span class="math inline">\(&quot; = &quot;Newark International Airport&quot;,  &quot;^JFK\)</span>” = “John F. Kennedy International Airport”,
+“^LGA$” = “LaGuardia Airport”
+))) %&gt;%
+count(origin)</p>
+</div>
+<div id="tip-8-of-18-transmute-to-create-or-change-columns-and-keep-only-those-columns" class="section level1">
+<h1>Tip 8 of 18: Transmute to create or change columns and keep only those columns</h1>
+<p>flights %&gt;%
+transmute(date = make_date(year, month, day), tailnum)</p>
+</div>
+<div id="tip-9-of-18-use-pipes-everywhere-including-inside-mutates" class="section level1">
+<h1>Tip 9 of 18: Use pipes %&gt;% everywhere including inside mutates</h1>
+<p>airlines %&gt;%
+mutate(name = name %&gt;%
+str_to_upper() %&gt;%
+str_replace_all(" (INC|CO)\.?<span class="math inline">\(&quot;, &quot;&quot;) %&gt;%  str_replace_all(&quot; AIR ?(LINES|WAYS)?( CORPORATION)?\)</span>“,”“) %&gt;%
+str_to_title() %&gt;%
+str_replace_all(”\bUs\b“,”US")) %&gt;%
+count(name)</p>
+<p>airlines %&gt;%
+mutate(name = str_replace_all(str_to_title(str_replace_all(str_replace_all(str_to_upper(name), " (INC|CO)\.?<span class="math inline">\(&quot;, &quot;&quot;), &quot; AIR ?(LINES|WAYS)?( CORPORATION)?\)</span>“,”“)),”\bUs\b“,”US"))</p>
+</div>
+<div id="tip-10-of-18-filter-groups-without-making-a-new-column" class="section level1">
+<h1>Tip 10 of 18: Filter groups without making a new column</h1>
+<p>flights %&gt;%
+count(carrier, sort = TRUE)</p>
+<p>flights_top_carriers &lt;- flights %&gt;%
+group_by(carrier) %&gt;%
+filter(n() &gt;= 10000) %&gt;%
+ungroup()</p>
+<p>flights_top_carriers %&gt;%
+count(carrier, sort = TRUE)</p>
+</div>
+<div id="tip-11-of-18-split-a-string-into-columns-based-on-a-regular-expression" class="section level1">
+<h1>Tip 11 of 18: Split a string into columns based on a regular expression</h1>
+<p>airlines %&gt;%
+count(name)</p>
+<p>airlines %&gt;%
+extract(
+name,
+into = c(“short_name”, “remainder”),
+regex = "^([^\\s]+) (.*)$"
+)</p>
+<p>airlines %&gt;%
+extract(
+name,
+into = c(“short_name”, “remainder”),
+regex = "^([^\\s]+) (.*)$",
+remove = FALSE
+)</p>
+</div>
+<div id="tip-12-of-18-semi_join-to-pick-only-rows-from-the-first-table-which-are-matched-in-the-second-table" class="section level1">
+<h1>Tip 12 of 18: semi_join to pick only rows from the first table which are matched in the second table</h1>
+<p>airways_beginning_with_a &lt;- airlines %&gt;%
+filter(name %&gt;% str_detect(“^A”))</p>
+<p>flights %&gt;%
+semi_join(airways_beginning_with_a, by = “carrier”) %&gt;%
+count(carrier)</p>
+</div>
+<div id="tip-13-of-18-anti_join-to-pick-only-rows-from-the-first-table-which-are-not-matched-in-the-second-table" class="section level1">
+<h1>Tip 13 of 18: anti_join to pick only rows from the first table which are NOT matched in the second table</h1>
+<p>flights %&gt;%
+anti_join(airways_beginning_with_a, by = “carrier”)</p>
+</div>
+<div id="tip-14-of-18-fct_reorder-to-sort-bar-charts" class="section level1">
+<h1>Tip 14 of 18: fct_reorder to sort bar charts</h1>
+<p>flights_with_airline_names &lt;- flights %&gt;%
+left_join(airlines, by = “carrier”)</p>
+<p>flights_with_airline_names %&gt;%
+count(name) %&gt;%
+ggplot(aes(name, n)) +
+geom_col()</p>
+<p>flights_with_airline_names %&gt;%
+count(name) %&gt;%
+mutate(name = fct_reorder(name, n)) %&gt;%
+ggplot(aes(name, n)) +
+geom_col()</p>
+</div>
+<div id="tip-15-of-18-coord_flip-to-display-counts-more-beautifully" class="section level1">
+<h1>Tip 15 of 18: coord_flip to display counts more beautifully</h1>
+<p>flights_with_airline_names %&gt;%
+count(name) %&gt;%
+mutate(name = fct_reorder(name, n)) %&gt;%
+ggplot(aes(name, n)) +
+geom_col() +
+coord_flip()</p>
+</div>
+<div id="tip-16-of-18-fct_lump-to-lump-some-factor-levels-into-other" class="section level1">
+<h1>Tip 16 of 18: fct_lump to lump some factor levels into “Other”</h1>
+<p>flights_with_airline_names %&gt;%
+mutate(name = fct_lump(name, n = 5)) %&gt;%
+count(name) %&gt;%
+mutate(name = fct_reorder(name, n)) %&gt;%
+ggplot(aes(name, n)) +
+geom_col() +
+coord_flip()</p>
+</div>
+<div id="tip-17-of-18-generate-all-combinations-using-crossing" class="section level1">
+<h1>Tip 17 of 18: Generate all combinations using crossing</h1>
+<p>crossing(
+customer_channel = c(“Online”, “Physical store”),
+customer_status = c(“New”, “Repeat”),
+spend_range = c(“$0-$100”, “$100-$200”, “$200-$500”, “$500+”)
+)</p>
+</div>
+<div id="tip-18-of-18-create-functions-that-take-column-names-with-double-curly-braces" class="section level1">
+<h1>Tip 18 of 18: Create functions that take column names with double curly braces</h1>
+<p>col_summary &lt;- function(data, col_names, na.rm = TRUE) {
+data %&gt;%
+summarise(across({{ col_names }},
+list(
+min = min,
+max = max,
+median = median,
+mean = mean
+),
+na.rm = na.rm,
+.names = "{col}_{fn}"
+))
+}</p>
+<p>flights_with_airline_names %&gt;%
+col_summary(c(air_time, arr_delay))</p>
+<p>flights_with_airline_names %&gt;%
+group_by(carrier) %&gt;%
+col_summary(c(air_time, arr_delay))</p>
+</div>

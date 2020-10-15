@@ -1,0 +1,41 @@
+---
+title: "ggplots tips and tricks"
+author: "Sergio Uribe"
+date: '2020-10-15'
+slug: ggplots-tips-and-tricks
+categories: visualization
+tags: ggplot2
+subtitle: ''
+---
+
+
+Is your background a different color than white? Use a transparent background:
+
+
+```{r, eval=FALSE}
+ggsave("myplot.tiff", dpi = 300, plot = myplot, bg = "transparent")
+```
+
+![image](static/transparent-background.png)
+
+
+
+
+To save your images in a high quality format that can be scaled for printing in a magazine or on a poster
+
+
+
+```{r, eval=FALSE}
+ggsave("myplot.tiff", dpi = 300, plot = myplot)
+```
+
+
+Match your poster aesthetic with 
+
+```{r, eval=FALSE}
+scale_fill_manual(values = c("#__", "#__", etc)
+```
+
+Check [this](https://drsimonj.svbtle.com/creating-corporate-colour-palettes-for-ggplot2) also 
+
+Need more adjustments for your graph? Try a [ggplot-extension!](https://exts.ggplot2.tidyverse.org/gallery/)

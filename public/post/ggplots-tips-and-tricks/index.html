@@ -5,9 +5,24 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>eda</title>
-  <meta property="og:title" content="eda" />
-  <meta name="twitter:title" content="eda" />
+  <title>ggplots tips and tricks</title>
+  <meta property="og:title" content="ggplots tips and tricks" />
+  <meta name="twitter:title" content="ggplots tips and tricks" />
+  <meta name="description" content="Is your background a different color than white? Use a transparent background:
+ggsave(&quot;myplot.tiff&quot;, dpi = 300, plot = myplot, bg = &quot;transparent&quot;) image
+ To save your images in a high quality format that can be scaled for printing in a magazine or on a poster
+ggsave(&quot;myplot.tiff&quot;, dpi = 300, plot = myplot) Match your poster aesthetic with
+scale_fill_manual(values = c(&quot;#__&quot;, &quot;#__&quot;, etc) Check this also
+Need more adjustments for your graph?">
+  <meta property="og:description" content="Is your background a different color than white? Use a transparent background:
+ggsave(&quot;myplot.tiff&quot;, dpi = 300, plot = myplot, bg = &quot;transparent&quot;) image
+ To save your images in a high quality format that can be scaled for printing in a magazine or on a poster
+ggsave(&quot;myplot.tiff&quot;, dpi = 300, plot = myplot) Match your poster aesthetic with
+scale_fill_manual(values = c(&quot;#__&quot;, &quot;#__&quot;, etc) Check this also
+Need more adjustments for your graph?">
+  <meta name="twitter:description" content="Is your background a different color than white? Use a transparent background:
+ggsave(&quot;myplot.tiff&quot;, dpi = 300, plot = myplot, bg = &quot;transparent&quot;) image
+ To save your images in a …">
   <meta name="author" content="Sergio Uribe"/>
   <link href='/img/favicon.png' rel='icon' type='image/x-icon'/>
   <meta property="og:image" content="/img/icon.png" />
@@ -15,13 +30,13 @@
   <meta name="twitter:card" content="summary" />
   <meta name="twitter:site" content="@dentaldatasci" />
   <meta name="twitter:creator" content="@dentaldatasci" />
-  <meta property="og:url" content="/categories/eda/" />
+  <meta property="og:url" content="/post/ggplots-tips-and-tricks/" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="Dental Data Science" />
 
   <meta name="generator" content="Hugo 0.71.0" />
-  <link rel="canonical" href="/categories/eda/" />
-  <link rel="alternate" href="/categories/eda/index.xml" type="application/rss+xml" title="Dental Data Science">
+  <link rel="canonical" href="/post/ggplots-tips-and-tricks/" />
+  <link rel="alternate" href="/index.xml" type="application/rss+xml" title="Dental Data Science">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
@@ -187,14 +202,40 @@ if (!doNotTrack) {
 
 
     
+  
+  
+  
+
+
+
+
+  
+
   <header class="header-section ">
+    
     <div class="intro-header no-img">
+      
       <div class="container">
         <div class="row">
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-            <div class="page-heading">
-              <h1>#eda</h1>
-              <hr class="small">
+            <div class="post-heading">
+              <h1>ggplots tips and tricks</h1>
+                
+                
+                  <span class="post-meta">
+  
+  
+  <i class="fa fa-calendar-o"></i>&nbsp;Posted on October 15, 2020
+  
+  
+  &nbsp;|&nbsp;
+  <i class="fa fa-clock-o"></i> 1 minutes (74 words)
+  
+  
+</span>
+
+
+                
             </div>
           </div>
         </div>
@@ -202,82 +243,73 @@ if (!doNotTrack) {
     </div>
   </header>
 
+
     
-  <div class="container" role="main">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
         
-        <div class="posts-list">
+
+
+<p>Is your background a different color than white? Use a transparent background:</p>
+<pre class="r"><code>ggsave(&quot;myplot.tiff&quot;, dpi = 300, plot = myplot, bg = &quot;transparent&quot;)</code></pre>
+<div class="figure">
+<img src="static/transparent-background.png" alt="" />
+<p class="caption">image</p>
+</div>
+<p>To save your images in a high quality format that can be scaled for printing in a magazine or on a poster</p>
+<pre class="r"><code>ggsave(&quot;myplot.tiff&quot;, dpi = 300, plot = myplot)</code></pre>
+<p>Match your poster aesthetic with</p>
+<pre class="r"><code>scale_fill_manual(values = c(&quot;#__&quot;, &quot;#__&quot;, etc)</code></pre>
+<p>Check <a href="https://drsimonj.svbtle.com/creating-corporate-colour-palettes-for-ggplot2">this</a> also</p>
+<p>Need more adjustments for your graph? Try a <a href="https://exts.ggplot2.tidyverse.org/gallery/">ggplot-extension!</a></p>
+
+      </article>
+
+      
+        <ul class="pager blog-pager">
           
-            <article class="post-preview">
-              <a href="/post/post/">
-                <h2 class="post-title">Post</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on July 26, 2020
-              </p>
-              <div class="post-entry">
-                
-                  Original from https://www.youtube.com/watch?v=ZM04jn95YP0
-install.packages(“tidyverse”) library(tidyverse) ## ── Attaching packages ─────────────────────────────── tidyverse 1.3.0 ── ## ✓ ggplot2 3.3.2 ✓ purrr 0.3.4 ## ✓ tibble 3.0.3 ✓ dplyr 1.0.0 ## ✓ tidyr 1.1.0 ✓ stringr 1.4.0 ## ✓ readr 1.3.1 ✓ forcats 0.5.0 ## ── Conflicts ────────────────────────────────── tidyverse_conflicts() ── ## x dplyr::filter() masks stats::filter() ## x dplyr::lag() masks stats::lag() library(lubridate) ## ## Attaching package: &#39;lubridate&#39; ## The following objects are masked from &#39;package:base&#39;: ## ## date, intersect, setdiff, union # install.
-                  <a href="/post/post/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="//tags/tidyverse/">tidyverse</a>&nbsp;
-                  
-                    #<a href="//tags/tricks/">tricks</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
+            <li class="previous">
+              <a href="/post/post/" data-toggle="tooltip" data-placement="top" title="Post">&larr; Previous Post</a>
+            </li>
           
-            <article class="post-preview">
-              <a href="/post/eda-with-tables/">
-                <h2 class="post-title">Exploratory Data Analysis with Tables</h2>
-
-                
-              </a>
-
-              <p class="post-meta">
-                Posted on September 5, 2019
-              </p>
-              <div class="post-entry">
-                
-                  Introduction Tables allow you to explore and summarize data efficiently. While graphs are more intuitive for discovering relationships and trends, tables have the advantage of providing detailed information and allowing descriptive statistics and data summaries to be delivered.
-Usually scientific articles in medicine begin with a table that shows the characteristics of the sample of patients. In this post, we will use the janitor and table1 packages to summarize data and make an example of table 1 using the NHANES database.
-                  <a href="/post/eda-with-tables/" class="post-read-more">[Read More]</a>
-                
-              </div>
-
-              
-                <span class="post-meta">
-                  
-                    #<a href="//tags/janitor/">janitor</a>&nbsp;
-                  
-                    #<a href="//tags/table1/">table1</a>&nbsp;
-                  
-                    #<a href="//tags/eda/">EDA</a>&nbsp;
-                  
-                    #<a href="//tags/table/">table</a>&nbsp;
-                  
-                </span>
-              
-
-            </article>
           
-        </div>
+        </ul>
+      
+
+
+      
         
-      </div>
+          <div class="disqus-comments">
+            <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "dental-data-science" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        
+        
+      
+
     </div>
   </div>
+</div>
 
     <footer>
   <div class="container">
@@ -328,7 +360,7 @@ Usually scientific articles in medicine begin with a table that shows the charac
           
           <li>
             
-            <a href="/categories/eda/index.xml" title="RSS">
+            <a href="/index.xml" title="RSS">
             
               <span class="fa-stack fa-lg">
                 <i class="fa fa-circle fa-stack-2x"></i>

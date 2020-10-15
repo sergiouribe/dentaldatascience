@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>tidyverse on Dental Data Science</title>
+    <link>/tags/tidyverse/</link>
+    <description>Recent content in tidyverse on Dental Data Science</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <managingEditor>sergio.uribe@gmail.com (Sergio Uribe)</managingEditor>
+    <webMaster>sergio.uribe@gmail.com (Sergio Uribe)</webMaster>
+    <lastBuildDate>Sun, 26 Jul 2020 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="/tags/tidyverse/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Post</title>
+      <link>/post/post/</link>
+      <pubDate>Sun, 26 Jul 2020 00:00:00 +0000</pubDate>
+      <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
+      <guid>/post/post/</guid>
+      <description>  </description>
+    </item>
+    
+  </channel>
+</rss>
