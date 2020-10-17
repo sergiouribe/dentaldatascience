@@ -16,7 +16,7 @@ Is your background a different color than white? Use a transparent background:
 ggsave("myplot.tiff", dpi = 300, plot = myplot, bg = "transparent")
 ```
 
-![image](static/transparent-background.png)
+![](/post/2020-10-15-ggplots-tips-and-tricks.en_files/transparent-background.png)
 
 
 

@@ -1,0 +1,495 @@
+---
+title: "How to create graphs with ggplot2 in R"
+author: "Sergio Uribe"
+date: '2020-10-17'
+slug: how-to-create-graphs-with-ggplot2-in-r
+categories: visualization
+tags: ggplot2
+subtitle: ''
+---
+
+```{r, setup, include=FALSE}
+knitr::opts_chunk$set(message = F, warning = F)
+```
+
+
+# How to code in R using RStudio
+
+Writing code is different from writing a letter or a mail. While a mail is written to another person, the code is written to be read by a machine. And unlike the person, the machine does not interpret the intent of the writer. Thus, if I write with some spelling or grammatical error, another person can understand the idea. However, a machine that finds an error could not go on. 
+Mistakes in writing code are inevitable and we all make them. The important thing is that you are able to detect where the error is, and that task is simpler when you write well-formatted code. For example look at these two codes: 
+
+```{r, eval=FALSE}
+# Code 1
+penguins %>% ggplot(aes(x=bill_length_mm,y=body_mass_g))+geom_point()  
+```
+
+```{r}
+# Code 2
+penguins %>% 
+  ggplot(aes(x = bill_length_mm, 
+             y = body_mass_g)) + 
+  geom_point() 
+```
+
+
+Both are identical, but the format of the second one allows you to read it better and in case there is any error it will be easier to detect. 
+The code is written for machines, but one of the ideas of tidyverse is that a human can also read and interpret it. 
+
+Here are some tips for writing better code: 
+
+ 1. use the shortcuts: 
+
++ CTRL + ALT + I: insert a chunk of code
++ CTRL + ALT + M: insert the pipe operator %>% 
++ ALT + - : insert the <-  assignment operator
++ Select the code and press CTRL * SHIFT + A: autoformat the code
++ Select the code and press CTRL + ENTER : run the code
+
+
+Try these shortcuts until you are familiar with them
+
+ 2. comment all your code
+
+Do your future self a favor and comment your code
+
+Everything that is after a # sign will not be executed and considered as a comment
+
+```{r eval=FALSE}
+x <- c(1:10) # here is my comment about this line
+# I can also write here! 
+```
+
+ 3. Capitalization matters
+
+Execute this code and found the errors
+
+```{r eval=FALSE}
+mean(X)
+```
+
+```{r eval=FALSE}
+Mean(x)
+```
+
+
+
+
+
+
+# Packages
+
+The pacman command allows to easy install other packages
+
+
+If not installed, write
+
+> install.packages("pacman")
+
+
+```{r}
+pacman::p_load(tidyverse,   
+               palmerpenguins )
+```
+
+
+# Dataset
+Now I will load the penguins dataset to my environment (check the upper right panel, the ENVIROMENT tab)
+
+```{r}
+data(penguins)
+```
+
+
+# EXPLORE THE DATASET
+
+
+With the View() command you can open the dataset in an external tab, as an spreadsheet, but you will not be able to modify it. And that's a good thing, remember: don't touch your data!
+
+```{r}
+View(penguins)
+```
+
+
+With the dim() commando, you can see the DIMensions of the dataset, in rows and columns
+
+```{r}
+dim(penguins)
+```
+
+I can explore the first six rows of the dataset, and this one of the first things that I do when I have some data
+```{r}
+head(penguins)
+```
+
+and also the last six rows
+```{r}
+tail(penguins)
+```
+With the str(), you can see the STRucture of your dataset (or dataframe). 
+Note that indicates the **class** and the **levels** of each categorical (or **factor**) variable.
+Also, you see the dimensions in the first line. 
+
+It tell us that this dataset is a tibble, a especial kind of dataset, that has 344 rows per 8 columns
+
+```{r}
+str(penguins)
+```
+The str() is *super* useful and also one of the first things that you have to examine about your data, and consult several times during your data analysis.
+
+
+The *tidyverse* version of str() is the glimpse() command
+
+```{r}
+glimpse(penguins)
+```
+The difference between str and glimpse is not much. Glimpse adapts the result to the size of the screen. 
+
+Try reducing the size of this window and running first str and then glimpse. Compare the results.
+
+
+To see a summary of all the variables, we have the following command
+
+It shows us central tendency and dispersion measures for continuous data and a count for categorical data.  For both it also shows us the amount of unavailable data or NA
+
+```{r}
+summary(penguins)
+```
+To see the summary of a particular variable, you can select it with $ in the following way: 
+
+dataset$column
+
+for example
+
+```{r}
+summary(penguins$species)
+```
+------------------------
+Exercises summary
+
+try getting the summary of island
+```{r}
+# write your code here
+
+```
+
+and now the summary of body_mass_g
+```{r}
+# write your code here
+
+```
+
+------------------------
+
+As you saw in the summary of all variables, R automatically detects the type or class of variable. 
+
+To check the class of a variable, we use the command: 
+
+class(dataset$variable_to_check)
+
+For example: 
+
+```{r}
+class(penguins$year)
+```
+
+Sometimes a number can be used to store a categorical variable, such as assigning a number to each sex. In general, I do not recommend using numbers to store nominal variables, but simply to store the variable as it is presented, for example male and female instead of 1 and 2. 
+
+For example, if we consult the summary of the year variable, we get the following: 
+
+
+```{r}
+summary(penguins$year)
+```
+R recognizes the year as a numerical variable. However, the year is indeed a categorical variable. Nobody says: "I was born in 1997.4" for example, 
+
+To change the type of variable we have to reassign the modified variable. 
+
+For example, to change the variable year from number to factor, we have to overwrite the variable year
+
+```{r}
+penguins$year <- as.factor(penguins$year) 
+```
+
+now the year variable should be correctly formatted
+
+```{r}
+summary(penguins$year)
+```
+Now it's fixed!
+
+
+# CREATING GRAPHS WITH GGPLOT2
+
+ggplot stands for grammar of graphics. 
+
+Just as language has rules with which to communicate any idea, graphics have a grammar. If we understand the components of a graph and how the different parts that make up a graph are related, we can create any type of visualization to communicate a result. 
+
+Essentially, to make a graphic we need three things: 
+
+ 1. the data, 
+ 2. the mapping of the variables to visual properties of the graph. The mappings are placed within the aes function (where aes stands for aesthetics), for example, position, size, color, shape, and
+ 3. a geometric shape that represents the data in the mapping. Geoms are the geometric objects (points, lines, bars, etc.) that can be placed on a graph. They are added using functions that start with geom_.
+
+
+So the first thing we need is the data
+
+```{r}
+penguins %>%  # the data
+  ggplot()    # means: "hey ggplot, take this data, and wait for instructions"
+```
+
+Secondly, we map the variables of interest
+
+Usually this is done this way: 
+
+```{r}
+penguins %>% 
+  ggplot(
+    mapping =                  # we can omit this line, I wrote it here just for you to see what the mapping refers to
+      aes(x = bill_length_mm,  # hey ggplot, map these aesthetic variables, in the x axis this variable
+          y = body_mass_g))    # and in the y axis this other
+  
+```
+
+
+Since I personally omit the mapping, I write:
+
+```{r}
+penguins %>% 
+  ggplot(aes(x = bill_length_mm, 
+             y = body_mass_g))
+```
+
+and the result is the same.
+
+we can skip other things, but I don't recommend it. For example, you can write: 
+
+```{r}
+penguins %>% 
+  ggplot(aes(bill_length_mm, body_mass_g)) 
+```
+
+
+Now we should tell ggplot how to map those x and y variables. In this case, we will choose to map them as points. 
+ 
+
+```{r, include=TRUE}
+penguins %>% 
+  ggplot(aes(x = bill_length_mm, 
+             y = body_mass_g)) + 
+  geom_point()  # this is the geometric object that will map the aesthetic
+```
+
+
+Later, we add more layers as aesthetics elements. 
+
+For example, we can add a color to each point to identify the sex. We add this as an additional aesthetic, see code below
+
+```{r}
+penguins %>%
+  drop_na() %>%  
+  ggplot(aes(x = bill_length_mm, 
+             y = body_mass_g)) +
+  geom_point() +
+  aes(color = sex)  # this is the additional layer
+```
+
+------------------------
+EXCERCISE
+
+Now it is your turn, we could ask: how is the distribution of the bill_depth_mm vs. the flipper_length_mm?
+
+```{r}
+# write your code here
+
+```
+
+There is a separate group of points: what could be due to a particular sex or species?
+Make a chart to find out!
+
+
+
+
+
+
+# EXERCISES
+
+## geom_point
+
+If you have two continuous variables, the geom_point is the preferred option to graph
+
+Try plotting the bill_length_mm in the x axis vs the bill_depth_mm
+
+```{r, eval=FALSE}
+penguins %>% 
+  ggplot(aes(x = _____________, 
+             y = _____________)) +
+geom_point()
+
+```
+
+
+
+
+
+You can add more layers as aesthetics elements. For example, if you want to visualize the previous graph but with species, you can add an additional layer coloring each point with the sex variable
+
+```{r, eval=FALSE}
+penguins %>% 
+  ggplot(aes(x = _____________, 
+             y = _____________, 
+             color = _________)) +
+  geom_point()
+```
+and we can add several additional aesthetics layers, as
+
+shape = for discrete or categorical variables, as sex
+size = for continuous variables, as body_mass_g
+
+
+and also we can add more geom layers. For example, we can add a regression line to explore the correlation between the plotted variables. 
+
+Try adding a geom_smooth(method = "lm") after the last geom and check the results
+
+
+```{r, eval=FALSE}
+penguins %>% 
+  ggplot(aes(x = bill_length_mm, 
+             y = bill_depth_mm)) +
+  geom_point() + 
+  ________________
+```
+What can you conclude about the relationship between these two variables?
+
+
+Now try disaggregating by species. 
+
+Hint: mark the species with colors
+
+
+We can add more variables depending on your nature. 
+
+For example, we can change the size of each point according to some numerical variable, such as the body_mass_g
+
+try completing this code
+
+```{r, eval=FALSE}
+penguins %>% 
+  ggplot(aes(x = bill_length_mm, 
+             y = bill_depth_mm, 
+             color = species, 
+             size = ___________) +
+  geom_point()
+```
+
+
+
+
+## Tuning your graph
+
+### Themes
+You can change the theme of the graph, the visual appearence, changing the layer that control this, with the commando *theme* and choosing your theme of preference
+
+```{r}
+penguins %>%
+  ggplot(aes(x = bill_length_mm,
+             y = flipper_length_mm,
+             color = species))  +   
+  geom_point() + 
+  theme_minimal()   # this is one example
+```
+
+
+```{r}
+penguins %>%
+  ggplot(aes(x = bill_length_mm,
+             y = flipper_length_mm,
+             color = species))  +   
+  geom_point() + 
+  theme_dark() # now a dark theme
+```
+Try others!
+
+try
+theme_linedraw()
+theme_light()
+
+```{r}
+penguins %>%
+  ggplot(aes(x = bill_length_mm,
+             y = flipper_length_mm,
+             color = species))  +   # in this case, here
+  geom_point() 
+```
+You can also install more themes or [create your own theme](https://emanuelaf.github.io/own-ggplot-theme.html)
+
+Some packages with additional themes are: 
+
+[ggpubr](http://www.sthda.com/english/articles/24-ggpubr-publication-ready-plots/) (I use mostly the minimal and some of the ggpubr package)
+and [ggthemes](https://rpubs.com/Mentors_Ubiqum/ggthemes_1)
+
+
+To install use
+```{r}
+pacman::p_load(ggthemes)
+```
+
+and then
+```{r}
+penguins %>%
+  ggplot(aes(x = bill_length_mm,
+             y = flipper_length_mm,
+             color = species))  +   # in this case, here
+  geom_point() + 
+  ggthemes::theme_economist()  # here I say" from the package ggthemes use the theme_economist()
+```
+You can try these themes:   
+ - ggthemes::theme_solarized()
+ - ggthemes::theme_excel()
+
+
+
+
+
+### Headings and labels
+
+You can add and change the labels with labs()
+
+```{r}
+penguins %>%
+  ggplot(aes(x = bill_length_mm,
+             y = flipper_length_mm,
+             color = species))  +  
+  geom_point()  +
+  labs(
+    title = "My Title",  
+    subtitle = "The subtitle", 
+    x = "the X axis", 
+    y = "the Y axis", 
+    color = "Specie"
+  )
+```
+
+Try to answer these questions: 
+
+What is the relationship between Penguin mass vs. flipper length ?
+
+And between Flipper length vs. bill length?
+
+
+
+
+# Note
+
+You will find this kind of notation in books and posts, where the data goes inside the ggplot command. For example: 
+
+```{r}
+ggplot(data = penguins) +
+  (mapping = aes(x = species, 
+                 y = body_mass_g, 
+                 color = sex)) + 
+  geom_boxplot() + 
+  theme_minimal()
+```
+
+I prefer to leave the data out of the ggplot command, since it's easier to perform some data transformation and then plot it. 
