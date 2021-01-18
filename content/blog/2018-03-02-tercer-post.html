@@ -13,6 +13,8 @@ categories:
 - epidemiological research
 ---
 
+<link href="/rmarkdown-libs/anchor-sections/anchor-sections.css" rel="stylesheet" />
+<script src="/rmarkdown-libs/anchor-sections/anchor-sections.js"></script>
 
 
 <p>A Case-control study compares patients who have a disease or outcome of interest (cases) with patients who do not have the disease or outcome (controls), and looks back retrospectively to compare how frequently the exposure to a risk factor is present in each group to determine the relationship between the risk factor and the disease.</p>
@@ -20,15 +22,17 @@ categories:
 <p>Case control studies are also known as “retrospective studies” and “case-referent studies.”</p>
 <p>In the classic textbook of Breslow and Day about <a href="http://www.iarc.fr/en/publications/pdfs-online/stat/sp32/index.php">data analysis of cancer research</a>,this is the table of the study about risk factors for oesophageal cancer:</p>
 <div class="figure">
-<img src="/img/grouped-data-case-control.png" alt="From Breslow and N. E. Day, ch 4." />
+<img src="/img/grouped-data-case-control.png" alt="" />
 <p class="caption">From Breslow and N. E. Day, ch 4.</p>
 </div>
-<p>We will use dplyr and ggplot2 to graph this data. In this project, we will recreate this table the <code>tidyverse</code> way.</p>
+<p>We will use dplyr and ggplot2 to graph this data.
+In this project, we will recreate this table the <code>tidyverse</code> way.</p>
 <p>First, we load the meta-package <strong>tidyverse</strong> thant contains packages as <strong>dplyr</strong> for data wrangling among others.</p>
 <pre class="r"><code>library(tidyverse)</code></pre>
 <p>The dataset of the book can be found here</p>
 <pre class="r"><code>df &lt;- read_csv(&quot;http://bit.ly/data_esoph&quot;, col_names = FALSE)</code></pre>
-<pre><code>## Parsed with column specification:
+<pre><code>## 
+## ── Column specification ────────────────────────────────────────────────────────
 ## cols(
 ##   X1 = col_double(),
 ##   X2 = col_double(),
@@ -152,7 +156,13 @@ categories:
 ## 5     1     2     1     0
 ## 6     1     2     1     0</code></pre>
 <p>Since we know the codes, we will recode all the dataset using the function <code>mutate</code> and <code>case_when</code> of <code>dplyr</code></p>
-<p>Age groups 1 = 25-34 2 = 35-44 3 = 45-54 4 = 55-64 5 = 65-74 6 = 75+</p>
+<p>Age groups
+1 = 25-34
+2 = 35-44
+3 = 45-54
+4 = 55-64
+5 = 65-74
+6 = 75+</p>
 <pre class="r"><code>df &lt;- df %&gt;% 
   mutate(
     age_grp = 
@@ -176,7 +186,8 @@ categories:
 ## 5     1     2     1     0 25-34  
 ## 6     1     2     1     0 25-34</code></pre>
 <p>OK!</p>
-<p>The same for the rest of the variables <strong>Alcohol</strong></p>
+<p>The same for the rest of the variables
+<strong>Alcohol</strong></p>
 <pre class="r"><code>df &lt;- df %&gt;% 
   mutate(
     alc_grp = 
@@ -232,7 +243,8 @@ categories:
                                               &quot;30+&quot;
                                               )))</code></pre>
 <p>Now we have the data ready for the analysis!</p>
-<p>Let’s make the table 1 We have two options, first the traditional table:</p>
+<p>Let’s make the table 1
+We have two options, first the traditional table:</p>
 <pre class="r"><code>table(df$age_grp, df$cc_grp)</code></pre>
 <pre><code>##        
 ##         case control
@@ -280,6 +292,7 @@ prop.table(table(df$age_grp, df$cc_grp))*100</code></pre>
   group_by(age_grp, cc_grp) %&gt;% 
   summarise(n = n()) %&gt;% 
   spread(cc_grp, n)</code></pre>
+<pre><code>## `summarise()` regrouping output by &#39;age_grp&#39; (override with `.groups` argument)</code></pre>
 <pre><code>## # A tibble: 6 x 3
 ## # Groups:   age_grp [6]
 ##   age_grp  case control
@@ -324,22 +337,20 @@ df %&gt;%
 ## 6 75+     0.065   0.04</code></pre>
 <p>Also, there is a new package called <code>janitor</code>, full of nice functions. One of them allow to make such table with a simple syntax:</p>
 <pre class="r"><code>df %&gt;% 
-  janitor::crosstab(age_grp, cc_grp, percent = &#39;col&#39;)  # this means: use the package janitor to create a crosstable of this variables and adding the percent by columns. You can change the latter to &#39;row&#39;</code></pre>
-<pre><code>## Warning: &#39;janitor::crosstab&#39; is deprecated.
-## Use &#39;tabyl(dat, var1, var2, ...)&#39; instead.
-## See help(&quot;Deprecated&quot;)</code></pre>
-<pre><code>##  age_grp  case control
-##    25-34 0.005   0.148
-##    35-44 0.045   0.245
-##    45-54 0.230   0.215
-##    55-64 0.380   0.214
-##    65-74 0.275   0.137
-##      75+ 0.065   0.040</code></pre>
+  janitor::tabyl(age_grp, cc_grp, percent = &#39;col&#39;)  # this means: use the package janitor to create a crosstable of this variables and adding the percent by columns. You can change the latter to &#39;row&#39;</code></pre>
+<pre><code>##  age_grp case control
+##    25-34    1     115
+##    35-44    9     190
+##    45-54   46     167
+##    55-64   76     166
+##    65-74   55     106
+##      75+   13      31</code></pre>
 <p>For alcohol:</p>
 <pre class="r"><code>df %&gt;% 
   group_by(alc_grp, cc_grp) %&gt;% 
   summarise(n = n()) %&gt;% 
   spread(cc_grp, n)</code></pre>
+<pre><code>## `summarise()` regrouping output by &#39;alc_grp&#39; (override with `.groups` argument)</code></pre>
 <pre><code>## # A tibble: 4 x 3
 ## # Groups:   alc_grp [4]
 ##   alc_grp  case control
@@ -353,6 +364,7 @@ df %&gt;%
   group_by(tob_grp, cc_grp) %&gt;% 
   summarise(n = n()) %&gt;% 
   spread(cc_grp, n)</code></pre>
+<pre><code>## `summarise()` regrouping output by &#39;tob_grp&#39; (override with `.groups` argument)</code></pre>
 <pre><code>## # A tibble: 4 x 3
 ## # Groups:   tob_grp [4]
 ##   tob_grp  case control
@@ -364,5 +376,6 @@ df %&gt;%
 <p>So, in this post we had recreated the table from the case-control study of (o)esophageal cancer in Ille-et-Vilaine, France in the Breslow and Day textbook.</p>
 <div id="references" class="section level1">
 <h1>References</h1>
-<p><a href="http://www.iarc.fr/en/publications/pdfs-online/stat/sp32/SP32_vol1-4.pdf">Statistical Methods in Cancer Research Volume I - The analysis of case-control studies - CLASSICAL METHODS OF ANALYSIS OF GROUPED DATA</a></p>
+<p><a href="http://www.iarc.fr/en/publications/pdfs-online/stat/sp32/SP32_vol1-4.pdf">Statistical Methods in Cancer Research
+Volume I - The analysis of case-control studies - CLASSICAL METHODS OF ANALYSIS OF GROUPED DATA</a></p>
 </div>

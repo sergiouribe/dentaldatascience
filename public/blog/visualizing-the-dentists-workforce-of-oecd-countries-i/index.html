@@ -1,0 +1,1816 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>Visualizing the dental workforce of OECD countries I</title>
+  <meta property="og:title" content="Visualizing the dental workforce of OECD countries I" />
+  <meta name="twitter:title" content="Visualizing the dental workforce of OECD countries I" />
+  <meta name="description" content="The Organisation for Economic Co-operation and Development host a database with extensive data. In this post we will do some visualizations to compare the number of dentists in each country.
+Packages used:
+ tidyverse gghighlight kableExtra  First we load the data. Now there is a package (OECD) able to extract the datasets, but I will use a local copy:
+dent_oecd &lt;- read_csv(&quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vStv7Pr69DtRKv6Nw6gVBep8hbT3pEeO6B1vNwxK_1DUHgpoTgbuRpZ4SvgtHFQnBZJVGeeQVyRuXZl/pub?gid=1330297229&amp;single=true&amp;output=csv&quot;) ## Parsed with column specification: ## cols( ## VAR = col_character(), ## Variable = col_character(), ## UNIT = col_character(), ## Measure = col_character(), ## COU = col_character(), ## Country = col_character(), ## YEA = col_double(), ## Year = col_double(), ## Value = col_double(), ## `Flag Codes` = col_character(), ## Flags = col_character() ## ) Always is preferable to take a look the data and its structure:">
+  <meta property="og:description" content="The Organisation for Economic Co-operation and Development host a database with extensive data. In this post we will do some visualizations to compare the number of dentists in each country.
+Packages used:
+ tidyverse gghighlight kableExtra  First we load the data. Now there is a package (OECD) able to extract the datasets, but I will use a local copy:
+dent_oecd &lt;- read_csv(&quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vStv7Pr69DtRKv6Nw6gVBep8hbT3pEeO6B1vNwxK_1DUHgpoTgbuRpZ4SvgtHFQnBZJVGeeQVyRuXZl/pub?gid=1330297229&amp;single=true&amp;output=csv&quot;) ## Parsed with column specification: ## cols( ## VAR = col_character(), ## Variable = col_character(), ## UNIT = col_character(), ## Measure = col_character(), ## COU = col_character(), ## Country = col_character(), ## YEA = col_double(), ## Year = col_double(), ## Value = col_double(), ## `Flag Codes` = col_character(), ## Flags = col_character() ## ) Always is preferable to take a look the data and its structure:">
+  <meta name="twitter:description" content="The Organisation for Economic Co-operation and Development host a database with extensive data. In this post we will do some visualizations to compare the number of dentists in each country.
+Packages …">
+  <meta name="author" content="Sergio Uribe"/>
+  <link href='https://dentaldatascience.org/img/favicon.png' rel='icon' type='image/x-icon'/>
+  <meta property="og:image" content="https://dentaldatascience.org/img/icon.png" />
+  <meta name="twitter:image" content="https://dentaldatascience.org/img/icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@dentaldatasci" />
+  <meta name="twitter:creator" content="@dentaldatasci" />
+  <meta property="og:url" content="https://dentaldatascience.org/blog/visualizing-the-dentists-workforce-of-oecd-countries-i/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Dental Data Science" />
+
+  <meta name="generator" content="Hugo 0.80.0" />
+  <link rel="canonical" href="https://dentaldatascience.org/blog/visualizing-the-dentists-workforce-of-oecd-countries-i/" />
+  <link rel="alternate" href="https://dentaldatascience.org/index.xml" type="application/rss+xml" title="Dental Data Science">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://dentaldatascience.org/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://dentaldatascience.org/css/highlight.min.css" /><link rel="stylesheet" href="https://dentaldatascience.org/css/codeblock.css" />
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-113383529-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://dentaldatascience.org/">Dental Data Science</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Categ" href="/categories">Categ</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Links" href="/page/links/">Links</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/page/about/">About</a>
+            </li>
+          
+        
+
+        
+
+        
+          <li>
+            <a href="#modalSearch" data-toggle="modal" data-target="#modalSearch" style="outline: none;">
+              <span class="hidden-sm hidden-md hidden-lg">Search</span> <span id="searchGlyph" class="glyphicon glyphicon-search"></span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+          <a title="Dental Data Science" href="https://dentaldatascience.org/">
+            <img class="avatar-img" src="https://dentaldatascience.org/img/icon.png" alt="Dental Data Science" />
+          </a>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+  <div id="modalSearch" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Search Dental Data Science</h4>
+        </div>
+        <div class="modal-body">
+          <gcse:search></gcse:search>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="blog-heading">
+              <h1>Visualizing the dental workforce of OECD countries I</h1>
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        
+
+
+<div class="figure">
+<img src="" />
+
+</div>
+<p>The Organisation for Economic Co-operation and Development host a <a href="https://data.oecd.org/">database</a> with extensive data. In this post we will do some visualizations to compare the number of dentists in each country.</p>
+<p>Packages used:</p>
+<ul>
+<li>tidyverse</li>
+<li>gghighlight</li>
+<li>kableExtra</li>
+</ul>
+<p>First we load the data. Now there is a package (<a href="https://cran.r-project.org/web/packages/OECD/index.html">OECD</a>) able to extract the datasets, but I will use a local copy:</p>
+<pre class="r"><code>dent_oecd &lt;- read_csv(&quot;https://docs.google.com/spreadsheets/d/e/2PACX-1vStv7Pr69DtRKv6Nw6gVBep8hbT3pEeO6B1vNwxK_1DUHgpoTgbuRpZ4SvgtHFQnBZJVGeeQVyRuXZl/pub?gid=1330297229&amp;single=true&amp;output=csv&quot;)</code></pre>
+<pre><code>## Parsed with column specification:
+## cols(
+##   VAR = col_character(),
+##   Variable = col_character(),
+##   UNIT = col_character(),
+##   Measure = col_character(),
+##   COU = col_character(),
+##   Country = col_character(),
+##   YEA = col_double(),
+##   Year = col_double(),
+##   Value = col_double(),
+##   `Flag Codes` = col_character(),
+##   Flags = col_character()
+## )</code></pre>
+<p>Always is preferable to take a look the data and its structure:</p>
+<pre class="r"><code>head(dent_oecd)</code></pre>
+<pre><code>## # A tibble: 6 x 11
+##   VAR   Variable UNIT  Measure COU   Country   YEA  Year Value `Flag Codes`
+##   &lt;chr&gt; &lt;chr&gt;    &lt;chr&gt; &lt;chr&gt;   &lt;chr&gt; &lt;chr&gt;   &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;chr&gt;       
+## 1 HEDU… Dentist… NOMB… Number  AUS   Austra…  2008  2008   552 &lt;NA&gt;        
+## 2 HEDU… Dentist… NOMB… Number  AUS   Austra…  2009  2009   632 &lt;NA&gt;        
+## 3 HEDU… Dentist… NOMB… Number  AUS   Austra…  2010  2010   665 &lt;NA&gt;        
+## 4 HEDU… Dentist… NOMB… Number  AUS   Austra…  2011  2011   684 &lt;NA&gt;        
+## 5 HEDU… Dentist… NOMB… Number  AUS   Austra…  2012  2012   723 &lt;NA&gt;        
+## 6 HEDU… Dentist… NOMB… Number  AUS   Austra…  2013  2013   894 &lt;NA&gt;        
+## # … with 1 more variable: Flags &lt;chr&gt;</code></pre>
+<pre class="r"><code>glimpse(dent_oecd)</code></pre>
+<pre><code>## Observations: 956
+## Variables: 11
+## $ VAR          &lt;chr&gt; &quot;HEDUDNGR&quot;, &quot;HEDUDNGR&quot;, &quot;HEDUDNGR&quot;, &quot;HEDUDNGR&quot;, &quot;HE…
+## $ Variable     &lt;chr&gt; &quot;Dentists graduates&quot;, &quot;Dentists graduates&quot;, &quot;Dentis…
+## $ UNIT         &lt;chr&gt; &quot;NOMBRENB&quot;, &quot;NOMBRENB&quot;, &quot;NOMBRENB&quot;, &quot;NOMBRENB&quot;, &quot;NO…
+## $ Measure      &lt;chr&gt; &quot;Number&quot;, &quot;Number&quot;, &quot;Number&quot;, &quot;Number&quot;, &quot;Number&quot;, &quot;…
+## $ COU          &lt;chr&gt; &quot;AUS&quot;, &quot;AUS&quot;, &quot;AUS&quot;, &quot;AUS&quot;, &quot;AUS&quot;, &quot;AUS&quot;, &quot;AUS&quot;, &quot;A…
+## $ Country      &lt;chr&gt; &quot;Australia&quot;, &quot;Australia&quot;, &quot;Australia&quot;, &quot;Australia&quot;,…
+## $ YEA          &lt;dbl&gt; 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 200…
+## $ Year         &lt;dbl&gt; 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 200…
+## $ Value        &lt;dbl&gt; 552, 632, 665, 684, 723, 894, 861, 957, 118, 134, 1…
+## $ `Flag Codes` &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…
+## $ Flags        &lt;chr&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA, NA,…</code></pre>
+<p>And a summary:</p>
+<pre class="r"><code>summary(dent_oecd)</code></pre>
+<pre><code>##      VAR              Variable             UNIT          
+##  Length:956         Length:956         Length:956        
+##  Class :character   Class :character   Class :character  
+##  Mode  :character   Mode  :character   Mode  :character  
+##                                                          
+##                                                          
+##                                                          
+##    Measure              COU              Country               YEA      
+##  Length:956         Length:956         Length:956         Min.   :2008  
+##  Class :character   Class :character   Class :character   1st Qu.:2010  
+##  Mode  :character   Mode  :character   Mode  :character   Median :2012  
+##                                                           Mean   :2012  
+##                                                           3rd Qu.:2014  
+##                                                           Max.   :2016  
+##       Year          Value            Flag Codes           Flags          
+##  Min.   :2008   Min.   :     0.00   Length:956         Length:956        
+##  1st Qu.:2010   1st Qu.:     1.34   Class :character   Class :character  
+##  Median :2012   Median :     6.00   Mode  :character   Mode  :character  
+##  Mean   :2012   Mean   :  3064.18                                        
+##  3rd Qu.:2014   3rd Qu.:  1071.00                                        
+##  Max.   :2016   Max.   :100994.00</code></pre>
+<p>I will use the <code>Dentists graduates</code>, and <code>Per 100 000 population</code> so let’s filter and replace the former data set</p>
+<pre class="r"><code>dent_oecd &lt;- dent_oecd %&gt;% 
+  filter(Variable == &quot;Dentists graduates&quot;, 
+         Measure == &quot;Per 100 000 population&quot;)</code></pre>
+<p>There are some useless columns, so unselect them</p>
+<pre class="r"><code>dent_oecd &lt;- select(dent_oecd, -c(VAR, UNIT, COU, YEA,`Flag Codes`, Flags))</code></pre>
+<p>Let’s plot. Since is a temporal trend, a line plot could be a good idea:</p>
+<pre class="r"><code>dent_oecd %&gt;%  # this means: take the dent_oecd dataframe, and
+  ggplot(aes(x = Year, y = Value, color = Country)) + #plot the year in the X axis, the value in the y axis and color the lines per country
+  geom_line() + 
+  labs(y = &quot;Dentists graduation per 100 000 hab&quot;)</code></pre>
+<p><img src="/post/2018-03-08-visualizing-the-number-of-dentists-from-oecd-countries_files/figure-html/messy%20plot-1.png" width="672" /></p>
+<p>Hmmm….the problem here is that isn’t easy to differentiate the countries.</p>
+<p>We have to choices: 1. plot each country separate, or 2. highlight one or few countries from the group we can use the package</p>
+<div id="plotting-one-graph-per-country-faceting." class="section level2">
+<h2>1. Plotting one graph per country: faceting.</h2>
+<pre class="r"><code>dent_oecd  %&gt;% 
+    ggplot(aes(x = Year, y = Value)) + # we delete the color = Country, since is not necessary
+  geom_line() + 
+  facet_wrap(~Country) + #this means: plot separately each country 
+  theme(axis.text.x = element_text(colour=&quot;grey20&quot;,size=6)) + 
+  labs(y = &quot;Dentists graduation per 100 000 hab&quot;)</code></pre>
+<p><img src="/post/2018-03-08-visualizing-the-number-of-dentists-from-oecd-countries_files/figure-html/facetted%20plot-1.png" width="672" /></p>
+<p>That’s much better. Some observations</p>
+<ul>
+<li>seem in general dentist graduating per 100 000 habitants has been stable in OECD countries,</li>
+<li>Chile seems to be increasing at a higher rate his graduation rate. Also Lithuania seems to share this trend.</li>
+<li>The line in Portugal is higher than in the rest of the countries</li>
+<li>Few countries decrease their graduation rate, seems that Denmark, Finland and Norway share this trend</li>
+</ul>
+<p><em>TODO: learn how to order the plots, e.g. from higher rate to lower </em></p>
+<p>We can transform the Value var using the log10. With <code>ggplot2</code> we can directly add the transformation to any axis, as y-axis in this case. We use <code>scale_y_log10()</code>. Sometimes is worth to use to expand some small differences or to graph data with orders of magnitude of difference.</p>
+<pre class="r"><code>dent_oecd  %&gt;% 
+  filter(Year &lt; 2016) %&gt;% 
+    ggplot(aes(x = Year, y = Value)) + 
+  geom_line() + 
+  facet_wrap(~Country) + 
+  theme(axis.text.x = element_text(size=6)) + 
+  labs(y = &quot;log10 Dentists graduation per 100 000 hab&quot;) + 
+  scale_y_log10()</code></pre>
+<p><img src="/post/2018-03-08-visualizing-the-number-of-dentists-from-oecd-countries_files/figure-html/facetted%20plot%202%20log10-1.png" width="672" /></p>
+</div>
+<div id="using-gghighlight" class="section level2">
+<h2>2. Using <code>gghighlight</code></h2>
+<p><code>gghighlight</code> is a package that highlight ggplot’s Lines and Points with Predicates</p>
+<p>Remember the first graph:</p>
+<pre class="r"><code>dent_oecd %&gt;%  
+  ggplot(aes(x = Year, y = Value, color = Country)) + 
+  geom_line() + 
+  labs(y = &quot;Dentists graduation per 100 000 hab&quot;)</code></pre>
+<p><img src="/post/2018-03-08-visualizing-the-number-of-dentists-from-oecd-countries_files/figure-html/messy%20plot%20again-1.png" width="672" /></p>
+<p>With gghighlight we can, as the name implies, highlight some lines according to a criteria or predicate.</p>
+<pre class="r"><code>dent_oecd %&gt;% 
+  filter(Year &lt; 2016) %&gt;% 
+  gghighlight_line(aes(x = Year, y = Value, color = Country), 
+                   predicate = mean(Value) &gt; 5) + # this is the threshold
+  labs(y = &quot;Dentists graduation per 100 000 hab&quot;) </code></pre>
+<p><img src="/post/2018-03-08-visualizing-the-number-of-dentists-from-oecd-countries_files/figure-html/highlighted%20and%20nice%20line%20plot-1.png" width="672" /></p>
+</div>
+<div id="pivot-table" class="section level2">
+<h2>Pivot table</h2>
+<p>Pivot table in the <code>dplyr</code> way</p>
+<pre class="r"><code>dent_oecd %&gt;% 
+  group_by(Country, Year) %&gt;% 
+  summarise(average = mean(Value)) %&gt;% 
+  spread(Year, average)</code></pre>
+<pre><code>## # A tibble: 36 x 10
+## # Groups:   Country [36]
+##    Country   `2008` `2009` `2010` `2011` `2012` `2013` `2014` `2015` `2016`
+##    &lt;chr&gt;      &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;
+##  1 Australia   2.6    2.91   3.02   3.06   3.18   3.87   3.67   4.02  NA   
+##  2 Austria     1.42   1.61   1.57   1.5    1.28   1.25   1.65  NA     NA   
+##  3 Belgium     1.14   1.44   1.57   1.32   1.46   1.62   1.95   2.05   2.09
+##  4 Canada      1.53   1.52   1.47   1.48   1.3    1.51  NA     NA     NA   
+##  5 Chile       2.98   4.32   4.11   4.82   5.57   5.86   6.35   7.5    7.17
+##  6 Czech Re…   1.59   3.9    3.37   2.86   2.49   3.15   3.26   3.75  NA   
+##  7 Denmark     4.28   3.2    3.37   3.41   2.92   2.8    2.73  NA     NA   
+##  8 Estonia     3.07   2.17   2.4    2.34   1.74   2.12   1.9    2.13  NA   
+##  9 Finland     1.34   1.35   2.44   2.56   3.27   2.87   2.38  NA     NA   
+## 10 France      1.36   1.33   1.49   1.72   1.57   1.66   1.48   1.88  NA   
+## # … with 26 more rows</code></pre>
+<p>Now enhance the table with the package <code>kableExtra</code>:</p>
+<p><code>install.packages(&quot;kableExtra&quot;)</code></p>
+<p><code>library(kableExtra)</code></p>
+<pre><code>## 
+## Attaching package: &#39;kableExtra&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:dplyr&#39;:
+## 
+##     group_rows</code></pre>
+<p>Addf the average as reference value</p>
+<pre class="r"><code>dent_oecd_avg &lt;- dent_oecd %&gt;% 
+  group_by(Year) %&gt;% 
+  summarise(Value = mean(Value, na.omit = TRUE)) # create a new dataframe with the average per year  
+
+dent_oecd_avg[,&quot;Country&quot;] &lt;- &quot;OECD average&quot;  # add a column and fill with a string
+dent_oecd &lt;- bind_rows(dent_oecd_avg, dent_oecd) # bind the dataframes by columns
+rm(dent_oecd_avg) # remove the average dataset</code></pre>
+<p>First I create the table and store as an object called <code>table_dent</code></p>
+<pre class="r"><code>table_dent &lt;- dent_oecd %&gt;% 
+  group_by(Country, Year) %&gt;% 
+  summarise(average = mean(Value)) %&gt;% 
+  spread(Year, average) </code></pre>
+<p>then apply the <code>kable</code> enhance to the object <code>table_dent</code> to show a nice formatted table:</p>
+<pre class="r"><code>knitr::kable(table_dent, 
+             caption = &quot;Dentists graduating per 100 000 habs. OECD countries&quot;, 
+             digits = 1)</code></pre>
+<table>
+<caption>
+(#tab:table nice)Dentists graduating per 100 000 habs. OECD countries
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+Country
+</th>
+<th style="text-align:right;">
+2008
+</th>
+<th style="text-align:right;">
+2009
+</th>
+<th style="text-align:right;">
+2010
+</th>
+<th style="text-align:right;">
+2011
+</th>
+<th style="text-align:right;">
+2012
+</th>
+<th style="text-align:right;">
+2013
+</th>
+<th style="text-align:right;">
+2014
+</th>
+<th style="text-align:right;">
+2015
+</th>
+<th style="text-align:right;">
+2016
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Australia
+</td>
+<td style="text-align:right;">
+2.6
+</td>
+<td style="text-align:right;">
+2.9
+</td>
+<td style="text-align:right;">
+3.0
+</td>
+<td style="text-align:right;">
+3.1
+</td>
+<td style="text-align:right;">
+3.2
+</td>
+<td style="text-align:right;">
+3.9
+</td>
+<td style="text-align:right;">
+3.7
+</td>
+<td style="text-align:right;">
+4.0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Austria
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+1.3
+</td>
+<td style="text-align:right;">
+1.2
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Belgium
+</td>
+<td style="text-align:right;">
+1.1
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+1.3
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+2.0
+</td>
+<td style="text-align:right;">
+2.0
+</td>
+<td style="text-align:right;">
+2.1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Canada
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+1.3
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Chile
+</td>
+<td style="text-align:right;">
+3.0
+</td>
+<td style="text-align:right;">
+4.3
+</td>
+<td style="text-align:right;">
+4.1
+</td>
+<td style="text-align:right;">
+4.8
+</td>
+<td style="text-align:right;">
+5.6
+</td>
+<td style="text-align:right;">
+5.9
+</td>
+<td style="text-align:right;">
+6.3
+</td>
+<td style="text-align:right;">
+7.5
+</td>
+<td style="text-align:right;">
+7.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Czech Republic
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+3.9
+</td>
+<td style="text-align:right;">
+3.4
+</td>
+<td style="text-align:right;">
+2.9
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:right;">
+3.1
+</td>
+<td style="text-align:right;">
+3.3
+</td>
+<td style="text-align:right;">
+3.8
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Denmark
+</td>
+<td style="text-align:right;">
+4.3
+</td>
+<td style="text-align:right;">
+3.2
+</td>
+<td style="text-align:right;">
+3.4
+</td>
+<td style="text-align:right;">
+3.4
+</td>
+<td style="text-align:right;">
+2.9
+</td>
+<td style="text-align:right;">
+2.8
+</td>
+<td style="text-align:right;">
+2.7
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Estonia
+</td>
+<td style="text-align:right;">
+3.1
+</td>
+<td style="text-align:right;">
+2.2
+</td>
+<td style="text-align:right;">
+2.4
+</td>
+<td style="text-align:right;">
+2.3
+</td>
+<td style="text-align:right;">
+1.7
+</td>
+<td style="text-align:right;">
+2.1
+</td>
+<td style="text-align:right;">
+1.9
+</td>
+<td style="text-align:right;">
+2.1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Finland
+</td>
+<td style="text-align:right;">
+1.3
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+2.4
+</td>
+<td style="text-align:right;">
+2.6
+</td>
+<td style="text-align:right;">
+3.3
+</td>
+<td style="text-align:right;">
+2.9
+</td>
+<td style="text-align:right;">
+2.4
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+France
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+1.3
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+1.7
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+1.7
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+1.9
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Germany
+</td>
+<td style="text-align:right;">
+2.2
+</td>
+<td style="text-align:right;">
+2.2
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:right;">
+2.7
+</td>
+<td style="text-align:right;">
+3.0
+</td>
+<td style="text-align:right;">
+2.8
+</td>
+<td style="text-align:right;">
+2.9
+</td>
+<td style="text-align:right;">
+2.8
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Greece
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:right;">
+2.4
+</td>
+<td style="text-align:right;">
+2.3
+</td>
+<td style="text-align:right;">
+2.3
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Hungary
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+<td style="text-align:right;">
+2.2
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:right;">
+2.8
+</td>
+<td style="text-align:right;">
+3.5
+</td>
+<td style="text-align:right;">
+3.0
+</td>
+<td style="text-align:right;">
+3.4
+</td>
+<td style="text-align:right;">
+3.1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Iceland
+</td>
+<td style="text-align:right;">
+1.9
+</td>
+<td style="text-align:right;">
+1.9
+</td>
+<td style="text-align:right;">
+1.9
+</td>
+<td style="text-align:right;">
+1.9
+</td>
+<td style="text-align:right;">
+1.9
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Ireland
+</td>
+<td style="text-align:right;">
+1.7
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+1.7
+</td>
+<td style="text-align:right;">
+1.9
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+<td style="text-align:right;">
+1.9
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Israel
+</td>
+<td style="text-align:right;">
+0.8
+</td>
+<td style="text-align:right;">
+0.7
+</td>
+<td style="text-align:right;">
+1.1
+</td>
+<td style="text-align:right;">
+1.2
+</td>
+<td style="text-align:right;">
+0.8
+</td>
+<td style="text-align:right;">
+0.8
+</td>
+<td style="text-align:right;">
+0.7
+</td>
+<td style="text-align:right;">
+0.6
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Italy
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+1.7
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+0.6
+</td>
+<td style="text-align:right;">
+1.0
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Japan
+</td>
+<td style="text-align:right;">
+1.9
+</td>
+<td style="text-align:right;">
+2.0
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+<td style="text-align:right;">
+1.9
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+<td style="text-align:right;">
+1.9
+</td>
+<td style="text-align:right;">
+1.9
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Korea
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+1.7
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+<td style="text-align:right;">
+1.9
+</td>
+<td style="text-align:right;">
+2.2
+</td>
+<td style="text-align:right;">
+2.6
+</td>
+<td style="text-align:right;">
+2.6
+</td>
+<td style="text-align:right;">
+2.9
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Latvia
+</td>
+<td style="text-align:right;">
+1.3
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+2.1
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:right;">
+2.0
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:right;">
+2.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Lithuania
+</td>
+<td style="text-align:right;">
+4.4
+</td>
+<td style="text-align:right;">
+4.7
+</td>
+<td style="text-align:right;">
+5.2
+</td>
+<td style="text-align:right;">
+4.7
+</td>
+<td style="text-align:right;">
+5.2
+</td>
+<td style="text-align:right;">
+5.5
+</td>
+<td style="text-align:right;">
+5.8
+</td>
+<td style="text-align:right;">
+6.4
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Luxembourg
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+<td style="text-align:right;">
+0.0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Mexico
+</td>
+<td style="text-align:right;">
+4.5
+</td>
+<td style="text-align:right;">
+4.7
+</td>
+<td style="text-align:right;">
+4.6
+</td>
+<td style="text-align:right;">
+4.7
+</td>
+<td style="text-align:right;">
+5.0
+</td>
+<td style="text-align:right;">
+3.8
+</td>
+<td style="text-align:right;">
+4.3
+</td>
+<td style="text-align:right;">
+4.0
+</td>
+<td style="text-align:right;">
+4.3
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Netherlands
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+1.7
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+1.1
+</td>
+<td style="text-align:right;">
+1.1
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+New Zealand
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+<td style="text-align:right;">
+2.0
+</td>
+<td style="text-align:right;">
+2.1
+</td>
+<td style="text-align:right;">
+2.1
+</td>
+<td style="text-align:right;">
+2.4
+</td>
+<td style="text-align:right;">
+2.3
+</td>
+<td style="text-align:right;">
+2.3
+</td>
+<td style="text-align:right;">
+2.1
+</td>
+<td style="text-align:right;">
+2.2
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Norway
+</td>
+<td style="text-align:right;">
+2.2
+</td>
+<td style="text-align:right;">
+2.7
+</td>
+<td style="text-align:right;">
+2.3
+</td>
+<td style="text-align:right;">
+2.7
+</td>
+<td style="text-align:right;">
+3.0
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:right;">
+2.3
+</td>
+<td style="text-align:right;">
+2.1
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+OECD average
+</td>
+<td style="text-align:right;">
+2.2
+</td>
+<td style="text-align:right;">
+2.2
+</td>
+<td style="text-align:right;">
+2.3
+</td>
+<td style="text-align:right;">
+2.4
+</td>
+<td style="text-align:right;">
+2.3
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:right;">
+2.8
+</td>
+<td style="text-align:right;">
+2.7
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Poland
+</td>
+<td style="text-align:right;">
+2.2
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:right;">
+2.6
+</td>
+<td style="text-align:right;">
+2.4
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Portugal
+</td>
+<td style="text-align:right;">
+7.1
+</td>
+<td style="text-align:right;">
+7.1
+</td>
+<td style="text-align:right;">
+7.5
+</td>
+<td style="text-align:right;">
+6.8
+</td>
+<td style="text-align:right;">
+5.6
+</td>
+<td style="text-align:right;">
+5.9
+</td>
+<td style="text-align:right;">
+6.2
+</td>
+<td style="text-align:right;">
+6.7
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Slovak Republic
+</td>
+<td style="text-align:right;">
+0.8
+</td>
+<td style="text-align:right;">
+0.8
+</td>
+<td style="text-align:right;">
+1.2
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+<td style="text-align:right;">
+1.7
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Slovenia
+</td>
+<td style="text-align:right;">
+2.1
+</td>
+<td style="text-align:right;">
+1.7
+</td>
+<td style="text-align:right;">
+2.0
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+<td style="text-align:right;">
+2.0
+</td>
+<td style="text-align:right;">
+3.4
+</td>
+<td style="text-align:right;">
+2.6
+</td>
+<td style="text-align:right;">
+3.3
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Spain
+</td>
+<td style="text-align:right;">
+3.2
+</td>
+<td style="text-align:right;">
+2.8
+</td>
+<td style="text-align:right;">
+3.0
+</td>
+<td style="text-align:right;">
+3.0
+</td>
+<td style="text-align:right;">
+3.3
+</td>
+<td style="text-align:right;">
+3.5
+</td>
+<td style="text-align:right;">
+3.8
+</td>
+<td style="text-align:right;">
+3.8
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Sweden
+</td>
+<td style="text-align:right;">
+2.0
+</td>
+<td style="text-align:right;">
+2.1
+</td>
+<td style="text-align:right;">
+2.4
+</td>
+<td style="text-align:right;">
+2.3
+</td>
+<td style="text-align:right;">
+2.1
+</td>
+<td style="text-align:right;">
+2.2
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:right;">
+2.5
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Switzerland
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+1.3
+</td>
+<td style="text-align:right;">
+1.3
+</td>
+<td style="text-align:right;">
+1.3
+</td>
+<td style="text-align:right;">
+1.2
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Turkey
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+1.3
+</td>
+<td style="text-align:right;">
+1.3
+</td>
+<td style="text-align:right;">
+1.5
+</td>
+<td style="text-align:right;">
+1.4
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+<td style="text-align:right;">
+2.0
+</td>
+<td style="text-align:right;">
+2.2
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+United Kingdom
+</td>
+<td style="text-align:right;">
+NA
+</td>
+<td style="text-align:right;">
+1.7
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+<td style="text-align:right;">
+1.9
+</td>
+<td style="text-align:right;">
+1.9
+</td>
+<td style="text-align:right;">
+1.9
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+<td style="text-align:right;">
+1.9
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+United States
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+1.6
+</td>
+<td style="text-align:right;">
+1.7
+</td>
+<td style="text-align:right;">
+1.7
+</td>
+<td style="text-align:right;">
+1.7
+</td>
+<td style="text-align:right;">
+1.8
+</td>
+<td style="text-align:right;">
+NA
+</td>
+</tr>
+</tbody>
+</table>
+<p>More information about ggplot2</p>
+<ul>
+<li><a href="https://www.rstudio.com/wp-content/uploads/2015/03/ggplot2-cheatsheet.pdf">ggplot2 cheat sheet</a></li>
+<li><a href="https://www.computerworld.com/article/2935394/business-intelligence/my-ggplot2-cheat-sheet-search-by-task.html">ggplot2 Search by task</a></li>
+<li><a href="http://ggplot2.tidyverse.org/reference/">ggplot 2 reference manual</a></li>
+</ul>
+</div>
+
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://dentaldatascience.org/blog/tercer-post/" data-toggle="tooltip" data-placement="top" title="Data wrangling and table summaries of case-control studies">&larr; Previous Post</a>
+            </li>
+          
+          
+            <li class="next">
+              <a href="https://dentaldatascience.org/blog/eda-with-tables/" data-toggle="tooltip" data-placement="top" title="Exploratory Data Analysis with Tables">Next Post &rarr;</a>
+            </li>
+          
+        </ul>
+      
+
+
+      
+        
+          <div class="disqus-comments">
+            <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "dental-data-science" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:sergio.uribe@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/sergiouribe" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/dentaldatasci" title="Twitter">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://linkedin.com/in/sergiouribe" title="LinkedIn">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://stackoverflow.com/users/4930967/sergiouribe" title="StackOverflow">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            
+            <a href="https://dentaldatascience.org/index.xml" title="RSS">
+            
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="http://www.sergiouri.be/">Sergio Uribe</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2020
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://dentaldatascience.org/">Dental Data Science</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.80.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>. This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC 4.0</a>.
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://dentaldatascience.org/js/main.js"></script>
+<script src="https://dentaldatascience.org/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> $(document).ready(function() {$("pre.chroma").css("padding","0");}); </script><script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script>
+<script src="https://dentaldatascience.org/js/load-photoswipe.js"></script>
+
+
+<script>
+  (function() {
+    var cx = '001914880863475946784:jaiqxnvieeu';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+
+
+
+
+
+  </body>
+</html>
+

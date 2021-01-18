@@ -8,14 +8,38 @@ tags: ggplot2
 subtitle: ''
 ---
 
+
 ```{r, setup, include=FALSE}
 knitr::opts_chunk$set(message = F, warning = F)
 ```
 
 
+# Package
+The packages are additional functionalities that can be installed to Rstudio. Think of the apps on your phone, which can do different things.
+
+There are several ways to install them, but the simplest is through a package called pacman, but first we need to install the package pacman
+
+
+```{r}
+if (!require("pacman")) install.packages("pacman")
+```
+
+Then, every time we need a new package, we invoke the command by
+
+```{r}
+pacman::p_load(tidyverse, 
+               palmerpenguins)
+```
+
+The packages are installed only once (just like the apps on your phone), but you need to call them every time you want to use them (just like the apps on your phone)
+
+
+
+
+
 # How to code in R using RStudio
 
-Writing code is different from writing a letter or a mail. While a mail is written to another person, the code is written to be read by a machine. And unlike the person, the machine does not interpret the intent of the writer. Thus, if I write with some spelling or grammatical error, another person can understand the idea. However, a machine that finds an error could not go on. 
+Writing code is different from writing a letter or a mail. While a mail is written to another person, the code is written to be read by a machine. And unlike the person, the machine does not interpret the intent of the writer. Thus, if I write with some spelling or grammatical error, another person can understand the idea. However, a machine that finds an error could not go on.  
 Mistakes in writing code are inevitable and we all make them. The important thing is that you are able to detect where the error is, and that task is simpler when you write well-formatted code. For example look at these two codes: 
 
 ```{r, eval=FALSE}
@@ -47,12 +71,16 @@ Here are some tips for writing better code:
 
 
 Try these shortcuts until you are familiar with them
+Note, this shortcuts only run inside a code chunk
+
+So, add a code chunk here and try all the rest of the shorcuts
+
 
  2. comment all your code
 
-Do your future self a favor and comment your code
+Do your future self a favor and comment your code.  
 
-Everything that is after a # sign will not be executed and considered as a comment
+Everything that is after a # sign will not be executed and considered as a comment, e.g.
 
 ```{r eval=FALSE}
 x <- c(1:10) # here is my comment about this line
@@ -105,7 +133,7 @@ data(penguins)
 
 With the View() command you can open the dataset in an external tab, as an spreadsheet, but you will not be able to modify it. And that's a good thing, remember: don't touch your data!
 
-```{r}
+```{r, eval=FALSE}
 View(penguins)
 ```
 
@@ -163,8 +191,9 @@ for example
 ```{r}
 summary(penguins$species)
 ```
+
 ------------------------
-Exercises summary
+EXERCISES 
 
 try getting the summary of island
 ```{r}
@@ -196,6 +225,13 @@ Sometimes a number can be used to store a categorical variable, such as assignin
 
 For example, if we consult the summary of the year variable, we get the following: 
 
+------------------------
+EXERCISES 
+
+Try finding the classes of other variables
+------------------------
+
+
 
 ```{r}
 summary(penguins$year)
@@ -216,6 +252,40 @@ now the year variable should be correctly formatted
 summary(penguins$year)
 ```
 Now it's fixed!
+
+
+## Exploring the dataset with tables
+
+A simple way to explore a dataset is by means of tables. This is done with the command (table(variable1, variable2))
+
+For example, let's look at the distribution of sex for each species
+
+```{r}
+table(penguins$species, 
+      penguins$sex)
+```
+
+The command tables show the result of (rows, columns)
+
+For example, if we change the order, we will obtain this
+
+```{r}
+table(penguins$sex, 
+      penguins$species)
+```
+
+
+------------------------
+Exercise
+
++ Try making a chart to see the total number of penguins per island. 
++ Now by island and by year
++ Try changing the order: how does it look better?
++ What happens if you make a table of a numerical variable?
+
+------------------------
+
+
 
 
 # CREATING GRAPHS WITH GGPLOT2

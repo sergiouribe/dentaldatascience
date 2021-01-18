@@ -1,0 +1,816 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+
+  <title>How to create graphs with ggplot2 in R</title>
+  <meta property="og:title" content="How to create graphs with ggplot2 in R" />
+  <meta name="twitter:title" content="How to create graphs with ggplot2 in R" />
+  <meta name="description" content="Package The packages are additional functionalities that can be installed to Rstudio. Think of the apps on your phone, which can do different things.
+There are several ways to install them, but the simplest is through a package called pacman, but first we need to install the package pacman
+if (!require(&quot;pacman&quot;)) install.packages(&quot;pacman&quot;) Then, every time we need a new package, we invoke the command by
+pacman::p_load(tidyverse, palmerpenguins) The packages are installed only once (just like the apps on your phone), but you need to call them every time you want to use them (just like the apps on your phone)">
+  <meta property="og:description" content="Package The packages are additional functionalities that can be installed to Rstudio. Think of the apps on your phone, which can do different things.
+There are several ways to install them, but the simplest is through a package called pacman, but first we need to install the package pacman
+if (!require(&quot;pacman&quot;)) install.packages(&quot;pacman&quot;) Then, every time we need a new package, we invoke the command by
+pacman::p_load(tidyverse, palmerpenguins) The packages are installed only once (just like the apps on your phone), but you need to call them every time you want to use them (just like the apps on your phone)">
+  <meta name="twitter:description" content="Package The packages are additional functionalities that can be installed to Rstudio. Think of the apps on your phone, which can do different things.
+There are several ways to install them, but the …">
+  <meta name="author" content="Sergio Uribe"/>
+  <link href='https://dentaldatascience.org/img/favicon.png' rel='icon' type='image/x-icon'/>
+  <meta property="og:image" content="https://dentaldatascience.org/img/icon.png" />
+  <meta name="twitter:image" content="https://dentaldatascience.org/img/icon.png" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:site" content="@dentaldatasci" />
+  <meta name="twitter:creator" content="@dentaldatasci" />
+  <meta property="og:url" content="https://dentaldatascience.org/blog/how-to-create-graphs-with-ggplot2-in-r/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Dental Data Science" />
+
+  <meta name="generator" content="Hugo 0.80.0" />
+  <link rel="canonical" href="https://dentaldatascience.org/blog/how-to-create-graphs-with-ggplot2-in-r/" />
+  <link rel="alternate" href="https://dentaldatascience.org/index.xml" type="application/rss+xml" title="Dental Data Science">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.css" integrity="sha384-wITovz90syo1dJWVh32uuETPVEtGigN07tkttEqPv+uR2SE/mbQcG7ATL28aI9H0" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://dentaldatascience.org/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" />
+  <link rel="stylesheet" href="https://dentaldatascience.org/css/highlight.min.css" /><link rel="stylesheet" href="https://dentaldatascience.org/css/codeblock.css" />
+
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.css" integrity="sha384-h/L2W9KefUClHWaty3SLE5F/qvc4djlyR4qY3NUV5HGQBBW7stbcfff1+I/vmsHh" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/default-skin/default-skin.min.css" integrity="sha384-iD0dNku6PYSIQLyfTOpB06F2KCZJAKLOThS5HRe8b3ibhdEQ6eKsFf/EeFxdOt5R" crossorigin="anonymous">
+
+
+
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+<div class="pswp__bg"></div>
+
+<div class="pswp__scroll-wrap">
+    
+    <div class="pswp__container">
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+      <div class="pswp__item"></div>
+    </div>
+    
+    <div class="pswp__ui pswp__ui--hidden">
+    <div class="pswp__top-bar">
+      
+      <div class="pswp__counter"></div>
+      <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+      <button class="pswp__button pswp__button--share" title="Share"></button>
+      <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+      <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+      
+      
+      <div class="pswp__preloader">
+        <div class="pswp__preloader__icn">
+          <div class="pswp__preloader__cut">
+            <div class="pswp__preloader__donut"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+      <div class="pswp__share-tooltip"></div>
+    </div>
+    <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+    </button>
+    <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+    </button>
+    <div class="pswp__caption">
+      <div class="pswp__caption__center"></div>
+    </div>
+    </div>
+    </div>
+</div>
+
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-113383529-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
+</head>
+
+  <body>
+    <nav class="navbar navbar-default navbar-fixed-top navbar-custom">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="https://dentaldatascience.org/">Dental Data Science</a>
+    </div>
+
+    <div class="collapse navbar-collapse" id="main-navbar">
+      <ul class="nav navbar-nav navbar-right">
+        
+          
+            <li>
+              <a title="Blog" href="/">Blog</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Categ" href="/categories">Categ</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Tags" href="/tags">Tags</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="Links" href="/page/links/">Links</a>
+            </li>
+          
+        
+          
+            <li>
+              <a title="About" href="/page/about/">About</a>
+            </li>
+          
+        
+
+        
+
+        
+          <li>
+            <a href="#modalSearch" data-toggle="modal" data-target="#modalSearch" style="outline: none;">
+              <span class="hidden-sm hidden-md hidden-lg">Search</span> <span id="searchGlyph" class="glyphicon glyphicon-search"></span>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+
+    <div class="avatar-container">
+      <div class="avatar-img-border">
+        
+          <a title="Dental Data Science" href="https://dentaldatascience.org/">
+            <img class="avatar-img" src="https://dentaldatascience.org/img/icon.png" alt="Dental Data Science" />
+          </a>
+        
+      </div>
+    </div>
+
+  </div>
+</nav>
+
+
+
+  <div id="modalSearch" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Search Dental Data Science</h4>
+        </div>
+        <div class="modal-body">
+          <gcse:search></gcse:search>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+    
+  
+  
+  
+
+
+
+
+  
+
+  <header class="header-section ">
+    
+    <div class="intro-header no-img">
+      
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="blog-heading">
+              <h1>How to create graphs with ggplot2 in R</h1>
+                
+                
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+    
+<div class="container" role="main">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      <article role="main" class="blog-post">
+        
+
+
+<div id="package" class="section level1">
+<h1>Package</h1>
+<p>The packages are additional functionalities that can be installed to Rstudio. Think of the apps on your phone, which can do different things.</p>
+<p>There are several ways to install them, but the simplest is through a package called pacman, but first we need to install the package pacman</p>
+<pre class="r"><code>if (!require(&quot;pacman&quot;)) install.packages(&quot;pacman&quot;)</code></pre>
+<p>Then, every time we need a new package, we invoke the command by</p>
+<pre class="r"><code>pacman::p_load(tidyverse, 
+               palmerpenguins)</code></pre>
+<p>The packages are installed only once (just like the apps on your phone), but you need to call them every time you want to use them (just like the apps on your phone)</p>
+</div>
+<div id="how-to-code-in-r-using-rstudio" class="section level1">
+<h1>How to code in R using RStudio</h1>
+<p>Writing code is different from writing a letter or a mail. While a mail is written to another person, the code is written to be read by a machine. And unlike the person, the machine does not interpret the intent of the writer. Thus, if I write with some spelling or grammatical error, another person can understand the idea. However, a machine that finds an error could not go on.<br />
+Mistakes in writing code are inevitable and we all make them. The important thing is that you are able to detect where the error is, and that task is simpler when you write well-formatted code. For example look at these two codes:</p>
+<pre class="r"><code># Code 1
+penguins %&gt;% ggplot(aes(x=bill_length_mm,y=body_mass_g))+geom_point()  </code></pre>
+<pre class="r"><code># Code 2
+penguins %&gt;% 
+  ggplot(aes(x = bill_length_mm, 
+             y = body_mass_g)) + 
+  geom_point() </code></pre>
+<p><img src="/post/2020-10-17-how-to-create-graphs-with-ggplot2-in-r.en_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>Both are identical, but the format of the second one allows you to read it better and in case there is any error it will be easier to detect.
+The code is written for machines, but one of the ideas of tidyverse is that a human can also read and interpret it.</p>
+<p>Here are some tips for writing better code:</p>
+<ol style="list-style-type: decimal">
+<li>use the shortcuts:</li>
+</ol>
+<ul>
+<li>CTRL + ALT + I: insert a chunk of code</li>
+<li>CTRL + ALT + M: insert the pipe operator %&gt;%</li>
+<li>ALT + - : insert the &lt;- assignment operator</li>
+<li>Select the code and press CTRL * SHIFT + A: autoformat the code</li>
+<li>Select the code and press CTRL + ENTER : run the code</li>
+</ul>
+<p>Try these shortcuts until you are familiar with them
+Note, this shortcuts only run inside a code chunk</p>
+<p>So, add a code chunk here and try all the rest of the shorcuts</p>
+<ol start="2" style="list-style-type: decimal">
+<li>comment all your code</li>
+</ol>
+<p>Do your future self a favor and comment your code.</p>
+<p>Everything that is after a # sign will not be executed and considered as a comment, e.g.</p>
+<pre class="r"><code>x &lt;- c(1:10) # here is my comment about this line
+# I can also write here! </code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>Capitalization matters</li>
+</ol>
+<p>Execute this code and found the errors</p>
+<pre class="r"><code>mean(X)</code></pre>
+<pre class="r"><code>Mean(x)</code></pre>
+</div>
+<div id="packages" class="section level1">
+<h1>Packages</h1>
+<p>The pacman command allows to easy install other packages</p>
+<p>If not installed, write</p>
+<blockquote>
+<p>install.packages(“pacman”)</p>
+</blockquote>
+<pre class="r"><code>pacman::p_load(tidyverse,   
+               palmerpenguins )</code></pre>
+</div>
+<div id="dataset" class="section level1">
+<h1>Dataset</h1>
+<p>Now I will load the penguins dataset to my environment (check the upper right panel, the ENVIROMENT tab)</p>
+<pre class="r"><code>data(penguins)</code></pre>
+</div>
+<div id="explore-the-dataset" class="section level1">
+<h1>EXPLORE THE DATASET</h1>
+<p>With the View() command you can open the dataset in an external tab, as an spreadsheet, but you will not be able to modify it. And that’s a good thing, remember: don’t touch your data!</p>
+<pre class="r"><code>View(penguins)</code></pre>
+<p>With the dim() commando, you can see the DIMensions of the dataset, in rows and columns</p>
+<pre class="r"><code>dim(penguins)</code></pre>
+<pre><code>## [1] 344   8</code></pre>
+<p>I can explore the first six rows of the dataset, and this one of the first things that I do when I have some data</p>
+<pre class="r"><code>head(penguins)</code></pre>
+<pre><code>## # A tibble: 6 x 8
+##   species island bill_length_mm bill_depth_mm flipper_length_… body_mass_g sex  
+##   &lt;fct&gt;   &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;int&gt;       &lt;int&gt; &lt;fct&gt;
+## 1 Adelie  Torge…           39.1          18.7              181        3750 male 
+## 2 Adelie  Torge…           39.5          17.4              186        3800 fema…
+## 3 Adelie  Torge…           40.3          18                195        3250 fema…
+## 4 Adelie  Torge…           NA            NA                 NA          NA &lt;NA&gt; 
+## 5 Adelie  Torge…           36.7          19.3              193        3450 fema…
+## 6 Adelie  Torge…           39.3          20.6              190        3650 male 
+## # … with 1 more variable: year &lt;int&gt;</code></pre>
+<p>and also the last six rows</p>
+<pre class="r"><code>tail(penguins)</code></pre>
+<pre><code>## # A tibble: 6 x 8
+##   species island bill_length_mm bill_depth_mm flipper_length_… body_mass_g sex  
+##   &lt;fct&gt;   &lt;fct&gt;           &lt;dbl&gt;         &lt;dbl&gt;            &lt;int&gt;       &lt;int&gt; &lt;fct&gt;
+## 1 Chinst… Dream            45.7          17                195        3650 fema…
+## 2 Chinst… Dream            55.8          19.8              207        4000 male 
+## 3 Chinst… Dream            43.5          18.1              202        3400 fema…
+## 4 Chinst… Dream            49.6          18.2              193        3775 male 
+## 5 Chinst… Dream            50.8          19                210        4100 male 
+## 6 Chinst… Dream            50.2          18.7              198        3775 fema…
+## # … with 1 more variable: year &lt;int&gt;</code></pre>
+<p>With the str(), you can see the STRucture of your dataset (or dataframe).
+Note that indicates the <strong>class</strong> and the <strong>levels</strong> of each categorical (or <strong>factor</strong>) variable.
+Also, you see the dimensions in the first line.</p>
+<p>It tell us that this dataset is a tibble, a especial kind of dataset, that has 344 rows per 8 columns</p>
+<pre class="r"><code>str(penguins)</code></pre>
+<pre><code>## tibble [344 × 8] (S3: tbl_df/tbl/data.frame)
+##  $ species          : Factor w/ 3 levels &quot;Adelie&quot;,&quot;Chinstrap&quot;,..: 1 1 1 1 1 1 1 1 1 1 ...
+##  $ island           : Factor w/ 3 levels &quot;Biscoe&quot;,&quot;Dream&quot;,..: 3 3 3 3 3 3 3 3 3 3 ...
+##  $ bill_length_mm   : num [1:344] 39.1 39.5 40.3 NA 36.7 39.3 38.9 39.2 34.1 42 ...
+##  $ bill_depth_mm    : num [1:344] 18.7 17.4 18 NA 19.3 20.6 17.8 19.6 18.1 20.2 ...
+##  $ flipper_length_mm: int [1:344] 181 186 195 NA 193 190 181 195 193 190 ...
+##  $ body_mass_g      : int [1:344] 3750 3800 3250 NA 3450 3650 3625 4675 3475 4250 ...
+##  $ sex              : Factor w/ 2 levels &quot;female&quot;,&quot;male&quot;: 2 1 1 NA 1 2 1 2 NA NA ...
+##  $ year             : int [1:344] 2007 2007 2007 2007 2007 2007 2007 2007 2007 2007 ...</code></pre>
+<p>The str() is <em>super</em> useful and also one of the first things that you have to examine about your data, and consult several times during your data analysis.</p>
+<p>The <em>tidyverse</em> version of str() is the glimpse() command</p>
+<pre class="r"><code>glimpse(penguins)</code></pre>
+<pre><code>## Rows: 344
+## Columns: 8
+## $ species           &lt;fct&gt; Adelie, Adelie, Adelie, Adelie, Adelie, Adelie, Ade…
+## $ island            &lt;fct&gt; Torgersen, Torgersen, Torgersen, Torgersen, Torgers…
+## $ bill_length_mm    &lt;dbl&gt; 39.1, 39.5, 40.3, NA, 36.7, 39.3, 38.9, 39.2, 34.1,…
+## $ bill_depth_mm     &lt;dbl&gt; 18.7, 17.4, 18.0, NA, 19.3, 20.6, 17.8, 19.6, 18.1,…
+## $ flipper_length_mm &lt;int&gt; 181, 186, 195, NA, 193, 190, 181, 195, 193, 190, 18…
+## $ body_mass_g       &lt;int&gt; 3750, 3800, 3250, NA, 3450, 3650, 3625, 4675, 3475,…
+## $ sex               &lt;fct&gt; male, female, female, NA, female, male, female, mal…
+## $ year              &lt;int&gt; 2007, 2007, 2007, 2007, 2007, 2007, 2007, 2007, 200…</code></pre>
+<p>The difference between str and glimpse is not much. Glimpse adapts the result to the size of the screen.</p>
+<p>Try reducing the size of this window and running first str and then glimpse. Compare the results.</p>
+<p>To see a summary of all the variables, we have the following command</p>
+<p>It shows us central tendency and dispersion measures for continuous data and a count for categorical data. For both it also shows us the amount of unavailable data or NA</p>
+<pre class="r"><code>summary(penguins)</code></pre>
+<pre><code>##       species          island    bill_length_mm  bill_depth_mm  
+##  Adelie   :152   Biscoe   :168   Min.   :32.10   Min.   :13.10  
+##  Chinstrap: 68   Dream    :124   1st Qu.:39.23   1st Qu.:15.60  
+##  Gentoo   :124   Torgersen: 52   Median :44.45   Median :17.30  
+##                                  Mean   :43.92   Mean   :17.15  
+##                                  3rd Qu.:48.50   3rd Qu.:18.70  
+##                                  Max.   :59.60   Max.   :21.50  
+##                                  NA&#39;s   :2       NA&#39;s   :2      
+##  flipper_length_mm  body_mass_g       sex           year     
+##  Min.   :172.0     Min.   :2700   female:165   Min.   :2007  
+##  1st Qu.:190.0     1st Qu.:3550   male  :168   1st Qu.:2007  
+##  Median :197.0     Median :4050   NA&#39;s  : 11   Median :2008  
+##  Mean   :200.9     Mean   :4202                Mean   :2008  
+##  3rd Qu.:213.0     3rd Qu.:4750                3rd Qu.:2009  
+##  Max.   :231.0     Max.   :6300                Max.   :2009  
+##  NA&#39;s   :2         NA&#39;s   :2</code></pre>
+<p>To see the summary of a particular variable, you can select it with $ in the following way:</p>
+<p>dataset$column</p>
+<p>for example</p>
+<pre class="r"><code>summary(penguins$species)</code></pre>
+<pre><code>##    Adelie Chinstrap    Gentoo 
+##       152        68       124</code></pre>
+<table style="width:35%;">
+<colgroup>
+<col width="34%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td align="left">EXERCISES</td>
+</tr>
+<tr class="even">
+<td align="left">try getting the summary of island</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>r # write your code here</code></td>
+</tr>
+<tr class="even">
+<td align="left">and now the summary of body_mass_g</td>
+</tr>
+<tr class="odd">
+<td align="left"><code>r # write your code here</code></td>
+</tr>
+</tbody>
+</table>
+<p>As you saw in the summary of all variables, R automatically detects the type or class of variable.</p>
+<p>To check the class of a variable, we use the command:</p>
+<p>class(dataset$variable_to_check)</p>
+<p>For example:</p>
+<pre class="r"><code>class(penguins$year)</code></pre>
+<pre><code>## [1] &quot;integer&quot;</code></pre>
+<p>Sometimes a number can be used to store a categorical variable, such as assigning a number to each sex. In general, I do not recommend using numbers to store nominal variables, but simply to store the variable as it is presented, for example male and female instead of 1 and 2.</p>
+<p>For example, if we consult the summary of the year variable, we get the following:</p>
+<table style="width:35%;">
+<colgroup>
+<col width="34%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td align="left">EXERCISES</td>
+</tr>
+<tr class="even">
+<td align="left">Try finding the classes of other variables</td>
+</tr>
+</tbody>
+</table>
+<pre class="r"><code>summary(penguins$year)</code></pre>
+<pre><code>##    Min. 1st Qu.  Median    Mean 3rd Qu.    Max. 
+##    2007    2007    2008    2008    2009    2009</code></pre>
+<p>R recognizes the year as a numerical variable. However, the year is indeed a categorical variable. Nobody says: “I was born in 1997.4” for example,</p>
+<p>To change the type of variable we have to reassign the modified variable.</p>
+<p>For example, to change the variable year from number to factor, we have to overwrite the variable year</p>
+<pre class="r"><code>penguins$year &lt;- as.factor(penguins$year) </code></pre>
+<p>now the year variable should be correctly formatted</p>
+<pre class="r"><code>summary(penguins$year)</code></pre>
+<pre><code>## 2007 2008 2009 
+##  110  114  120</code></pre>
+<p>Now it’s fixed!</p>
+<div id="exploring-the-dataset-with-tables" class="section level2">
+<h2>Exploring the dataset with tables</h2>
+<p>A simple way to explore a dataset is by means of tables. This is done with the command (table(variable1, variable2))</p>
+<p>For example, let’s look at the distribution of sex for each species</p>
+<pre class="r"><code>table(penguins$species, 
+      penguins$sex)</code></pre>
+<pre><code>##            
+##             female male
+##   Adelie        73   73
+##   Chinstrap     34   34
+##   Gentoo        58   61</code></pre>
+<p>The command tables show the result of (rows, columns)</p>
+<p>For example, if we change the order, we will obtain this</p>
+<pre class="r"><code>table(penguins$sex, 
+      penguins$species)</code></pre>
+<pre><code>##         
+##          Adelie Chinstrap Gentoo
+##   female     73        34     58
+##   male       73        34     61</code></pre>
+<table style="width:35%;">
+<colgroup>
+<col width="34%" />
+</colgroup>
+<tbody>
+<tr class="odd">
+<td align="left">Exercise</td>
+</tr>
+<tr class="even">
+<td align="left">+ Try making a chart to see the total number of penguins per island.
++ Now by island and by year
++ Try changing the order: how does it look better?
++ What happens if you make a table of a numerical variable?</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div id="creating-graphs-with-ggplot2" class="section level1">
+<h1>CREATING GRAPHS WITH GGPLOT2</h1>
+<p>ggplot stands for grammar of graphics.</p>
+<p>Just as language has rules with which to communicate any idea, graphics have a grammar. If we understand the components of a graph and how the different parts that make up a graph are related, we can create any type of visualization to communicate a result.</p>
+<p>Essentially, to make a graphic we need three things:</p>
+<ol style="list-style-type: decimal">
+<li>the data,</li>
+<li>the mapping of the variables to visual properties of the graph. The mappings are placed within the aes function (where aes stands for aesthetics), for example, position, size, color, shape, and</li>
+<li>a geometric shape that represents the data in the mapping. Geoms are the geometric objects (points, lines, bars, etc.) that can be placed on a graph. They are added using functions that start with geom_.</li>
+</ol>
+<p>So the first thing we need is the data</p>
+<pre class="r"><code>penguins %&gt;%  # the data
+  ggplot()    # means: &quot;hey ggplot, take this data, and wait for instructions&quot;</code></pre>
+<p><img src="/post/2020-10-17-how-to-create-graphs-with-ggplot2-in-r.en_files/figure-html/unnamed-chunk-26-1.png" width="672" /></p>
+<p>Secondly, we map the variables of interest</p>
+<p>Usually this is done this way:</p>
+<pre class="r"><code>penguins %&gt;% 
+  ggplot(
+    mapping =                  # we can omit this line, I wrote it here just for you to see what the mapping refers to
+      aes(x = bill_length_mm,  # hey ggplot, map these aesthetic variables, in the x axis this variable
+          y = body_mass_g))    # and in the y axis this other</code></pre>
+<p><img src="/post/2020-10-17-how-to-create-graphs-with-ggplot2-in-r.en_files/figure-html/unnamed-chunk-27-1.png" width="672" /></p>
+<p>Since I personally omit the mapping, I write:</p>
+<pre class="r"><code>penguins %&gt;% 
+  ggplot(aes(x = bill_length_mm, 
+             y = body_mass_g))</code></pre>
+<p><img src="/post/2020-10-17-how-to-create-graphs-with-ggplot2-in-r.en_files/figure-html/unnamed-chunk-28-1.png" width="672" /></p>
+<p>and the result is the same.</p>
+<p>we can skip other things, but I don’t recommend it. For example, you can write:</p>
+<pre class="r"><code>penguins %&gt;% 
+  ggplot(aes(bill_length_mm, body_mass_g)) </code></pre>
+<p><img src="/post/2020-10-17-how-to-create-graphs-with-ggplot2-in-r.en_files/figure-html/unnamed-chunk-29-1.png" width="672" /></p>
+<p>Now we should tell ggplot how to map those x and y variables. In this case, we will choose to map them as points.</p>
+<pre class="r"><code>penguins %&gt;% 
+  ggplot(aes(x = bill_length_mm, 
+             y = body_mass_g)) + 
+  geom_point()  # this is the geometric object that will map the aesthetic</code></pre>
+<p><img src="/post/2020-10-17-how-to-create-graphs-with-ggplot2-in-r.en_files/figure-html/unnamed-chunk-30-1.png" width="672" /></p>
+<p>Later, we add more layers as aesthetics elements.</p>
+<p>For example, we can add a color to each point to identify the sex. We add this as an additional aesthetic, see code below</p>
+<pre class="r"><code>penguins %&gt;%
+  drop_na() %&gt;%  
+  ggplot(aes(x = bill_length_mm, 
+             y = body_mass_g)) +
+  geom_point() +
+  aes(color = sex)  # this is the additional layer</code></pre>
+<p><img src="/post/2020-10-17-how-to-create-graphs-with-ggplot2-in-r.en_files/figure-html/unnamed-chunk-31-1.png" width="672" /></p>
+<hr />
+<p>EXCERCISE</p>
+<p>Now it is your turn, we could ask: how is the distribution of the bill_depth_mm vs. the flipper_length_mm?</p>
+<pre class="r"><code># write your code here</code></pre>
+<p>There is a separate group of points: what could be due to a particular sex or species?
+Make a chart to find out!</p>
+</div>
+<div id="exercises" class="section level1">
+<h1>EXERCISES</h1>
+<div id="geom_point" class="section level2">
+<h2>geom_point</h2>
+<p>If you have two continuous variables, the geom_point is the preferred option to graph</p>
+<p>Try plotting the bill_length_mm in the x axis vs the bill_depth_mm</p>
+<pre class="r"><code>penguins %&gt;% 
+  ggplot(aes(x = _____________, 
+             y = _____________)) +
+geom_point()</code></pre>
+<p>You can add more layers as aesthetics elements. For example, if you want to visualize the previous graph but with species, you can add an additional layer coloring each point with the sex variable</p>
+<pre class="r"><code>penguins %&gt;% 
+  ggplot(aes(x = _____________, 
+             y = _____________, 
+             color = _________)) +
+  geom_point()</code></pre>
+<p>and we can add several additional aesthetics layers, as</p>
+<p>shape = for discrete or categorical variables, as sex
+size = for continuous variables, as body_mass_g</p>
+<p>and also we can add more geom layers. For example, we can add a regression line to explore the correlation between the plotted variables.</p>
+<p>Try adding a geom_smooth(method = “lm”) after the last geom and check the results</p>
+<pre class="r"><code>penguins %&gt;% 
+  ggplot(aes(x = bill_length_mm, 
+             y = bill_depth_mm)) +
+  geom_point() + 
+  ________________</code></pre>
+<p>What can you conclude about the relationship between these two variables?</p>
+<p>Now try disaggregating by species.</p>
+<p>Hint: mark the species with colors</p>
+<p>We can add more variables depending on your nature.</p>
+<p>For example, we can change the size of each point according to some numerical variable, such as the body_mass_g</p>
+<p>try completing this code</p>
+<pre class="r"><code>penguins %&gt;% 
+  ggplot(aes(x = bill_length_mm, 
+             y = bill_depth_mm, 
+             color = species, 
+             size = ___________) +
+  geom_point()</code></pre>
+</div>
+<div id="tuning-your-graph" class="section level2">
+<h2>Tuning your graph</h2>
+<div id="themes" class="section level3">
+<h3>Themes</h3>
+<p>You can change the theme of the graph, the visual appearence, changing the layer that control this, with the commando <em>theme</em> and choosing your theme of preference</p>
+<pre class="r"><code>penguins %&gt;%
+  ggplot(aes(x = bill_length_mm,
+             y = flipper_length_mm,
+             color = species))  +   
+  geom_point() + 
+  theme_minimal()   # this is one example</code></pre>
+<p><img src="/post/2020-10-17-how-to-create-graphs-with-ggplot2-in-r.en_files/figure-html/unnamed-chunk-37-1.png" width="672" /></p>
+<pre class="r"><code>penguins %&gt;%
+  ggplot(aes(x = bill_length_mm,
+             y = flipper_length_mm,
+             color = species))  +   
+  geom_point() + 
+  theme_dark() # now a dark theme</code></pre>
+<p><img src="/post/2020-10-17-how-to-create-graphs-with-ggplot2-in-r.en_files/figure-html/unnamed-chunk-38-1.png" width="672" />
+Try others!</p>
+<p>try
+theme_linedraw()
+theme_light()</p>
+<pre class="r"><code>penguins %&gt;%
+  ggplot(aes(x = bill_length_mm,
+             y = flipper_length_mm,
+             color = species))  +   # in this case, here
+  geom_point() </code></pre>
+<p><img src="/post/2020-10-17-how-to-create-graphs-with-ggplot2-in-r.en_files/figure-html/unnamed-chunk-39-1.png" width="672" />
+You can also install more themes or <a href="https://emanuelaf.github.io/own-ggplot-theme.html">create your own theme</a></p>
+<p>Some packages with additional themes are:</p>
+<p><a href="http://www.sthda.com/english/articles/24-ggpubr-publication-ready-plots/">ggpubr</a> (I use mostly the minimal and some of the ggpubr package)
+and <a href="https://rpubs.com/Mentors_Ubiqum/ggthemes_1">ggthemes</a></p>
+<p>To install use</p>
+<pre class="r"><code>pacman::p_load(ggthemes)</code></pre>
+<p>and then</p>
+<pre class="r"><code>penguins %&gt;%
+  ggplot(aes(x = bill_length_mm,
+             y = flipper_length_mm,
+             color = species))  +   # in this case, here
+  geom_point() + 
+  ggthemes::theme_economist()  # here I say&quot; from the package ggthemes use the theme_economist()</code></pre>
+<p><img src="/post/2020-10-17-how-to-create-graphs-with-ggplot2-in-r.en_files/figure-html/unnamed-chunk-41-1.png" width="672" />
+You can try these themes:<br />
+- ggthemes::theme_solarized()
+- ggthemes::theme_excel()</p>
+</div>
+<div id="headings-and-labels" class="section level3">
+<h3>Headings and labels</h3>
+<p>You can add and change the labels with labs()</p>
+<pre class="r"><code>penguins %&gt;%
+  ggplot(aes(x = bill_length_mm,
+             y = flipper_length_mm,
+             color = species))  +  
+  geom_point()  +
+  labs(
+    title = &quot;My Title&quot;,  
+    subtitle = &quot;The subtitle&quot;, 
+    x = &quot;the X axis&quot;, 
+    y = &quot;the Y axis&quot;, 
+    color = &quot;Specie&quot;
+  )</code></pre>
+<p><img src="/post/2020-10-17-how-to-create-graphs-with-ggplot2-in-r.en_files/figure-html/unnamed-chunk-42-1.png" width="672" /></p>
+<p>Try to answer these questions:</p>
+<p>What is the relationship between Penguin mass vs. flipper length ?</p>
+<p>And between Flipper length vs. bill length?</p>
+</div>
+</div>
+</div>
+<div id="note" class="section level1">
+<h1>Note</h1>
+<p>You will find this kind of notation in books and posts, where the data goes inside the ggplot command. For example:</p>
+<pre class="r"><code>ggplot(data = penguins) +
+  (mapping = aes(x = species, 
+                 y = body_mass_g, 
+                 color = sex)) + 
+  geom_boxplot() + 
+  theme_minimal()</code></pre>
+<p><img src="/post/2020-10-17-how-to-create-graphs-with-ggplot2-in-r.en_files/figure-html/unnamed-chunk-43-1.png" width="672" /></p>
+<p>I prefer to leave the data out of the ggplot command, since it’s easier to perform some data transformation and then plot it.</p>
+</div>
+
+      </article>
+
+      
+        <ul class="pager blog-pager">
+          
+            <li class="previous">
+              <a href="https://dentaldatascience.org/blog/ggplots-tips-and-tricks/" data-toggle="tooltip" data-placement="top" title="ggplots tips and tricks">&larr; Previous Post</a>
+            </li>
+          
+          
+        </ul>
+      
+
+
+      
+        
+          <div class="disqus-comments">
+            <div id="disqus_thread"></div>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "dental-data-science" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+          </div>
+        
+        
+      
+
+    </div>
+  </div>
+</div>
+
+    <footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <ul class="list-inline text-center footer-links">
+          
+              <li>
+                <a href="mailto:sergio.uribe@gmail.com" title="Email me">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-envelope fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://github.com/sergiouribe" title="GitHub">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://twitter.com/dentaldatasci" title="Twitter">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://linkedin.com/in/sergiouribe" title="LinkedIn">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-linkedin fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+              <li>
+                <a href="https://stackoverflow.com/users/4930967/sergiouribe" title="StackOverflow">
+                  <span class="fa-stack fa-lg">
+                    <i class="fa fa-circle fa-stack-2x"></i>
+                    <i class="fa fa-stack-overflow fa-stack-1x fa-inverse"></i>
+                  </span>
+                </a>
+              </li>
+          
+          <li>
+            
+            <a href="https://dentaldatascience.org/index.xml" title="RSS">
+            
+              <span class="fa-stack fa-lg">
+                <i class="fa fa-circle fa-stack-2x"></i>
+                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+              </span>
+            </a>
+          </li>
+          
+        </ul>
+        <p class="credits copyright text-muted">
+          
+            
+              <a href="http://www.sergiouri.be/">Sergio Uribe</a>
+            
+          
+
+          &nbsp;&bull;&nbsp;
+          2020
+
+          
+            &nbsp;&bull;&nbsp;
+            <a href="https://dentaldatascience.org/">Dental Data Science</a>
+          
+        </p>
+        
+        <p class="credits theme-by text-muted">
+          <a href="http://gohugo.io">Hugo v0.80.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a>. This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc/4.0/">CC-BY-NC 4.0</a>.
+          
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/katex.min.js" integrity="sha384-/y1Nn9+QQAipbNQWU65krzJralCnuOasHncUFXGkdwntGeSvQicrYkiUBwsgUqc1" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.7.1/contrib/auto-render.min.js" integrity="sha384-dq1/gEHSxPZQ7DdrM82ID4YVol9BYyU7GbWlIwnwyPzotpoc57wDw/guX8EaYGPx" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js" integrity="sha256-ZosEbRLbNQzLpnKIkEdrPv7lOy9C27hHQ+Xp8a4MxAQ=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://dentaldatascience.org/js/main.js"></script>
+<script src="https://dentaldatascience.org/js/highlight.min.js"></script>
+<script> hljs.initHighlightingOnLoad(); </script>
+<script> $(document).ready(function() {$("pre.chroma").css("padding","0");}); </script><script> renderMathInElement(document.body); </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe.min.js" integrity="sha384-QELNnmcmU8IR9ZAykt67vGr9/rZJdHbiWi64V88fCPaOohUlHCqUD/unNN0BXSqy" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/photoswipe/4.1.2/photoswipe-ui-default.min.js" integrity="sha384-m67o7SkQ1ALzKZIFh4CiTA8tmadaujiTa9Vu+nqPSwDOqHrDmxLezTdFln8077+q" crossorigin="anonymous"></script>
+<script src="https://dentaldatascience.org/js/load-photoswipe.js"></script>
+
+
+<script>
+  (function() {
+    var cx = '001914880863475946784:jaiqxnvieeu';
+    var gcse = document.createElement('script');
+    gcse.type = 'text/javascript';
+    gcse.async = true;
+    gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(gcse, s);
+  })();
+</script>
+
+
+
+
+
+  </body>
+</html>
+
