@@ -4,7 +4,8 @@ author: "Sergio Uribe"
 date: '2020-10-15'
 slug: ggplots-tips-and-tricks
 categories: visualization
-tags: ggplot2
+tags: 
+  - "ggplot"
 subtitle: ''
 ---
 

@@ -1,29 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>Dataframe on Dental Data Science</title>
-    <link>/tags/dataframe/</link>
-    <description>Recent content in Dataframe on Dental Data Science</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <managingEditor>sergio.uribe@gmail.com (Sergio Uribe)</managingEditor>
-    <webMaster>sergio.uribe@gmail.com (Sergio Uribe)</webMaster>
-    <lastBuildDate>Sun, 04 Mar 2018 00:00:00 +0000</lastBuildDate>
-    
-	<atom:link href="/tags/dataframe/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Create dataframe from tables</title>
-      <link>/drafts/create-dataframe-from-tables/</link>
-      <pubDate>Sun, 04 Mar 2018 00:00:00 +0000</pubDate>
-      <author>sergio.uribe@gmail.com (Sergio Uribe)</author>
-      <guid>/drafts/create-dataframe-from-tables/</guid>
-      <description>Unfortunately most of published research don’t include the original dataset. New initiatives as Open Science Foundation or FigShare allows to share datasets.
-To replicate results is imprescindible to have access to the original data, but what to do when this is not possible and all we have is the paper with some tables and graphs?
-Recreate data from tableshttps://stackoverflow.com/questions/49091515/create-fake-data-to-recreate-a-contingency-table/49091853#49091853
-Recreate data from graphshttps://rpubs.com/sergiouribe/graficos_ejes_secundarios
-</description>
-    </item>
-    
-  </channel>
-</rss>

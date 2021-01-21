@@ -3,8 +3,10 @@ title: "How to create graphs with ggplot2 in R"
 author: "Sergio Uribe"
 date: '2020-10-17'
 slug: how-to-create-graphs-with-ggplot2-in-r
-categories: visualization
-tags: ggplot2
+categories: 
+  - "visualization"
+tags: 
+  - "ggplot2"
 subtitle: ''
 ---
 
@@ -92,11 +94,11 @@ x <- c(1:10) # here is my comment about this line
 Execute this code and found the errors
 
 ```{r eval=FALSE}
-mean(X)
+# mean(X)
 ```
 
 ```{r eval=FALSE}
-Mean(x)
+# Mean(x)
 ```
 
 
@@ -134,7 +136,7 @@ data(penguins)
 With the View() command you can open the dataset in an external tab, as an spreadsheet, but you will not be able to modify it. And that's a good thing, remember: don't touch your data!
 
 ```{r, eval=FALSE}
-View(penguins)
+ # View(penguins)
 ```
 
 
@@ -391,10 +393,10 @@ If you have two continuous variables, the geom_point is the preferred option to 
 Try plotting the bill_length_mm in the x axis vs the bill_depth_mm
 
 ```{r, eval=FALSE}
-penguins %>% 
-  ggplot(aes(x = _____________, 
-             y = _____________)) +
-geom_point()
+# penguins %>% 
+#  ggplot(aes(x = _____________, 
+#             y = _____________)) +
+# geom_point()
 
 ```
 
@@ -405,11 +407,11 @@ geom_point()
 You can add more layers as aesthetics elements. For example, if you want to visualize the previous graph but with species, you can add an additional layer coloring each point with the sex variable
 
 ```{r, eval=FALSE}
-penguins %>% 
-  ggplot(aes(x = _____________, 
-             y = _____________, 
-             color = _________)) +
-  geom_point()
+# penguins %>% 
+#  ggplot(aes(x = _____________, 
+#             y = _____________, 
+#             color = _________)) +
+#  geom_point()
 ```
 and we can add several additional aesthetics layers, as
 
@@ -423,11 +425,11 @@ Try adding a geom_smooth(method = "lm") after the last geom and check the result
 
 
 ```{r, eval=FALSE}
-penguins %>% 
-  ggplot(aes(x = bill_length_mm, 
-             y = bill_depth_mm)) +
-  geom_point() + 
-  ________________
+# penguins %>% 
+#  ggplot(aes(x = bill_length_mm, 
+#             y = bill_depth_mm)) +
+#  geom_point() + 
+#  ________________
 ```
 What can you conclude about the relationship between these two variables?
 
@@ -444,12 +446,12 @@ For example, we can change the size of each point according to some numerical va
 try completing this code
 
 ```{r, eval=FALSE}
-penguins %>% 
-  ggplot(aes(x = bill_length_mm, 
-             y = bill_depth_mm, 
-             color = species, 
-             size = ___________) +
-  geom_point()
+# penguins %>% 
+#  ggplot(aes(x = bill_length_mm, 
+#             y = bill_depth_mm, 
+#             color = species, 
+#             size = ___________) +
+#  geom_point()
 ```
 
 

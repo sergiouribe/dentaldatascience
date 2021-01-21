@@ -4,11 +4,12 @@ author: "Sergio Uribe"
 date: '2019-09-05'
 slug: eda-with-tables
 tags:
-- janitor
-- table1
-- EDA
-- table
-categories: eda
+  - janitor
+  - table1
+  - EDA
+  - table
+categories: 
+  - "eda"
 ---
 
 ![]()
