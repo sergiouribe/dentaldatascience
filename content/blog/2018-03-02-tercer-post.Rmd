@@ -4,13 +4,13 @@ author: "Sergio Uribe"
 date: '2018-03-02'
 slug: tercer-post
 tags:
-- dplyr
-- ggplot2
-- case-control
+  - dplyr
+  - ggplot2
+  - case-control
 categories:
-- data wrangling
-- case-control study
-- epidemiological research
+  - data wrangling
+  - case-control study
+  - epidemiological research
 ---
 
 A Case-control study compares patients who have a disease or outcome of interest (cases) with patients who do not have the disease or outcome (controls), and looks back retrospectively to compare how frequently the exposure to a risk factor is present in each group to determine the relationship between the risk factor and the disease.
