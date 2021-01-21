@@ -48,3 +48,6 @@ $RECYCLE.BIN/
 Network Trash Folder
 Temporary Items
 .apdisk
+
+# hugo generated site files
+public
