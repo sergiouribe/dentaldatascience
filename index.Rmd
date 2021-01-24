@@ -2,3 +2,4 @@
 site: blogdown:::blogdown_site
 ---
 
+{{ $paginator := .Paginate (where .Site.RegularPages.ByDate.Reverse "Type" "post") }}
