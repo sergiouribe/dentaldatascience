@@ -29,7 +29,7 @@ This site discuss exploratory data analysis with [R](https://www.r-project.org/)
 
 # About the author
 
-[Sergio Uribe](http://www.sergiouri.be/). I Leading Research at the Bioinformatics [Research Unit Riga Stradins University](https://www.rsu.lv/en/bioinformatics) and Associate Professor at the [School of Dentistry, Universidad Austral de Chile](http://www.medicina.uach.cl/escuelas/odontologia/index.php). In the 90s I use Epi Info (6.04 of course), SPSS, SAS, etc during 2000-2008 and then I discovered R. I used it intermittently, but the real incentive to use as my main tool of analysis was recently with: 
+[Sergio Uribe](http://www.sergiouri.be/). I am Leading Research at the Bioinformatics [Research Unit Riga Stradins University](https://www.rsu.lv/en/bioinformatics) and Associate Professor at the [School of Dentistry, Universidad Austral de Chile](http://www.medicina.uach.cl/escuelas/odontologia/index.php). In the 90s I used Epi Info (6.04 of course), SPSS, SAS among others until in 2005~6 I discovered R. I used it intermittently, but the real incentive to use as my main tool of analysis was recently with: 
 
  - the development of the [tidyverse](https://www.tidyverse.org/), a set of tools that allow a human readable workflow for data analysis, and
  - the development of [rmarkdown](https://rmarkdown.rstudio.com/), to create dynamic documents that allow the easy deployment of reproducible code integrated to documents.
