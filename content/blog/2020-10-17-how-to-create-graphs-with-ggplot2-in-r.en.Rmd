@@ -3,6 +3,7 @@ title: "How to create graphs with ggplot2 in R"
 author: "Sergio Uribe"
 date: '2020-10-17'
 slug: how-to-create-graphs-with-ggplot2-in-r
+type: post
 categories: 
   - "visualization"
 tags: 
