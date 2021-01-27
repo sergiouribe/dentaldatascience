@@ -16,10 +16,10 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"] # si hay proble
 
 [Params]
   mainSections = ["blog"] # see in docs https://gohugo.io/functions/where/#mainsections
-  subtitle = "Putting Dental Data Science in DDS"
+  subtitle = "Adding Dental Data Science in DDS"
 #  subtitle = "Tools and tips to manipulate dental research data, create visualizations, and to communicate information with R"
   logo = "img/icon.png"
-  favicon = "img/favicon.png"
+  favicon = "img/favicon.ico/favicon-32x32.png"
   dateFormat = "January 2, 2006"
   commit = false
   rss = true
@@ -68,17 +68,17 @@ ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"] # si hay proble
 
 [[menu.main]]
     name = "Blog"
-    url = ""
+    url = "blog"
     weight = 1
 
 [[menu.main]]
     name = "About"
-    url = "page/about/"
+    url = "post/about/"
     weight = 6
     
 [[menu.main]]
     name = "Links"
-    url = "page/links/"
+    url = "post/links/"
     weight = 5
 
 [[menu.main]]
