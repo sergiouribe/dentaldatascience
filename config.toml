@@ -15,6 +15,7 @@ googleAnalytics = "UA-113383529-1"
 ignoreFiles = ["\\.Rmd$", "\\.Rmarkdown$", "_files$", "_cache$"] # si hay problemas, eliminar
 
 [Params]
+  mainSections = ["blog"] # see in docs https://gohugo.io/functions/where/#mainsections
   subtitle = "Putting Dental Data Science in DDS"
 #  subtitle = "Tools and tips to manipulate dental research data, create visualizations, and to communicate information with R"
   logo = "img/icon.png"
