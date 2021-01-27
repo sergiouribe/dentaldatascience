@@ -30,13 +30,13 @@
 {{- with .Site.Params.fb_app_id }}
   <meta property="fb:app_id" content="{{ . }}" />
 {{- end }}
-  <meta property="og:url" content="{{ .URL | absLangURL }}" />
+  <meta property="og:url" content="{{ absLangURL .Permalink }}" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="{{ .Site.Title }}" />
 <!-- Hugo Version number -->
-  {{ .Hugo.Generator -}}
+  {{ hugo.Generator -}}
 <!-- Links and stylesheets -->
-  <link rel="canonical" href="{{ .URL | absLangURL }}" />
+  <link rel="canonical" href="{{ absLangURL .Permalink }}" />
   {{- if .RSSLink }}
   <link rel="alternate" href="{{ .RSSLink }}" type="application/rss+xml" title="{{ .Site.Title }}">
   {{- else }}
